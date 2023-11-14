@@ -94,6 +94,10 @@ return new class extends Migration
                 $table->primary([$pivotRole, $columnNames['model_morph_key'], 'model_type'],
                     'model_has_roles_role_model_type_primary');
             }
+            
+            $table->decimal('cost', 8, 2)->nullable();
+            $table->timestamp('expires_at')->nullable();
+            $table->timestamps();
         });
 
         Schema::create($tableNames['role_has_permissions'], function (Blueprint $table) use ($tableNames, $pivotRole, $pivotPermission) {
