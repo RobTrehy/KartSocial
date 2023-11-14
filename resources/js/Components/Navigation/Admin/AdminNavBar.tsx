@@ -35,12 +35,12 @@ export default function AdminNavBar() {
                     <div className="flex">
                         {/* <!-- Secondary Navigation Links --> */}
                         <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            <AdminNavLink
+                            {/* <AdminNavLink
                                 tag="a"
                                 href={route('telescope')}
                             >
                                 Telescope
-                            </AdminNavLink>
+                            </AdminNavLink> */}
                         </div>
 
                         {/* <!-- Hamburger --> */}
