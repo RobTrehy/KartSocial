@@ -38,7 +38,7 @@ trait HasLaps
 
     /**
      * All TrackVisitSessionLap records for this model, via each Track, TrackLayout, TrackVisit and each TrackVisitSession.
-     * 
+     *
      * Order By: lap_time, ASC
      */
     public function fastestLaps(): MorphToMany

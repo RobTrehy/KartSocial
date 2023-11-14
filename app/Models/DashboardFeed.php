@@ -34,16 +34,15 @@ class DashboardFeed extends Model
         'parent_id',
     ];
 
-
     /**
      * The relationships to append to the model
-     * 
+     *
      * @var array<int string>
      */
     protected $with = [
         'user',
         'subject',
-        'parent'
+        'parent',
     ];
 
     /**

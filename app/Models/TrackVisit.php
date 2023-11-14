@@ -13,8 +13,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class TrackVisit extends Model
 {
-    use LogsActivity;
     use HasFactory;
+    use LogsActivity;
 
     protected $appends = ['fastestLap'];
 
@@ -60,7 +60,7 @@ class TrackVisit extends Model
 
     /**
      * All TrackVisitSessionLap records that are associated with this model, through each TrackVisitSession.
-     * 
+     *
      * Order By: lap_time, ASC
      */
     public function fastestLaps(): HasMany

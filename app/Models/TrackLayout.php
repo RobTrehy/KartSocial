@@ -86,7 +86,7 @@ class TrackLayout extends Model
 
     /**
      * All TrackVisitSessionLap records for this model, via each TrackVisit and each TrackVisitSession.
-     * 
+     *
      * Order By: lap_time, ASC
      */
     public function fastestLaps(): MorphToMany

@@ -63,7 +63,7 @@ trait HasExportableData
                 $data[$visit->trackLayout->track->name][$visit->trackLayout->name]['visits'][$i]['sessions'][$si] = [
                     'name' => $session->session_name,
                     'type' => $session->session_type,
-                    'length' => $session->session_length . ' ' . $session->session_length_type,
+                    'length' => $session->session_length.' '.$session->session_length_type,
                     'position' => $session->finish_position,
                     'drivers' => $session->total_drivers,
                     'created_at' => Carbon::parse($visit->created_at)->toJSON(),

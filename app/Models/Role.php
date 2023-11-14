@@ -10,7 +10,7 @@ class Role extends SpatieRole
 {
     /**
      * The attributes that should be cast.
-     * 
+     *
      * @var array
      */
     protected $casts = [
@@ -19,7 +19,7 @@ class Role extends SpatieRole
 
     /**
      * EXTENDED: Add withPivot()->withTimestamps()
-     * 
+     *
      * A role belongs to some users of the model associated with its guard.
      */
     public function users(): BelongsToMany

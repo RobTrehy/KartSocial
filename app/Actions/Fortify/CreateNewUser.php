@@ -34,7 +34,7 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ], [
-            'dob.before' => 'You must be over 13 years of age to use this service.'
+            'dob.before' => 'You must be over 13 years of age to use this service.',
         ])->validate();
 
         if (Env::get('APP_INVITATION_ONLY', false)) {

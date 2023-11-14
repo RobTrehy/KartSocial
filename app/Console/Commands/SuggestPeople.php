@@ -62,7 +62,7 @@ class SuggestPeople extends Command
                 ->each(function ($data) use ($user) {
                     UserSuggestion::create([
                         'user_id' => $user->id,
-                        'suggested_id' => $data->user_id
+                        'suggested_id' => $data->user_id,
                     ])->via()->associate(Track::find($data->track_id))->save();
                 });
 

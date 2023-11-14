@@ -16,11 +16,11 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\PermissionRegistrar;
-use Spatie\Permission\Traits\HasRoles;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Permission\PermissionRegistrar;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements \Spatie\PersonalDataExport\ExportsPersonalData
 {
@@ -92,7 +92,7 @@ class User extends Authenticatable implements \Spatie\PersonalDataExport\Exports
 
     /**
      * The relationship counts to append to the model
-     * 
+     *
      * @var array<int string>
      */
     protected $withCount = [
@@ -130,13 +130,13 @@ class User extends Authenticatable implements \Spatie\PersonalDataExport\Exports
             PermissionRegistrar::$pivotRole
         )->withPivot(['cost', 'expires_at'])->withTimestamps();
 
-        if (!PermissionRegistrar::$teams) {
+        if (! PermissionRegistrar::$teams) {
             return $relation;
         }
 
         return $relation->wherePivot(PermissionRegistrar::$teamsKey, getPermissionsTeamId())
             ->where(function ($q) {
-                $teamField = config('permission.table_names.roles') . '.' . PermissionRegistrar::$teamsKey;
+                $teamField = config('permission.table_names.roles').'.'.PermissionRegistrar::$teamsKey;
                 $q->whereNull($teamField)->orWhere($teamField, getPermissionsTeamId());
             });
     }

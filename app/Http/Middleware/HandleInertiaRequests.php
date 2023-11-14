@@ -16,6 +16,7 @@ class HandleInertiaRequests extends Middleware
      * The root template that's loaded on the first page visit.
      *
      * @see https://inertiajs.com/server-side-setup#root-template
+     *
      * @var string
      */
     protected $rootView = 'app';
@@ -24,8 +25,6 @@ class HandleInertiaRequests extends Middleware
      * Determines the current asset version.
      *
      * @see https://inertiajs.com/asset-versioning
-     * @param  \Illuminate\Http\Request  $request
-     * @return string|null
      */
     public function version(Request $request): ?string
     {
@@ -36,8 +35,6 @@ class HandleInertiaRequests extends Middleware
      * Defines the props that are shared by default.
      *
      * @see https://inertiajs.com/shared-data
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
      */
     public function share(Request $request): array
     {
@@ -46,7 +43,7 @@ class HandleInertiaRequests extends Middleware
         if (Auth::check()) {
             $perms = User::find(Auth::id())->getAllPermissions()->pluck('name');
         }
-        if (!Auth::check() || Route::currentRouteName() === 'verification.notice') {
+        if (! Auth::check() || Route::currentRouteName() === 'verification.notice') {
             $formatter = new \NumberFormatter('en_GB', \NumberFormatter::PADDING_POSITION);
             $stats['users'] = $formatter->format(floor(User::count() / 10) * 10); // To the nearest 10
             $stats['laps'] = $formatter->format(floor(TrackVisitSessionLap::count() / 10) * 10); // To the nearest 10
