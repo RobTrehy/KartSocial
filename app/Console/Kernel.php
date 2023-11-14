@@ -12,7 +12,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
+        $schedule->command('app:suggest-people')->hourly();
+        $schedule->command('app:cancel-expired-restrictions')->daily();
+        $schedule->command('app:clear-expired-roles')->daily();
         $schedule->command('activitylog:clean')->daily();
+        $schedule->command('personal-data-export:clean')->daily();
     }
 
     /**
@@ -20,7 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands(): void
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
