@@ -2,7 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\TrackVisitSessionLap;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Env;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -36,8 +41,23 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $stats = [];
+
+        if (Auth::check()) {
+            $perms = User::find(Auth::id())->getAllPermissions()->pluck('name');
+        }
+        if (!Auth::check() || Route::currentRouteName() === 'verification.notice') {
+            $formatter = new \NumberFormatter('en_GB', \NumberFormatter::PADDING_POSITION);
+            $stats['users'] = $formatter->format(floor(User::count() / 10) * 10); // To the nearest 10
+            $stats['laps'] = $formatter->format(floor(TrackVisitSessionLap::count() / 10) * 10); // To the nearest 10
+        }
+
         return array_merge(parent::share($request), [
-            //
-        ]);
+            'app_name' => Env::get('APP_NAME'),
+            'app_feedback_label' => Env::get('APP_FEEDBACK_LABEL', 'Feedback'),
+            'app_version' => Env::get('APP_VERSION', 'v0.0.0'),
+            'max_invites' => Env::get('APP_MAX_INVITES', 1),
+            'auth.permissions' => isset($perms) ? $perms : null,
+        ], $stats);
     }
 }
