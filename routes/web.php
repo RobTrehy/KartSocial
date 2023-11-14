@@ -25,12 +25,22 @@ Route::get('/', function () {
     ]);
 });
 
+
+Route::get('/tracks', [TracksController::class, 'index'])->name('tracks.index');
+Route::get('/tracks/{track}', [TracksController::class, 'show'])->name('tracks.show');
+
+/**
+ * User must be authenticated, verified and NOT restricted.
+ */
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'feed'])->name('dashboard');
+
+    // Track / Layout Routes
+    Route::resource('tracks', TracksController::class)->except(['index', 'show']);
 
     // Admin Routes
     Route::prefix('/admin')->middleware(['can:admin.access'])->name('admin:')->group(function () {
