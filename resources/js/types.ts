@@ -33,6 +33,9 @@ export interface Auth {
 }
 
 export type InertiaSharedProps<T = {}> = T & {
+  app_name: string;
+  app_feedback_label: string;
+  app_version: string;
   jetstream: {
     canCreateTeams: boolean;
     canManageTwoFactorAuthentication: boolean;
@@ -49,6 +52,8 @@ export type InertiaSharedProps<T = {}> = T & {
   auth: Auth;
   errorBags: any;
   errors: any;
+  laps: string;
+  users: string;
 };
 
 export interface Session {
