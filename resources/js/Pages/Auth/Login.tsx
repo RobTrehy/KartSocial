@@ -39,7 +39,7 @@ export default function Login({ canResetPassword, status }: Props) {
         </div>
       )}
 
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="w-full">
         <div>
           <InputLabel htmlFor="identity">Alias or Email Address</InputLabel>
           <TextInput
