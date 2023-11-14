@@ -7,6 +7,7 @@ use App\Traits\User\HasLaps;
 use App\Traits\User\HasTrackData;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -78,6 +79,23 @@ class User extends Authenticatable
         'profile_photo_url',
         'cover_photo_url',
     ];
+
+    /**
+     * The relationship counts to append to the model
+     * 
+     * @var array<int string>
+     */
+    protected $withCount = [
+        'invited',
+    ];
+
+    /**
+     * Can send invites
+     */
+    public function invited(): HasMany
+    {
+        return $this->hasMany(Invitation::class, 'invited_by');
+    }
 
     /**
      * EXTENDED: Add withPivot()->withTimestamps()
