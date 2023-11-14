@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\User\HasCoverPhoto;
+use App\Traits\User\HasFollowing;
 use App\Traits\User\HasLaps;
 use App\Traits\User\HasTrackData;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,6 +21,7 @@ class User extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;
+    use HasFollowing;
     use HasProfilePhoto;
     use HasCoverPhoto;
     use HasRoles;
