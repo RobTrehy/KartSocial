@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Staudenmeir\EloquentHasManyDeep\HasManyDeep;
 
 class Track extends Model
 {
@@ -81,7 +82,7 @@ class Track extends Model
     public function laps()
     {
         return $this->hasManyDeep(
-            TrackLap::class,
+            TrackVisitSessionLap::class,
             [
                 TrackLayout::class,
                 TrackVisit::class,
@@ -103,7 +104,7 @@ class Track extends Model
     public function myLaps(): HasManyThrough
     {
         return $this->hasManyDeep(
-            TrackLap::class,
+            TrackVisitSessionLap::class,
             [
                 TrackLayout::class,
                 TrackVisit::class,
@@ -123,7 +124,7 @@ class Track extends Model
      *
      * Order By: lap_time, ASC
      */
-    public function fastestLaps(): MorphToMany
+    public function fastestLaps(): HasManyDeep
     {
         return $this->laps()->orderBy('lap_time', 'ASC');
     }

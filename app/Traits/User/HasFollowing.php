@@ -3,6 +3,7 @@
 namespace App\Traits\User;
 
 use App\Models\User;
+use App\Models\UserSuggestion;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
