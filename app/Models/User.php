@@ -2,21 +2,30 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\User\HasCoverPhoto;
+use App\Traits\User\HasLaps;
+use App\Traits\User\HasTrackData;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\PermissionRegistrar;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
+    use HasCoverPhoto;
+    use HasRoles;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use HasTrackData;
+    use HasLaps;
 
     /**
      * The attributes that are mass assignable.
@@ -27,6 +36,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'dob',
+        'alias',
+        'bio',
+        'weight',
+        'home_track_id',
     ];
 
     /**
@@ -35,10 +49,15 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
+        'dob',
         'password',
         'remember_token',
+        'email_verified_at',
         'two_factor_recovery_codes',
         'two_factor_secret',
+        'two_factor_confirmed_at',
+        'profile_photo_path',
+        'cover_photo_path',
     ];
 
     /**
@@ -57,5 +76,48 @@ class User extends Authenticatable
      */
     protected $appends = [
         'profile_photo_url',
+        'cover_photo_url',
     ];
+
+    /**
+     * EXTENDED: Add withPivot()->withTimestamps()
+     *
+     * A model may have multiple roles.
+     */
+    public function roles(): BelongsToMany
+    {
+        $relation = $this->morphToMany(
+            config('permission.models.role'),
+            'model',
+            config('permission.table_names.model_has_roles'),
+            config('permission.column_names.model_morph_key'),
+            PermissionRegistrar::$pivotRole
+        )->withPivot(['cost', 'expires_at'])->withTimestamps();
+
+        if (!PermissionRegistrar::$teams) {
+            return $relation;
+        }
+
+        return $relation->wherePivot(PermissionRegistrar::$teamsKey, getPermissionsTeamId())
+            ->where(function ($q) {
+                $teamField = config('permission.table_names.roles') . '.' . PermissionRegistrar::$teamsKey;
+                $q->whereNull($teamField)->orWhere($teamField, getPermissionsTeamId());
+            });
+    }
+
+    /**
+     * Set the expiry of the role.
+     *
+     * @param  string|int|\Spatie\Permission\Contracts\Role  $role
+     * @param  string  $expires
+     * @return $this
+     */
+    public function setRoleExpiry($role, $expires): User
+    {
+        $pivot = $this->roles()->wherePivot('role_id', $this->getStoredRole($role)->id)->first()->pivot;
+        $pivot->expires_at = $expires;
+        $pivot->save();
+
+        return $this;
+    }
 }
