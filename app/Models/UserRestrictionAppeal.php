@@ -24,7 +24,7 @@ class UserRestrictionAppeal extends Model
      */
     public function restriction(): BelongsTo
     {
-        return $this->belongsTo(UserRestrion::class, 'id', 'restriction_id');
+        return $this->belongsTo(UserRestrions::class, 'id', 'restriction_id');
     }
 
     /**
