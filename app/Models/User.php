@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\User\HasCoverPhoto;
+use App\Traits\User\HasExportableData;
 use App\Traits\User\HasFollowing;
 use App\Traits\User\HasLaps;
 use App\Traits\User\HasTrackData;
@@ -21,20 +22,21 @@ use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class User extends Authenticatable
+class User extends Authenticatable implements \Spatie\PersonalDataExport\ExportsPersonalData
 {
     use CausesActivity;
-    use LogsActivity;
     use HasApiTokens;
+    use HasCoverPhoto;
+    use HasExportableData;
     use HasFactory;
     use HasFollowing;
+    use HasLaps;
     use HasProfilePhoto;
-    use HasCoverPhoto;
     use HasRoles;
+    use HasTrackData;
+    use LogsActivity;
     use Notifiable;
     use TwoFactorAuthenticatable;
-    use HasTrackData;
-    use HasLaps;
 
     /**
      * The attributes that are mass assignable.
