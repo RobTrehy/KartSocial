@@ -40,6 +40,7 @@ export default function Login({ canResetPassword, status }: Props) {
       )}
 
       <form onSubmit={onSubmit} className="w-full">
+        <p className="mb-5 text-2xl">Welcome Back</p>
         <div>
           <InputLabel htmlFor="identity">Alias or Email Address</InputLabel>
           <TextInput
