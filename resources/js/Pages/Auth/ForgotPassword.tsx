@@ -39,7 +39,7 @@ export default function ForgotPassword({ status }: Props) {
         </div>
       )}
 
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="w-full">
         <div>
           <InputLabel htmlFor="email">Email</InputLabel>
           <TextInput

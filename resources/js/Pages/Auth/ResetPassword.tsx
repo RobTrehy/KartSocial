@@ -33,7 +33,7 @@ export default function ResetPassword({ token, email }: Props) {
     <AuthenticationCard>
       <Head title="Reset Password" />
 
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="w-full">
         <div>
           <InputLabel htmlFor="email">Email</InputLabel>
           <TextInput

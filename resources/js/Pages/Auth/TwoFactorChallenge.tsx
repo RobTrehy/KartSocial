@@ -49,7 +49,7 @@ export default function TwoFactorChallenge() {
           : 'Please confirm access to your account by entering the authentication code provided by your authenticator application.'}
       </div>
 
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="w-full">
         {recovery ? (
           <div>
             <InputLabel htmlFor="recovery_code">Recovery Code</InputLabel>

@@ -30,7 +30,7 @@ export default function ConfirmPassword() {
         before continuing.
       </div>
 
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="w-full">
         <div>
           <InputLabel htmlFor="password">Password</InputLabel>
           <TextInput

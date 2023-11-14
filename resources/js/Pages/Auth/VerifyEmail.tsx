@@ -1,9 +1,9 @@
-import { Link, useForm, Head } from '@inertiajs/react';
-import classNames from 'classnames';
-import React from 'react';
-import useRoute from '@/Hooks/useRoute';
 import AuthenticationCard from '@/Components/AuthenticationCard';
 import PrimaryButton from '@/Components/PrimaryButton';
+import useRoute from '@/Hooks/useRoute';
+import { Head, Link, useForm } from '@inertiajs/react';
+import classNames from 'classnames';
+import React from 'react';
 
 interface Props {
   status: string;
@@ -36,7 +36,7 @@ export default function VerifyEmail({ status }: Props) {
         </div>
       )}
 
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="w-full">
         <div className="mt-4 flex items-center justify-between">
           <PrimaryButton
             className={classNames({ 'opacity-25': form.processing })}
