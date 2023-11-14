@@ -7,9 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class TrackVisitSession extends Model
 {
+    use LogsActivity;
     use HasFactory;
 
     protected $appends = ['fastestLap'];
@@ -61,5 +64,25 @@ class TrackVisitSession extends Model
     public function getFastestLapAttribute(): HasOneOrMany
     {
         return $this->fastestLaps()->first();
+    }
+
+    /**
+     * Configure the activity logging rules
+     */
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly([
+                'session_name',
+                'session_type',
+                'session_length_type',
+                'session_length',
+                'session_order',
+                'total_drivers',
+                'finish_position',
+            ])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs()
+            ->useLogName('Track Session');
     }
 }

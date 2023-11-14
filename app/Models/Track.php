@@ -9,10 +9,13 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Track extends Model
 {
     use HasFactory;
+    use LogsActivity;
     use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
     protected $appends = ['fastestLap'];
@@ -131,5 +134,17 @@ class Track extends Model
     public function getFastestLapAttribute()
     {
         return $this->fastestLaps()->first();
+    }
+
+    /**
+     * Configure the activity logging rules
+     */
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logFillable()
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs()
+            ->useLogName('Track');
     }
 }

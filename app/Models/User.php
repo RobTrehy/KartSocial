@@ -17,9 +17,14 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\PermissionRegistrar;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\CausesActivity;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class User extends Authenticatable
 {
+    use CausesActivity;
+    use LogsActivity;
     use HasApiTokens;
     use HasFactory;
     use HasFollowing;
@@ -148,5 +153,18 @@ class User extends Authenticatable
         $pivot->save();
 
         return $this;
+    }
+
+    /**
+     * Set the default activity logging options for this model
+     */
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logFillable()
+            ->logOnlyDirty()
+            ->logExcept(['password'])
+            ->dontSubmitEmptyLogs()
+            ->useLogName('User');
     }
 }

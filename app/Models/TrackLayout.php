@@ -8,9 +8,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class TrackLayout extends Model
 {
+    use LogsActivity;
     use \Staudenmeir\EloquentEagerLimit\HasEagerLimit;
     use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
@@ -97,5 +100,17 @@ class TrackLayout extends Model
     public function getFastestLapAttribute()
     {
         return $this->fastestLaps()->first();
+    }
+
+    /**
+     * Configure the activity logging rules
+     */
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['name', 'length'])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs()
+            ->useLogName('Track Layout');
     }
 }
