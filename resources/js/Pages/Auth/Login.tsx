@@ -1,13 +1,13 @@
-import { Link, useForm, Head } from '@inertiajs/react';
-import classNames from 'classnames';
-import React from 'react';
-import useRoute from '@/Hooks/useRoute';
 import AuthenticationCard from '@/Components/AuthenticationCard';
 import Checkbox from '@/Components/Checkbox';
+import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import InputError from '@/Components/InputError';
+import useRoute from '@/Hooks/useRoute';
+import { Head, Link, useForm } from '@inertiajs/react';
+import classNames from 'classnames';
+import React from 'react';
 
 interface Props {
   canResetPassword: boolean;
@@ -17,7 +17,7 @@ interface Props {
 export default function Login({ canResetPassword, status }: Props) {
   const route = useRoute();
   const form = useForm({
-    email: '',
+    identity: '',
     password: '',
     remember: '',
   });
@@ -41,17 +41,17 @@ export default function Login({ canResetPassword, status }: Props) {
 
       <form onSubmit={onSubmit}>
         <div>
-          <InputLabel htmlFor="email">Email</InputLabel>
+          <InputLabel htmlFor="identity">Alias or Email Address</InputLabel>
           <TextInput
-            id="email"
-            type="email"
+            id="identity"
+            type="text"
             className="mt-1 block w-full"
-            value={form.data.email}
-            onChange={e => form.setData('email', e.currentTarget.value)}
+            value={form.data.identity}
+            onChange={e => form.setData('identity', e.currentTarget.value)}
             required
             autoFocus
           />
-          <InputError className="mt-2" message={form.errors.email} />
+          <InputError className="mt-2" message={form.errors.identity} />
         </div>
 
         <div className="mt-4">
