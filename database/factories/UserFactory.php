@@ -24,12 +24,12 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
-            'dob' => $this->faker->dateTimeBetween('-80 yeras', '-14 years'),
+            'dob' => $this->faker->dateTimeBetween('-80 years', '-14 years'),
             'two_factor_secret' => null,
             'two_factor_recovery_codes' => null,
             'remember_token' => Str::random(10),
             'profile_photo_path' => null,
-            'cover_photo_parth' => null,
+            'cover_photo_path' => null,
         ];
     }
 
