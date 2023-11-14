@@ -1,9 +1,9 @@
 import AuthenticationCard from '@/Components/AuthenticationCard';
-import Checkbox from '@/Components/Checkbox';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
+import Checkbox from '@/Components/Forms/Checkbox';
+import InputError from '@/Components/Forms/InputError';
+import InputLabel from '@/Components/Forms/InputLabel';
+import TextInput from '@/Components/Forms/TextInput';
 import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
 import useRoute from '@/Hooks/useRoute';
 import { Head, Link, useForm } from '@inertiajs/react';
 import classNames from 'classnames';

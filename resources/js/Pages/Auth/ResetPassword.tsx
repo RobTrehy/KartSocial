@@ -1,12 +1,12 @@
-import { useForm, Head } from '@inertiajs/react';
+import AuthenticationCard from '@/Components/AuthenticationCard';
+import InputError from '@/Components/Forms/InputError';
+import InputLabel from '@/Components/Forms/InputLabel';
+import TextInput from '@/Components/Forms/TextInput';
+import PrimaryButton from '@/Components/PrimaryButton';
+import useRoute from '@/Hooks/useRoute';
+import { Head, useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import React from 'react';
-import useRoute from '@/Hooks/useRoute';
-import AuthenticationCard from '@/Components/AuthenticationCard';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import InputError from '@/Components/InputError';
 
 interface Props {
   token: string;

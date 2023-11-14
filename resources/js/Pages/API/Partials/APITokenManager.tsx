@@ -1,22 +1,22 @@
-import { useForm } from '@inertiajs/react';
-import classNames from 'classnames';
-import React, { useState } from 'react';
-import useRoute from '@/Hooks/useRoute';
 import ActionMessage from '@/Components/ActionMessage';
 import ActionSection from '@/Components/ActionSection';
-import Checkbox from '@/Components/Checkbox';
 import ConfirmationModal from '@/Components/ConfirmationModal';
 import DangerButton from '@/Components/DangerButton';
 import DialogModal from '@/Components/DialogModal';
 import FormSection from '@/Components/FormSection';
-import InputError from '@/Components/InputError';
+import Checkbox from '@/Components/Forms/Checkbox';
+import InputError from '@/Components/Forms/InputError';
+import TextInput from '@/Components/Forms/TextInput';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
 import SecondaryButton from '@/Components/SecondaryButton';
 import SectionBorder from '@/Components/SectionBorder';
-import { ApiToken } from '@/types';
+import useRoute from '@/Hooks/useRoute';
 import useTypedPage from '@/Hooks/useTypedPage';
+import { ApiToken } from '@/types';
+import { useForm } from '@inertiajs/react';
+import classNames from 'classnames';
+import React, { useState } from 'react';
 
 interface Props {
   tokens: ApiToken[];

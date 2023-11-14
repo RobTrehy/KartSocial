@@ -1,20 +1,23 @@
-import { Link, useForm, Head } from '@inertiajs/react';
-import classNames from 'classnames';
-import React from 'react';
+import AuthenticationCard from '@/Components/AuthenticationCard';
+import Checkbox from '@/Components/Forms/Checkbox';
+import InputError from '@/Components/Forms/InputError';
+import InputHelp from '@/Components/Forms/InputHelp';
+import InputLabel from '@/Components/Forms/InputLabel';
+import TextInput from '@/Components/Forms/TextInput';
+import PrimaryButton from '@/Components/PrimaryButton';
 import useRoute from '@/Hooks/useRoute';
 import useTypedPage from '@/Hooks/useTypedPage';
-import AuthenticationCard from '@/Components/AuthenticationCard';
-import Checkbox from '@/Components/Checkbox';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import InputError from '@/Components/InputError';
+import { Head, Link, useForm } from '@inertiajs/react';
+import classNames from 'classnames';
+import React from 'react';
 
 export default function Register() {
   const page = useTypedPage();
   const route = useRoute();
   const form = useForm({
     name: '',
+    alias: '',
+    dob: '',
     email: '',
     password: '',
     password_confirmation: '',
@@ -32,7 +35,8 @@ export default function Register() {
     <AuthenticationCard>
       <Head title="Register" />
 
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="w-full">
+        <p className="mb-5 text-2xl">Join us</p>
         <div>
           <InputLabel htmlFor="name">Name</InputLabel>
           <TextInput
@@ -46,6 +50,31 @@ export default function Register() {
             autoComplete="name"
           />
           <InputError className="mt-2" message={form.errors.name} />
+        </div>
+
+        <div className="mt-4">
+          <InputLabel htmlFor="alias">Display Name</InputLabel>
+          <TextInput
+            id="alias"
+            type="text"
+            className="mt-1 block w-full"
+            value={form.data.alias}
+            onChange={e => form.setData('alias', e.currentTarget.value)}
+          />
+          <InputError className="mt-2" message={form.errors.alias} />
+        </div>
+
+        <div className="mt-4">
+          <InputLabel htmlFor="dob">Date of Birth</InputLabel>
+          <TextInput
+            id="dob"
+            type="date"
+            className="mt-1 block w-full"
+            value={form.data.dob}
+            onChange={e => form.setData('dob', e.currentTarget.value)}
+          />
+          <InputHelp className="mt-2" message="This information is private, for registration purposes only." />
+          <InputError className="mt-2" message={form.errors.dob} />
         </div>
 
         <div className="mt-4">
