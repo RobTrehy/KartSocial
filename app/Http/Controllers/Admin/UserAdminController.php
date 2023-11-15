@@ -52,7 +52,7 @@ class UserAdminController extends Controller
         }
 
         return Inertia::render('Admin/Users/Show', [
-            'user' => $user->load(['roles', 'ban']),
+            'user' => $user->load(['roles', 'restriction']),
             'trackSelect' => $trackSelect,
             'selectedTrack' => $selectedTrack,
         ]);
@@ -101,7 +101,7 @@ class UserAdminController extends Controller
         }
 
         return Inertia::render('Admin/Users/TrackVisits/Index', [
-            'trackVisits' => TrackVisit::where('user_id', $user->id)->paginate(10),
+            'trackVisits' => TrackVisit::where('user_id', $user->id)->with(['trackLayout', 'sessions', 'sessions.laps'])->paginate(10),
         ]);
     }
 
