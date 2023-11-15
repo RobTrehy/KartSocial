@@ -1,76 +1,54 @@
+import useRoute from '@/Hooks/useRoute';
+import { Link } from '@inertiajs/react';
 import React from 'react';
-import ApplicationLogo from '@/Components/ApplicationLogo';
 
 export default function Welcome() {
+  const route = useRoute();
+
   return (
     <div>
-      <div className="p-6 lg:p-8 bg-white dark:bg-gray-800 dark:bg-gradient-to-bl dark:from-gray-700/50 dark:via-transparent border-b border-gray-200 dark:border-gray-700">
-        <ApplicationLogo className="block h-12 w-auto" />
-
-        <h1 className="mt-8 text-2xl font-medium text-gray-900 dark:text-white">
-          Welcome to your Jetstream application!
+      <div className="p-6 lg:p-8 bg-white dark:bg-gray-800 dark:bg-gradient-to-bl dark:from-gray-700/50 dark:via-transparent rounded-md">
+        <h1 className="text-2xl font-medium text-gray-900 dark:text-white">
+          Welcome to Kart Social!
         </h1>
 
         <p className="mt-6 text-gray-500 dark:text-gray-400 leading-relaxed">
-          Laravel Jetstream provides a beautiful, robust starting point for your
-          next Laravel application. Laravel is designed to help you build your
-          application using a development environment that is simple, powerful,
-          and enjoyable. We believe you should love expressing your creativity
-          through programming, so we have spent time carefully crafting the
-          Laravel ecosystem to be a breath of fresh air. We hope you love it.
+          Kart Social is a social platform for go-kart racers to record, share and compare their lap times!<br />
+          If you're seeing this page, we're hoping it's because you're new to our platform. We'd normally show you a feed of recent activity from people that you follow.
         </p>
       </div>
 
-      <div className="bg-gray-200 dark:bg-gray-800 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 p-6 lg:p-8">
-        <div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
+        <h1 className="text-xl font-bold text-center col-span-1 md:col-span-2 pt-6 lg:pt-8 dark:text-white">Where to start?</h1>
+
+        <Link href={route('user-profile.edit')} className="px-6 lg:px-8 py-4 hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-500 rounded-md">
           <div className="flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth="1.5"
-              className="w-6 h-6 stroke-gray-400"
-            >
+              className="w-6 h-6 stroke-gray-400">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"
+                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
               />
             </svg>
+
             <h2 className="ml-3 text-xl font-semibold text-gray-900 dark:text-white">
-              <a href="https://laravel.com/docs">Documentation</a>
+              Setup your profile
             </h2>
           </div>
 
           <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-            Laravel has wonderful documentation covering every aspect of the
-            framework. Whether you're new to the framework or have previous
-            experience, we recommend reading all of the documentation from
-            beginning to end.
+            Your profile needs some more information that we didn't ask for when you registered!<br />
+            Along with the traditional profile and cover photos, we'd love to know your home track and your weight.<br />
+            If you're already regretting the display name you chose, you can also change it here!
           </p>
+        </Link>
 
-          <p className="mt-4 text-sm">
-            <a
-              href="https://laravel.com/docs"
-              className="inline-flex items-center font-semibold text-indigo-700 dark:text-indigo-300"
-            >
-              Explore the documentation
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                className="ml-1 w-5 h-5 fill-indigo-500 dark:fill-indigo-200"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </a>
-          </p>
-        </div>
-
-        <div>
+        <Link href={route('visits.create')} className="px-6 lg:px-8 py-4 hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-500 rounded-md">
           <div className="flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -85,38 +63,18 @@ export default function Welcome() {
               />
             </svg>
             <h2 className="ml-3 text-xl font-semibold text-gray-900 dark:text-white">
-              <a href="https://laracasts.com">Laracasts</a>
+              Log a Track Visit
             </h2>
           </div>
 
           <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-            Laracasts offers thousands of video tutorials on Laravel, PHP, and
-            JavaScript development. Check them out, see for yourself, and
-            massively level up your development skills in the process.
+            In order to share your lap times, you start by recording a visit to a track!<br />
+            You can record visits both in the past and in the future, so people viewing your profile can see when you're planning to go too!<br />
+            Once you've got a visit recorded, you can add multiple sessions, and record lap times from each - we have a couple of ways of importing your lap times, to keep it quick and easy!
           </p>
+        </Link>
 
-          <p className="mt-4 text-sm">
-            <a
-              href="https://laracasts.com"
-              className="inline-flex items-center font-semibold text-indigo-700 dark:text-indigo-300"
-            >
-              Start watching Laracasts
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                className="ml-1 w-5 h-5 fill-indigo-500 dark:fill-indigo-200"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </a>
-          </p>
-        </div>
-
-        <div>
+        <div className="px-6 lg:px-8 py-4 hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-500 rounded-md cursor-not-allowed">
           <div className="flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -128,23 +86,22 @@ export default function Welcome() {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"
               />
             </svg>
             <h2 className="ml-3 text-xl font-semibold text-gray-900 dark:text-white">
-              <a href="https://tailwindcss.com/">Tailwind</a>
+              Follow Your Friends
             </h2>
           </div>
 
           <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-            Laravel Jetstream is built with Tailwind, an amazing utility first
-            CSS framework that doesn't get in your way. You'll be amazed how
-            easily you can build and maintain fresh, modern designs with this
-            wonderful framework at your fingertips.
+            Your rivals too!<br />
+            We can't link you to this one, you'll need to use the search bar at the top! You can search for people by their email address or display name.<br />
+            You'll be linked to their profile page and have the option to follow them. When they record a track visit, the details will show in your dashboard feed!
           </p>
         </div>
 
-        <div>
+        <Link href={route('tracks.index')} className="px-6 lg:px-8 py-4 hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-500 rounded-md">
           <div className="flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -156,21 +113,20 @@ export default function Welcome() {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+                d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z"
               />
             </svg>
+
             <h2 className="ml-3 text-xl font-semibold text-gray-900 dark:text-white">
-              Authentication
+              Discover New Tracks
             </h2>
           </div>
 
           <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-            Authentication and registration views are included with Laravel
-            Jetstream, as well as support for user email verification and
-            resetting forgotten passwords. So, you're free to get started with
-            what matters most: building your application.
+            Whilst we don't have an exhaustive database of every track in the country, it is rather large!<br />
+            If there is a track near to you that isn't in our database currently, there is an option to add it! We'd really appreciate that!
           </p>
-        </div>
+        </Link>
       </div>
     </div>
   );
