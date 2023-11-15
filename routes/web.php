@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TrackLayoutsController;
 use App\Http\Controllers\TracksController;
+use App\Http\Controllers\TrackVisitsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -46,6 +47,9 @@ Route::middleware([
     Route::resource('tracks.layout', TrackLayoutsController::class)->except(['index', 'show']);
     Route::post('/tracks/{track}/layout/{layout}/reinstate', [TrackLayoutsController::class, 'reinstate'])->withTrashed()->name('tracks.layout.reinstate');
     Route::post('/tracks/{track}/layout/{layout}/set_default', [TrackLayoutsController::class, 'makeDefault'])->withTrashed()->name('tracks.layout.set_default');
+    
+    // Track Visit & Session Routes
+    Route::resource('visits', TrackVisitsController::class);
 
     // Admin Routes
     Route::prefix('/admin')->middleware(['can:admin.access'])->name('admin:')->group(function () {
