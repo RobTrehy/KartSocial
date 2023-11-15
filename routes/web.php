@@ -27,12 +27,13 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return redirect(route('tracks.index'));
+    // return Inertia::render('Welcome', [
+    //     'canLogin' => Route::has('login'),
+    //     'canRegister' => Route::has('register'),
+    //     'laravelVersion' => Application::VERSION,
+    //     'phpVersion' => PHP_VERSION,
+    // ]);
 })->name('home');
 
 // User Profile Routes
@@ -100,6 +101,7 @@ Route::middleware([
         ->name('current-user-photo.destroy');
     Route::delete('/user/cover-photo', [UserPhotosController::class, 'destroyCover'])
         ->name('current-user-cover.destroy');
+    Route::post('/user/data/request', [UserAccountController::class, 'requestPersonalData'])->name('user.personal-data-request');
     Route::personalDataExports('personal-data-exports');
 
     // User Restrictions and Appeals
