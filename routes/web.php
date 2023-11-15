@@ -5,12 +5,15 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TrackLayoutsController;
 use App\Http\Controllers\TracksController;
 use App\Http\Controllers\TrackVisitsController;
+use App\Http\Controllers\TrackVisitSessionLapsController;
 use App\Http\Controllers\TrackVisitSessionsController;
+use App\Http\Controllers\User\UserAccountController;
+use App\Http\Controllers\User\UserPhotosController;
+use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\UserRestrictionController;
 use App\Http\Middleware\UserIsNotRestricted;
 use App\Http\Middleware\UserIsRestricted;
 use App\Models\UserRestrictions;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Env;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -71,9 +74,9 @@ Route::middleware([
     // Track Visit & Session Routes
     Route::resource('visits', TrackVisitsController::class);
     Route::resource('visits.sessions', TrackVisitSessionsController::class)->except(['index', 'show']);
-    Route::get('/session/{session}/laps', [TrackLapController::class, 'edit'])->name('session.laps');
-    Route::put('/session/{session}/laps', [TrackLapController::class, 'update'])->name('session.laps.update');
-    Route::delete('/session/{session}/lap/{lap}', [TrackLapController::class, 'destroy'])->name('session.lap.destroy');
+    Route::get('/session/{session}/laps', [TrackVisitSessionLapsController::class, 'edit'])->name('session.laps');
+    Route::put('/session/{session}/laps', [TrackVisitSessionLapsController::class, 'update'])->name('session.laps.update');
+    Route::delete('/session/{session}/lap/{lap}', [TrackVisitSessionLapsController::class, 'destroy'])->name('session.lap.destroy');
 
     // Admin Routes
     Route::prefix('/admin')->middleware(['can:admin.access'])->name('admin:')->group(function () {
