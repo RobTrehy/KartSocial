@@ -6,6 +6,7 @@ use App\Http\Controllers\TrackLayoutsController;
 use App\Http\Controllers\TracksController;
 use App\Http\Controllers\TrackVisitsController;
 use App\Http\Controllers\TrackVisitSessionsController;
+use App\Http\Controllers\UserRestrictionController;
 use App\Http\Middleware\UserIsNotRestricted;
 use App\Http\Middleware\UserIsRestricted;
 use App\Models\UserRestrictions;
@@ -90,9 +91,19 @@ Route::middleware([
     Route::post('/search', [SearchController::class, 'search'])->name('search');
 
     // User Profile Routes
-    Route::personalDataExports('personal-data-exports');
     Route::get('/user/profile', [UserProfileController::class, 'edit'])->name('user-profile.edit');
     Route::put('/user/profile', [UserProfileController::class, 'update'])->name('user-profile.update');
+    Route::put('/user/profile-photos', [UserPhotosController::class, 'update'])
+        ->middleware([config('fortify.auth_middleware', 'auth') . ':' . config('fortify.guard')])
+        ->name('user-profile-photos.update');
+    Route::delete('/user/profile-photo', [UserPhotosController::class, 'destroyPhoto'])
+        ->name('current-user-photo.destroy');
+    Route::delete('/user/cover-photo', [UserPhotosController::class, 'destroyCover'])
+        ->name('current-user-cover.destroy');
+    Route::personalDataExports('personal-data-exports');
+
+    // User Restrictions and Appeals
+    Route::post('/user/restriction/appeal', [UserRestrictionController::class, 'addAppealComment'])->name('user.restriction.appeal.add');
 });
 
 Route::get('/restricted', function () {
