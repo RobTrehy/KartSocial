@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Jetstream\Http\Controllers\Inertia\UserProfileController;
 use Spatie\PersonalDataExport\Jobs\CreatePersonalDataExportJob;
 
-class UserAccountController extends Controller
+class UserAccountController extends UserProfileController
 {
     /**
      * Create an SAR / Personal Data Export Request
