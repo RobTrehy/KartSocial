@@ -11,6 +11,7 @@ use App\Http\Middleware\UserIsNotRestricted;
 use App\Http\Middleware\UserIsRestricted;
 use App\Models\UserRestrictions;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Env;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -117,3 +118,7 @@ Route::get('/restricted', function () {
     }
     return redirect('/dashboard');
 })->name('restricted.access');
+
+if (Env::get('APP_INVITATION_ONLY', false)) {
+    include 'invitations.php';
+}
