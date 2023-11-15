@@ -1,12 +1,13 @@
+import SectionTitle from '@/Components/SectionTitle';
 import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
-import SectionTitle from '@/Components/SectionTitle';
 
 interface Props {
   title: string;
   description: string;
   renderActions?(): JSX.Element;
   onSubmit(): void;
+  noGrid?: boolean;
 }
 
 export default function FormSection({
@@ -14,6 +15,7 @@ export default function FormSection({
   renderActions,
   title,
   description,
+  noGrid = false,
   children,
 }: PropsWithChildren<Props>) {
   const hasActions = !!renderActions;
@@ -37,7 +39,7 @@ export default function FormSection({
                 : 'sm:rounded-md',
             )}
           >
-            <div className="grid grid-cols-6 gap-6">{children}</div>
+            <div className={`${(noGrid) ? '' : 'grid grid-cols-6 gap-6'}`}>{children}</div>
           </div>
 
           {hasActions && (
