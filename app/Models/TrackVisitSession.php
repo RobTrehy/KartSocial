@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -55,13 +54,13 @@ class TrackVisitSession extends Model
      */
     public function fastestLaps(): HasMany
     {
-        return $this->laps()->order_by('lap_time', 'ASC');
+        return $this->laps()->orderBy('lap_time', 'ASC');
     }
 
     /**
      * Get the single most fastest TrackVisitSessionLap for this model.
      */
-    public function getFastestLapAttribute(): HasOneOrMany
+    public function getFastestLapAttribute(): TrackVisitSessionLap
     {
         return $this->fastestLaps()->first();
     }

@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Staudenmeir\EloquentHasManyDeep\HasManyDeep;
 
 class TrackLayout extends Model
 {
@@ -51,7 +51,7 @@ class TrackLayout extends Model
     public function laps(): HasManyThrough
     {
         return $this->hasManyDeep(
-            TrackLap::class,
+            TrackVisitSessionLap::class,
             [
                 TrackVisit::class,
                 TrackVisitSession::class,
@@ -71,7 +71,7 @@ class TrackLayout extends Model
     public function myLaps(): HasManyThrough
     {
         return $this->hasManyDeep(
-            TrackLap::class,
+            TrackVisitSessionLap::class,
             [
                 TrackVisit::class,
                 TrackVisitSession::class,
@@ -89,7 +89,7 @@ class TrackLayout extends Model
      *
      * Order By: lap_time, ASC
      */
-    public function fastestLaps(): MorphToMany
+    public function fastestLaps(): HasManyDeep
     {
         return $this->laps()->orderBy('lap_time', 'ASC');
     }
@@ -97,7 +97,7 @@ class TrackLayout extends Model
     /**
      * Get the single most fastest TrackVisitSessionLap for this model.
      */
-    public function getFastestLapAttribute()
+    public function getFastestLapAttribute(): TrackVisitSessionLap
     {
         return $this->fastestLaps()->first();
     }

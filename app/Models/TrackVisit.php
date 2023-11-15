@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -63,15 +62,15 @@ class TrackVisit extends Model
      *
      * Order By: lap_time, ASC
      */
-    public function fastestLaps(): HasMany
+    public function fastestLaps(): HasManyThrough
     {
-        return $this->laps()->order_by('lap_time', 'ASC');
+        return $this->laps()->orderBy('lap_time', 'ASC');
     }
 
     /**
      * Get the single most fastest TrackVisitSessionLap for this model.
      */
-    public function getFastestLapAttribute(): HasOneOrMany
+    public function getFastestLapAttribute(): TrackVisitSessionLap
     {
         return $this->fastestLaps()->first();
     }
