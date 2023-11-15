@@ -6,8 +6,10 @@ use App\Models\Track;
 use App\Models\TrackLayout;
 use App\Models\TrackVisit;
 use App\Models\TrackVisitSession;
+use App\Models\TrackVisitSessionLap;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Staudenmeir\EloquentHasManyDeep\HasManyDeep;
 
 trait HasLaps
 {
@@ -19,21 +21,17 @@ trait HasLaps
     public function laps(): HasManyThrough
     {
         return $this->hasManyDeep(
-            TrackLap::class,
+            TrackVisitSessionLap::class,
             [
-                Track::class,
-                TrackLayout::class,
                 TrackVisit::class,
                 TrackVisitSession::class,
             ],
             [
                 null,
-                'track_id',
-                'track_layout_id',
                 'track_visit_id',
                 'session_id',
             ]
-        )->where('track_visits.user_id', $this->id);
+        );
     }
 
     /**
@@ -49,17 +47,17 @@ trait HasLaps
     /**
      * All TrackVisitSessionLap records for this model, filtered by TrackLayout
      */
-    public function fastestLapsForTrackLayout(TrackLayout $layout): MorphToMany
+    public function fastestLapsForTrackLayout(TrackLayout $layout): HasManyDeep
     {
         return $this->laps()
-            ->where('track_visit.track_layout_id', $layout->id)
+            ->where('track_visits.track_layout_id', $layout->id)
             ->orderBy('lap_time', 'ASC');
     }
 
     /**
      * All TrackVisitSessionLap records for this model, filtered by Track
      */
-    public function fastestLapsForTrack(Track $track): MorphToMany
+    public function fastestLapsForTrack(Track $track): HasManyDeep
     {
         $ids = [];
         $layouts = $track->allLayouts()->get();
@@ -68,7 +66,7 @@ trait HasLaps
         }
 
         return $this->laps()
-            ->whereIn('track_visit.track_layout_id', $ids)
+            ->whereIn('track_visits.track_layout_id', $ids)
             ->orderBy('lap_time', 'ASC');
     }
 }
