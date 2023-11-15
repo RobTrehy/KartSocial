@@ -6,6 +6,7 @@ use App\Http\Controllers\TrackLayoutsController;
 use App\Http\Controllers\TracksController;
 use App\Http\Controllers\TrackVisitsController;
 use App\Http\Controllers\TrackVisitSessionsController;
+use App\Http\Middleware\UserIsNotRestricted;
 use App\Http\Middleware\UserIsRestricted;
 use App\Models\UserRestrictions;
 use Illuminate\Foundation\Application;
@@ -31,7 +32,13 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('home');
+
+// User Profile Routes
+Route::middleware([UserIsNotRestricted::class])->get('/@{alias}/follows', [UserProfileController::class, 'showFollows'])->name('profile.show.follows');
+Route::middleware([UserIsNotRestricted::class])->get('/@{alias}/followers', [UserProfileController::class, 'showFollowers'])->name('profile.show.followers');
+Route::middleware([UserIsNotRestricted::class])->get('/@{alias}/{item}', [UserProfileController::class, 'showItem'])->name('profile.show.item');
+Route::middleware([UserIsNotRestricted::class])->get('/@{alias}/', [UserProfileController::class, 'show'])->name('profile.show');
 
 
 Route::get('/tracks', [TracksController::class, 'index'])->name('tracks.index');
@@ -47,6 +54,10 @@ Route::middleware([
     UserIsRestricted::class,
 ])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'feed'])->name('dashboard');
+
+    // Follower Routes
+    Route::put('/user/{user}/follow', [UserProfileController::class, 'follow'])->name('user.follow');
+    Route::delete('/user/{user}/follow', [UserProfileController::class, 'unfollow'])->name('user.unfollow');
 
     // Track / Layout Routes
     Route::resource('tracks', TracksController::class)->except(['index', 'show']);
@@ -78,7 +89,10 @@ Route::middleware([
     // App Search
     Route::post('/search', [SearchController::class, 'search'])->name('search');
 
+    // User Profile Routes
     Route::personalDataExports('personal-data-exports');
+    Route::get('/user/profile', [UserProfileController::class, 'edit'])->name('user-profile.edit');
+    Route::put('/user/profile', [UserProfileController::class, 'update'])->name('user-profile.update');
 });
 
 Route::get('/restricted', function () {
