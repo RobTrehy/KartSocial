@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TrackLayoutsController;
 use App\Http\Controllers\TracksController;
 use App\Http\Controllers\TrackVisitsController;
+use App\Http\Controllers\TrackVisitSessionsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -50,6 +51,7 @@ Route::middleware([
     
     // Track Visit & Session Routes
     Route::resource('visits', TrackVisitsController::class);
+    Route::resource('visits.sessions', TrackVisitSessionsController::class)->except(['index', 'show']);
 
     // Admin Routes
     Route::prefix('/admin')->middleware(['can:admin.access'])->name('admin:')->group(function () {
