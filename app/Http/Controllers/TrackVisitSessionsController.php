@@ -24,7 +24,7 @@ class TrackVisitSessionsController extends Controller
         }
 
         return Inertia::render('Visits/NewSession', [
-            'visit' => $visit,
+            'visit' => $visit->load(['trackLayout', 'sessions']),
         ]);
     }
 
@@ -56,7 +56,7 @@ class TrackVisitSessionsController extends Controller
         }
 
         return Inertia::render('Visits/EditSession', [
-            'visit' => $visit,
+            'visit' => $visit->load(['trackLayout', 'sessions']),
             'session' => $session,
         ]);
     }
@@ -72,7 +72,7 @@ class TrackVisitSessionsController extends Controller
             abort(403);
         }
 
-        $session->update($request->safe());
+        $session->update($request->safe()->toArray());
 
         return redirect(route('visits.show', ['visit' => $visit->id]));
     }

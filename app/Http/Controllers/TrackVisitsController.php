@@ -24,7 +24,10 @@ class TrackVisitsController extends Controller
         }
 
         return Inertia::render('Visits/Index', [
-            'visits' => TrackVisit::where('user_id', Auth::id())->orderBy('visit_date', 'DESC')->paginate(15),
+            'visits' => TrackVisit::where('user_id', Auth::id())
+                ->with(['trackLayout', 'sessions', 'sessions.laps'])
+                ->orderBy('visit_date', 'DESC')
+                ->paginate(15),
         ]);
     }
 
@@ -88,7 +91,7 @@ class TrackVisitsController extends Controller
         }
 
         return Inertia::render('Visits/Show', [
-            'visit' => $visit,
+            'visit' => $visit->load(['trackLayout', 'sessions', 'sessions.laps']),
         ]);
     }
 

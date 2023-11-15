@@ -23,7 +23,7 @@ class TrackVisitSessionLapsController extends Controller
         }
 
         return Inertia::render('Visits/Sessions/Lap', [
-            'session' => $session,
+            'session' => $session->load(['laps']),
         ]);
     }
 
