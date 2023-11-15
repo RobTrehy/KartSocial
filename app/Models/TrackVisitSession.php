@@ -60,7 +60,7 @@ class TrackVisitSession extends Model
     /**
      * Get the single most fastest TrackVisitSessionLap for this model.
      */
-    public function getFastestLapAttribute(): TrackVisitSessionLap
+    public function getFastestLapAttribute(): TrackVisitSessionLap|null
     {
         return $this->fastestLaps()->first();
     }
