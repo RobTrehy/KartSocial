@@ -6,7 +6,6 @@ use App\Http\Requests\CreateTrackVisitSessionRequest;
 use App\Http\Requests\UpdateTrackVisitSessionRequest;
 use App\Models\TrackVisit;
 use App\Models\TrackVisitSession;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 

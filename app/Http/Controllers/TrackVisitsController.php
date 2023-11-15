@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateTrackVisitRequest;
-use App\Http\Requests\StoreTrackVisitRequest;
 use App\Http\Requests\UpdateTrackVisitRequest;
 use App\Models\Track;
 use App\Models\TrackLayout;
 use App\Models\TrackVisit;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 

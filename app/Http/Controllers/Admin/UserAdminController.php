@@ -7,7 +7,6 @@ use App\Http\Requests\Admin\UpdateUserProfileRequest;
 use App\Models\Track;
 use App\Models\TrackVisit;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
