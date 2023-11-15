@@ -16,8 +16,6 @@ class TrackVisitSession extends Model
 
     protected $appends = ['fastestLap'];
 
-    protected $with = ['laps'];
-
     protected $fillable = [
         'track_visit_id',
         'session_name',

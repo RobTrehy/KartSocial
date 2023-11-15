@@ -85,7 +85,7 @@ class TracksController extends Controller
             ->get();
 
         $feed = TrackVisit::whereIn('track_layout_id', $layouts->pluck('id'))
-            ->with('driver', 'sessions', 'sessions.laps')
+            ->with(['trackLayout', 'driver', 'sessions', 'sessions.laps'])
             ->where('visit_date', '<=', Carbon::now())
             ->orderBy('visit_date', 'DESC')
             ->limit(50)
