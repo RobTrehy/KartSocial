@@ -18,13 +18,17 @@ interface Props {
   selectedTrack: Object;
 }
 
-export default function UpdateProfileForm({ user, trackSelect, selectedTrack }: Props) {
+export default function UpdateProfileForm({
+  user,
+  trackSelect,
+  selectedTrack,
+}: Props) {
   const form = useForm({
     _method: 'PUT',
     alias: user.alias,
     bio: user.bio || '',
     weight: user.weight || '',
-    home_track_id: user.home_track_id || null
+    home_track_id: user.home_track_id || null,
   });
   const route = useRoute();
   const [track, set_track] = useState<object | null>(selectedTrack || null);
@@ -55,7 +59,6 @@ export default function UpdateProfileForm({ user, trackSelect, selectedTrack }: 
         </>
       )}
     >
-
       {/* <!-- Alias --> */}
       <div className="col-span-6 sm:col-span-4">
         <InputLabel htmlFor="alias" value="Display Name" />
@@ -64,7 +67,9 @@ export default function UpdateProfileForm({ user, trackSelect, selectedTrack }: 
           type="text"
           className="mt-1 block w-full"
           value={form.data.alias}
-          onChange={e => form.setData('alias', e.currentTarget.value.replace(/\s/g, ''))}
+          onChange={e =>
+            form.setData('alias', e.currentTarget.value.replace(/\s/g, ''))
+          }
         />
         <InputError message={form.errors.alias} className="mt-2" />
       </div>
@@ -81,7 +86,9 @@ export default function UpdateProfileForm({ user, trackSelect, selectedTrack }: 
             onChange={e => form.setData('bio', e.currentTarget.value)}
             rows="3"
           />
-          <span className="absolute bottom-1 right-1 text-xs text-gray-400">{form.data.bio.length}/120</span>
+          <span className="absolute bottom-1 right-1 text-xs text-gray-400">
+            {form.data.bio.length}/120
+          </span>
         </div>
         <InputError message={form.errors.bio} className="mt-2" />
       </div>
@@ -105,7 +112,10 @@ export default function UpdateProfileForm({ user, trackSelect, selectedTrack }: 
         <InputLabel htmlFor="home_track_id" value="Select your Home Track" />
         <SearchSelect
           value={track}
-          onChange={option => { set_track(option); form.setData('home_track_id', option?.value) }}
+          onChange={option => {
+            set_track(option);
+            form.setData('home_track_id', option?.value);
+          }}
           options={trackSelect}
           isSearchable
         />

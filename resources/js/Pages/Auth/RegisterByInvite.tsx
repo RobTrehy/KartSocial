@@ -42,13 +42,17 @@ export default function RegisterByInvite({ email, invitation_token }: Props) {
 
       <form onSubmit={onSubmit} className="w-full">
         <p className="mb-5 text-2xl">Join us</p>
-        {
-          (!invitation_token) && (
-            <div className="w-full bg-yellow-200 p-2 rounded-md mb-4">
-              <h2 className="text-md font-semibold text-yellow-800">Invitation Only!</h2>
-              <p className="text-yellow-600 text-sm">We are currently open to registration via invitation only. Please follow the link in your invite to register!</p>
-            </div>)
-        }
+        {!invitation_token && (
+          <div className="w-full bg-yellow-200 p-2 rounded-md mb-4">
+            <h2 className="text-md font-semibold text-yellow-800">
+              Invitation Only!
+            </h2>
+            <p className="text-yellow-600 text-sm">
+              We are currently open to registration via invitation only. Please
+              follow the link in your invite to register!
+            </p>
+          </div>
+        )}
         <div>
           <InputLabel htmlFor="name">Name</InputLabel>
           <TextInput
@@ -85,7 +89,10 @@ export default function RegisterByInvite({ email, invitation_token }: Props) {
             value={form.data.dob}
             onChange={e => form.setData('dob', e.currentTarget.value)}
           />
-          <InputHelp className="mt-2" message="This information is private, for registration purposes only." />
+          <InputHelp
+            className="mt-2"
+            message="This information is private, for registration purposes only."
+          />
           <InputError className="mt-2" message={form.errors.dob} />
         </div>
 

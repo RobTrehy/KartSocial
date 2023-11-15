@@ -18,11 +18,14 @@ export default function DeleteSessionForm({ visit, session }: any) {
   }
 
   function deleteSession() {
-    form.delete(route('visits.sessions.destroy', { visit: visit, session: session }), {
-      preserveScroll: true,
-      onSuccess: () => closeModal(),
-      onFinish: () => form.reset(),
-    });
+    form.delete(
+      route('visits.sessions.destroy', { visit: visit, session: session }),
+      {
+        preserveScroll: true,
+        onSuccess: () => closeModal(),
+        onFinish: () => form.reset(),
+      },
+    );
   }
 
   function closeModal() {
@@ -36,13 +39,12 @@ export default function DeleteSessionForm({ visit, session }: any) {
       description={'Permanently delete this session.'}
     >
       <div className="max-w-xl text-sm text-gray-600 dark:text-gray-400">
-        Selecting to delete this session, will permenantly remove all laps also associated with this session.
+        Selecting to delete this session, will permenantly remove all laps also
+        associated with this session.
       </div>
 
       <div className="mt-5">
-        <DangerButton onClick={confirmDeletion}>
-          Delete Session
-        </DangerButton>
+        <DangerButton onClick={confirmDeletion}>Delete Session</DangerButton>
       </div>
 
       {/* <!-- Delete Confirmation Modal --> */}

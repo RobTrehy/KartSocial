@@ -36,13 +36,12 @@ export default function DeleteVisitForm({ id }: any) {
       description={'Permanently delete this visit.'}
     >
       <div className="max-w-xl text-sm text-gray-600 dark:text-gray-400">
-        Selecting to delete this visit, will permenantly remove all sessions and laps also associated with this visit.
+        Selecting to delete this visit, will permenantly remove all sessions and
+        laps also associated with this visit.
       </div>
 
       <div className="mt-5">
-        <DangerButton onClick={confirmDeletion}>
-          Delete Visit
-        </DangerButton>
+        <DangerButton onClick={confirmDeletion}>Delete Visit</DangerButton>
       </div>
 
       {/* <!-- Delete Confirmation Modal --> */}

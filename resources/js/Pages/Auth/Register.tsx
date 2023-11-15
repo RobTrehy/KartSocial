@@ -73,7 +73,10 @@ export default function Register() {
             value={form.data.dob}
             onChange={e => form.setData('dob', e.currentTarget.value)}
           />
-          <InputHelp className="mt-2" message="This information is private, for registration purposes only." />
+          <InputHelp
+            className="mt-2"
+            message="This information is private, for registration purposes only."
+          />
           <InputError className="mt-2" message={form.errors.dob} />
         </div>
 

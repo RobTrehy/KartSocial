@@ -72,7 +72,6 @@ export default function AdminRestrictionForm({ user }: Props) {
         </>
       )}
     >
-
       {/* <!-- Name --> */}
       <div className="col-span-6 sm:col-span-4">
         <InputLabel htmlFor="reason" value="Reason" />
@@ -90,48 +89,61 @@ export default function AdminRestrictionForm({ user }: Props) {
       <div className="col-span-6">
         <InputLabel value="Duration" />
         <div className="flex flex-wrap gap-2">
-          {
-            duration === '1 day'
-              ? <PrimaryButton>1 Day</PrimaryButton>
-              : <SecondaryButton onClick={() => setDuration('1 day')}>1 Day</SecondaryButton>
-          }
-          {
-            duration === '3 days'
-              ? <PrimaryButton>3 Days</PrimaryButton>
-              : <SecondaryButton onClick={() => setDuration('3 days')}>3 Days</SecondaryButton>
-          }
-          {
-            duration === '1 week'
-              ? <PrimaryButton>1 Week</PrimaryButton>
-              : <SecondaryButton onClick={() => setDuration('1 week')}>1 Week</SecondaryButton>
-          }
-          {
-            duration === '1 month'
-              ? <PrimaryButton>1 Month</PrimaryButton>
-              : <SecondaryButton onClick={() => setDuration('1 month')}>1 Month</SecondaryButton>
-          }
-          {
-            duration === '6 months'
-              ? <PrimaryButton>6 Months</PrimaryButton>
-              : <SecondaryButton onClick={() => setDuration('6 months')}>6 Months</SecondaryButton>
-          }
-          {
-            duration === '1 year'
-              ? <PrimaryButton>1 Year</PrimaryButton>
-              : <SecondaryButton onClick={() => setDuration('1 year')}>1 Year</SecondaryButton>
-          }
-          {
-            duration === 'indefinitely'
-              ? <DangerButton>Indefinitely</DangerButton>
-              : <SecondaryButton onClick={() => setDuration('indefinitely')}>Indefinitely</SecondaryButton>
-          }
+          {duration === '1 day' ? (
+            <PrimaryButton>1 Day</PrimaryButton>
+          ) : (
+            <SecondaryButton onClick={() => setDuration('1 day')}>
+              1 Day
+            </SecondaryButton>
+          )}
+          {duration === '3 days' ? (
+            <PrimaryButton>3 Days</PrimaryButton>
+          ) : (
+            <SecondaryButton onClick={() => setDuration('3 days')}>
+              3 Days
+            </SecondaryButton>
+          )}
+          {duration === '1 week' ? (
+            <PrimaryButton>1 Week</PrimaryButton>
+          ) : (
+            <SecondaryButton onClick={() => setDuration('1 week')}>
+              1 Week
+            </SecondaryButton>
+          )}
+          {duration === '1 month' ? (
+            <PrimaryButton>1 Month</PrimaryButton>
+          ) : (
+            <SecondaryButton onClick={() => setDuration('1 month')}>
+              1 Month
+            </SecondaryButton>
+          )}
+          {duration === '6 months' ? (
+            <PrimaryButton>6 Months</PrimaryButton>
+          ) : (
+            <SecondaryButton onClick={() => setDuration('6 months')}>
+              6 Months
+            </SecondaryButton>
+          )}
+          {duration === '1 year' ? (
+            <PrimaryButton>1 Year</PrimaryButton>
+          ) : (
+            <SecondaryButton onClick={() => setDuration('1 year')}>
+              1 Year
+            </SecondaryButton>
+          )}
+          {duration === 'indefinitely' ? (
+            <DangerButton>Indefinitely</DangerButton>
+          ) : (
+            <SecondaryButton onClick={() => setDuration('indefinitely')}>
+              Indefinitely
+            </SecondaryButton>
+          )}
         </div>
-        <p className="mt-2 text-sm"><span className="font-semibold">Expiry: </span>
-          {
-            duration !== 'indefinitely'
-              ? moment(form.data.expires_at).format('Do MMMM YYYY')
-              : 'Never'
-          }
+        <p className="mt-2 text-sm">
+          <span className="font-semibold">Expiry: </span>
+          {duration !== 'indefinitely'
+            ? moment(form.data.expires_at).format('Do MMMM YYYY')
+            : 'Never'}
         </p>
         <InputError className="mt-2" message={form.errors.expires_at} />
       </div>

@@ -54,7 +54,10 @@ export default function UpdateProfilePhotosForm({ user }: Props) {
   function updateProfilePhotos() {
     form.post(route('user-profile-photos.update'), {
       errorBag: 'updateProfilePhotos',
-      onSuccess: () => { clearPhotoFileInput(); clearCoverFileInput() },
+      onSuccess: () => {
+        clearPhotoFileInput();
+        clearCoverFileInput();
+      },
     });
   }
 
@@ -73,7 +76,7 @@ export default function UpdateProfilePhotosForm({ user }: Props) {
 
       if (ctx) {
         ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-        ctx.imageSmoothingQuality = "low";
+        ctx.imageSmoothingQuality = 'low';
 
         ctx.drawImage(
           image,
@@ -84,20 +87,27 @@ export default function UpdateProfilePhotosForm({ user }: Props) {
           0,
           0,
           crop.width * scaleX,
-          crop.height * scaleY
+          crop.height * scaleY,
         );
       }
 
-      const base64Image = canvas.toDataURL("image/png"); // can be changed to jpeg/jpg etc
+      const base64Image = canvas.toDataURL('image/png'); // can be changed to jpeg/jpg etc
 
       if (base64Image) {
-        const fileType = base64Image.split(";")[0].split(":")[1];
+        const fileType = base64Image.split(';')[0].split(':')[1];
 
         const buffer = Buffer.from(
-          base64Image.replace(/^data:image\/\w+;base64,/, ""),
-          "base64"
+          base64Image.replace(/^data:image\/\w+;base64,/, ''),
+          'base64',
         );
-        form.setData('photo', new File([buffer], photoRef.current?.files?.[0].name || 'profile-photo', { type: fileType }));
+        form.setData(
+          'photo',
+          new File(
+            [buffer],
+            photoRef.current?.files?.[0].name || 'profile-photo',
+            { type: fileType },
+          ),
+        );
       }
     }
   }
@@ -117,7 +127,7 @@ export default function UpdateProfilePhotosForm({ user }: Props) {
 
       if (ctx) {
         ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-        ctx.imageSmoothingQuality = "low";
+        ctx.imageSmoothingQuality = 'low';
 
         ctx.drawImage(
           image,
@@ -128,20 +138,27 @@ export default function UpdateProfilePhotosForm({ user }: Props) {
           0,
           0,
           crop.width * scaleX,
-          crop.height * scaleY
+          crop.height * scaleY,
         );
       }
 
-      const base64Image = canvas.toDataURL("image/png"); // can be changed to jpeg/jpg etc
+      const base64Image = canvas.toDataURL('image/png'); // can be changed to jpeg/jpg etc
 
       if (base64Image) {
-        const fileType = base64Image.split(";")[0].split(":")[1];
+        const fileType = base64Image.split(';')[0].split(':')[1];
 
         const buffer = Buffer.from(
-          base64Image.replace(/^data:image\/\w+;base64,/, ""),
-          "base64"
+          base64Image.replace(/^data:image\/\w+;base64,/, ''),
+          'base64',
         );
-        form.setData('cover', new File([buffer], coverRef.current?.files?.[0].name || 'cover-photo', { type: fileType }));
+        form.setData(
+          'cover',
+          new File(
+            [buffer],
+            coverRef.current?.files?.[0].name || 'cover-photo',
+            { type: fileType },
+          ),
+        );
       }
     }
   }
@@ -268,12 +285,27 @@ export default function UpdateProfilePhotosForm({ user }: Props) {
           {photoPreview ? (
             // <!-- New Profile Photo Preview -->
             <div className="mt-2 relative">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 absolute -top-2 -right-2 z-50"
-                onClick={() => { setPhotoPreview(null); }}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-10 h-10 absolute -top-2 -right-2 z-50"
+                onClick={() => {
+                  setPhotoPreview(null);
+                }}
               >
-                <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clipRule="evenodd" />
+                <path
+                  fillRule="evenodd"
+                  d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
+                  clipRule="evenodd"
+                />
               </svg>
-              <ReactCrop aspect={1} crop={photoCrop} onChange={c => setPhotoCrop(c)} onComplete={completePhotoCrop}>
+              <ReactCrop
+                aspect={1}
+                crop={photoCrop}
+                onChange={c => setPhotoCrop(c)}
+                onComplete={completePhotoCrop}
+              >
                 <img src={photoPreview} ref={photoPreviewRef} />
               </ReactCrop>
             </div>
@@ -326,12 +358,27 @@ export default function UpdateProfilePhotosForm({ user }: Props) {
           {coverPreview ? (
             // <!-- New Cover Photo Preview -->
             <div className="mt-2 relative">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 absolute fill-gray-100 cursor-pointer -top-2 -right-2 z-[5000]"
-                onClick={() => { setCoverPreview(null); }}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-10 h-10 absolute fill-gray-100 cursor-pointer -top-2 -right-2 z-[5000]"
+                onClick={() => {
+                  setCoverPreview(null);
+                }}
               >
-                <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clipRule="evenodd" />
+                <path
+                  fillRule="evenodd"
+                  d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
+                  clipRule="evenodd"
+                />
               </svg>
-              <ReactCrop aspect={42/9} crop={coverCrop} onChange={c => setCoverCrop(c)} onComplete={completeCoverCrop}>
+              <ReactCrop
+                aspect={42 / 9}
+                crop={coverCrop}
+                onChange={c => setCoverCrop(c)}
+                onComplete={completeCoverCrop}
+              >
                 <img src={coverPreview} ref={coverPreviewRef} />
               </ReactCrop>
             </div>

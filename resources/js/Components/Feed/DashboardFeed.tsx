@@ -4,21 +4,23 @@ import * as Cards from './Cards';
 
 interface FeedItem {
   parent: {
-    id: number
-  },
-  card_type: string,
+    id: number;
+  };
+  card_type: string;
 }
 
 interface GroupFeedItem {
-  items: Array<FeedItem>
+  items: Array<FeedItem>;
 }
 
 interface Props {
-  feed: Array<FeedItem>
+  feed: Array<FeedItem>;
 }
 
 export default function DashboardFeed({ feed }: Props) {
-  const [groupedFeed, setGroupedFeed] = useState<Array<GroupFeedItem> | null>(null);
+  const [groupedFeed, setGroupedFeed] = useState<Array<GroupFeedItem> | null>(
+    null,
+  );
   let shown: Array<number> = [];
 
   useEffect(() => {
@@ -36,16 +38,15 @@ export default function DashboardFeed({ feed }: Props) {
     }
   }, [feed]);
 
-  return (
-    groupedFeed ?
-      feed.map((item: FeedItem, i: number) => {
+  return groupedFeed
+    ? feed.map((item: FeedItem, i: number) => {
         // @ts-ignore
         let C = Cards[item.card_type];
         if (C !== undefined) {
-            return <C {...item} key={i} />
+          return <C {...item} key={i} />;
         } else {
-          return <p key={i}>Card `{item.card_type}` not found! </p>
+          return <p key={i}>Card `{item.card_type}` not found! </p>;
         }
-      }) : null
-  )
+      })
+    : null;
 }

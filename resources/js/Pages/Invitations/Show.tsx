@@ -3,13 +3,10 @@ import React from 'react';
 import InviteUserForm from './Partials/InviteUserForm';
 
 interface Props {
-  invited: Array<any>
+  invited: Array<any>;
 }
 
-export default function Show({
-  invited,
-}: Props) {
-
+export default function Show({ invited }: Props) {
   return (
     <AppLayout
       title={'Private Alpha Invitation'}

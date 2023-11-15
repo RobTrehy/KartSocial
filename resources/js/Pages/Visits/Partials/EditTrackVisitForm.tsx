@@ -11,8 +11,6 @@ import { useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 
-
-
 export default function EditTrackVisitForm(props: any) {
   const { visit } = props;
   const route = useRoute();
@@ -30,23 +28,44 @@ export default function EditTrackVisitForm(props: any) {
   const [layouts, setLayouts] = useState<Array<object>>([]);
 
   useEffect(() => {
-    if (track && props.tracks.filter(obj => { return obj.id === track?.value })[0]?.all_layouts.length === 1) {
-      let l = props.tracks.filter(obj => { return obj.id === track?.value })[0]?.all_layouts[0];
+    if (
+      track &&
+      props.tracks.filter(obj => {
+        return obj.id === track?.value;
+      })[0]?.all_layouts.length === 1
+    ) {
+      let l = props.tracks.filter(obj => {
+        return obj.id === track?.value;
+      })[0]?.all_layouts[0];
       console.log(l);
-      let _layouts: Array<object> = [{
-        value: l.id,
-        label: (l.retired_at) ? `${(l.name) ? l.name : 'Default'} [Retired]` : (l.name) ? l.name : 'Default',
-      }];
+      let _layouts: Array<object> = [
+        {
+          value: l.id,
+          label: l.retired_at
+            ? `${l.name ? l.name : 'Default'} [Retired]`
+            : l.name
+            ? l.name
+            : 'Default',
+        },
+      ];
       set_layout(_layouts[0]);
       setLayouts(_layouts);
     } else {
       let _layouts: Array<object> = [];
-      props.tracks.filter(obj => { return obj.id === track?.value })[0]?.all_layouts.map((layout: object) => {
-        _layouts.push({
-          value: layout.id,
-          label: (layout.retired_at) ? `${(layout.name) ? layout.name : 'Default'} [Retired]` : (layout.name) ? layout.name : 'Default'
+      props.tracks
+        .filter(obj => {
+          return obj.id === track?.value;
+        })[0]
+        ?.all_layouts.map((layout: object) => {
+          _layouts.push({
+            value: layout.id,
+            label: layout.retired_at
+              ? `${layout.name ? layout.name : 'Default'} [Retired]`
+              : layout.name
+              ? layout.name
+              : 'Default',
+          });
         });
-      });
       set_layout(null);
       setLayouts(_layouts);
     }
@@ -56,7 +75,7 @@ export default function EditTrackVisitForm(props: any) {
     form.put(route('visits.update', { visit: visit.id }), {
       errorBag: 'trackVisit',
       preserveScroll: true,
-      onSuccess: (result) => console.log(result),
+      onSuccess: result => console.log(result),
     });
   }
 
@@ -80,7 +99,6 @@ export default function EditTrackVisitForm(props: any) {
         </>
       )}
     >
-
       {/* <!-- Date and Time --> */}
       <div className="col-span-6 sm:col-span-4">
         <InputLabel htmlFor="visit_date" value="Date and Time" />
@@ -123,7 +141,10 @@ export default function EditTrackVisitForm(props: any) {
         <InputLabel htmlFor="track_layout_id" value="Select the Track Layout" />
         <SearchSelect
           value={layout}
-          onChange={option => { set_layout(option); form.setData('track_layout_id', option?.value) }}
+          onChange={option => {
+            set_layout(option);
+            form.setData('track_layout_id', option?.value);
+          }}
           options={layouts}
           isSearchable
         />

@@ -30,10 +30,7 @@ export default function ResponsiveNavLink({
             );
           case 'a':
             return (
-              <a
-                href={href}
-                className={classes}
-              >
+              <a href={href} className={classes}>
                 {children}
               </a>
             );

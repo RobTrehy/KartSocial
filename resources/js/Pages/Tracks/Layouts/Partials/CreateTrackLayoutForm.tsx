@@ -9,8 +9,6 @@ import { useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import React from 'react';
 
-
-
 export default function CreateTrackLayoutForm({ track }: any) {
   const route = useRoute();
 
@@ -18,7 +16,7 @@ export default function CreateTrackLayoutForm({ track }: any) {
     _method: 'POST',
     is_default: false,
     name: '',
-    length: ''
+    length: '',
   });
 
   function createTrackLayout() {
@@ -48,7 +46,6 @@ export default function CreateTrackLayoutForm({ track }: any) {
         </>
       )}
     >
-
       {/* <!-- Track Name --> */}
       <div className="col-span-6 sm:col-span-4">
         <InputLabel htmlFor="track_name" value="Track Name" />

@@ -9,7 +9,6 @@ import { useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import React from 'react';
 
-
 export default function EditTrackLayoutForm({ track, layout }: any) {
   const route = useRoute();
 
@@ -21,9 +20,12 @@ export default function EditTrackLayoutForm({ track, layout }: any) {
   });
 
   function updateTrackLayout() {
-    form.put(route('tracks.layout.update', { track: track.id, layout: layout.id }), {
-      errorBag: 'trackLayoutUpdate',
-    });
+    form.put(
+      route('tracks.layout.update', { track: track.id, layout: layout.id }),
+      {
+        errorBag: 'trackLayoutUpdate',
+      },
+    );
   }
 
   return (
@@ -46,7 +48,6 @@ export default function EditTrackLayoutForm({ track, layout }: any) {
         </>
       )}
     >
-
       {/* <!-- Layout Name --> */}
       <div className="col-span-6 sm:col-span-4">
         <InputLabel htmlFor="name" value="Layout Name" />

@@ -39,7 +39,9 @@ export default function FormSection({
                 : 'sm:rounded-md',
             )}
           >
-            <div className={`${(noGrid) ? '' : 'grid grid-cols-6 gap-6'}`}>{children}</div>
+            <div className={`${noGrid ? '' : 'grid grid-cols-6 gap-6'}`}>
+              {children}
+            </div>
           </div>
 
           {hasActions && (

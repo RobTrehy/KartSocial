@@ -25,11 +25,17 @@ export default function EditTrackSessionForm(props: any) {
   });
 
   function updateTrackSession() {
-    form.put(route('visits.sessions.update', { 'visit': props.track_visit_id, session: session.id }), {
-      errorBag: 'trackSession',
-      preserveScroll: true,
-      onSuccess: (result) => console.log(result),
-    });
+    form.put(
+      route('visits.sessions.update', {
+        visit: props.track_visit_id,
+        session: session.id,
+      }),
+      {
+        errorBag: 'trackSession',
+        preserveScroll: true,
+        onSuccess: result => console.log(result),
+      },
+    );
   }
 
   return (
@@ -52,7 +58,6 @@ export default function EditTrackSessionForm(props: any) {
         </>
       )}
     >
-
       {/* <!-- Session Name --> */}
       <div className="col-span-6 sm:col-span-4">
         <InputLabel htmlFor="session_name" value="Session Name" />
@@ -99,14 +104,18 @@ export default function EditTrackSessionForm(props: any) {
             onChange={e => form.setData('session_length', e.target.value)}
           />
           <div className="absolute inset-y-0 right-0 flex items-center">
-            <label htmlFor="session_length_type" className="sr-only">Session Length Type</label>
+            <label htmlFor="session_length_type" className="sr-only">
+              Session Length Type
+            </label>
             <select
               id="session_length_type"
               name="session_length_type"
               title="Session Length Type"
               className="h-full rounded-md border-0 bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-brand-600 sm:text-sm"
               value={form.data.session_length_type}
-              onChange={e => form.setData('session_length_type', e.target.value)}
+              onChange={e =>
+                form.setData('session_length_type', e.target.value)
+              }
             >
               <option value="Laps">Laps</option>
               <option value="Minutes">Minutes</option>
@@ -114,7 +123,10 @@ export default function EditTrackSessionForm(props: any) {
           </div>
         </div>
         <InputError message={form.errors.session_length} className="mt-2" />
-        <InputError message={form.errors.session_length_type} className="mt-2" />
+        <InputError
+          message={form.errors.session_length_type}
+          className="mt-2"
+        />
       </div>
 
       {/* <!-- Session Position --> */}

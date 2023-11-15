@@ -17,13 +17,17 @@ interface Props {
   selectedTrack: Object;
 }
 
-export default function AdminProfileForm({ user, trackSelect, selectedTrack }: Props) {
+export default function AdminProfileForm({
+  user,
+  trackSelect,
+  selectedTrack,
+}: Props) {
   const form = useForm({
     _method: 'PUT',
     name: user.name,
     alias: user.alias,
     weight: user.weight || '',
-    home_track_id: user.home_track_id || null
+    home_track_id: user.home_track_id || null,
   });
   const route = useRoute();
   const [track, set_track] = useState<object | null>(selectedTrack || null);
@@ -37,7 +41,7 @@ export default function AdminProfileForm({ user, trackSelect, selectedTrack }: P
   const clearTrack = () => {
     set_track(null);
     form.setData('home_track_id', null);
-  }
+  };
 
   return (
     <FormSection
@@ -59,7 +63,6 @@ export default function AdminProfileForm({ user, trackSelect, selectedTrack }: P
         </>
       )}
     >
-
       {/* <!-- Name --> */}
       <div className="col-span-6 sm:col-span-4">
         <InputLabel htmlFor="name" value="Name" />
@@ -81,7 +84,9 @@ export default function AdminProfileForm({ user, trackSelect, selectedTrack }: P
           type="text"
           className="mt-1 block w-full"
           value={form.data.alias}
-          onChange={e => form.setData('alias', e.currentTarget.value.replace(/\s/g, ''))}
+          onChange={e =>
+            form.setData('alias', e.currentTarget.value.replace(/\s/g, ''))
+          }
         />
         <InputError message={form.errors.alias} className="mt-2" />
       </div>
@@ -105,11 +110,19 @@ export default function AdminProfileForm({ user, trackSelect, selectedTrack }: P
         <InputLabel htmlFor="home_track_id" value="Select your Home Track" />
         <SearchSelect
           value={track}
-          onChange={option => { set_track(option); form.setData('home_track_id', option?.value) }}
+          onChange={option => {
+            set_track(option);
+            form.setData('home_track_id', option?.value);
+          }}
           options={trackSelect}
           isSearchable
         />
-        <div className="text-xs dark:text-gray-300 hover:text-brand-600 dark:hover:text-brand-500 cursor-pointer px-2 pt-0.5" onClick={clearTrack}>Clear Home Track</div>
+        <div
+          className="text-xs dark:text-gray-300 hover:text-brand-600 dark:hover:text-brand-500 cursor-pointer px-2 pt-0.5"
+          onClick={clearTrack}
+        >
+          Clear Home Track
+        </div>
       </div>
     </FormSection>
   );

@@ -52,7 +52,6 @@ export default function UpdateProfileInformationForm({ user }: Props) {
         </>
       )}
     >
-
       {/* <!-- Name --> */}
       <div className="col-span-6 sm:col-span-4">
         <InputLabel htmlFor="name" value="Name" />

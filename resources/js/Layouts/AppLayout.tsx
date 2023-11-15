@@ -25,9 +25,10 @@ export default function AppLayout({
 
       <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
         <div className="sticky top-0 z-[100] w-full">
-          {
-            (page.props.auth.permissions && page.props.auth.permissions.includes('admin.access')) && <AdminNavBar />
-          }
+          {page.props.auth.permissions &&
+            page.props.auth.permissions.includes('admin.access') && (
+              <AdminNavBar />
+            )}
           <AppNavBar />
 
           {/* <!-- Page Heading --> */}

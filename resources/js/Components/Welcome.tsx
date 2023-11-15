@@ -13,22 +13,32 @@ export default function Welcome() {
         </h1>
 
         <p className="mt-6 text-gray-500 dark:text-gray-400 leading-relaxed">
-          Kart Social is a social platform for go-kart racers to record, share and compare their lap times!<br />
-          If you're seeing this page, we're hoping it's because you're new to our platform. We'd normally show you a feed of recent activity from people that you follow.
+          Kart Social is a social platform for go-kart racers to record, share
+          and compare their lap times!
+          <br />
+          If you're seeing this page, we're hoping it's because you're new to
+          our platform. We'd normally show you a feed of recent activity from
+          people that you follow.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
-        <h1 className="text-xl font-bold text-center col-span-1 md:col-span-2 pt-6 lg:pt-8 dark:text-white">Where to start?</h1>
+        <h1 className="text-xl font-bold text-center col-span-1 md:col-span-2 pt-6 lg:pt-8 dark:text-white">
+          Where to start?
+        </h1>
 
-        <Link href={route('user-profile.edit')} className="px-6 lg:px-8 py-4 hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-500 rounded-md">
+        <Link
+          href={route('user-profile.edit')}
+          className="px-6 lg:px-8 py-4 hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-500 rounded-md"
+        >
           <div className="flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth="1.5"
-              className="w-6 h-6 stroke-gray-400">
+              className="w-6 h-6 stroke-gray-400"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -42,13 +52,21 @@ export default function Welcome() {
           </div>
 
           <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-            Your profile needs some more information that we didn't ask for when you registered!<br />
-            Along with the traditional profile and cover photos, we'd love to know your home track and your weight.<br />
-            If you're already regretting the display name you chose, you can also change it here!
+            Your profile needs some more information that we didn't ask for when
+            you registered!
+            <br />
+            Along with the traditional profile and cover photos, we'd love to
+            know your home track and your weight.
+            <br />
+            If you're already regretting the display name you chose, you can
+            also change it here!
           </p>
         </Link>
 
-        <Link href={route('visits.create')} className="px-6 lg:px-8 py-4 hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-500 rounded-md">
+        <Link
+          href={route('visits.create')}
+          className="px-6 lg:px-8 py-4 hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-500 rounded-md"
+        >
           <div className="flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -68,9 +86,15 @@ export default function Welcome() {
           </div>
 
           <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-            In order to share your lap times, you start by recording a visit to a track!<br />
-            You can record visits both in the past and in the future, so people viewing your profile can see when you're planning to go too!<br />
-            Once you've got a visit recorded, you can add multiple sessions, and record lap times from each - we have a couple of ways of importing your lap times, to keep it quick and easy!
+            In order to share your lap times, you start by recording a visit to
+            a track!
+            <br />
+            You can record visits both in the past and in the future, so people
+            viewing your profile can see when you're planning to go too!
+            <br />
+            Once you've got a visit recorded, you can add multiple sessions, and
+            record lap times from each - we have a couple of ways of importing
+            your lap times, to keep it quick and easy!
           </p>
         </Link>
 
@@ -95,13 +119,22 @@ export default function Welcome() {
           </div>
 
           <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-            Your rivals too!<br />
-            We can't link you to this one, you'll need to use the search bar at the top! You can search for people by their email address or display name.<br />
-            You'll be linked to their profile page and have the option to follow them. When they record a track visit, the details will show in your dashboard feed!
+            Your rivals too!
+            <br />
+            We can't link you to this one, you'll need to use the search bar at
+            the top! You can search for people by their email address or display
+            name.
+            <br />
+            You'll be linked to their profile page and have the option to follow
+            them. When they record a track visit, the details will show in your
+            dashboard feed!
           </p>
         </div>
 
-        <Link href={route('tracks.index')} className="px-6 lg:px-8 py-4 hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-500 rounded-md">
+        <Link
+          href={route('tracks.index')}
+          className="px-6 lg:px-8 py-4 hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-500 rounded-md"
+        >
           <div className="flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -123,8 +156,12 @@ export default function Welcome() {
           </div>
 
           <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-            Whilst we don't have an exhaustive database of every track in the country, it is rather large!<br />
-            If there is a track near to you that isn't in our database currently, there is an option to add it! We'd really appreciate that!
+            Whilst we don't have an exhaustive database of every track in the
+            country, it is rather large!
+            <br />
+            If there is a track near to you that isn't in our database
+            currently, there is an option to add it! We'd really appreciate
+            that!
           </p>
         </Link>
       </div>

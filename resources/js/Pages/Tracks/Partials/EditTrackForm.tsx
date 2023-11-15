@@ -10,7 +10,6 @@ import { useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import React from 'react';
 
-
 export default function EditTrackForm({ track }: any) {
   const route = useRoute();
 
@@ -25,7 +24,7 @@ export default function EditTrackForm({ track }: any) {
     postal_code: track.postal_code,
     type: track.type,
     url: track.url,
-    number: track.number
+    number: track.number,
   });
 
   function updateTrack() {
@@ -54,7 +53,6 @@ export default function EditTrackForm({ track }: any) {
         </>
       )}
     >
-
       {/* <!-- Track Name --> */}
       <div className="col-span-6 sm:col-span-4">
         <InputLabel htmlFor="name" value="Track Name" />

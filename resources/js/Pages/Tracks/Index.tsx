@@ -8,45 +8,53 @@ import TrackList from './Partials/TrackList';
 import TrackMap from './Partials/TrackMap';
 
 export default function Index(props: any) {
-    const route = useRoute();
-    const [list, setList] = useState<boolean>(false);
+  const route = useRoute();
+  const [list, setList] = useState<boolean>(false);
 
-    return (
-        <AppLayout
-            title="Tracks"
-            renderHeader={() => (
-                <div className="flex flex-row items-center">
-                    <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                        Tracks
-                    </h2>
-                    <div className="ml-auto flex gap-x-2">
-                        {
-                            (props.auth.permissions?.includes('tracks.create')) &&
-                            <SecondaryButton onClick={() => router.visit(route('tracks.create'))}>
-                                Add Track
-                            </SecondaryButton>
-                        }
-                        <SecondaryButton onClick={() => setList(!list)}>
-                            {(list) ? 'Map View' : 'List View'}
-                        </SecondaryButton>
-                    </div>
-                </div>
+  return (
+    <AppLayout
+      title="Tracks"
+      renderHeader={() => (
+        <div className="flex flex-row items-center">
+          <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            Tracks
+          </h2>
+          <div className="ml-auto flex gap-x-2">
+            {props.auth.permissions?.includes('tracks.create') && (
+              <SecondaryButton
+                onClick={() => router.visit(route('tracks.create'))}
+              >
+                Add Track
+              </SecondaryButton>
             )}
-        >
-            {list ? (
-                <div className="py-12">
-                    <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <TrackList {...props} />
+            <SecondaryButton onClick={() => setList(!list)}>
+              {list ? 'Map View' : 'List View'}
+            </SecondaryButton>
+          </div>
+        </div>
+      )}
+    >
+      {list ? (
+        <div className="py-12">
+          <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <TrackList {...props} />
 
-                        {
-                            (props.auth.permissions?.includes('tracks.create')) &&
-                            <InputHelp className="mt-4 text-center">
-                                Track Missing? <Link href={route('tracks.create')} className="hover:text-brand-500 duration-500 transition-colors">Submit a new track!</Link>
-                            </InputHelp>
-                        }
-                    </div>
-                </div>
-            ) : <TrackMap {...props} />}
-        </AppLayout>
-    );
+            {props.auth.permissions?.includes('tracks.create') && (
+              <InputHelp className="mt-4 text-center">
+                Track Missing?{' '}
+                <Link
+                  href={route('tracks.create')}
+                  className="hover:text-brand-500 duration-500 transition-colors"
+                >
+                  Submit a new track!
+                </Link>
+              </InputHelp>
+            )}
+          </div>
+        </div>
+      ) : (
+        <TrackMap {...props} />
+      )}
+    </AppLayout>
+  );
 }

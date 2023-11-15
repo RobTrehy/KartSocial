@@ -15,7 +15,6 @@ export default function AdminProfilePhotosForm({ user }: Props) {
   const route = useRoute();
   const page = useTypedPage();
 
-
   function deletePhoto() {
     router.delete(route('current-user-photo.destroy'), {
       preserveScroll: true,
@@ -33,12 +32,10 @@ export default function AdminProfilePhotosForm({ user }: Props) {
       title={'Profile Images'}
       description={`You can only remove a users image, not upload one.`}
     >
-
       <div className="grid grid-cols-6 gap-6">
         {/* <!-- Profile Photo --> */}
         {page.props.jetstream.managesProfilePhotos ? (
           <div className="col-span-6 sm:col-span-4">
-
             <InputLabel htmlFor="photo" value="Photo" />
 
             {/* <!-- Current Profile Photo --> */}
@@ -65,7 +62,6 @@ export default function AdminProfilePhotosForm({ user }: Props) {
         {/* <!-- Cover Photo --> */}
         {page.props.jetstream.managesProfilePhotos ? (
           <div className="col-span-6 sm:col-span-4">
-
             <InputLabel htmlFor="cover" value="Cover Image" />
 
             {/* <!-- Current Cover Photo --> */}

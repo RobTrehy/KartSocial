@@ -10,8 +10,6 @@ import { useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import React from 'react';
 
-
-
 export default function CreateTrackForm() {
   const route = useRoute();
 
@@ -26,14 +24,14 @@ export default function CreateTrackForm() {
     postal_code: '',
     type: 'Outdoor',
     url: '',
-    number: ''
+    number: '',
   });
 
   function createTrack() {
     form.post(route('tracks.store'), {
       errorBag: 'trackCreate',
       preserveScroll: true,
-      onSuccess: (result) => console.log(result),
+      onSuccess: result => console.log(result),
     });
   }
 
@@ -57,7 +55,6 @@ export default function CreateTrackForm() {
         </>
       )}
     >
-
       {/* <!-- Track Name --> */}
       <div className="col-span-6 sm:col-span-4">
         <InputLabel htmlFor="name" value="Track Name" />

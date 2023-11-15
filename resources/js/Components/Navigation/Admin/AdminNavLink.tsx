@@ -23,7 +23,7 @@ export default function AdminNavLink({
       <a href={href} className={classes} {...props}>
         {children}
       </a>
-    )
+    );
   }
 
   return (
