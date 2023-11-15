@@ -6,16 +6,14 @@ use App\Http\Requests\CreateTrackLayoutRequest;
 use App\Models\Track;
 use App\Models\TrackLayout;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class TrackLayoutsController extends Controller
 {
-
     /**
      * Show the form for creating a new resource.
-     * 
+     *
      * Requires: track.layouts.create
      */
     public function create(Track $track)
@@ -31,7 +29,7 @@ class TrackLayoutsController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * 
+     *
      * Requires: track.layouts.create
      */
     public function store(CreateTrackLayoutRequest $request, Track $track)
@@ -54,7 +52,7 @@ class TrackLayoutsController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * 
+     *
      * Requires: track.layouts.update
      */
     public function edit(Track $track, TrackLayout $layout)
@@ -71,7 +69,7 @@ class TrackLayoutsController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * 
+     *
      * Requires: track.layouts.update
      */
     public function update(UpdateTrackLayoutRequest $request, Track $track, TrackLayout $layout)
@@ -87,7 +85,7 @@ class TrackLayoutsController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * 
+     *
      * Requires: track.layouts.destroy
      */
     public function destroy(Track $track, TrackLayout $layout)
@@ -109,7 +107,7 @@ class TrackLayoutsController extends Controller
 
     /**
      * Reinstate the specified resource from storage.
-     * 
+     *
      * Requires: track.layouts.restore
      */
     public function reinstate(Track $track, TrackLayout $layout)
@@ -131,7 +129,7 @@ class TrackLayoutsController extends Controller
 
     /**
      * Make the specified resource the default track layout.
-     * 
+     *
      * Requires: track.layouts.set_default
      */
     public function makeDefault(Track $track, TrackLayout $layout)

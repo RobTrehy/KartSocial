@@ -40,7 +40,7 @@ class InvitationController extends Controller
 
         activity('Invitation')
             ->event('invited')
-            ->log('Invited ' . $request->email);
+            ->log('Invited '.$request->email);
 
         // TODO: Trigger invitation email
 

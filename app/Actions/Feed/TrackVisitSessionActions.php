@@ -16,7 +16,7 @@ class TrackVisitSessionActions
     {
         $user_id = Auth::check() ? Auth::id() : $event->session->trackVisit->user_id; // Hack to get around seeding?
 
-        // Find if a TrackVisit has recently been logged for this session        
+        // Find if a TrackVisit has recently been logged for this session
         // If no visit is recently logged, find if a session is recently logged on the same visit
         $created = DashboardFeed::where('user_id', $user_id)
             ->where(function (Builder $query) use ($event) {
@@ -35,7 +35,7 @@ class TrackVisitSessionActions
             $created->subject_type = 'App\\Models\\TrackSession';
             $created->subject_id = $event->session->id;
             $created->card_type = 'TrackSession';
-            $created->description = "added some Track Sessions to a new Track Visit";
+            $created->description = 'added some Track Sessions to a new Track Visit';
             $created->parent_type = 'App\\Models\\TrackVisit';
             $created->parent_id = $event->session->track_visit_id;
             $created->save();
@@ -91,8 +91,8 @@ class TrackVisitSessionActions
 
         if ($record) {
             $record->description =
-                (($event->session['added'] > 0) ? 'added ' . $event->session['added'] .
-                    (($event->session['updated'] > 0) ? ' and ' : '') : '') . (($event->session['updated'] > 0) ? 'updated ' . $event->session['updated'] : '') . ' laps on a Track Session';
+                (($event->session['added'] > 0) ? 'added '.$event->session['added'].
+                    (($event->session['updated'] > 0) ? ' and ' : '') : '').(($event->session['updated'] > 0) ? 'updated '.$event->session['updated'] : '').' laps on a Track Session';
             $record->save();
         } else {
             DashboardFeed::create([
@@ -101,8 +101,8 @@ class TrackVisitSessionActions
                 'subject_id' => $event->session['session']['id'],
                 'card_type' => 'SessionLaps',
                 'event' => 'laps',
-                'description' => (($event->session['added'] > 0) ? 'added ' . $event->session['added'] .
-                    (($event->session['updated'] > 0) ? ' and ' : '') : '') . (($event->session['updated'] > 0) ? 'updated ' . $event->session['updated'] : '') . ' laps on a Track Session',
+                'description' => (($event->session['added'] > 0) ? 'added '.$event->session['added'].
+                    (($event->session['updated'] > 0) ? ' and ' : '') : '').(($event->session['updated'] > 0) ? 'updated '.$event->session['updated'] : '').' laps on a Track Session',
                 'parent_type' => 'App\\Models\\TrackVisit',
                 'parent_id' => $event->session['session']['track_visit_id'],
             ]);
@@ -110,7 +110,7 @@ class TrackVisitSessionActions
 
         activity('Session Laps')
             ->performedOn(TrackVisitSession::find($event->session['session']['id']))
-            ->event('- ' . (($event->session['updated'] > 0) ? $event->session['updated'] . ' updated ' . (($event->session['added'] > 0) ? ', ' : '') : '') . (($event->session['added'] > 0) ? $event->session['added'] . ' created' : ''))
+            ->event('- '.(($event->session['updated'] > 0) ? $event->session['updated'].' updated '.(($event->session['added'] > 0) ? ', ' : '') : '').(($event->session['added'] > 0) ? $event->session['added'].' created' : ''))
             ->log('updated');
     }
 
@@ -121,10 +121,10 @@ class TrackVisitSessionActions
         if ($records['track']) {
             // Track, Layout and Personal Records
             $this->createTrackRecordFeedItem($event->session['session'], $event->session['lap']);
-        } else if ($records['layout']) {
+        } elseif ($records['layout']) {
             // Layout and Personal Records
             $this->createTrackLayoutRecordFeedItem($event->session['session'], $event->session['lap']);
-        } else if ($records['personal']) {
+        } elseif ($records['personal']) {
             // Personal Record only
             $this->createPersonalRecordFeedItem($event->session['session'], $event->session['lap']);
         }
@@ -156,7 +156,7 @@ class TrackVisitSessionActions
                 'properties' => [
                     'lap' => $lap,
                     'track' => $visit->trackLayout->track,
-                ]
+                ],
             ]);
         }
     }
@@ -189,7 +189,7 @@ class TrackVisitSessionActions
                     'lap' => $lap,
                     'track' => $visit->trackLayout->track,
                     'layout' => $visit->trackLayout,
-                ]
+                ],
             ]);
         }
     }
@@ -222,7 +222,7 @@ class TrackVisitSessionActions
                     'lap' => $lap,
                     'track' => $visit->trackLayout->track,
                     'layout' => $visit->trackLayout,
-                ]
+                ],
             ]);
         }
     }

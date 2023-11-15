@@ -97,7 +97,7 @@ class TrackLayout extends Model
     /**
      * Get the single most fastest TrackVisitSessionLap for this model.
      */
-    public function getFastestLapAttribute(): TrackVisitSessionLap|null
+    public function getFastestLapAttribute(): ?TrackVisitSessionLap
     {
         return $this->fastestLaps()->first();
     }

@@ -19,7 +19,7 @@ class TrackVisitsSeeder extends Seeder
         DB::table('track_visit_session_laps')->truncate();
         DB::table('dashboard_feeds')->truncate();
 
-        for ($i = 0; $i < 160; $i++)
+        for ($i = 0; $i < 160; $i++) {
             $visit = \App\Models\TrackVisit::factory()
                 ->has(
                     \App\Models\TrackVisitSession::factory(rand(1, 5))
@@ -32,6 +32,7 @@ class TrackVisitsSeeder extends Seeder
                     'sessions',
                 )
                 ->create();
+        }
         foreach ($visit->sessions() as $session) {
             TrackVisitSessionEvent::dispatch(
                 [

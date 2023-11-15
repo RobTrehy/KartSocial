@@ -23,7 +23,7 @@ class RestrictUserRequest extends FormRequest
     {
         return [
             'reason' => 'required|string',
-            'expires_at' => 'nullable|date'
+            'expires_at' => 'nullable|date',
         ];
     }
 }

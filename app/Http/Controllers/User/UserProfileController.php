@@ -7,7 +7,6 @@ use App\Http\Requests\UpdateProfileRequest;
 use App\Models\DashboardFeed;
 use App\Models\Track;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -15,7 +14,7 @@ class UserProfileController extends Controller
 {
     /**
      * Display the specified resource.
-     * 
+     *
      * Requires: None/Guest
      */
     public function show(string $alias)
@@ -37,7 +36,7 @@ class UserProfileController extends Controller
 
     /**
      * Display the specified resource.
-     * 
+     *
      * Requires: None/Guest
      */
     public function showFollows(string $alias)
@@ -58,7 +57,7 @@ class UserProfileController extends Controller
 
     /**
      * Display the specified resource.
-     * 
+     *
      * Requires: None/Guest
      */
     public function showFollowers(string $alias)
@@ -76,7 +75,7 @@ class UserProfileController extends Controller
 
     /**
      * Display the specified resource.
-     * 
+     *
      * Requires: None/Guest
      */
     public function showItem(string $alias, DashboardFeed $item)
@@ -98,7 +97,7 @@ class UserProfileController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * 
+     *
      * Requires: user-profile.update
      */
     public function edit()
@@ -132,7 +131,7 @@ class UserProfileController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * 
+     *
      * Requires: user-profile.update
      */
     public function update(UpdateProfileRequest $request)
@@ -153,7 +152,7 @@ class UserProfileController extends Controller
 
     /**
      * Add a follower
-     * 
+     *
      * Requires: user-profile:update
      */
     public function follow(User $user)
@@ -169,7 +168,7 @@ class UserProfileController extends Controller
 
     /**
      * Remove a follower
-     * 
+     *
      * Requires: user-profile:update
      */
     public function unfollow(User $user)

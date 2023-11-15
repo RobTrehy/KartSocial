@@ -12,7 +12,7 @@ class DashboardController extends Controller
 {
     /**
      * Display the dashboard feed
-     * 
+     *
      * Requires: dashboard.view
      */
     public function feed()
@@ -37,7 +37,7 @@ class DashboardController extends Controller
                 User::find(Auth::id())
                     ->load('trackVisits')
                     ->pluck('track_visits.track_layout.track.id')
-            )->inRandomOrder()->take(5)->get()
+            )->inRandomOrder()->take(5)->get(),
         ]);
     }
 }

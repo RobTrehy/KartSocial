@@ -17,19 +17,19 @@ class TracksController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * 
+     *
      * Requires: none
      */
     public function index()
     {
         return Inertia::render('Tracks/Index', [
-            'tracks' => Track::withCount('layouts', 'laps', 'myLaps')->orderBy('name', 'ASC')->get()
+            'tracks' => Track::withCount('layouts', 'laps', 'myLaps')->orderBy('name', 'ASC')->get(),
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
-     * 
+     *
      * Requires: tracks.create
      */
     public function create()
@@ -43,7 +43,7 @@ class TracksController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * 
+     *
      * Requires: tracks.create
      */
     public function store(CreateTrackRequest $request)
@@ -65,7 +65,7 @@ class TracksController extends Controller
 
     /**
      * Display the specified resource.
-     * 
+     *
      * Requires: none
      */
     public function show(Track $track)
@@ -122,7 +122,7 @@ class TracksController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * 
+     *
      * Requires: tracks.update
      */
     public function edit(Track $track)
@@ -138,7 +138,7 @@ class TracksController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * 
+     *
      * Requires: tracks.update
      */
     public function update(UpdateTrackRequest $request, Track $track)

@@ -14,7 +14,7 @@ class UserPhotosController extends Controller
 {
     /**
      * Update the user's photos in storage.
-     * 
+     *
      * Requires: user-profile.photos.update
      */
     public function update(Request $request)
@@ -72,7 +72,7 @@ class UserPhotosController extends Controller
 
     /**
      * Delete the current user's profile photo.
-     * 
+     *
      * Requires: user-profile.photos.update
      *
      * @return \Illuminate\Http\RedirectResponse
@@ -95,7 +95,7 @@ class UserPhotosController extends Controller
 
     /**
      * Delete the current user's cover photo.
-     * 
+     *
      * Requires: user-profile.photos.update
      *
      * @return \Illuminate\Http\RedirectResponse

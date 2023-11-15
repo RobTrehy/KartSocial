@@ -17,7 +17,7 @@ class UserAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * 
+     *
      * Requires: none
      */
     public function index()
@@ -29,7 +29,7 @@ class UserAdminController extends Controller
 
     /**
      * Display the specified resource.
-     * 
+     *
      * Requires: none
      */
     public function show(User $user)
@@ -60,7 +60,7 @@ class UserAdminController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * 
+     *
      * Requires: user-profile.update.any
      */
     public function update(UpdateUserProfileRequest $request, User $user)
@@ -91,7 +91,7 @@ class UserAdminController extends Controller
 
     /**
      * Get a list of track visits for a User
-     * 
+     *
      * Requires: visits.view.any
      */
     public function trackVisits(User $user)
@@ -107,7 +107,7 @@ class UserAdminController extends Controller
 
     /**
      * Get a list of user activity
-     * 
+     *
      * Requires: none
      */
     public function activity(User $user)

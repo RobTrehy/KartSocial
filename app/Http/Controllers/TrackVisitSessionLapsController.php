@@ -13,7 +13,7 @@ class TrackVisitSessionLapsController extends Controller
 {
     /**
      * Show the form for editing the specified resource.
-     * 
+     *
      * Requires: visits.sessions.laps.update
      */
     public function edit(TrackVisitSession $session)
@@ -29,7 +29,7 @@ class TrackVisitSessionLapsController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * 
+     *
      * Requires: visits.sessions.laps.update
      */
     public function update(Request $request)
@@ -81,7 +81,7 @@ class TrackVisitSessionLapsController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * 
+     *
      * Requires: visits.sessions.laps.update
      */
     public function destroy(TrackVisitSession $session, TrackVisitSessionLap $lap)

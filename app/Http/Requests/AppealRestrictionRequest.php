@@ -24,7 +24,7 @@ class AppealRestrictionRequest extends FormRequest
         return [
             'restriction_id' => 'required|integer|exists:user_restrictions,id',
             'appeal' => 'required|string',
-            'allow_reply' => 'nullable|boolean'
+            'allow_reply' => 'nullable|boolean',
         ];
     }
 }

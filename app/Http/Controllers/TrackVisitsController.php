@@ -14,7 +14,7 @@ class TrackVisitsController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * 
+     *
      * Requires: visits.view
      */
     public function index()
@@ -33,7 +33,7 @@ class TrackVisitsController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     * 
+     *
      * Requires: visits.create
      */
     public function create()
@@ -60,7 +60,7 @@ class TrackVisitsController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * 
+     *
      * Requires: visits.create
      */
     public function store(CreateTrackVisitRequest $request)
@@ -81,7 +81,7 @@ class TrackVisitsController extends Controller
 
     /**
      * Display the specified resource.
-     * 
+     *
      * Requires: visits.view
      */
     public function show(TrackVisit $visit)
@@ -97,7 +97,7 @@ class TrackVisitsController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * 
+     *
      * Requires: visits.update
      */
     public function edit(TrackVisit $visit)
@@ -137,7 +137,7 @@ class TrackVisitsController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * 
+     *
      * Requires: visits.update
      */
     public function update(UpdateTrackVisitRequest $request, TrackVisit $visit)
@@ -160,7 +160,7 @@ class TrackVisitsController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * 
+     *
      * Requires: visits.destroy
      */
     public function destroy(TrackVisit $visit)

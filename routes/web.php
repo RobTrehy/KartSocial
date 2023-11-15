@@ -46,7 +46,6 @@ Route::middleware([UserIsNotRestricted::class])->get('/@{alias}/followers', [Use
 Route::middleware([UserIsNotRestricted::class])->get('/@{alias}/{item}', [UserProfileController::class, 'showItem'])->name('profile.show.item');
 Route::middleware([UserIsNotRestricted::class])->get('/@{alias}/', [UserProfileController::class, 'show'])->name('profile.show');
 
-
 Route::get('/tracks', [TracksController::class, 'index'])->name('tracks.index');
 Route::get('/tracks/{track}', [TracksController::class, 'show'])->name('tracks.show');
 
@@ -90,7 +89,7 @@ Route::middleware([
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified'
+    'verified',
 ])->group(function () {
     // App Search
     Route::post('/search', [SearchController::class, 'search'])->name('search');
@@ -99,7 +98,7 @@ Route::middleware([
     Route::get('/user/profile', [UserProfileController::class, 'edit'])->name('user-profile.edit');
     Route::put('/user/profile', [UserProfileController::class, 'update'])->name('user-profile.update');
     Route::put('/user/profile-photos', [UserPhotosController::class, 'update'])
-        ->middleware([config('fortify.auth_middleware', 'auth') . ':' . config('fortify.guard')])
+        ->middleware([config('fortify.auth_middleware', 'auth').':'.config('fortify.guard')])
         ->name('user-profile-photos.update');
     Route::delete('/user/profile-photo', [UserPhotosController::class, 'destroyPhoto'])
         ->name('current-user-photo.destroy');
@@ -119,6 +118,7 @@ Route::get('/restricted', function () {
             'restriction' => $restriction,
         ]);
     }
+
     return redirect('/dashboard');
 })->name('restricted.access');
 

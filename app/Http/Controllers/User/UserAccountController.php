@@ -10,7 +10,7 @@ class UserAccountController extends UserProfileController
 {
     /**
      * Create an SAR / Personal Data Export Request
-     * 
+     *
      * Requires: None
      */
     public function requestPersonalData()

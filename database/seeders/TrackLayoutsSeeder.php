@@ -17,7 +17,7 @@ class TrackLayoutsSeeder extends Seeder
 
         $firstLine = true;
         while (($data = fgetcsv($csvFile, 2000, ',')) !== false) {
-            if (!$firstLine) {
+            if (! $firstLine) {
                 $track = Track::where('name', $data[0])->first();
 
                 if ($track) {

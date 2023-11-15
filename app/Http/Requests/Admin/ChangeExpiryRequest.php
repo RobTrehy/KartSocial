@@ -22,7 +22,7 @@ class ChangeExpiryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'expires_at' => 'nullable|date'
+            'expires_at' => 'nullable|date',
         ];
     }
 }

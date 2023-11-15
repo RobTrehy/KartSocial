@@ -130,11 +130,11 @@ class User extends Authenticatable implements \Spatie\PersonalDataExport\Exports
             app(PermissionRegistrar::class)->pivotRole
         )->withPivot(['cost', 'expires_at'])->withTimestamps();
 
-        if (!app(PermissionRegistrar::class)->teams) {
+        if (! app(PermissionRegistrar::class)->teams) {
             return $relation;
         }
 
-        $teamField = config('permission.table_names.roles') . '.' . app(PermissionRegistrar::class)->teamsKey;
+        $teamField = config('permission.table_names.roles').'.'.app(PermissionRegistrar::class)->teamsKey;
 
         return $relation->wherePivot(app(PermissionRegistrar::class)->teamsKey, getPermissionsTeamId())
             ->where(fn ($q) => $q->whereNull($teamField)->orWhere($teamField, getPermissionsTeamId()));

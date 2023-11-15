@@ -17,6 +17,7 @@ class TrackVisitSessionFactory extends Factory
     public function definition(): array
     {
         $total = rand(1, 20);
+
         return [
             'session_name' => fake()->word(),
             'session_type' => fake()->randomElement(['Practice', 'Qualifying', 'Heat', 'Semi Final', 'Grand Final', 'Final', 'Race']),

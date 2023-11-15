@@ -11,10 +11,9 @@ use Inertia\Inertia;
 
 class TrackVisitSessionsController extends Controller
 {
-
     /**
      * Show the form for creating a new resource.
-     * 
+     *
      * Requires: visits.sessions.create
      */
     public function create(TrackVisit $visit)
@@ -30,7 +29,7 @@ class TrackVisitSessionsController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * 
+     *
      * Requires: visits.sessions.create
      */
     public function store(CreateTrackVisitSessionRequest $request)
@@ -46,7 +45,7 @@ class TrackVisitSessionsController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * 
+     *
      * Requires: visits.sessions.update
      */
     public function edit(TrackVisit $visit, TrackVisitSession $session)
@@ -63,7 +62,7 @@ class TrackVisitSessionsController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * 
+     *
      * Requires: visits.sessions.update
      */
     public function update(UpdateTrackVisitSessionRequest $request, TrackVisit $visit, TrackVisitSession $session)
@@ -79,7 +78,7 @@ class TrackVisitSessionsController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * 
+     *
      * Requires: visits.sessions.destroy
      */
     public function destroy(TrackVisit $visit, TrackVisitSession $session)
