@@ -52,6 +52,9 @@ Route::middleware([
     // Track Visit & Session Routes
     Route::resource('visits', TrackVisitsController::class);
     Route::resource('visits.sessions', TrackVisitSessionsController::class)->except(['index', 'show']);
+    Route::get('/session/{session}/laps', [TrackLapController::class, 'edit'])->name('session.laps');
+    Route::put('/session/{session}/laps', [TrackLapController::class, 'update'])->name('session.laps.update');
+    Route::delete('/session/{session}/lap/{lap}', [TrackLapController::class, 'destroy'])->name('session.lap.destroy');
 
     // Admin Routes
     Route::prefix('/admin')->middleware(['can:admin.access'])->name('admin:')->group(function () {
