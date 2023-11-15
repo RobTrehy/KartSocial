@@ -1,11 +1,15 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TrackLayoutsController;
 use App\Http\Controllers\TracksController;
 use App\Http\Controllers\TrackVisitsController;
 use App\Http\Controllers\TrackVisitSessionsController;
+use App\Http\Middleware\UserIsRestricted;
+use App\Models\UserRestrictions;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -40,6 +44,7 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
+    UserIsRestricted::class,
 ])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'feed'])->name('dashboard');
 
@@ -48,7 +53,7 @@ Route::middleware([
     Route::resource('tracks.layout', TrackLayoutsController::class)->except(['index', 'show']);
     Route::post('/tracks/{track}/layout/{layout}/reinstate', [TrackLayoutsController::class, 'reinstate'])->withTrashed()->name('tracks.layout.reinstate');
     Route::post('/tracks/{track}/layout/{layout}/set_default', [TrackLayoutsController::class, 'makeDefault'])->withTrashed()->name('tracks.layout.set_default');
-    
+
     // Track Visit & Session Routes
     Route::resource('visits', TrackVisitsController::class);
     Route::resource('visits.sessions', TrackVisitSessionsController::class)->except(['index', 'show']);
@@ -61,3 +66,27 @@ Route::middleware([
         include 'admin.php';
     });
 });
+
+/**
+ * User must be Authenticated and verified, but they CAN be banned
+ */
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    // App Search
+    Route::post('/search', [SearchController::class, 'search'])->name('search');
+
+    Route::personalDataExports('personal-data-exports');
+});
+
+Route::get('/restricted', function () {
+    $restriction = UserRestrictions::where('user_id', Auth::id())->with(['user', 'restictor', 'appeals', 'appeals.user'])->first();
+    if ($restriction) {
+        return Inertia::render('Restricted/Index', [
+            'restriction' => $restriction,
+        ]);
+    }
+    return redirect('/dashboard');
+})->name('restricted.access');
