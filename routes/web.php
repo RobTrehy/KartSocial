@@ -15,6 +15,7 @@ use App\Http\Middleware\UserIsNotRestricted;
 use App\Http\Middleware\UserIsRestricted;
 use App\Models\UserRestrictions;
 use Illuminate\Support\Env;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -98,7 +99,7 @@ Route::middleware([
     Route::get('/user/profile', [UserProfileController::class, 'edit'])->name('user-profile.edit');
     Route::put('/user/profile', [UserProfileController::class, 'update'])->name('user-profile.update');
     Route::put('/user/profile-photos', [UserPhotosController::class, 'update'])
-        ->middleware([config('fortify.auth_middleware', 'auth').':'.config('fortify.guard')])
+        ->middleware([config('fortify.auth_middleware', 'auth') . ':' . config('fortify.guard')])
         ->name('user-profile-photos.update');
     Route::delete('/user/profile-photo', [UserPhotosController::class, 'destroyPhoto'])
         ->name('current-user-photo.destroy');
@@ -125,3 +126,7 @@ Route::get('/restricted', function () {
 if (Env::get('APP_INVITATION_ONLY', false)) {
     include 'invitations.php';
 }
+
+Route::get('/seed', function () {
+    Artisan::call('db:seed', ['--force' => true]);
+});
