@@ -6,9 +6,9 @@ import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { DarkModeSwitch } from 'react-toggle-dark-mode';
 import AppSearch from '../AppSearch/AppSearch';
-import ApplicationMark from '../ApplicationMark';
 import Dropdown from '../Dropdown';
 import DropdownLink from '../DropdownLink';
+import IntialsLogo from '../Logos/InitialsLogo';
 import NavLink from '../NavLink';
 import ResponsiveNavLink from '../ResponsiveNavLink';
 
@@ -61,8 +61,8 @@ export default function AppNavBar() {
             'complete' === d.readyState
               ? l()
               : w.attachEvent
-              ? w.attachEvent('onload', l)
-              : w.addEventListener('load', l, !1);
+                ? w.attachEvent('onload', l)
+                : w.addEventListener('load', l, !1);
         }
       })(window, document, 'canny-jssdk', 'script');
       //@ts-ignore
@@ -98,7 +98,7 @@ export default function AppNavBar() {
               <Link
                 href={page.props.auth.user ? route('dashboard') : route('home')}
               >
-                <ApplicationMark className="block h-9 w-auto fill-brand-600" />
+                <IntialsLogo classes="text-4xl text-brand-600" secondaryClasses='text-brand-500' />
               </Link>
             </div>
 
@@ -286,11 +286,10 @@ export default function AppNavBar() {
                         <div
                           className="absolute z-10 bg-blue-500 rounded-full text-xs leading-none h-[12px] text-center"
                           style={{
-                            width: `${
-                              (page.props.auth.user.invited_count /
-                                page.props.max_invites) *
+                            width: `${(page.props.auth.user.invited_count /
+                              page.props.max_invites) *
                               100
-                            }%`,
+                              }%`,
                           }}
                         />
                       </div>

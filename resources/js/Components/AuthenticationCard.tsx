@@ -1,6 +1,6 @@
-import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo';
 import useTypedPage from '@/Hooks/useTypedPage';
 import React, { PropsWithChildren } from 'react';
+import TextLogo from './Logos/TextLogo';
 
 export default function AuthenticationCard({
   children,
@@ -9,14 +9,14 @@ export default function AuthenticationCard({
   const { laps, users } = page.props;
 
   return (
-    <div className="h-screen w-screen flex flex-row">
-      <div className="w-0 sm:w-1/2 flex flex-col gap-4 sm:justify-center items-center pt-6 sm:pt-0 bg-brand-600 text-white">
-        <h1 className="text-5xl font-bold">Kart Social</h1>
-        <div className="rounded-lg bg-brand-500 w-3/4 p-5">
+    <div className="h-full min-h-screen w-screen flex flex-col-reverse md:flex-row">
+      <div className="md:w-1/2 flex flex-col gap-4 md:justify-center items-center pt-6 md:pt-0 bg-brand-600 text-white">
+        <TextLogo classes="text-6xl hidden md:flex" secondaryClasses='text-white/70' />
+        <div className="rounded-lg bg-brand-500 md:w-3/4 mx-4 p-5 mb-8">
           Login or Register to the social platform for go-kart racers to record,
           share and compare their lap times!
           <div className="px-4 py-8 mx-auto text-center lg:py-10 lg:px-6">
-            <dl className="grid gap-8 mx-auto text-white sm:grid-cols-3">
+            <dl className="grid gap-8 mx-auto text-white grid-cols-3">
               <div className="flex flex-col items-center justify-center">
                 <dt className="mb-2 text-3xl md:text-4xl font-extrabold">
                   100+
@@ -40,9 +40,9 @@ export default function AuthenticationCard({
         </div>
       </div>
 
-      <div className="w-full sm:w-1/2 flex flex-col sm:justify-center items-center pt-6 sm:pt-0 px-8 sm:px-40 bg-white dark:bg-gray-900">
-        <div className="sm:hidden">
-          <AuthenticationCardLogo />
+      <div className="md:w-1/2 flex flex-col md:justify-center items-center py-6 px-8 2xl:px-40 bg-white dark:bg-gray-900">
+        <div className="md:hidden mb-5 md:mb-0">
+          <TextLogo classes="text-brand-600 text-5xl" secondaryClasses="text-brand-500" />
         </div>
 
         {children}
