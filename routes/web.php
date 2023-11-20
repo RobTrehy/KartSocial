@@ -47,9 +47,6 @@ Route::middleware([UserIsNotRestricted::class])->get('/@{alias}/followers', [Use
 Route::middleware([UserIsNotRestricted::class])->get('/@{alias}/{item}', [UserProfileController::class, 'showItem'])->name('profile.show.item');
 Route::middleware([UserIsNotRestricted::class])->get('/@{alias}/', [UserProfileController::class, 'show'])->name('profile.show');
 
-Route::get('/tracks', [TracksController::class, 'index'])->name('tracks.index');
-Route::get('/tracks/{track}', [TracksController::class, 'show'])->name('tracks.show');
-
 /**
  * User must be authenticated, verified and NOT restricted.
  */
@@ -111,6 +108,8 @@ Route::middleware([
     // User Restrictions and Appeals
     Route::post('/user/restriction/appeal', [UserRestrictionController::class, 'addAppealComment'])->name('user.restriction.appeal.add');
 });
+
+Route::resource('tracks', TracksController::class)->only(['index', 'show']);
 
 Route::get('/restricted', function () {
     $restriction = UserRestrictions::where('user_id', Auth::id())->with(['user', 'restictor', 'appeals', 'appeals.user'])->first();
