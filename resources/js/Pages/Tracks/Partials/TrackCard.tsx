@@ -21,7 +21,7 @@ export default function TrackCard({ track }: Props) {
   return (
     <Link
       href={route('tracks.show', track.id)}
-      className="group flex flex-col h-full bg-white border border-gray-200 shadow-sm rounded-xl dark:bg-gray-900 dark:border-gray-700"
+      className="group flex flex-col h-full bg-white border border-gray-200 shadow-sm sm:rounded-xl dark:bg-gray-900 dark:border-gray-700"
     >
       <div className="p-4 md:p-5">
         <div className="flex">
