@@ -17,7 +17,7 @@ export default function Index({ trackVisits }: any) {
         </h2>
       )}
     >
-      <div className="py-12">
+      <div className="py-4 md:py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <ul
             role="list"

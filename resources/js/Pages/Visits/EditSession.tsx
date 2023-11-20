@@ -20,7 +20,7 @@ export default function EditSession({ visit, session, ...props }: any) {
         </div>
       )}
     >
-      <div className="py-12">
+      <div className="py-4 md:py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <EditTrackSessionForm
             track_visit_id={visit.id}

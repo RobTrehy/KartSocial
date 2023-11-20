@@ -87,7 +87,7 @@ export default function Show({ user, ...props }: any) {
           </div>
         </div>
       )}
-      <div className="py-12">
+      <div className="py-4 md:py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
           {page.props.jetstream.managesProfilePhotos ? (
             <>

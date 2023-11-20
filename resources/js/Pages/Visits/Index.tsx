@@ -29,7 +29,7 @@ export default function Index(props: any) {
         </div>
       )}
     >
-      <div className="py-12">
+      <div className="py-4 md:py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div className="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700 border-x border-gray-200 dark:border-gray-700 rounded-md">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-x-6 p-2 rounded-t-md">

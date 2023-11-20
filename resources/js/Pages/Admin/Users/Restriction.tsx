@@ -46,7 +46,7 @@ export default function Restriction({ user }: any) {
         </div>
       )}
     >
-      <div className="py-12">
+      <div className="py-4 md:py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-col gap-y-2">
           <p>
             The account was restricted by {user.ban.banner.alias} on{' '}
