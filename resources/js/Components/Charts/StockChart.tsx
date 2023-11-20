@@ -11,7 +11,7 @@ import { Line } from 'react-chartjs-2';
 import React from 'react';
 
 ChartJS.register(LineElement, PointElement, LinearScale, Title, CategoryScale);
-const formatter = number =>
+const formatter = (number: number) =>
   number > 999999 ? (number / 1000000).toFixed(1) + 'M' : number;
 
 const buildData = ({ chartData }) => ({
@@ -65,7 +65,7 @@ const options = {
   },
 };
 
-const numberToFix = (number, fix) => (number || 0).toFixed(fix);
+const numberToFix = (number: number, fix: number) => (number || 0).toFixed(fix);
 
 const StockChart = ({ info }) => {
   const data = buildData(info);

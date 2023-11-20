@@ -1,5 +1,5 @@
 import ActionSection from '@/Components/ActionSection';
-import { User } from '@/types';
+import { Role, User } from '@/types';
 import moment from 'moment';
 import React from 'react';
 
@@ -15,8 +15,7 @@ export default function AdminPlanForm({ user }: Props) {
     >
       <div className="grid grid-cols-6 gap-6">
         <div className="flex flex-col gap-y-2 col-span-6 sm:col-span-4">
-          {/* TODO: Role type */}
-          {user.roles?.map((role: any, i: number) => {
+          {user.roles?.map((role: Role, i: number) => {
             return (
               <div
                 className={`flex flex-col ${role.colors.background} border ${role.colors.border} p-2 rounded-md dark:text-gray-200`}

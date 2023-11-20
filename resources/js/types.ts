@@ -22,16 +22,34 @@ export interface User {
   followed_by_count: number;
   followed_by: Array<User>;
   invited_count: number;
-  roles: Nullable<Array<any>>; // TODO: Role Type
+  roles: Nullable<Array<Role>>;
   created_at: DateTime;
   updated_at: DateTime;
 }
 
 export interface Auth {
   user: Nullable<User>;
-  permissions: Nullable<
-    Array<any> // TODO: Permissions array Type
-  >;
+  permissions: Nullable<Array<string>>;
+}
+
+export interface Role {
+  id: number;
+  name: string;
+  colors: {
+    background: string;
+    border: string;
+  }
+  pivot: {
+    cost: number;
+    expires_at: DateTime;
+    created_at: DateTime;
+    updated_at: DateTime;
+  }
+}
+
+export interface Permission {
+  id: number;
+  name: string;
 }
 
 export type InertiaSharedProps<T = {}> = T & {
