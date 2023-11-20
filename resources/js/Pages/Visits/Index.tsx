@@ -15,11 +15,11 @@ export default function Index(props: any) {
     <AppLayout
       title="Track Log"
       renderHeader={() => (
-        <div className="flex flex-row items-center">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-y-2">
           <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             Track Log
           </h2>
-          <div className="ml-auto">
+          <div className="flex gap-x-2">
             <SecondaryButton
               onClick={() => router.visit(route('visits.create'))}
             >
@@ -31,15 +31,15 @@ export default function Index(props: any) {
     >
       <div className="py-4 md:py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div className="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700 border-x border-gray-200 dark:border-gray-700 rounded-md">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-x-6 p-2 rounded-t-md">
+          <div className="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700 border-x border-gray-200 dark:border-gray-700 sm:rounded-md">
+            <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-x-6 p-2 rounded-t-md">
               <p className="text-xs font-medium text-left text-gray-500 dark:text-gray-400 uppercase">
                 Visit
               </p>
-              <p className="hidden sm:block text-xs font-medium text-left text-gray-500 dark:text-gray-400 uppercase">
+              <p className="text-xs font-medium text-left text-gray-500 dark:text-gray-400 uppercase">
                 Track
               </p>
-              <div className="hidden md:grid grid-cols-3 text-xs font-medium text-left text-gray-500 dark:text-gray-400 uppercase">
+              <div className="grid grid-cols-3 text-xs font-medium text-left text-gray-500 dark:text-gray-400 uppercase">
                 <p>Sessions</p>
                 <p>Laps</p>
                 <p>Fastest Lap</p>
