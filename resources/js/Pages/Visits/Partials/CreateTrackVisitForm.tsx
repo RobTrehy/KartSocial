@@ -66,8 +66,7 @@ export default function CreateTrackVisitForm(props: Props) {
       props.tracks
         .filter(obj => {
           return obj.id === track?.value;
-        })[0]
-        .all_layouts.map((layout: TrackLayout) => {
+        })[0]?.all_layouts.map((layout: TrackLayout) => {
           _layouts.push({
             value: layout.id,
             label: layout.retired_at

@@ -51,7 +51,7 @@ export default function EditTrackVisitForm(props: Props) {
       let l = props.tracks.filter(obj => {
         return obj.id === track?.value;
       })[0]?.all_layouts[0];
-      let _layouts: Array<object> = [
+      let _layouts: Array<{value: number, label: string}> = [
         {
           value: l.id,
           label: l.retired_at
@@ -61,6 +61,7 @@ export default function EditTrackVisitForm(props: Props) {
               : 'Default',
         },
       ];
+      form.setData('track_layout_id', _layouts[0].value.toString());
       set_layout(_layouts[0]);
       setLayouts(_layouts);
     } else {
@@ -68,8 +69,7 @@ export default function EditTrackVisitForm(props: Props) {
       props.tracks
         .filter(obj => {
           return obj.id === track?.value;
-        })[0]
-        ?.all_layouts.map((layout: TrackLayout) => {
+        })[0]?.all_layouts.map((layout: TrackLayout) => {
           _layouts.push({
             value: layout.id,
             label: layout.retired_at
@@ -79,6 +79,7 @@ export default function EditTrackVisitForm(props: Props) {
                 : 'Default',
           });
         });
+      form.setData('track_layout_id', '');
       set_layout(null);
       setLayouts(_layouts);
     }
