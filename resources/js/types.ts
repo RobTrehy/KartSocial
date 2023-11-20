@@ -2,33 +2,35 @@ type DateTime = string;
 
 export type Nullable<T> = T | null;
 
-export interface Team {
-  id: number;
-  name: string;
-  personal_team: boolean;
-  created_at: DateTime;
-  updated_at: DateTime;
-}
-
 export interface User {
   id: number;
   name: string;
+  alias: string;
   email: string;
-  current_team_id: Nullable<number>;
+  bio: string;
   profile_photo_path: Nullable<string>;
   profile_photo_url: string;
+  cover_photo_path: Nullable<string>;
+  cover_photo_url: string;
   two_factor_enabled: boolean;
   email_verified_at: Nullable<DateTime>;
+  home_track_id: Nullable<number>;
+  home_track: Nullable<Track>;
+  weight: Nullable<number | string>;
+  follows_count: number;
+  follows: Array<User>
+  followed_by_count: number;
+  followed_by: Array<User>;
+  invited_count: number;
+  roles: Nullable<Array<any>>; // TODO: Role Type
   created_at: DateTime;
   updated_at: DateTime;
 }
 
 export interface Auth {
-  user: Nullable<
-    User & {
-      all_teams?: Team[];
-      current_team?: Team;
-    }
+  user: Nullable<User>;
+  permissions: Nullable<
+    Array<any> // TODO: Permissions array Type
   >;
 }
 
@@ -37,18 +39,17 @@ export type InertiaSharedProps<T = {}> = T & {
   app_feedback_label: string;
   app_version: string;
   jetstream: {
-    canCreateTeams: boolean;
     canManageTwoFactorAuthentication: boolean;
     canUpdatePassword: boolean;
     canUpdateProfileInformation: boolean;
     flash: any;
     hasAccountDeletionFeatures: boolean;
     hasApiFeatures: boolean;
-    hasTeamFeatures: boolean;
     hasTermsAndPrivacyPolicyFeature: boolean;
     managesProfilePhotos: boolean;
     hasEmailVerification: boolean;
   };
+  max_invites: number;
   auth: Auth;
   errorBags: any;
   errors: any;
@@ -77,25 +78,51 @@ export interface ApiToken {
   updated_at: DateTime;
 }
 
-export interface JetstreamTeamPermissions {
-  canAddTeamMembers: boolean;
-  canDeleteTeam: boolean;
-  canRemoveTeamMembers: boolean;
-  canUpdateTeam: boolean;
-}
-
-export interface Role {
-  key: string;
-  name: string;
-  permissions: string[];
-  description: string;
-}
-
-export interface TeamInvitation {
+export interface Track {
   id: number;
-  team_id: number;
-  email: string;
-  role: Nullable<string>;
+  name: string;
+  address_1: string;
+  address_2: string;
+  address_3: string;
+  town: string;
+  county: string;
+  postal_code: string;
+  lat: number;
+  lng: number;
+  type: string;
+  url: string;
+  number: string;
+  layouts: Nullable<Array<TrackLayout>>;
+  all_layouts: Nullable<Array<TrackLayout>>;
+  retired_layouts: Nullable<Array<TrackLayout>>;
   created_at: DateTime;
   updated_at: DateTime;
+}
+
+export interface TrackLayout {
+  id: number;
+  track_id: number;
+  track: Nullable<Track>;
+  is_default: boolean;
+  name: Nullable<string>;
+  length: Nullable<number>;
+  laps_count: number;
+  my_laps_count: number;
+  fastestLap: TrackVisitSessionLap & {
+    session: any;
+  };
+  myFastest: TrackVisitSessionLap & {
+    session: any;
+  };
+  chartData: any;
+  retired_at: DateTime;
+  created_at: DateTime;
+  updated_at: DateTime;
+}
+
+export interface TrackVisitSessionLap {
+  id: number;
+  lap_number: number;
+  lap_time: number;
+  lap_diff: number;
 }

@@ -6,31 +6,15 @@ import { FormatLapDiff } from '@/Helpers/FormatLapDiff';
 import { FormatLapTime } from '@/Helpers/FormatLapTime';
 import usePermissions from '@/Hooks/usePermissions';
 import useRoute from '@/Hooks/useRoute';
+import { Track, TrackLayout } from '@/types';
 import { Link, router, useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import moment from 'moment';
 import React, { useState } from 'react';
 
 interface Props {
-  layout: {
-    id: number;
-    name: string;
-    is_default: boolean;
-    length: number;
-    laps_count: number;
-    my_laps_count: number;
-    fastestLap: {
-      lap_time: number;
-      session: any;
-    };
-    myFastest: {
-      lap_time: number;
-      session: any;
-    };
-    retired_at: string;
-    chartData: any;
-  };
-  track: any;
+  layout: TrackLayout;
+  track: Track;
 }
 
 export default function TrackLayoutCard({ layout, track }: Props) {
@@ -129,6 +113,8 @@ export default function TrackLayoutCard({ layout, track }: Props) {
                   <div className="flex flex-col">
                     <span className="block leading-5 text-sm ml-4 text-red-500">
                       {FormatLapDiff({
+                        id: 0,
+                        lap_time: 0,
                         lap_number: 2,
                         lap_diff:
                           layout.myFastest.lap_time -
@@ -249,16 +235,12 @@ export default function TrackLayoutCard({ layout, track }: Props) {
             <TrackLayoutChart
               chartData={layout.chartData?.latest}
               title="Latest Laps"
-              layout={layout}
-              trackName={track.name}
             />
           )}
           {slide === 1 && (
             <TrackLayoutChart
               chartData={layout.chartData?.myLatest}
               title="My Latest Laps"
-              layout={layout}
-              trackName={track.name}
             />
           )}
           <svg

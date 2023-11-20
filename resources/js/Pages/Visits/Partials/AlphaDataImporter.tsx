@@ -1,9 +1,9 @@
 import Select from '@/Components/Forms/Select';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import * as XLSX from 'xlsx';
 import { sessionLapContext } from '../Sessions/Lap';
 
-export default function AlphaDataImporter({}: any) {
+export default function AlphaDataImporter({ }: any) {
   const [file, setFile] = useState<File | null>(null);
   const [excelRows, setExcelRows] = useState<Array<any> | null>(null);
   const [driver, setDriver] = useState<string | null>(null);
@@ -38,9 +38,11 @@ export default function AlphaDataImporter({}: any) {
     }
   }, [driver]);
 
-  const handleOnSubmit = e => {
+  const handleOnSubmit = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    setFile(e.target.files[0]);
+    if (e.target.files) {
+      setFile(e.target.files[0]);
+    }
   };
 
   const processExcel = (data: any) => {

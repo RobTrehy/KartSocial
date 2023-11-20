@@ -5,22 +5,23 @@ import InputLabel from '@/Components/Forms/InputLabel';
 import TextInput from '@/Components/Forms/TextInput';
 import PrimaryButton from '@/Components/PrimaryButton';
 import useRoute from '@/Hooks/useRoute';
-import { Link, useForm, usePage } from '@inertiajs/react';
+import useTypedPage from '@/Hooks/useTypedPage';
+import { Link, useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import React from 'react';
 
 interface Props {
   invited: Array<any>;
-}
+};
 
 export default function InviteUserForm({ invited }: Props) {
-  const page = usePage();
+  const page = useTypedPage();
   const route = useRoute();
 
   const form = useForm({
     _method: 'POST',
     email: '',
-    invited_by: page.props.auth.user.id,
+    invited_by: page.props.auth.user?.id,
   });
 
   function sendInvite() {
@@ -39,7 +40,7 @@ export default function InviteUserForm({ invited }: Props) {
           <ActionMessage on={form.recentlySuccessful} className="mr-3">
             Invite Sent!
           </ActionMessage>
-          {page.props.auth.user.invited_count < page.props.max_invites && (
+          {page.props.auth.user && (page.props.auth.user?.invited_count < page.props.max_invites) && (
             <PrimaryButton
               className={classNames({ 'opacity-25': form.processing })}
               disabled={form.processing}
@@ -57,22 +58,24 @@ export default function InviteUserForm({ invited }: Props) {
         />
         <div className="mt-1 block bg-gray-200 text-gray-900 w-full rounded-full text-xs leading-none h-[16px] text-center relative mb-0.5">
           <div className="absolute z-20 w-full pt-0.5">
-            {page.props.auth.user.invited_count}/{page.props.max_invites}
+            {page.props.auth.user?.invited_count}/{page.props.max_invites}
           </div>
-          <div
-            className="absolute z-10 bg-blue-500 rounded-full text-xs leading-none h-[16px] text-center"
-            style={{
-              width: `${
-                (page.props.auth.user.invited_count / page.props.max_invites) *
-                100
-              }%`,
-            }}
-          />
+          {
+            page.props.auth.user && (
+              <div
+                className="absolute z-10 bg-blue-500 rounded-full text-xs leading-none h-[16px] text-center"
+                style={{
+                  width: `${(page.props.auth.user.invited_count / page.props.max_invites) *
+                    100
+                    }%`,
+                }}
+              />)
+          }
         </div>
       </div>
 
       {/* <!-- Email --> */}
-      {page.props.auth.user.invited_count < page.props.max_invites && (
+      {page.props.auth.user && (page.props.auth.user.invited_count < page.props.max_invites) && (
         <div className="col-span-6 sm:col-span-4">
           <InputLabel htmlFor="email" value="Email Address to invite" />
           <TextInput
@@ -86,7 +89,7 @@ export default function InviteUserForm({ invited }: Props) {
         </div>
       )}
 
-      {page.props.auth.user.invited_count == page.props.max_invites && (
+      {page.props.auth.user && (page.props.auth.user.invited_count == page.props.max_invites) && (
         <div className="col-span-6 sm:col-span-4">
           <InputLabel
             htmlFor="email"
@@ -95,7 +98,7 @@ export default function InviteUserForm({ invited }: Props) {
         </div>
       )}
 
-      {page.props.auth.user.invited_count > 0 && (
+      {page.props.auth.user && (page.props.auth.user.invited_count > 0) && (
         <div className="col-span-6 sm:col-span-4">
           <InputLabel htmlFor="email" value="You have previously invited:" />
           <ul className="list-disc mx-8 text-sm">

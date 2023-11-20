@@ -18,7 +18,11 @@ interface MarkerProps extends PigeonProps {
   text?: string;
 
   // callbacks
-  onClick?: ({ event: HTMLMouseEvent, anchor: Point, payload: any }) => void;
+  onClick?: ({
+    event: HTMLMouseEvent,
+    anchor: Point,
+    payload: any,
+  }) => void;
   onContextMenu?: ({
     event: HTMLMouseEvent,
     anchor: Point,
@@ -29,7 +33,11 @@ interface MarkerProps extends PigeonProps {
     anchor: Point,
     payload: any,
   }) => void;
-  onMouseOut?: ({ event: HTMLMouseEvent, anchor: Point, payload: any }) => void;
+  onMouseOut?: ({
+    event: HTMLMouseEvent,
+    anchor: Point,
+    payload: any,
+  }) => void;
 }
 
 export function Marker(props: MarkerProps): JSX.Element {
@@ -37,14 +45,14 @@ export function Marker(props: MarkerProps): JSX.Element {
     typeof props.width !== 'undefined'
       ? props.width
       : typeof props.height !== 'undefined'
-      ? (props.height * 29) / 34
-      : 29;
+        ? (props.height * 29) / 34
+        : 29;
   const height =
     typeof props.height !== 'undefined'
       ? props.height
       : typeof props.width !== 'undefined'
-      ? (props.width * 34) / 29
-      : 34;
+        ? (props.width * 34) / 29
+        : 34;
   const [internalHover, setInternalHover] = useState(props.hover || false);
   const hover =
     typeof props.hover === 'undefined' ? internalHover : props.hover;
@@ -61,9 +69,8 @@ export function Marker(props: MarkerProps): JSX.Element {
     <div
       style={{
         position: 'absolute',
-        transform: `translate(${props.left - width / 2}px, ${
-          props.top - (height - 1)
-        }px)`,
+        transform: `translate(${props.left - width / 2}px, ${props.top - (height - 1)
+          }px)`,
         filter: hover ? 'drop-shadow(0 0 4px rgba(0, 0, 0, .3))' : '',
         pointerEvents: 'none',
         cursor: 'pointer',

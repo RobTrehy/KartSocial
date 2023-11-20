@@ -17,7 +17,7 @@ export default function ImportDataModal({ open, setOpen }: any) {
   }: any = useContext(sessionLapContext);
 
   const [processing, setProcessing] = useState<boolean>(false);
-  const [dataType, setDataType] = useState(null);
+  const [dataType, setDataType] = useState<string|null>(null);
 
   const complete = () => {
     processImport();

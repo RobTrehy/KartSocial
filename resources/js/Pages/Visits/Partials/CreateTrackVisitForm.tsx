@@ -8,11 +8,22 @@ import TextInput from '@/Components/Forms/TextInput';
 import TextareaInput from '@/Components/Forms/TextareaInput';
 import PrimaryButton from '@/Components/PrimaryButton';
 import useRoute from '@/Hooks/useRoute';
+import { TrackLayout } from '@/types';
 import { Link, useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 
-export default function CreateTrackVisitForm(props: any) {
+interface track {
+  id: number;
+  value: number;
+  all_layouts: Array<TrackLayout>;
+};
+interface Props {
+  tracks: Array<track>;
+  trackSelect: Array<object>;
+};
+
+export default function CreateTrackVisitForm(props: Props) {
   const route = useRoute();
 
   const form = useForm({
@@ -23,7 +34,7 @@ export default function CreateTrackVisitForm(props: any) {
     notes: '',
   });
 
-  const [track, set_track] = useState<object | null>(null);
+  const [track, set_track] = useState<track | null>(null);
   const [layout, set_layout] = useState<object | null>(null);
   const [layouts, setLayouts] = useState<Array<object>>([]);
 
@@ -31,22 +42,23 @@ export default function CreateTrackVisitForm(props: any) {
     if (
       track &&
       props.tracks.filter(obj => {
-        return obj.id === track?.value;
-      })[0]?.all_layouts.length === 1
+        return obj.id === track.value;
+      })[0].all_layouts.length === 1
     ) {
       let l = props.tracks.filter(obj => {
-        return obj.id === track?.value;
-      })[0]?.all_layouts[0];
-      let _layouts: Array<object> = [
+        return obj.id === track.value;
+      })[0].all_layouts[0];
+      let _layouts: Array<{value: number, label: string}> = [
         {
           value: l.id,
           label: l.retired_at
             ? `${l.name ? l.name : 'Default'} [Retired]`
             : l.name
-            ? l.name
-            : 'Default',
+              ? l.name
+              : 'Default',
         },
       ];
+      form.setData('track_layout_id', _layouts[0].value.toString());
       set_layout(_layouts[0]);
       setLayouts(_layouts);
     } else {
@@ -55,14 +67,14 @@ export default function CreateTrackVisitForm(props: any) {
         .filter(obj => {
           return obj.id === track?.value;
         })[0]
-        ?.all_layouts.map((layout: object) => {
+        .all_layouts.map((layout: TrackLayout) => {
           _layouts.push({
             value: layout.id,
             label: layout.retired_at
               ? `${layout.name ? layout.name : 'Default'} [Retired]`
               : layout.name
-              ? layout.name
-              : 'Default',
+                ? layout.name
+                : 'Default',
           });
         });
       set_layout(null);
@@ -74,7 +86,6 @@ export default function CreateTrackVisitForm(props: any) {
     form.post(route('visits.store'), {
       errorBag: 'trackVisit',
       preserveScroll: true,
-      onSuccess: result => console.log(result),
     });
   }
 
@@ -165,7 +176,6 @@ export default function CreateTrackVisitForm(props: any) {
         <InputLabel htmlFor="notes" value="Visit Notes" />
         <TextareaInput
           id="notes"
-          // type="text"
           className="mt-1 block w-full"
           value={form.data.notes}
           onChange={e => form.setData('notes', e.currentTarget.value)}

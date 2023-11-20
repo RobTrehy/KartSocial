@@ -1,6 +1,6 @@
-import React from 'react';
-import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo';
+import TextLogo from '@/Components/Logos/TextLogo';
 import { Head } from '@inertiajs/react';
+import React from 'react';
 
 interface Props {
   policy: string;
@@ -15,7 +15,7 @@ export default function PrivacyPolicy({ policy }: Props) {
         <div className="pt-4 bg-gray-100 dark:bg-gray-900">
           <div className="min-h-screen flex flex-col items-center pt-6 sm:pt-0">
             <div>
-              <AuthenticationCardLogo />
+              <TextLogo />
             </div>
 
             <div

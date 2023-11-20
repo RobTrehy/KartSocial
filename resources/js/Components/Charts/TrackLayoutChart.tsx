@@ -11,6 +11,15 @@ import { Line } from 'react-chartjs-2';
 
 import React from 'react';
 
+interface Props {
+  chartData: ChartData;
+  title: string;
+}
+interface ChartData {
+  labels: string[];
+  data: Array<any>;
+}
+
 ChartJS.register(
   LineElement,
   PointElement,
@@ -20,7 +29,7 @@ ChartJS.register(
   CategoryScale,
 );
 
-const buildData = ({ data, labels }) => ({
+const buildData = ({ data, labels }: ChartData) => ({
   labels: labels,
   datasets: [
     {
@@ -34,7 +43,7 @@ const buildData = ({ data, labels }) => ({
   ],
 });
 
-const TrackLayoutChart = ({ chartData, title }) => {
+const TrackLayoutChart = ({ chartData, title }: Props) => {
   if (chartData.data.length === 0) {
     return (
       <div className="w-full flex flex-col">

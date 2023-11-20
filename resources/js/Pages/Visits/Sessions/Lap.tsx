@@ -1,5 +1,6 @@
 import PrimaryButton from '@/Components/PrimaryButton';
 import AppLayout from '@/Layouts/AppLayout';
+import { TrackVisitSessionLap } from '@/types';
 import React, { createContext, useState } from 'react';
 import CreateSessionLapForm from '../Partials/CreateSessionLapForm';
 import ImportDataModal from '../Partials/ImportDataModal';
@@ -9,20 +10,20 @@ export const sessionLapContext = createContext({});
 export default function Lap(props: any) {
   const { session } = props;
   const [showImport, setShowImport] = useState(false);
-  const [importLaps, setImportLaps] = useState([]);
+  const [importLaps, setImportLaps] = useState<Array<TrackVisitSessionLap>>([]);
   const [importReady, setImportReady] = useState(false);
 
   const [laps, setLaps] = useState(session.laps || []);
 
   const processImport = () => {
-    importLaps.map((lap, i) => {
+    importLaps.map((lap: TrackVisitSessionLap, i: number) => {
       if (isNaN(lap.lap_time)) {
         importLaps[i].lap_time = lap.lap_time
           .split(':')
           .reduce((acc: number, time: number) => 60 * acc + +time)
           .toString();
       }
-      if (lap.lap_number !== '1') {
+      if (lap.lap_number.toString() !== '1') {
         let prevLap = importLaps[i - 1]
           ? importLaps[i - 1]
           : laps[laps.length - 1];
