@@ -1,7 +1,7 @@
 import useRoute from '@/Hooks/useRoute';
 import classNames from 'classnames';
 import React, { useState } from 'react';
-import ResponsiveNavLink from '../../ResponsiveNavLink';
+import ResponsiveAdminNavLink from '../Links/ResponsiveAdminNavLink';
 import AdminNavLink from './AdminNavLink';
 
 export default function AdminNavBar() {
@@ -51,7 +51,7 @@ export default function AdminNavBar() {
               onClick={() => {
                 setShowingNavigationDropdown(!showingNavigationDropdown);
               }}
-              className="sm:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
+              className="sm:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white focus:outline-none transition duration-150 ease-in-out"
             >
               <svg
                 className="h-6 w-6"
@@ -93,12 +93,12 @@ export default function AdminNavBar() {
         })}
       >
         <div className="pt-2 pb-3 space-y-1">
-          <ResponsiveNavLink
+          <ResponsiveAdminNavLink
             href={route('admin:users.index')}
             active={route().current('admin:users.index')}
           >
-            User
-          </ResponsiveNavLink>
+            Users
+          </ResponsiveAdminNavLink>
         </div>
       </div>
     </nav>

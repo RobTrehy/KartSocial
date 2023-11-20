@@ -10,7 +10,7 @@ import Dropdown from '../Dropdown';
 import DropdownLink from '../DropdownLink';
 import IntialsLogo from '../Logos/InitialsLogo';
 import NavLink from '../NavLink';
-import ResponsiveNavLink from '../ResponsiveNavLink';
+import ResponsiveNavLink from './Links/ResponsiveNavLink';
 
 export default function AppNavBar() {
   const page = useTypedPage();
@@ -90,7 +90,7 @@ export default function AppNavBar() {
   return (
     <nav className="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
       {/* <!-- Primary Navigation Menu --> */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
         <div className="flex justify-between h-16 relative">
           <div className="flex flex-1">
             {/* <!-- Logo --> */}
@@ -103,7 +103,7 @@ export default function AppNavBar() {
             </div>
 
             {/* <!-- Main Navigation Links --> */}
-            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+            <div className="hidden space-x-4 lg:space-x-8 md:-my-px md:ml-10 md:flex">
               <NavLink
                 href={route('tracks.index')}
                 active={route().current('tracks.index')}
@@ -119,10 +119,10 @@ export default function AppNavBar() {
                 </NavLink>
               )}
             </div>
-            {page.props.auth.user && <AppSearch />}
+            {page.props.auth.user && <AppSearch breakpoint="lg" />}
           </div>
 
-          <div className="hidden sm:flex sm:items-center sm:ml-6">
+          <div className="hidden md:flex md:items-center md:ml-6">
             <div className="ml-3 flex items-center gap-x-3 relative">
               {/* <!-- Canny Product Feedback --> */}
               <Dropdown
@@ -301,7 +301,7 @@ export default function AppNavBar() {
             </div>
           </div>
 
-          <div className="-mr-2 flex items-center sm:hidden">
+          <div className="-mr-2 flex items-center md:hidden">
             {/* <!-- Feedback Mobile Dropdown --> */}
             <button
               type="button"
@@ -362,7 +362,7 @@ export default function AppNavBar() {
 
       {/* <!-- Responsive Feedback Menu --> */}
       <div
-        className={classNames('sm:hidden', {
+        className={classNames('md:hidden', {
           block: showingFeedbackDropdown,
           hidden: !showingFeedbackDropdown,
         })}
@@ -391,7 +391,7 @@ export default function AppNavBar() {
 
       {/* <!-- Responsive Navigation Menu --> */}
       <div
-        className={classNames('sm:hidden', {
+        className={classNames('md:hidden', {
           block: showingNavigationDropdown,
           hidden: !showingNavigationDropdown,
         })}
