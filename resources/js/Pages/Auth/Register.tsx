@@ -141,7 +141,7 @@ export default function Register() {
                 />
 
                 <div className="ml-2">
-                  I agree to the
+                  I agree to the&nbsp;
                   <a
                     target="_blank"
                     href={route('terms.show')}
@@ -149,7 +149,7 @@ export default function Register() {
                   >
                     Terms of Service
                   </a>
-                  and
+                  &nbsp;and&nbsp;
                   <a
                     target="_blank"
                     href={route('policy.show')}

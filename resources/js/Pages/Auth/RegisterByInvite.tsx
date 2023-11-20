@@ -157,7 +157,7 @@ export default function RegisterByInvite({ email, invitation_token }: Props) {
                 />
 
                 <div className="ml-2">
-                  I agree to the
+                  I agree to the&nbsp;
                   <a
                     target="_blank"
                     href={route('terms.show')}
@@ -165,7 +165,7 @@ export default function RegisterByInvite({ email, invitation_token }: Props) {
                   >
                     Terms of Service
                   </a>
-                  and
+                  &nbsp;and&nbsp;
                   <a
                     target="_blank"
                     href={route('policy.show')}

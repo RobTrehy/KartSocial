@@ -15,7 +15,7 @@ export default function PrivacyPolicy({ policy }: Props) {
         <div className="pt-4 bg-gray-100 dark:bg-gray-900">
           <div className="min-h-screen flex flex-col items-center pt-6 sm:pt-0">
             <div>
-              <TextLogo />
+              <TextLogo classes="text-5xl text-brand-600" secondaryClasses="text-brand-500" />
             </div>
 
             <div
