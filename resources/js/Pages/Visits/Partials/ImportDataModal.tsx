@@ -58,7 +58,7 @@ export default function ImportDataModal({ open, setOpen }: any) {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-3xl">
+              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all w-full max-w-full md:my-8 md:w-full md:max-w-3xl">
                 <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
                     <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
@@ -75,7 +75,7 @@ export default function ImportDataModal({ open, setOpen }: any) {
                               htmlFor=""
                               value="Select the type of data you wish to import"
                             />
-                            <ul className="mt-1 grid w-full gap-6 md:grid-cols-2">
+                            <ul className="mt-1 grid w-full gap-6 sm:grid-cols-2">
                               <li>
                                 <input
                                   type="radio"
@@ -168,7 +168,7 @@ export default function ImportDataModal({ open, setOpen }: any) {
                   {processing && (
                     <div className="mr-auto italic">Processing Images...</div>
                   )}
-                  {!processing && importLaps.length !== 0 && (
+                  {!processing && importLaps?.length !== 0 && (
                     <div className="mr-auto italic">
                       {importLaps.length} laps detected
                     </div>
