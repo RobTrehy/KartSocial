@@ -1,8 +1,13 @@
 import { FormatLapDiff } from '@/Helpers/FormatLapDiff';
 import { FormatLapTime } from '@/Helpers/FormatLapTime';
+import { TrackVisitSession, TrackVisitSessionLap } from '@/types';
 import React from 'react';
 
-export default function SessionLapsTable({ session }: any) {
+interface Props {
+  session: TrackVisitSession;
+}
+
+export default function SessionLapsTable({ session }: Props) {
   return (
     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 border-t dark:border-gray-700">
       <thead>
@@ -28,15 +33,14 @@ export default function SessionLapsTable({ session }: any) {
         </tr>
       </thead>
       <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-        {session.laps.map((lap: any, i: number) => {
+        {session.laps.map((lap: TrackVisitSessionLap, i: number) => {
           return (
             <tr
               key={i}
-              className={`${
-                lap.lap_number === session.fastestLap?.lap_number
+              className={`${lap.lap_number === session.fastestLap?.lap_number
                   ? 'bg-yellow-50 hover:bg-yellow-100 dark:bg-yellow-800 dark:hover:bg-yellow-900 font-bold'
                   : 'hover:bg-gray-50 dark:hover:bg-gray-900'
-              }`}
+                }`}
             >
               <td className="px-6 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                 {lap.lap_number}

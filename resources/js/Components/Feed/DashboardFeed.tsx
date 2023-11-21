@@ -21,7 +21,6 @@ export default function DashboardFeed({ feed }: Props) {
   const [groupedFeed, setGroupedFeed] = useState<Array<GroupFeedItem> | null>(
     null,
   );
-  let shown: Array<number> = [];
 
   useEffect(() => {
     if (feed && !groupedFeed) {
@@ -40,13 +39,13 @@ export default function DashboardFeed({ feed }: Props) {
 
   return groupedFeed
     ? feed.map((item: FeedItem, i: number) => {
-        // @ts-ignore
-        let C = Cards[item.card_type];
-        if (C !== undefined) {
-          return <C {...item} key={i} />;
-        } else {
-          return <p key={i}>Card `{item.card_type}` not found! </p>;
-        }
-      })
+      // @ts-ignore
+      let C = Cards[item.card_type];
+      if (C !== undefined) {
+        return <C {...item} key={i} />;
+      } else {
+        return <p key={i}>Card `{item.card_type}` not found! </p>;
+      }
+    })
     : null;
 }
