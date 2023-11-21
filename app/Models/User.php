@@ -7,6 +7,7 @@ use App\Traits\User\HasExportableData;
 use App\Traits\User\HasFollowing;
 use App\Traits\User\HasLaps;
 use App\Traits\User\HasTrackData;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -22,7 +23,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\PermissionRegistrar;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements \Spatie\PersonalDataExport\ExportsPersonalData
+class User extends Authenticatable implements \Spatie\PersonalDataExport\ExportsPersonalData, MustVerifyEmail
 {
     use CausesActivity;
     use HasApiTokens;
@@ -130,11 +131,11 @@ class User extends Authenticatable implements \Spatie\PersonalDataExport\Exports
             app(PermissionRegistrar::class)->pivotRole
         )->withPivot(['cost', 'expires_at'])->withTimestamps();
 
-        if (! app(PermissionRegistrar::class)->teams) {
+        if (!app(PermissionRegistrar::class)->teams) {
             return $relation;
         }
 
-        $teamField = config('permission.table_names.roles').'.'.app(PermissionRegistrar::class)->teamsKey;
+        $teamField = config('permission.table_names.roles') . '.' . app(PermissionRegistrar::class)->teamsKey;
 
         return $relation->wherePivot(app(PermissionRegistrar::class)->teamsKey, getPermissionsTeamId())
             ->where(fn ($q) => $q->whereNull($teamField)->orWhere($teamField, getPermissionsTeamId()));
