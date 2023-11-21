@@ -47,7 +47,7 @@ export default function CreateTrackLayoutForm({ track }: any) {
       )}
     >
       {/* <!-- Track Name --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="track_name" value="Track Name" />
         <div className="border border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 px-3 py-2 rounded-md shadow-sm mt-1 block w-full cursor-not-allowed">
           {track.name}
@@ -55,7 +55,7 @@ export default function CreateTrackLayoutForm({ track }: any) {
       </div>
 
       {/* <!-- Layout Name --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="name" value="Layout Name" />
         <TextInput
           id="name"
@@ -68,7 +68,7 @@ export default function CreateTrackLayoutForm({ track }: any) {
       </div>
 
       {/* <!-- Length --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="length" value="Length (M)" />
         <TextInput
           id="length"

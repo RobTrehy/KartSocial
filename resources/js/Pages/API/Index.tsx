@@ -1,7 +1,7 @@
-import React from 'react';
-import APITokenManager from '@/Pages/API/Partials/APITokenManager';
 import AppLayout from '@/Layouts/AppLayout';
+import APITokenManager from '@/Pages/API/Partials/APITokenManager';
 import { ApiToken } from '@/types';
+import React from 'react';
 
 interface Props {
   tokens: ApiToken[];
@@ -24,7 +24,7 @@ export default function ApiTokenIndex({
       )}
     >
       <div>
-        <div className="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto py-10 md:px-6 lg:px-8">
           <APITokenManager
             tokens={tokens}
             availablePermissions={availablePermissions}

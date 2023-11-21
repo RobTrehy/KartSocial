@@ -14,7 +14,7 @@ export default function AdminPlanForm({ user }: Props) {
       description={`The features this user has signed up for.`}
     >
       <div className="grid grid-cols-6 gap-6">
-        <div className="flex flex-col gap-y-2 col-span-6 sm:col-span-4">
+        <div className="flex flex-col gap-y-2 col-span-6 md:col-span-4">
           {user.roles?.map((role: Role, i: number) => {
             return (
               <div

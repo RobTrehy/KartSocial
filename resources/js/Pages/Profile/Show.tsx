@@ -31,7 +31,7 @@ export default function Show({
       )}
     >
       <div>
-        <div className="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto py-10 md:px-6 lg:px-8">
           {page.props.jetstream.canUpdateProfileInformation ? (
             <div>
               <UpdateProfileInformationForm user={page.props.auth.user!} />
@@ -41,7 +41,7 @@ export default function Show({
           ) : null}
 
           {page.props.jetstream.canUpdatePassword ? (
-            <div className="mt-10 sm:mt-0">
+            <div className="mt-10 md:mt-0">
               <UpdatePasswordForm />
 
               <SectionBorder />
@@ -49,7 +49,7 @@ export default function Show({
           ) : null}
 
           {page.props.jetstream.canManageTwoFactorAuthentication ? (
-            <div className="mt-10 sm:mt-0">
+            <div className="mt-10 md:mt-0">
               <TwoFactorAuthenticationForm
                 requiresConfirmation={confirmsTwoFactorAuthentication}
               />
@@ -58,13 +58,13 @@ export default function Show({
             </div>
           ) : null}
 
-          <div className="mt-10 sm:mt-0">
+          <div className="mt-10 md:mt-0">
             <LogoutOtherBrowserSessions sessions={sessions} />
           </div>
 
           <SectionBorder />
 
-          <div className="mt-10 sm:mt-0">
+          <div className="mt-10 md:mt-0">
             <DownloadPersonalDataForm />
           </div>
 
@@ -72,7 +72,7 @@ export default function Show({
             <>
               <SectionBorder />
 
-              <div className="mt-10 sm:mt-0">
+              <div className="mt-10 md:mt-0">
                 <DeleteUserForm />
               </div>
             </>

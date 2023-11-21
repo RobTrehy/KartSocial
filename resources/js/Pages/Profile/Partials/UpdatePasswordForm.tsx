@@ -60,7 +60,7 @@ export default function UpdatePasswordForm() {
         </>
       )}
     >
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="current_password">Current Password</InputLabel>
         <TextInput
           id="current_password"
@@ -76,7 +76,7 @@ export default function UpdatePasswordForm() {
         <InputError message={form.errors.current_password} className="mt-2" />
       </div>
 
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="password">New Password</InputLabel>
         <TextInput
           id="password"
@@ -90,7 +90,7 @@ export default function UpdatePasswordForm() {
         <InputError message={form.errors.password} className="mt-2" />
       </div>
 
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="password_confirmation">
           Confirm Password
         </InputLabel>

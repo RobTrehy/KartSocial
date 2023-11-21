@@ -1,8 +1,7 @@
-import { Link } from '@inertiajs/react';
-import React from 'react';
 import useRoute from '@/Hooks/useRoute';
 import useTypedPage from '@/Hooks/useTypedPage';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
+import React from 'react';
 
 interface Props {
   canLogin: boolean;
@@ -24,9 +23,9 @@ export default function Welcome({
     <>
       <Head title="Welcome" />
 
-      <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+      <div className="relative md:flex md:justify-center md:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
         {canLogin ? (
-          <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
+          <div className="md:fixed md:top-0 md:right-0 p-6 text-right">
             {page.props.auth.user ? (
               <Link
                 href={route('dashboard')}
@@ -75,7 +74,7 @@ export default function Welcome({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
               <a
                 href="https://laravel.com/docs"
-                className="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500"
+                className="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-md shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500"
               >
                 <div>
                   <div className="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
@@ -123,7 +122,7 @@ export default function Welcome({
 
               <a
                 href="https://laracasts.com"
-                className="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500"
+                className="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-md shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500"
               >
                 <div>
                   <div className="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
@@ -170,7 +169,7 @@ export default function Welcome({
 
               <a
                 href="https://laravel-news.com"
-                className="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500"
+                className="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-md shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500"
               >
                 <div>
                   <div className="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
@@ -216,7 +215,7 @@ export default function Welcome({
                 </svg>
               </a>
 
-              <div className="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
+              <div className="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-md shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
                 <div>
                   <div className="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
                     <svg
@@ -318,8 +317,8 @@ export default function Welcome({
             </div>
           </div>
 
-          <div className="flex justify-center mt-16 px-6 sm:items-center sm:justify-between">
-            <div className="text-center text-sm text-gray-500 dark:text-gray-400 sm:text-left">
+          <div className="flex justify-center mt-16 px-6 md:items-center md:justify-between">
+            <div className="text-center text-sm text-gray-500 dark:text-gray-400 md:text-left">
               <div className="flex items-center gap-4">
                 <a
                   href="https://github.com/sponsors/taylorotwell"
@@ -343,7 +342,7 @@ export default function Welcome({
               </div>
             </div>
 
-            <div className="ml-4 text-center text-sm text-gray-500 dark:text-gray-400 sm:text-right sm:ml-0">
+            <div className="ml-4 text-center text-sm text-gray-500 dark:text-gray-400 md:text-right md:ml-0">
               Laravel v{laravelVersion} (PHP v{phpVersion})
             </div>
           </div>

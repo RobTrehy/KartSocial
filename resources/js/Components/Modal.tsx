@@ -16,11 +16,11 @@ export default function Modal({
   children,
 }: PropsWithChildren<ModalProps>) {
   const maxWidthClass = {
-    sm: 'sm:max-w-sm',
-    md: 'sm:max-w-md',
-    lg: 'sm:max-w-lg',
-    xl: 'sm:max-w-xl',
-    '2xl': 'sm:max-w-2xl',
+    sm: 'md:max-w-sm',
+    md: 'md:max-w-md',
+    lg: 'md:max-w-lg',
+    xl: 'md:max-w-xl',
+    '2xl': 'md:max-w-2xl',
   }[maxWidth];
 
   if (typeof window === 'undefined') {
@@ -36,7 +36,7 @@ export default function Modal({
         open={isOpen}
         onClose={onClose}
       >
-        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center md:block md:p-0">
           <Transition.Child
             as={React.Fragment}
             enter="ease-out duration-300"
@@ -51,7 +51,7 @@ export default function Modal({
 
           {/* This element is to trick the browser into centering the modal contents. */}
           <span
-            className="hidden sm:inline-block sm:align-middle sm:h-screen"
+            className="hidden md:inline-block md:align-middle md:h-screen"
             aria-hidden="true"
           >
             &#8203;
@@ -59,15 +59,15 @@ export default function Modal({
           <Transition.Child
             as={React.Fragment}
             enter="ease-out duration-300"
-            enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            enterTo="opacity-100 translate-y-0 sm:scale-100"
+            enterFrom="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
+            enterTo="opacity-100 translate-y-0 md:scale-100"
             leave="ease-in duration-200"
-            leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-            leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            leaveFrom="opacity-100 translate-y-0 md:scale-100"
+            leaveTo="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
           >
             <div
               className={classNames(
-                'inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full',
+                'inline-block align-bottom bg-white dark:bg-gray-800 rounded-md text-left overflow-hidden shadow-xl transform transition-all md:my-8 md:align-middle md:w-full',
                 maxWidthClass,
               )}
             >

@@ -15,7 +15,7 @@ export default function Index(props: any) {
     <AppLayout
       title="Tracks"
       renderHeader={() => (
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-y-2">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-y-2">
           <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             Tracks
           </h2>
@@ -36,7 +36,7 @@ export default function Index(props: any) {
     >
       {list ? (
         <div className="py-4 md:py-12">
-          <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto md:px-6 lg:px-8">
             <TrackList {...props} />
 
             {props.auth.permissions?.includes('tracks.create') && (

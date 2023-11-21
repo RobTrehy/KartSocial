@@ -15,7 +15,7 @@ export default function Show({ user }: any) {
     <AppLayout
       title="User Activity - Admin"
       renderHeader={() => (
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-y-2">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-y-2">
           <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {user.alias} - User Acitvity
           </h2>
@@ -41,8 +41,8 @@ export default function Show({ user }: any) {
       )}
     >
       <div className="py-4 md:py-12">
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div className="overflow-hidden sm:rounded-lg">
+        <div className="max-w-7xl mx-auto md:px-6 lg:px-8">
+          <div className="overflow-hidden md:rounded-md">
             <ul
               role="list"
               className="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700 border-x border-gray-200 dark:border-gray-700 rounded-t-md"

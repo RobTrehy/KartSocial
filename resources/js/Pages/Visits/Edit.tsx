@@ -15,12 +15,12 @@ export default function Edit(props: any) {
       )}
     >
       <div className="py-4 md:py-12">
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto md:px-6 lg:px-8">
           <EditTrackVisitForm {...props} />
 
           <SectionBorder />
 
-          <div className="mt-10 sm:mt-0">
+          <div className="mt-10 md:mt-0">
             <DeleteVisitForm id={props.visit.id} />
           </div>
         </div>

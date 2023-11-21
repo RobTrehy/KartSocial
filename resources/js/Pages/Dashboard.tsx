@@ -13,8 +13,8 @@ export default function Dashboard() {
       )}
     >
       <div className="py-4 md:py-12">
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
+        <div className="max-w-7xl mx-auto md:px-6 lg:px-8">
+          <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-xl md:rounded-md">
             <Welcome />
           </div>
         </div>

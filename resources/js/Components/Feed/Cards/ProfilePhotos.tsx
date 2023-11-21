@@ -29,7 +29,7 @@ export default function ProfilePhotos({
       >
         <div className="bg-black opacity-50 absolute inset-0"></div>
 
-        <div className="relative flex items-center h-full max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div className="relative flex items-center h-full max-w-7xl mx-auto md:px-6 lg:px-8">
           <div className="h-40 w-40 p-1 rounded-md backdrop-blur-sm bg-white/30">
             <img
               className="h-full w-full rounded-md object-cover"

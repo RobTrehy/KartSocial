@@ -124,7 +124,7 @@ export function Marker(props: MarkerProps): JSX.Element {
             </g>
           </svg>
           {hover ? (
-            <div className="bg-black/70 text-white rounded-lg p-1">
+            <div className="bg-black/70 text-white rounded-md p-1">
               {props.text}
             </div>
           ) : null}

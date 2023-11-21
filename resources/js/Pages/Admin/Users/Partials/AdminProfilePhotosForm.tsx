@@ -35,7 +35,7 @@ export default function AdminProfilePhotosForm({ user }: Props) {
       <div className="grid grid-cols-6 gap-6">
         {/* <!-- Profile Photo --> */}
         {page.props.jetstream.managesProfilePhotos ? (
-          <div className="col-span-6 sm:col-span-4">
+          <div className="col-span-6 md:col-span-4">
             <InputLabel htmlFor="photo" value="Photo" />
 
             {/* <!-- Current Profile Photo --> */}
@@ -61,7 +61,7 @@ export default function AdminProfilePhotosForm({ user }: Props) {
 
         {/* <!-- Cover Photo --> */}
         {page.props.jetstream.managesProfilePhotos ? (
-          <div className="col-span-6 sm:col-span-4">
+          <div className="col-span-6 md:col-span-4">
             <InputLabel htmlFor="cover" value="Cover Image" />
 
             {/* <!-- Current Cover Photo --> */}

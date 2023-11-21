@@ -216,7 +216,7 @@ export default function TwoFactorAuthenticationForm({
                 </p>
               </div>
 
-              <div className="grid gap-1 max-w-xl mt-4 px-4 py-4 font-mono text-sm bg-gray-100 dark:bg-gray-900 rounded-lg">
+              <div className="grid gap-1 max-w-xl mt-4 px-4 py-4 font-mono text-sm bg-gray-100 dark:bg-gray-900 rounded-md">
                 {recoveryCodes.map(code => (
                   <div key={code}>{code}</div>
                 ))}

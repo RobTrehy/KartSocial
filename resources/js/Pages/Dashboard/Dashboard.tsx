@@ -14,7 +14,7 @@ export default function Dashboard({ feed, suggestions, tracks }: any) {
   return (
     <AppLayout title="Dashboard">
       <div className="py-6">
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-row gap-x-6">
+        <div className="max-w-7xl mx-auto md:px-6 lg:px-8 flex flex-row gap-x-6">
           {feed.length === 0 ? (
             <Welcome />
           ) : (

@@ -95,7 +95,7 @@ export default function SessionAccordion({ visit, profile }: Props) {
                 </div>
               )}
               {visit.user_id === auth.user?.id && !profile && (
-                <div className="flex flex-col sm:flex-row w-full md:w-auto md:ml-auto">
+                <div className="flex flex-col md:flex-row w-full md:w-auto md:ml-auto">
                   <Link
                     href={route('visits.sessions.edit', {
                       visit: session.track_visit_id,

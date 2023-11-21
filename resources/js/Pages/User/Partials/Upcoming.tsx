@@ -6,7 +6,7 @@ export default function Upcoming({ user }: any) {
 
   return (
     <ul className="flex flex-col text-gray-800 dark:text-white">
-      <li className="items-center gap-x-2 py-3 px-4 text-center font-semibold bg-white border -mt-px md:first:rounded-t-lg first:mt-0 md:last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700">
+      <li className="items-center gap-x-2 py-3 px-4 text-center font-semibold bg-white border -mt-px md:first:rounded-t-md first:mt-0 md:last:rounded-b-md dark:bg-gray-800 dark:border-gray-700">
         Upcoming Track Visits
       </li>
       {user.track_visits.map((visit: any, i: number) => {
@@ -15,7 +15,7 @@ export default function Upcoming({ user }: any) {
           return (
             <li
               key={i}
-              className="items-center gap-x-2 py-3 px-4 bg-white border -mt-px md:first:rounded-t-lg first:mt-0 md:last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700 "
+              className="items-center gap-x-2 py-3 px-4 bg-white border -mt-px md:first:rounded-t-md first:mt-0 md:last:rounded-b-md dark:bg-gray-800 dark:border-gray-700 "
             >
               <span className="font-semibold">{visit.title}</span>{' '}
               {moment(visit.visit_date).fromNow()} at{' '}
@@ -29,7 +29,7 @@ export default function Upcoming({ user }: any) {
         }
       })}
       {upCount === 0 && (
-        <li className="items-center gap-x-2 py-3 px-4 text-sm bg-white border -mt-px md:first:rounded-t-lg first:mt-0 md:last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700">
+        <li className="items-center gap-x-2 py-3 px-4 text-sm bg-white border -mt-px md:first:rounded-t-md first:mt-0 md:last:rounded-b-md dark:bg-gray-800 dark:border-gray-700">
           Nothing Recorded!
         </li>
       )}

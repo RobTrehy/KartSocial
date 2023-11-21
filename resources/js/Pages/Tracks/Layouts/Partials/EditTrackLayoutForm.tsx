@@ -49,7 +49,7 @@ export default function EditTrackLayoutForm({ track, layout }: any) {
       )}
     >
       {/* <!-- Layout Name --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="name" value="Layout Name" />
         <TextInput
           id="name"
@@ -63,7 +63,7 @@ export default function EditTrackLayoutForm({ track, layout }: any) {
       </div>
 
       {/* <!-- Layout Length --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="length" value="Length (M)" />
         <TextInput
           id="length"

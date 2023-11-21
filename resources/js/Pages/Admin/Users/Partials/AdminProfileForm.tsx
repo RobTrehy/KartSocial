@@ -64,7 +64,7 @@ export default function AdminProfileForm({
       )}
     >
       {/* <!-- Name --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="name" value="Name" />
         <TextInput
           id="name"
@@ -77,7 +77,7 @@ export default function AdminProfileForm({
       </div>
 
       {/* <!-- Alias --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="alias" value="Display Name" />
         <TextInput
           id="alias"
@@ -92,7 +92,7 @@ export default function AdminProfileForm({
       </div>
 
       {/* <!-- Weight --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="weight" value="Weight (KG)" />
         <TextInput
           id="weight"
@@ -106,7 +106,7 @@ export default function AdminProfileForm({
       </div>
 
       {/* <!-- Home Track ID --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="home_track_id" value="Select your Home Track" />
         <SearchSelect
           value={track}

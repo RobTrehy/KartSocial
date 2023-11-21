@@ -73,7 +73,7 @@ export default function AdminRestrictionForm({ user }: Props) {
       )}
     >
       {/* <!-- Name --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="reason" value="Reason" />
         <TextInput
           id="reason"

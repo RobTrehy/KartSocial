@@ -48,20 +48,20 @@ export default function ImportDataModal({ open, setOpen }: any) {
         </Transition.Child>
 
         <div className="fixed inset-0 z-10 overflow-y-auto">
-          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+          <div className="flex min-h-full items-end justify-center p-4 text-center md:items-center md:p-0">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
-              enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-              enterTo="opacity-100 translate-y-0 sm:scale-100"
+              enterFrom="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
+              enterTo="opacity-100 translate-y-0 md:scale-100"
               leave="ease-in duration-200"
-              leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-              leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              leaveFrom="opacity-100 translate-y-0 md:scale-100"
+              leaveTo="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all w-full max-w-full md:my-8 md:w-full md:max-w-3xl">
-                <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                  <div className="sm:flex sm:items-start">
-                    <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+              <Dialog.Panel className="relative transform overflow-hidden rounded-md bg-white text-left shadow-xl transition-all w-full max-w-full md:my-8 md:w-full md:max-w-3xl">
+                <div className="bg-white px-4 pb-4 pt-5 md:p-6 md:pb-4">
+                  <div className="md:flex md:items-start">
+                    <div className="mt-3 text-center md:ml-4 md:mt-0 md:text-left">
                       <Dialog.Title
                         as="h3"
                         className="text-base font-semibold leading-6 text-gray-900"
@@ -75,7 +75,7 @@ export default function ImportDataModal({ open, setOpen }: any) {
                               htmlFor=""
                               value="Select the type of data you wish to import"
                             />
-                            <ul className="mt-1 grid w-full gap-6 sm:grid-cols-2">
+                            <ul className="mt-1 grid w-full gap-6 md:grid-cols-2">
                               <li>
                                 <input
                                   type="radio"
@@ -88,7 +88,7 @@ export default function ImportDataModal({ open, setOpen }: any) {
                                 />
                                 <label
                                   htmlFor="csv-data"
-                                  className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                                  className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-md cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
                                 >
                                   <div className="block">
                                     <div className="w-full text-lg font-semibold">
@@ -123,7 +123,7 @@ export default function ImportDataModal({ open, setOpen }: any) {
                                 />
                                 <label
                                   htmlFor="app-screens"
-                                  className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                                  className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-md cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
                                 >
                                   <div className="block">
                                     <div className="w-full text-lg font-semibold">
@@ -160,7 +160,7 @@ export default function ImportDataModal({ open, setOpen }: any) {
                     </div>
                   </div>
                 </div>
-                <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 sm:gap-x-1.5 items-center">
+                <div className="bg-gray-50 px-4 py-3 md:flex md:flex-row-reverse md:px-6 md:gap-x-1.5 items-center">
                   {importReady && (
                     <PrimaryButton onClick={complete}>Import</PrimaryButton>
                   )}

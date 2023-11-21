@@ -59,7 +59,7 @@ export default function EditTrackSessionForm(props: any) {
       )}
     >
       {/* <!-- Session Name --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="session_name" value="Session Name" />
         <TextInput
           id="session_name"
@@ -72,7 +72,7 @@ export default function EditTrackSessionForm(props: any) {
       </div>
 
       {/* <!-- Session Type --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="session_type" value="Session Type" />
         <select
           id="session_type"
@@ -93,7 +93,7 @@ export default function EditTrackSessionForm(props: any) {
       </div>
 
       {/* <!-- Session Length --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="session_length" value="Session Length" />
         <div className="relative mt-2 rounded-md shadow-sm">
           <TextInput
@@ -111,7 +111,7 @@ export default function EditTrackSessionForm(props: any) {
               id="session_length_type"
               name="session_length_type"
               title="Session Length Type"
-              className="h-full rounded-md border-0 bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-brand-600 sm:text-sm"
+              className="h-full rounded-md border-0 bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-brand-600 md:text-sm"
               value={form.data.session_length_type}
               onChange={e =>
                 form.setData('session_length_type', e.target.value)
@@ -130,7 +130,7 @@ export default function EditTrackSessionForm(props: any) {
       </div>
 
       {/* <!-- Session Position --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <div className="flex flex-row">
           <label
             className="w-1/2 font-medium text-sm text-gray-700 dark:text-gray-300"

@@ -18,7 +18,7 @@ export default function Show({ user, ...props }: any) {
     <AppLayout
       title="User - Admin"
       renderHeader={() => (
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-y-2">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-y-2">
           <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             Administrate User
           </h2>
@@ -45,10 +45,10 @@ export default function Show({ user, ...props }: any) {
     >
       {user.ban && (
         <div className="bg-red-700">
-          <div className="max-w-screen-xl mx-auto py-2 px-3 sm:px-6 lg:px-8">
+          <div className="max-w-screen-xl mx-auto py-2 px-3 md:px-6 lg:px-8">
             <div className="flex items-center justify-between flex-wrap">
               <div className="w-0 flex-1 flex items-center min-w-0">
-                <span className="flex p-2 rounded-lg bg-red-600">
+                <span className="flex p-2 rounded-md bg-red-600">
                   <svg
                     className="h-5 w-5 text-white"
                     xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +70,7 @@ export default function Show({ user, ...props }: any) {
                 </p>
               </div>
 
-              <div className="flex-shrink-0 sm:ml-3">
+              <div className="flex-shrink-0 md:ml-3">
                 <SecondaryButton
                   onClick={() =>
                     router.visit(
@@ -88,7 +88,7 @@ export default function Show({ user, ...props }: any) {
         </div>
       )}
       <div className="py-4 md:py-12">
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto md:px-6 lg:px-8">
           {page.props.jetstream.managesProfilePhotos ? (
             <>
               <AdminProfilePhotosForm user={user} />
@@ -97,18 +97,18 @@ export default function Show({ user, ...props }: any) {
             </>
           ) : null}
 
-          <div className="mt-10 sm:mt-0">
+          <div className="mt-10 md:mt-0">
             <AdminProfileForm user={user} {...props} />
           </div>
 
           <SectionBorder />
 
-          <div className="mt-10 sm:mt-0">
+          <div className="mt-10 md:mt-0">
             <AdminPlanForm user={user} />
           </div>
 
           {!user.ban && (
-            <div className="mt-10 sm:mt-0">
+            <div className="mt-10 md:mt-0">
               <SectionBorder />
               <AdminRestrictionForm user={user} />
             </div>

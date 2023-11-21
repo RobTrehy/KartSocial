@@ -8,7 +8,7 @@ interface Props {
 export default function SectionTitle({ title, description }: Props) {
   return (
     <div className="md:col-span-1">
-      <div className="px-4 sm:px-0">
+      <div className="px-4 md:px-0">
         <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
           {title}
         </h3>

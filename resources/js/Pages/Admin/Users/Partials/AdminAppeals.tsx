@@ -105,7 +105,7 @@ export default function AdminAppeals({ ban }: any) {
   };
 
   return (
-    <div className="last:rounded-b-lg border dark:border-gray-700 w-full overflow-hidden divide-y dark:divide-gray-700">
+    <div className="last:rounded-b-md border dark:border-gray-700 w-full overflow-hidden divide-y dark:divide-gray-700">
       {ban.appeals.map((appeal: any, i: number) => (
         <div
           className={classNames(

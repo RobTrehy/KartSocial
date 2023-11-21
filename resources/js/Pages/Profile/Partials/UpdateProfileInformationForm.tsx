@@ -53,7 +53,7 @@ export default function UpdateProfileInformationForm({ user }: Props) {
       )}
     >
       {/* <!-- Name --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="name" value="Name" />
         <TextInput
           id="name"
@@ -67,7 +67,7 @@ export default function UpdateProfileInformationForm({ user }: Props) {
       </div>
 
       {/* <!-- Email --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="email" value="Email" />
         <TextInput
           id="email"

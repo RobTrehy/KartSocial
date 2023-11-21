@@ -109,7 +109,7 @@ export default function CreateTrackVisitForm(props: Props) {
       )}
     >
       {/* <!-- Date and Time --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="visit_date" value="Date and Time" />
         <TextInput
           id="visit_date"
@@ -122,7 +122,7 @@ export default function CreateTrackVisitForm(props: Props) {
       </div>
 
       {/* <!-- Track ID --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="track_id" value="Select the Track" />
         <SearchSelect
           value={track}
@@ -142,7 +142,7 @@ export default function CreateTrackVisitForm(props: Props) {
       </div>
 
       {/* <!-- Track Layout ID --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="track_layout_id" value="Select the Track Layout" />
         <SearchSelect
           value={layout}
@@ -158,7 +158,7 @@ export default function CreateTrackVisitForm(props: Props) {
       </div>
 
       {/* <!-- Title --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="title" value="Visit Title" />
         <TextInput
           id="title"
@@ -171,7 +171,7 @@ export default function CreateTrackVisitForm(props: Props) {
       </div>
 
       {/* <!-- Notes --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="notes" value="Visit Notes" />
         <TextareaInput
           id="notes"

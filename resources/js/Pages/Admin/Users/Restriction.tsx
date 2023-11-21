@@ -14,7 +14,7 @@ export default function Restriction({ user }: any) {
     <AppLayout
       title="User Restriction - Admin"
       renderHeader={() => (
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-y-2">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-y-2">
           <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {user.alias} - User Restriction
           </h2>
@@ -47,7 +47,7 @@ export default function Restriction({ user }: any) {
       )}
     >
       <div className="py-4 md:py-12">
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-col gap-y-2">
+        <div className="max-w-7xl mx-auto md:px-6 lg:px-8 flex flex-col gap-y-2">
           <p>
             The account was restricted by {user.ban.banner.alias} on{' '}
             {moment(user.ban.created_at).format('Do MMMM YYYY [at] HH:mm')}
@@ -62,7 +62,7 @@ export default function Restriction({ user }: any) {
           )}
 
           <div>
-            <div className="flex flex-col text-gray-800 dark:text-white bg-white border-t border-x rounded-t-lg px-4 md:px-5 pt-4 md:pt-5 dark:bg-gray-800 dark:border-gray-700 w-full">
+            <div className="flex flex-col text-gray-800 dark:text-white bg-white border-t border-x rounded-t-md px-4 md:px-5 pt-4 md:pt-5 dark:bg-gray-800 dark:border-gray-700 w-full">
               <FeedHeader
                 user={user.ban.banner}
                 description={<>provided the following reason</>}

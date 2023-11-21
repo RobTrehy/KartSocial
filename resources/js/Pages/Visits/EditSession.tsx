@@ -21,7 +21,7 @@ export default function EditSession({ visit, session, ...props }: any) {
       )}
     >
       <div className="py-4 md:py-12">
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto md:px-6 lg:px-8">
           <EditTrackSessionForm
             track_visit_id={visit.id}
             order={visit.sessions.length}
@@ -30,7 +30,7 @@ export default function EditSession({ visit, session, ...props }: any) {
 
           <SectionBorder />
 
-          <div className="mt-10 sm:mt-0">
+          <div className="mt-10 md:mt-0">
             <DeleteSessionForm visit={visit.id} session={session.id} />
           </div>
         </div>

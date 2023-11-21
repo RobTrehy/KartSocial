@@ -51,7 +51,7 @@ export default function InviteUserForm({ invited }: Props) {
         </>
       )}
     >
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel
           htmlFor="email"
           value={`We currently allow each user to send a maximum of ${page.props.max_invites} invites.`}
@@ -76,7 +76,7 @@ export default function InviteUserForm({ invited }: Props) {
 
       {/* <!-- Email --> */}
       {page.props.auth.user && (page.props.auth.user.invited_count < page.props.max_invites) && (
-        <div className="col-span-6 sm:col-span-4">
+        <div className="col-span-6 md:col-span-4">
           <InputLabel htmlFor="email" value="Email Address to invite" />
           <TextInput
             id="email"
@@ -90,7 +90,7 @@ export default function InviteUserForm({ invited }: Props) {
       )}
 
       {page.props.auth.user && (page.props.auth.user.invited_count == page.props.max_invites) && (
-        <div className="col-span-6 sm:col-span-4">
+        <div className="col-span-6 md:col-span-4">
           <InputLabel
             htmlFor="email"
             value="You have used all your invites! Please check back later."
@@ -99,7 +99,7 @@ export default function InviteUserForm({ invited }: Props) {
       )}
 
       {page.props.auth.user && (page.props.auth.user.invited_count > 0) && (
-        <div className="col-span-6 sm:col-span-4">
+        <div className="col-span-6 md:col-span-4">
           <InputLabel htmlFor="email" value="You have previously invited:" />
           <ul className="list-disc mx-8 text-sm">
             {invited.map((invite: any, i: number) => {

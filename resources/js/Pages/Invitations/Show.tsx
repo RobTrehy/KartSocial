@@ -17,7 +17,7 @@ export default function Show({ invited }: Props) {
       )}
     >
       <div>
-        <div className="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto py-10 md:px-6 lg:px-8">
           <InviteUserForm invited={invited} />
         </div>
       </div>

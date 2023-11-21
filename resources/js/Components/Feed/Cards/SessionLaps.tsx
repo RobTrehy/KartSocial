@@ -25,7 +25,7 @@ export default function SessionLaps({
         </div>
 
         <div className={reveal ? 'relative' : 'h-28 overflow-hidden relative'}>
-          <div className="flex flex-col sm:flex-row items-center divide-y md:divide-y-0 md:divide-x border-t text-xs font-medium text-gray-500 dark:text-gray-500 dark:border-gray-700 dark:divide-gray-700">
+          <div className="flex flex-col md:flex-row items-center divide-y md:divide-y-0 md:divide-x border-t text-xs font-medium text-gray-500 dark:text-gray-500 dark:border-gray-700 dark:divide-gray-700">
             <div className="px-5 py-0.5 w-full md:w-auto text-center">
               Session Length: {subject.session_length}{' '}
               {subject.session_length_type}

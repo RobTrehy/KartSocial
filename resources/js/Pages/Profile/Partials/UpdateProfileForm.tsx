@@ -60,7 +60,7 @@ export default function UpdateProfileForm({
       )}
     >
       {/* <!-- Alias --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="alias" value="Display Name" />
         <TextInput
           id="alias"
@@ -75,7 +75,7 @@ export default function UpdateProfileForm({
       </div>
 
       {/* <!-- Bio --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="bio" value="Bio" />
         <div className="relative">
           <TextareaInput
@@ -94,7 +94,7 @@ export default function UpdateProfileForm({
       </div>
 
       {/* <!-- Weight --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="weight" value="Weight (KG)" />
         <TextInput
           id="weight"
@@ -108,7 +108,7 @@ export default function UpdateProfileForm({
       </div>
 
       {/* <!-- Home Track ID --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="home_track_id" value="Select your Home Track" />
         <SearchSelect
           value={track}

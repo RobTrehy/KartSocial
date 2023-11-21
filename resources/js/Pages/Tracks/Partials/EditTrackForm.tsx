@@ -54,7 +54,7 @@ export default function EditTrackForm({ track }: any) {
       )}
     >
       {/* <!-- Track Name --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="name" value="Track Name" />
         <TextInput
           id="name"
@@ -68,7 +68,7 @@ export default function EditTrackForm({ track }: any) {
       </div>
 
       {/* <!-- Address 1 --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="address_1" value="Address Line 1" />
         <TextInput
           id="address_1"
@@ -81,7 +81,7 @@ export default function EditTrackForm({ track }: any) {
       </div>
 
       {/* <!-- Address 2 --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="address_2" value="Address Line 2" />
         <TextInput
           id="address_2"
@@ -94,7 +94,7 @@ export default function EditTrackForm({ track }: any) {
       </div>
 
       {/* <!-- Address 3 --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="address_3" value="Address Line 3" />
         <TextInput
           id="address_3"
@@ -107,7 +107,7 @@ export default function EditTrackForm({ track }: any) {
       </div>
 
       {/* <!-- Town --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="town" value="Town" />
         <TextInput
           id="town"
@@ -120,7 +120,7 @@ export default function EditTrackForm({ track }: any) {
       </div>
 
       {/* <!-- County --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="county" value="County" />
         <TextInput
           id="county"
@@ -133,7 +133,7 @@ export default function EditTrackForm({ track }: any) {
       </div>
 
       {/* <!-- Post Code --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="postal_code" value="Post Code" />
         <TextInput
           id="postal_code"
@@ -146,7 +146,7 @@ export default function EditTrackForm({ track }: any) {
       </div>
 
       {/* <!-- Track Type --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="type" value="Track Type" />
         <Select
           id="type"
@@ -161,7 +161,7 @@ export default function EditTrackForm({ track }: any) {
       </div>
 
       {/* <!-- URL --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="url" value="Website" />
         <TextInput
           id="url"
@@ -174,7 +174,7 @@ export default function EditTrackForm({ track }: any) {
       </div>
 
       {/* <!-- Number --> */}
-      <div className="col-span-6 sm:col-span-4">
+      <div className="col-span-6 md:col-span-4">
         <InputLabel htmlFor="number" value="Phone Number" />
         <TextInput
           id="number"

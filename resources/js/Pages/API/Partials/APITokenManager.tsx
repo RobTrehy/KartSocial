@@ -122,7 +122,7 @@ export default function APITokenManager({
         )}
       >
         {/* <!-- Token Name --> */}
-        <div className="col-span-6 sm:col-span-4">
+        <div className="col-span-6 md:col-span-4">
           <InputLabel htmlFor="name">Name</InputLabel>
           <TextInput
             id="name"
@@ -190,7 +190,7 @@ export default function APITokenManager({
           <SectionBorder />
 
           {/* <!-- Manage API Tokens --> */}
-          <div className="mt-10 sm:mt-0">
+          <div className="mt-10 md:mt-0">
             <ActionSection
               title={'Manage API Tokens'}
               description={

@@ -14,7 +14,7 @@ export default function Show({ user, following, item }: any) {
     <AppLayout title={user.alias}>
       <Header user={user} following={following} />
 
-      <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto md:px-6 lg:px-8">
         <div className="overflow-hidden pb-8">
           <div className="flex gap-x-6 ">
             <div className="w-96 flex flex-col gap-y-4">

@@ -5,7 +5,7 @@ import PaginationLinks from './PaginationLinks';
 export default function Pagination({ data }: any) {
   return (
     <div className="flex items-center justify-between">
-      <div className="flex flex-1 justify-between sm:hidden">
+      <div className="flex flex-1 justify-between md:hidden">
         <Link
           href={data.prev_page_url}
           className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
@@ -19,7 +19,7 @@ export default function Pagination({ data }: any) {
           Next
         </Link>
       </div>
-      <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+      <div className="hidden md:flex md:flex-1 md:items-center md:justify-between">
         <p className="text-xs text-gray-700 dark:text-gray-400 px-1">
           Showing <span className="font-medium">{data.from}</span> to{' '}
           <span className="font-medium">{data.to}</span> of{' '}

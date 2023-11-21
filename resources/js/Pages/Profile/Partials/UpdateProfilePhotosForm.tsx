@@ -271,7 +271,7 @@ export default function UpdateProfilePhotosForm({ user }: Props) {
     >
       {/* <!-- Profile Photo --> */}
       {page.props.jetstream.managesProfilePhotos ? (
-        <div className="col-span-6 sm:col-span-4">
+        <div className="col-span-6 md:col-span-4">
           {/* <!-- Profile Photo File Input --> */}
           <input
             type="file"
@@ -344,7 +344,7 @@ export default function UpdateProfilePhotosForm({ user }: Props) {
 
       {/* <!-- Cover Photo --> */}
       {page.props.jetstream.managesProfilePhotos ? (
-        <div className="col-span-6 sm:col-span-4">
+        <div className="col-span-6 md:col-span-4">
           {/* <!-- Cover Photo File Input --> */}
           <input
             type="file"

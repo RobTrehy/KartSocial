@@ -19,7 +19,7 @@ export default function UserPageLayout({
     <AppLayout title={user.alias}>
       <Header user={user} following={following} />
 
-      <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto md:px-6 lg:px-8">
         <div className="overflow-hidden pb-8">
           <div className="flex flex-col md:flex-row gap-x-6 gap-y-4">
             <div className="w-full md:w-96 px-0 flex flex-col gap-y-4">

@@ -23,7 +23,7 @@ export default function Edit(props: Props) {
       )}
     >
       <div>
-        <div className="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto py-10 md:px-6 lg:px-8">
           {page.props.jetstream.managesProfilePhotos ? (
             <div>
               <UpdateProfilePhotosForm user={page.props.auth.user!} />
@@ -32,7 +32,7 @@ export default function Edit(props: Props) {
             </div>
           ) : null}
 
-          <div className="mt-10 sm:mt-0">
+          <div className="mt-10 md:mt-0">
             <UpdateProfileForm user={page.props.auth.user!} {...props} />
           </div>
         </div>

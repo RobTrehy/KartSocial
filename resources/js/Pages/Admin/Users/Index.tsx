@@ -17,18 +17,18 @@ export default function Index({ users }: any) {
       )}
     >
       <div className="py-4 md:py-12">
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div className="overflow-hidden sm:rounded-lg">
+        <div className="max-w-7xl mx-auto md:px-6 lg:px-8">
+          <div className="overflow-hidden md:rounded-md">
             <ul
               role="list"
               className="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700 border-x border-gray-200 dark:border-gray-700 rounded-t-md"
             >
               <li>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 items-center gap-x-6 p-2 bg-gray-200 dark:bg-gray-700 rounded-t-md">
+                <div className="grid grid-cols-2 md:grid-cols-3 md:grid-cols-5 items-center gap-x-6 p-2 bg-gray-200 dark:bg-gray-700 rounded-t-md">
                   <p className="col-span-2 pl-14 text-xs font-medium text-left text-gray-500 dark:text-gray-400 uppercase">
                     Name
                   </p>
-                  <p className="hidden sm:block text-xs font-medium text-left text-gray-500 dark:text-gray-400 uppercase">
+                  <p className="hidden md:block text-xs font-medium text-left text-gray-500 dark:text-gray-400 uppercase">
                     Alias
                   </p>
                   <p className="hidden md:block text-xs font-medium text-left text-gray-500 dark:text-gray-400 uppercase">
@@ -43,7 +43,7 @@ export default function Index({ users }: any) {
                 <li key={person.email}>
                   <Link
                     href={route('admin:users.show', { user: person.id })}
-                    className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 items-center gap-x-6 p-2 hover:bg-gray-100 dark:hover:bg-gray-900"
+                    className="grid grid-cols-2 md:grid-cols-3 md:grid-cols-5 items-center gap-x-6 p-2 hover:bg-gray-100 dark:hover:bg-gray-900"
                   >
                     <div className="col-span-2 flex min-w-0 gap-x-4">
                       <img
@@ -65,7 +65,7 @@ export default function Index({ users }: any) {
                         </p>
                       </div>
                     </div>
-                    <p className="hidden sm:block text-sm leading-6 whitespace-nowrap text-gray-900 dark:text-white">
+                    <p className="hidden md:block text-sm leading-6 whitespace-nowrap text-gray-900 dark:text-white">
                       {person.alias}
                     </p>
                     <p className="hidden md:block text-sm leading-6 whitespace-nowrap text-gray-900 dark:text-white">
