@@ -15,11 +15,11 @@ export default function TrackVisitFeed({ feed, profile = false }: any) {
     <div className="flex flex-col gap-y-6">
       {feed.map((visit: any, i: number) => {
         return (
-          <div key={i} className="flex flex-row w-full">
-            <div className="flex flex-col text-center mx-4 w-32">
-              <div className="mx-auto h-20 w-20 p-2 mb-2 rounded-md bg-gray-200 dark:bg-gray-800">
+          <div key={i} className="flex flex-col md:flex-row w-full">
+            <div className="flex flex-row md:flex-col items-center text-center gap-x-2 mx-4 w-full md:w-32">
+              <div className="md:mx-auto h-10 md:h-20 w-10 md:w-20 p-0.5 md:p-2 mb-2 rounded-md bg-gray-200 dark:bg-gray-800">
                 <img
-                  className="h-16 w-16 rounded-md object-cover"
+                  className="rounded-md object-cover"
                   src={visit.driver.profile_photo_url}
                   alt={visit.driver.alias}
                 />

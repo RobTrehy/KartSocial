@@ -63,8 +63,8 @@ export default function TrackLayoutCard({ layout, track }: Props) {
       <div className="flex w-full md:w-1/2 p-10 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 items-center">
         <div className="flex flex-col w-full h-full">
           {layout.fastestLap && (
-            <div className="flex gap-x-2 w-full items-end mb-6">
-              <div className="flex flex-col">
+            <div className="flex flex-col md:flex-row gap-2 w-full items-center md:items-end mb-2 md:mb-6">
+              <div className="flex flex-col text-center md:text-left">
                 <p className="font-semibold">Layout Record</p>
                 <span className="block leading-none text-3xl text-gray-800 dark:text-gray-100">
                   {FormatLapTime(layout.fastestLap)}
@@ -86,7 +86,7 @@ export default function TrackLayoutCard({ layout, track }: Props) {
                 </p>
               </div>
               {layout.myFastest && (
-                <div className="flex flex-col text-right ml-6">
+                <div className="flex flex-col text-center md:text-right md:ml-6">
                   <p className="font-semibold">Personal Best</p>
                   <span className="block leading-none text-3xl text-gray-800 dark:text-gray-100">
                     {FormatLapTime(layout.myFastest)}
@@ -102,7 +102,7 @@ export default function TrackLayoutCard({ layout, track }: Props) {
               {layout.myFastest &&
                 layout.myFastest.lap_time === layout.fastestLap.lap_time && (
                   <div className="flex flex-col">
-                    <span className="block leading-5 text-sm ml-4 text-green-500">
+                    <span className="block leading-5 text-sm md:ml-4 text-green-500">
                       0.000
                     </span>
                     <p className="text-xs">&nbsp;</p>
@@ -111,7 +111,7 @@ export default function TrackLayoutCard({ layout, track }: Props) {
               {layout.myFastest &&
                 layout.myFastest.lap_time > layout.fastestLap.lap_time && (
                   <div className="flex flex-col">
-                    <span className="block leading-5 text-sm ml-4 text-red-500">
+                    <span className="block leading-5 text-sm md:ml-4 text-red-500">
                       {FormatLapDiff({
                         id: 0,
                         lap_time: 0,
@@ -127,26 +127,26 @@ export default function TrackLayoutCard({ layout, track }: Props) {
             </div>
           )}
           <div className="flex flex-col text-sm w-full">
-            <div className="flex gap-x-2 w-full items-center mb-2">
-              <div className="flex w-1/2">
-                <div className="pr-3 w-1/2 font-semibold">Total Laps</div>
+            <div className="flex flex-col md:flex-row gap-x-2 w-full items-center mb-2">
+              <div className="flex w-full md:w-1/2">
+                <div className="pr-3 w-1/2 font-semibold text-right md:text-left">Total Laps</div>
                 <div className="px-3 w-1/2">{layout.laps_count}</div>
               </div>
-              <div className="flex w-1/2">
-                <div className="pr-3 w-1/2 font-semibold">Your Laps</div>
+              <div className="flex w-full md:w-1/2">
+                <div className="pr-3 w-1/2 font-semibold text-right md:text-left">Your Laps</div>
                 <div className="px-3 w-1/2">{layout.my_laps_count}</div>
               </div>
             </div>
-            <div className="flex gap-x-2 w-full items-center">
+            <div className="flex flex-col md:flex-row gap-x-2 w-full items-center">
               {layout.length && (
-                <div className="flex w-1/2">
-                  <div className="pr-3 w-1/2 font-semibold">Layout Length</div>
+                <div className="flex w-full md:w-1/2">
+                  <div className="pr-3 w-1/2 font-semibold text-right md:text-left">Layout Length</div>
                   <div className="px-3 w-1/2">{layout.length}M</div>
                 </div>
               )}
               {layout.length && layout.my_laps_count > 0 && (
-                <div className="flex w-1/2">
-                  <div className="pr-3 w-1/2 font-semibold">You've Driven</div>
+                <div className="flex w-full md:w-1/2">
+                  <div className="pr-3 w-1/2 font-semibold text-right md:text-left">You've Driven</div>
                   <div className="px-3 w-1/2">
                     {(
                       (layout.length * layout.my_laps_count) /
@@ -158,7 +158,7 @@ export default function TrackLayoutCard({ layout, track }: Props) {
               )}
             </div>
           </div>
-          <div className="flex flex-row mt-auto text-xs gap-x-2 -m-8">
+          <div className="flex flex-row text-xs gap-x-2 -mb-8 mx-auto md:mt-auto md:-m-8">
             {permissions.includes('tracks.layouts.update') && (
               <button
                 onClick={() =>

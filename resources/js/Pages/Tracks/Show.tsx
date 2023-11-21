@@ -2,19 +2,25 @@ import TrackVisitFeed from '@/Components/Feed/TrackVisitFeed';
 import usePermissions from '@/Hooks/usePermissions';
 import useRoute from '@/Hooks/useRoute';
 import AppLayout from '@/Layouts/AppLayout';
+import { Track, TrackLayout } from '@/types';
 import { router } from '@inertiajs/react';
 import { Map, Marker } from 'pigeon-maps';
 import React, { useState } from 'react';
 import TrackLayoutCard from './Partials/TrackLayoutCard';
 
-export default function Index({ track, layouts }: any) {
+interface Props {
+  track: Track;
+  layouts: Array<TrackLayout>;
+}
+
+export default function Index({ track, layouts }: Props) {
   const permissions = usePermissions();
   const route = useRoute();
   const [layout, setLayout] = useState<number>(0);
 
   return (
     <AppLayout title={track.name}>
-      <div className="w-full aspect-[42/9] overflow-hidden bg-brand-700 relative mb-6 shadow-md">
+      <div className="w-full md:aspect-[42/9] overflow-hidden bg-brand-700 relative mb-6 shadow-md">
         {track.lat && track.lng && (
           <div className="absolute inset-0">
             <Map defaultCenter={[+track.lat, +track.lng]} defaultZoom={13}>
@@ -28,7 +34,7 @@ export default function Index({ track, layouts }: any) {
         )}
         <div className="bg-black opacity-60 absolute inset-0"></div>
 
-        <div className="relative flex justify-between items-end h-full max-w-7xl mx-auto sm:px-6 lg:px-8 pb-6">
+        <div className="relative flex flex-col md:flex-row justify-between items-end h-full max-w-7xl mt-6 md:mt-0 mx-auto px-4 md:px-6 lg:px-8 pb-6">
           <div className="flex flex-row gap-x-6 text-gray-800 dark:text-gray-200 items-end">
             <div className="text-gray-100 flex flex-col gap-y-2">
               <p className="text-3xl font-bold">{track.name}</p>
@@ -50,7 +56,7 @@ export default function Index({ track, layouts }: any) {
                   {track.postal_code}
                 </p>
               )}
-              <div className="flex flex-row gap-x-2 text-md">
+              <div className="flex flex-col md:flex-row gap-x-2 text-md">
                 {track.url && (
                   <a
                     href={track.url}
@@ -62,7 +68,7 @@ export default function Index({ track, layouts }: any) {
                   </a>
                 )}
                 {track.url && track.number && (
-                  <span className="text-gray-400">&bull;</span>
+                  <span className="hidden md:inline-block text-gray-400">&bull;</span>
                 )}
                 {track.number && (
                   <a
@@ -77,7 +83,7 @@ export default function Index({ track, layouts }: any) {
               </div>
             </div>
           </div>
-          <div className="mt-4 w-1/3 text-right text-gray-800 dark:text-gray-200">
+          <div className="mt-4 w-full md:w-1/3 text-center md:text-right text-gray-800 dark:text-gray-200">
             {(permissions.includes('tracks.layouts.create') ||
               permissions.includes('tracks.layouts.update')) && (
               <div className="inline-flex items-center divide-x divide-gray-300 dark:divide-gray-500 overflow-hidden backdrop-blur-sd bg-white/50 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-500 rounded-md font-semibold text-xs text-gray-100 dark:text-gray-300 uppercase tracking-widest shadow-sm disabled:opacity-25">
@@ -113,9 +119,9 @@ export default function Index({ track, layouts }: any) {
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
           {track.fastestLap &&
             track.fastestLap?.lap_time === track.myFastest?.lap_time && (
-              <div className="text-center pb-8 lg:px-4">
+              <div className="text-center mb-6 md:pb-8 lg:px-4">
                 <div
-                  className="p-2 bg-brand-800 items-center text-brand-100 leading-none lg:rounded-full flex lg:inline-flex"
+                  className="p-2 bg-brand-800 items-center text-brand-100 leading-none lg:rounded-full flex flex-col gap-y-2 md:flex-row lg:inline-flex"
                   role="alert"
                 >
                   <span className="flex items-center gap-x-2 rounded-full bg-brand-500 uppercase px-2 py-1 text-xs font-bold mr-3">
