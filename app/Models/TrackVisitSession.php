@@ -27,6 +27,8 @@ class TrackVisitSession extends Model
         'finish_position',
     ];
 
+    protected $with = ['laps'];
+
     /**
      * The TrackVisit this TrackVisitSession is associated to.
      */
