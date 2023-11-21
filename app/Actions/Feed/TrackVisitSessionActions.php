@@ -24,7 +24,7 @@ class TrackVisitSessionActions
                     $query->where('subject_type', 'App\\Models\\TrackVisit')
                         ->where('subject_id', $event->session->track_visit_id);
                 })->orWhere(function (Builder $query) use ($event) {
-                    $query->where('subject_type', 'App\\Models\\TrackSession')
+                    $query->where('subject_type', 'App\\Models\\TrackVisitSession')
                         ->orWhere('subject_id', $event->session->id);
                 });
             })
@@ -32,7 +32,7 @@ class TrackVisitSessionActions
             ->first();
 
         if ($created) {
-            $created->subject_type = 'App\\Models\\TrackSession';
+            $created->subject_type = 'App\\Models\\TrackVisitSession';
             $created->subject_id = $event->session->id;
             $created->card_type = 'TrackSession';
             $created->description = 'added some Track Sessions to a new Track Visit';
@@ -42,7 +42,7 @@ class TrackVisitSessionActions
         } else {
             DashboardFeed::create([
                 'user_id' => $user_id,
-                'subject_type' => 'App\\Models\\TrackSession',
+                'subject_type' => 'App\\Models\\TrackVisitSession',
                 'subject_id' => $event->session->id,
                 'card_type' => 'TrackSession',
                 'event' => 'created',
@@ -57,7 +57,7 @@ class TrackVisitSessionActions
     {
         $user_id = (Auth::check()) ? Auth::id() : $event->session->trackVisit->user_id; // Hack to get around seeding?
         $record = DashboardFeed::where('user_id', $user_id)
-            ->where('subject_type', 'App\\Models\\TrackSession')
+            ->where('subject_type', 'App\\Models\\TrackVisitSession')
             ->where('subject_id', $event->session->id)
             ->where('event', 'updated')
             ->where('updated_at', '>=', Carbon::now()->subHours(5))
@@ -68,7 +68,7 @@ class TrackVisitSessionActions
         } else {
             DashboardFeed::create([
                 'user_id' => $user_id,
-                'subject_type' => 'App\\Models\\TrackSession',
+                'subject_type' => 'App\\Models\\TrackVisitSession',
                 'subject_id' => $event->session->id,
                 'card_type' => 'TrackSession',
                 'event' => 'updated',
@@ -83,7 +83,7 @@ class TrackVisitSessionActions
     {
         $user_id = (Auth::check()) ? Auth::id() : $event->session->trackVisit->user_id; // Hack to get around seeding?
         $record = DashboardFeed::where('user_id', $user_id)
-            ->where('subject_type', 'App\\Models\\TrackSession')
+            ->where('subject_type', 'App\\Models\\TrackVisitSession')
             ->where('subject_id', $event->session['session']['id'])
             ->where('event', 'laps')
             ->where('updated_at', '>=', Carbon::now()->subHours(5))
@@ -97,7 +97,7 @@ class TrackVisitSessionActions
         } else {
             DashboardFeed::create([
                 'user_id' => $user_id,
-                'subject_type' => 'App\\Models\\TrackSession',
+                'subject_type' => 'App\\Models\\TrackVisitSession',
                 'subject_id' => $event->session['session']['id'],
                 'card_type' => 'SessionLaps',
                 'event' => 'laps',
@@ -134,7 +134,7 @@ class TrackVisitSessionActions
     {
         $visit = TrackVisit::find($session['track_visit_id']);
         $record = DashboardFeed::where('user_id', $visit->user_id)
-            ->where('subject_type', 'App\\Models\\TrackSession')
+            ->where('subject_type', 'App\\Models\\TrackVisitSession')
             ->where('subject_id', $session['id'])
             ->where('event', 'track_record')
             ->first();
@@ -148,7 +148,7 @@ class TrackVisitSessionActions
         } else {
             DashboardFeed::create([
                 'user_id' => $visit->user_id,
-                'subject_type' => 'App\\Models\\TrackSession',
+                'subject_type' => 'App\\Models\\TrackVisitSession',
                 'subject_id' => $session['id'],
                 'card_type' => 'TrackRecord',
                 'event' => 'track_record',
@@ -165,7 +165,7 @@ class TrackVisitSessionActions
     {
         $visit = TrackVisit::find($session['track_visit_id']);
         $record = DashboardFeed::where('user_id', $visit->user_id)
-            ->where('subject_type', 'App\\Models\\TrackSession')
+            ->where('subject_type', 'App\\Models\\TrackVisitSession')
             ->where('subject_id', $session['id'])
             ->where('event', 'layout_record')
             ->first();
@@ -180,7 +180,7 @@ class TrackVisitSessionActions
         } else {
             DashboardFeed::create([
                 'user_id' => $visit->user_id,
-                'subject_type' => 'App\\Models\\TrackSession',
+                'subject_type' => 'App\\Models\\TrackVisitSession',
                 'subject_id' => $session['id'],
                 'card_type' => 'TrackRecord',
                 'event' => 'layout_record',
@@ -198,7 +198,7 @@ class TrackVisitSessionActions
     {
         $visit = TrackVisit::find($session['track_visit_id']);
         $record = DashboardFeed::where('user_id', $visit->user_id)
-            ->where('subject_type', 'App\\Models\\TrackSession')
+            ->where('subject_type', 'App\\Models\\TrackVisitSession')
             ->where('subject_id', $session['id'])
             ->where('event', 'personal_record')
             ->first();
@@ -213,7 +213,7 @@ class TrackVisitSessionActions
         } else {
             DashboardFeed::create([
                 'user_id' => $visit->user_id,
-                'subject_type' => 'App\\Models\\TrackSession',
+                'subject_type' => 'App\\Models\\TrackVisitSession',
                 'subject_id' => $session['id'],
                 'card_type' => 'TrackRecord',
                 'event' => 'personal_record',
