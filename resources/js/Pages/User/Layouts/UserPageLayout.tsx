@@ -7,7 +7,7 @@ import Upcoming from '../Partials/Upcoming';
 
 export interface UserPageLayoutProps {
   user: User;
-  following: any; // TODO
+  following: boolean;
 }
 
 export default function UserPageLayout({
@@ -21,8 +21,8 @@ export default function UserPageLayout({
 
       <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div className="overflow-hidden pb-8">
-          <div className="flex gap-x-6 ">
-            <div className="w-96 flex flex-col gap-y-4">
+          <div className="flex flex-col md:flex-row gap-x-6">
+            <div className="w-full md:w-96 px-2 md:px-0 flex flex-col gap-y-4">
               <Upcoming user={user} />
               <FollowedBy user={user} />
             </div>

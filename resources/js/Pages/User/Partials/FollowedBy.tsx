@@ -10,7 +10,7 @@ export default function FollowedBy({ user }: any) {
   }
 
   return (
-    <div className="flex flex-col items-center gap-2 py-3 px-4 bg-white border -mt-px rounded-md dark:text-white dark:bg-gray-800 dark:border-gray-700">
+    <div className="hidden md:flex flex-col items-center gap-2 py-3 px-4 bg-white border -mt-px rounded-md dark:text-white dark:bg-gray-800 dark:border-gray-700">
       <div className="flex flex-row w-full justify-between items-center">
         <div className="flex flex-col">
           <p className="text-md font-semibold">Followers</p>
