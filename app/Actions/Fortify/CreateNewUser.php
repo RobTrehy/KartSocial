@@ -3,6 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Models\Invitation;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Env;
 use Illuminate\Support\Facades\Hash;
@@ -49,6 +50,6 @@ class CreateNewUser implements CreatesNewUsers
             'dob' => $input['dob'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
-        ]);
+        ])->assignRole(Role::findByName('Basic'));
     }
 }
