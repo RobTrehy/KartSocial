@@ -1,13 +1,18 @@
 import ActionSection from '@/Components/ActionSection';
+import DialogModal from '@/Components/DialogModal';
+import SecondaryButton from '@/Components/SecondaryButton';
 import { Role, User } from '@/types';
 import moment from 'moment';
-import React from 'react';
+import React, { useState } from 'react';
+import FeaturePacks from './FeaturePacks';
 
 interface Props {
   user: User;
 }
 
 export default function AdminPlanForm({ user }: Props) {
+  const [addFeatures, setAddFeatures] = useState<boolean>(false);
+
   return (
     <ActionSection
       title={'User Access'}
@@ -41,6 +46,24 @@ export default function AdminPlanForm({ user }: Props) {
           })}
         </div>
       </div>
+      <div className="mt-5 -mx-4 md:-mx-6 -mb-5 md:-mb-6">
+        <div className="flex items-center justify-end px-4 py-3 bg-gray-50 dark:bg-gray-800 text-right md:px-6 md:rounded-bl-md md:rounded-br-md">
+          <SecondaryButton
+            onClick={() => setAddFeatures(true)}
+          >
+            Add Feature
+          </SecondaryButton>
+        </div>
+      </div>
+
+      <DialogModal
+        isOpen={addFeatures}
+        onClose={() => setAddFeatures(false)}
+      >
+        <DialogModal.Content title="Add Feature Pack to User">
+          <FeaturePacks user={user} />
+        </DialogModal.Content>
+      </DialogModal>
     </ActionSection>
   );
 }

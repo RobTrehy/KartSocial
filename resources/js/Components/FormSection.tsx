@@ -45,7 +45,7 @@ export default function FormSection({
           </div>
 
           {hasActions && (
-            <div className="flex items-center justify-end px-4 py-3 bg-gray-50 dark:bg-gray-800 text-right px-6 shadow md:rounded-bl-md md:rounded-br-md">
+            <div className="flex items-center justify-end px-4 py-3 bg-gray-50 dark:bg-gray-800 text-right md:px-6 shadow md:rounded-bl-md md:rounded-br-md">
               {renderActions?.()}
             </div>
           )}
