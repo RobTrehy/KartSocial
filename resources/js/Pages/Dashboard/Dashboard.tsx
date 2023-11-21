@@ -19,7 +19,7 @@ export default function Dashboard({ feed, suggestions, tracks }: any) {
             <Welcome />
           ) : (
             <>
-              <div className="flex flex-col gap-y-6 mb-6 w-2/3">
+              <div className="flex flex-col gap-y-6 mb-6 md:w-2/3">
                 {feed.length > 0 &&
                   page.props.app_feedback_label === 'alpha' && (
                     <MessageReveal
@@ -42,19 +42,6 @@ export default function Dashboard({ feed, suggestions, tracks }: any) {
                             everything works correctly. This means most, if not
                             all, of the design is likely to change later on!
                           </p>
-                          <p>
-                            We'd love your ideas for a couple of things in
-                            particular:
-                          </p>
-                          <ul className="list-disc mx-8">
-                            <li>
-                              Name for the product! Do we like Kart Social?
-                            </li>
-                            <li>
-                              A logo (ideally SVG) - kind of need to settle on
-                              the name first though!
-                            </li>
-                          </ul>
                           <p className="mt-2">
                             If you're familiar with PHP, Laravel, InertiaJS or
                             React, head on over to{' '}
@@ -74,7 +61,7 @@ export default function Dashboard({ feed, suggestions, tracks }: any) {
                   )}
                 <DashboardFeed feed={feed} />
               </div>
-              <div className="flex flex-col gap-y-6 w-1/3">
+              <div className="hidden md:flex flex-col gap-y-6 w-1/3">
                 {suggestions.length > 0 && (
                   <>
                     <div className="flex flex-col items-center bg-white border -mt-px rounded-md overflow-hidden dark:text-white dark:bg-gray-800 dark:border-gray-700 divide-y dark:divide-gray-700">

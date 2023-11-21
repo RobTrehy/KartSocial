@@ -9,7 +9,7 @@ export default function MessageReveal({ title, message }: Props) {
   const [revealed, setRevealed] = useState<boolean>(false);
 
   return (
-    <div className="p-4 leading-relaxed bg-brand-200 dark:bg-brand-900 dark:text-gray-200 text-sm rounded-md">
+    <div className="p-4 leading-relaxed bg-brand-200 dark:bg-brand-900 dark:text-gray-200 text-sm md:rounded-lg">
       <h2 className="text-lg font-semibold">{title}</h2>
       {(typeof message === 'string' || message instanceof String) && (
         <p className={revealed ? '' : 'truncate'}>{message}</p>
