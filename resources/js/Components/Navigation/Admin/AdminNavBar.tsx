@@ -36,12 +36,12 @@ export default function AdminNavBar() {
           <div className="flex">
             {/* <!-- Secondary Navigation Links --> */}
             <div className="hidden space-x-8 md:-my-px md:ml-10 md:flex">
-              {/* <AdminNavLink
-                                tag="a"
-                                href={route('telescope')}
-                            >
-                                Telescope
-                            </AdminNavLink> */}
+              <AdminNavLink
+                tag="a"
+                href={route('telescope')}
+              >
+                Telescope
+              </AdminNavLink>
             </div>
 
             {/* <!-- Hamburger --> */}
@@ -98,6 +98,12 @@ export default function AdminNavBar() {
             active={route().current('admin:users.index')}
           >
             Users
+          </ResponsiveAdminNavLink>
+          <ResponsiveAdminNavLink
+            as="a"
+            href={route('telescope')}
+          >
+            Telescope
           </ResponsiveAdminNavLink>
         </div>
       </div>
