@@ -8,7 +8,7 @@ use App\Events\TrackVisitEvent;
 use App\Events\TrackVisitSessionEvent;
 use Illuminate\Events\Dispatcher;
 
-class RecordFeedListener
+class RecordFeedSubscriber
 {
     public function TrackVisit($event): void
     {
