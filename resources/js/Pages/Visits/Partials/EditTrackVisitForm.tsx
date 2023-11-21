@@ -51,7 +51,7 @@ export default function EditTrackVisitForm(props: Props) {
       let l = props.tracks.filter(obj => {
         return obj.id === track?.value;
       })[0]?.all_layouts[0];
-      let _layouts: Array<{value: number, label: string}> = [
+      let _layouts: Array<{ value: number, label: string }> = [
         {
           value: l.id,
           label: l.retired_at
@@ -125,19 +125,6 @@ export default function EditTrackVisitForm(props: Props) {
         <InputError message={form.errors.visit_date} className="mt-2" />
       </div>
 
-      {/* <!-- Title --> */}
-      <div className="col-span-6 sm:col-span-4">
-        <InputLabel htmlFor="title" value="Visit Title" />
-        <TextInput
-          id="title"
-          type="text"
-          className="mt-1 block w-full"
-          value={form.data.title}
-          onChange={e => form.setData('title', e.currentTarget.value)}
-        />
-        <InputError message={form.errors.title} className="mt-2" />
-      </div>
-
       {/* <!-- Track ID --> */}
       <div className="col-span-6 sm:col-span-4">
         <InputLabel htmlFor="track_id" value="Select the Track" />
@@ -163,6 +150,19 @@ export default function EditTrackVisitForm(props: Props) {
         />
 
         <InputError message={form.errors.track_layout_id} className="mt-2" />
+      </div>
+
+      {/* <!-- Title --> */}
+      <div className="col-span-6 sm:col-span-4">
+        <InputLabel htmlFor="title" value="Visit Title" />
+        <TextInput
+          id="title"
+          type="text"
+          className="mt-1 block w-full"
+          value={form.data.title}
+          onChange={e => form.setData('title', e.currentTarget.value)}
+        />
+        <InputError message={form.errors.title} className="mt-2" />
       </div>
 
       {/* <!-- Notes --> */}
