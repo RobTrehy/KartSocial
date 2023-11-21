@@ -13,11 +13,11 @@ export default function Show(props: any) {
     <AppLayout
       title="Track Visit"
       renderHeader={() => (
-        <div className="flex flex-row items-center">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-y-2">
           <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             Track Visit
           </h2>
-          <div className="ml-auto flex gap-x-2">
+          <div className="flex gap-x-2">
             {visit?.user_id === auth.user.id && (
               <>
                 <SecondaryButton

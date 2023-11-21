@@ -8,17 +8,23 @@ import { FormatLapTime } from '@/Helpers/FormatLapTime';
 import { toOrdinal } from '@/Helpers/ToOrdinal';
 import useRoute from '@/Hooks/useRoute';
 import useTypedPage from '@/Hooks/useTypedPage';
+import { TrackVisit, TrackVisitSession } from '@/types';
 import { Link } from '@inertiajs/react';
 import React from 'react';
 
-export default function SessionAccordion({ visit, profile }: any) {
+interface Props {
+  visit: TrackVisit;
+  profile: Boolean;
+}
+
+export default function SessionAccordion({ visit, profile }: Props) {
   const route = useRoute();
   const page = useTypedPage();
   const { auth } = page.props;
 
   return (
     <AccordionGroup>
-      {visit.sessions.map((session: any, i: number) => {
+      {visit.sessions.map((session: TrackVisitSession, i: number) => {
         return (
           <AccordionItem key={i}>
             <AccordionSessionTitle id={session.id}>

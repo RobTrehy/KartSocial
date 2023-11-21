@@ -138,6 +138,29 @@ export interface TrackLayout {
   updated_at: DateTime;
 }
 
+export interface TrackVisit {
+  id: number;
+  user_id: number;
+  title: string;
+  notes: string;
+  visit_date: DateTime;
+  sessions: Array<TrackVisitSession>;
+  track_layout_id: number;
+  track_layout: TrackLayout;
+}
+
+export interface TrackVisitSession {
+  id: number;
+  track_visit_id: number;
+  session_name: string;
+  session_length: number;
+  session_length_type: string;
+  laps: Array<TrackVisitSessionLap>;
+  fastestLap: TrackVisitSessionLap;
+  finish_position: number;
+  total_drivers: number;
+}
+
 export interface TrackVisitSessionLap {
   id: number;
   lap_number: number;
