@@ -43,7 +43,7 @@ export default function AdminRestrictionForm({ user }: Props) {
     } else if (duration === 'indefinitely') {
       date = null;
     }
-    form.setData('expires_at', date.format());
+    form.setData('expires_at', (duration === 'indefinitely') ? null : date.format());
   }, [duration]);
 
   function restrictUser() {
