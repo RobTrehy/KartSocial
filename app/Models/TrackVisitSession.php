@@ -52,7 +52,7 @@ class TrackVisitSession extends Model
      */
     public function fastestLaps(): HasMany
     {
-        return $this->laps()->orderBy('lap_time', 'ASC');
+        return $this->hasMany(TrackVisitSessionLap::class, 'session_id')->orderBy('lap_time', 'ASC');
     }
 
     /**
