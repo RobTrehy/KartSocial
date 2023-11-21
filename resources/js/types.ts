@@ -113,6 +113,9 @@ export interface Track {
   layouts: Nullable<Array<TrackLayout>>;
   all_layouts: Nullable<Array<TrackLayout>>;
   retired_layouts: Nullable<Array<TrackLayout>>;
+  fastestLap: Nullable<TrackVisitSessionLap>;
+  myFastest: Nullable<TrackVisitSessionLap>;
+  feed: Array<any>; // TODO: Track Feed
   created_at: DateTime;
   updated_at: DateTime;
 }
