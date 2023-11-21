@@ -168,5 +168,5 @@ export interface TrackVisitSessionLap {
   id: number;
   lap_number: number;
   lap_time: number;
-  lap_diff: number;
+  lap_diff: number|null;
 }

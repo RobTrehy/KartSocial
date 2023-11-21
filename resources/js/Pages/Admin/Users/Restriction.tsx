@@ -14,11 +14,11 @@ export default function Restriction({ user }: any) {
     <AppLayout
       title="User Restriction - Admin"
       renderHeader={() => (
-        <div className="flex flex-row items-center">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-y-2">
           <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {user.alias} - User Restriction
           </h2>
-          <div className="ml-auto flex gap-x-2">
+          <div className="flex gap-x-2">
             <SecondaryButton
               onClick={() =>
                 router.visit(route('admin:users.show', { user: user.id }))

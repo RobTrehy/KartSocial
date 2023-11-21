@@ -41,11 +41,11 @@ export default function Lap(props: any) {
     <AppLayout
       title="Track Visit"
       renderHeader={() => (
-        <div className="flex flex-row items-center">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-y-2">
           <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {session.session_name} ({session.session_type})
           </h2>
-          <div className="ml-auto">
+          <div className="flex gap-x-2">
             <PrimaryButton onClick={() => setShowImport(true)}>
               Import Data
             </PrimaryButton>
