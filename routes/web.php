@@ -18,6 +18,7 @@ use Illuminate\Support\Env;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,6 +101,16 @@ Route::middleware([
 
     // User Restrictions and Appeals
     Route::post('/user/restriction/appeal', [UserRestrictionController::class, 'addAppealComment'])->name('user.restriction.appeal.add');
+});
+
+/**
+ * User must be Authenticated, they don't have to be verified, and they CAN be banned
+ */
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+])->group(function () {
+    Route::get('/logout', [AuthenticatedSessionController::class, 'destroy']);
 });
 
 Route::resource('tracks', TracksController::class)->only(['index', 'show']);
