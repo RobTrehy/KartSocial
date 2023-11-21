@@ -74,44 +74,44 @@ export default function SessionAccordion({ visit, profile }: Props) {
             <AccordionBody id={session.id}>
               <SessionLapsTable session={session} />
             </AccordionBody>
-            <div className="flex flex-col sm:flex-row items-center divide-y sm:divide-y-0 sm:divide-x border-t text-xs font-medium text-gray-500 dark:text-gray-500 dark:border-gray-700 dark:divide-gray-700">
-              <div className="px-5 py-0.5">
+            <div className="flex flex-col md:flex-row items-center divide-y md:divide-y-0 md:divide-x border-t text-xs font-medium text-gray-500 dark:text-gray-500 dark:border-gray-700 dark:divide-gray-700">
+              <div className="px-5 py-0.5 w-full md:w-auto text-center">
                 Session Length: {session.session_length}{' '}
                 {session.session_length_type}
               </div>
-              <div className="px-5 py-0.5">
+              <div className="px-5 py-0.5 w-full md:w-auto text-center">
                 {session.laps ? session.laps.length : 0} Laps Completed
               </div>
               {session.fastestLap && (
-                <div className="px-5 py-0.5">
+                <div className="px-5 py-0.5 w-full md:w-auto text-center">
                   Fastest Lap: {FormatLapTime(session.fastestLap)} on lap{' '}
                   {session.fastestLap.lap_number}
                 </div>
               )}
               {session.finish_position && session.total_drivers && (
-                <div className="px-5 py-0.5">
+                <div className="px-5 py-0.5 w-full md:w-auto text-center">
                   Finished {toOrdinal(session.finish_position)} of{' '}
                   {session.total_drivers} drivers
                 </div>
               )}
               {visit.user_id === auth.user?.id && !profile && (
-                <>
+                <div className="flex flex-col sm:flex-row w-full md:w-auto md:ml-auto">
                   <Link
                     href={route('visits.sessions.edit', {
                       visit: session.track_visit_id,
                       session: session.id,
                     })}
-                    className="ml-auto px-5 py-0.5 bg-gray-200 dark:bg-gray-900 text-black dark:text-white"
+                    className="w-full md:w-auto text-center px-5 py-0.5 bg-gray-200 dark:bg-gray-900 text-black dark:text-white"
                   >
                     Edit Session
                   </Link>
                   <Link
                     href={route('session.laps', { session: session.id })}
-                    className="px-5 py-0.5 bg-gray-300 dark:bg-gray-700 text-black dark:text-white"
+                    className="w-full md:w-auto text-center px-5 py-0.5 bg-brand-600 dark:bg-brand-500 text-white"
                   >
                     Add/Update Laps
                   </Link>
-                </>
+                </div>
               )}
             </div>
           </AccordionItem>
