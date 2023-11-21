@@ -18,7 +18,7 @@ class TrackLayoutsController extends Controller
      */
     public function create(Track $track)
     {
-        if (Auth::user()->cannot('track.layouts.create')) {
+        if (Auth::user()->cannot('tracks.layouts.create')) {
             abort(403);
         }
 
