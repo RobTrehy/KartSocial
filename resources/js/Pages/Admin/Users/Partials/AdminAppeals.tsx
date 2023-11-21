@@ -6,6 +6,7 @@ import TextInput from '@/Components/Forms/TextInput';
 import PrimaryButton from '@/Components/PrimaryButton';
 import SecondaryButton from '@/Components/SecondaryButton';
 import useRoute from '@/Hooks/useRoute';
+import { UserRestriction, UserRestrictionAppeals } from '@/types';
 import { router, useForm } from '@inertiajs/react';
 import axios from 'axios';
 import classNames from 'classnames';
@@ -18,17 +19,21 @@ import React, {
   useState,
 } from 'react';
 
-export default function AdminAppeals({ ban }: any) {
+interface Props {
+  restriction: UserRestriction;
+}
+
+export default function AdminAppeals({ restriction }: Props) {
   const [changingExpiry, setChangingExpiry] = useState<boolean>(false);
   const [from, setFrom] = useState<string>('current');
   const [method, setMethod] = useState<string>('add');
   const [count, setCount] = useState<number>(0);
   const [type, setType] = useState<string>('days');
-  const [preview, setPreview] = useState(ban.expires_at);
+  const [preview, setPreview] = useState(restriction.expires_at);
 
   const route = useRoute();
   const form = useForm({
-    ban_id: ban.id,
+    restriction_id: restriction.id,
     appeal: '',
   });
 
@@ -38,7 +43,7 @@ export default function AdminAppeals({ ban }: any) {
       setMethod('add');
       _date = moment();
     } else if (from === 'current') {
-      _date = moment(ban.expires_at);
+      _date = moment(restriction.expires_at);
     }
 
     if (_date && method === 'add') {
@@ -55,7 +60,7 @@ export default function AdminAppeals({ ban }: any) {
   }, [from, method, count, type]);
 
   const expiryForm = useForm({
-    ban_id: ban.id,
+    restriction_id: restriction.id,
     expires_at: preview,
   });
 
@@ -75,7 +80,7 @@ export default function AdminAppeals({ ban }: any) {
   const cancelAppeals = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     axios
-      .post(route('admin:user.restriction.appeal.close', { ban: ban.id }))
+      .post(route('admin:user.restriction.appeal.close', { restriction: restriction.id }))
       .then(res => {
         router.reload();
       });
@@ -84,7 +89,7 @@ export default function AdminAppeals({ ban }: any) {
   const openAppeals = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     axios
-      .put(route('admin:user.restriction.appeal.open', { ban: ban.id }))
+      .put(route('admin:user.restriction.appeal.open', { restriction: restriction.id }))
       .then(res => {
         router.reload();
       });
@@ -92,7 +97,7 @@ export default function AdminAppeals({ ban }: any) {
 
   const changeExpiry = () => {
     if (moment(preview).isAfter(moment())) {
-      expiryForm.post(route('admin:user.restriction.expiry', { ban: ban.id }), {
+      expiryForm.post(route('admin:user.restriction.expiry', { restriction: restriction.id }), {
         preserveScroll: true,
         onSuccess: () => {
           setChangingExpiry(false);
@@ -106,12 +111,12 @@ export default function AdminAppeals({ ban }: any) {
 
   return (
     <div className="last:rounded-b-md border dark:border-gray-700 w-full overflow-hidden divide-y dark:divide-gray-700">
-      {ban.appeals.map((appeal: any, i: number) => (
+      {restriction.appeals?.map((appeal: UserRestrictionAppeals, i: number) => (
         <div
           className={classNames(
             'flex',
             'flex-col',
-            appeal.user.id === ban.user.id
+            appeal.user.id === restriction.user.id
               ? 'bg-brand-100 dark:bg-gray-700'
               : 'bg-white dark:bg-gray-800',
             'text-gray-800 dark:text-white px-4 md:px-5 pt-4 md:pt-5',
@@ -133,8 +138,8 @@ export default function AdminAppeals({ ban }: any) {
         onKeyDown={onKeyDown}
         placeholder="Add a comment"
       />
-      <div className="bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-300 flex flex-row justify-around py-2 px-3 w-full">
-        {ban.appeals[ban.appeals.length - 1].allow_reply ? (
+      <div className="bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-300 flex flex-col md:flex-row justify-around py-2 px-3 w-full">
+        {restriction.appeals && restriction.appeals[restriction.appeals.length - 1].allow_reply ? (
           <a href="#" className="text-red-500" onClick={cancelAppeals}>
             Prevent Futher Appeals or Comments
           </a>

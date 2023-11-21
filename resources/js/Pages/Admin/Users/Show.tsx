@@ -3,14 +3,20 @@ import SectionBorder from '@/Components/SectionBorder';
 import useRoute from '@/Hooks/useRoute';
 import useTypedPage from '@/Hooks/useTypedPage';
 import AppLayout from '@/Layouts/AppLayout';
+import { User } from '@/types';
 import { router } from '@inertiajs/react';
 import React from 'react';
 import AdminPlanForm from './Partials/AdminPlanForm';
 import AdminProfileForm from './Partials/AdminProfileForm';
 import AdminProfilePhotosForm from './Partials/AdminProfilePhotosForm';
 import AdminRestrictionForm from './Partials/AdminRestrictionForm';
+import DeleteUserForm from './Partials/DeleteUserForm';
 
-export default function Show({ user, ...props }: any) {
+interface Props {
+  user: User;
+}
+
+export default function Show({ user, ...props }: Props) {
   const page = useTypedPage();
   const route = useRoute();
 
@@ -43,12 +49,12 @@ export default function Show({ user, ...props }: any) {
         </div>
       )}
     >
-      {user.ban && (
+      {user.restriction && (
         <div className="bg-red-700">
           <div className="max-w-screen-xl mx-auto py-2 px-3 md:px-6 lg:px-8">
-            <div className="flex items-center justify-between flex-wrap">
-              <div className="w-0 flex-1 flex items-center min-w-0">
-                <span className="flex p-2 rounded-md bg-red-600">
+            <div className="flex flex-col md:flex-row items-center justify-between flex-wrap">
+              <div className="flex flex-row items-center">
+                <span className="flex flex-row p-2 rounded-md bg-red-600">
                   <svg
                     className="h-5 w-5 text-white"
                     xmlns="http://www.w3.org/2000/svg"
@@ -107,12 +113,17 @@ export default function Show({ user, ...props }: any) {
             <AdminPlanForm user={user} />
           </div>
 
-          {!user.ban && (
+          {!user.restriction && (
             <div className="mt-10 md:mt-0">
               <SectionBorder />
               <AdminRestrictionForm user={user} />
             </div>
           )}
+
+          <div className="mt-10 md:mt-0">
+            <SectionBorder />
+            <DeleteUserForm user={user} />
+          </div>
         </div>
       </div>
     </AppLayout>

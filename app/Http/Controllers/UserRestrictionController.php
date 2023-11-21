@@ -22,7 +22,7 @@ class UserRestrictionController extends Controller
     public function addAppealComment(AppealRestrictionRequest $request)
     {
         UserRestrictionAppeal::create([
-            'ban_id' => $request->ban_id,
+            'restriction_id' => $request->restriction_id,
             'commenter_id' => Auth::id(),
             'appeal' => $request->appeal,
             'allow_reply' => ($request->allow_reply) ? $request->allow_reply : true,
@@ -36,11 +36,11 @@ class UserRestrictionController extends Controller
      */
     public function adminManageRestriction(User $user)
     {
-        $ban = UserRestrictions::where('user_id', $user->id)->with(['user', 'banner', 'appeals', 'appeals.user'])->first();
-        if ($ban) {
+        $restriction = UserRestrictions::where('user_id', $user->id)->with(['user', 'restrictor', 'appeals', 'appeals.user'])->first();
+        if ($restriction) {
             return Inertia::render('Admin/Users/Restriction', [
                 'user' => $user,
-                'user.ban' => $ban,
+                'user.restriction' => $restriction,
             ]);
         }
 
@@ -91,7 +91,7 @@ class UserRestrictionController extends Controller
     {
         UserRestrictions::create([
             'user_id' => $user->id,
-            'banner_id' => Auth::id(),
+            'restrictor_id' => Auth::id(),
             'reason' => $request->reason,
             'expires_at' => $request->expires_at,
         ]);

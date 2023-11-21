@@ -23,6 +23,33 @@ export interface User {
   followed_by: Array<User>;
   invited_count: number;
   roles: Nullable<Array<Role>>;
+  restriction: Nullable<UserRestriction>;
+  created_at: DateTime;
+  updated_at: DateTime;
+}
+
+export interface UserRestriction {
+  id: number;
+  user_id: number;
+  user: User;
+  restrictor_id: number;
+  restrictor: User;
+  reason: string;
+  appeals: Nullable<Array<UserRestrictionAppeals>>;
+  expires_at: Nullable<DateTime>;
+  created_at: DateTime;
+  updated_at: DateTime;
+}
+
+export interface UserRestrictionAppeals {
+  id: number;
+  restriction_id: number;
+  restriction: UserRestriction;
+  user: User;
+  commenter_id: number;
+  commenter: User;
+  appeal: string;
+  allow_reply: boolean;
   created_at: DateTime;
   updated_at: DateTime;
 }
@@ -168,5 +195,5 @@ export interface TrackVisitSessionLap {
   id: number;
   lap_number: number;
   lap_time: number;
-  lap_diff: number|null;
+  lap_diff: number | null;
 }

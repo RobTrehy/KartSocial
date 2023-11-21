@@ -22,3 +22,4 @@ Route::post('/users/{user}/restrict', [UserRestrictionController::class, 'adminR
 Route::post('/user/restriction/{ban}', [UserRestrictionController::class, 'adminCancelAppeals'])->name('user.restriction.appeal.close');
 Route::put('/user/restriction/{ban}', [UserRestrictionController::class, 'adminOpenAppeals'])->name('user.restriction.appeal.open');
 Route::post('/user/restriction/{ban}/expiry', [UserRestrictionController::class, 'adminChangeExpiry'])->name('user.restriction.expiry');
+Route::delete('/user/{user}/destroy', [UserAdminController::class, 'destroy'])->name('user.admin.destroy.confirmed');

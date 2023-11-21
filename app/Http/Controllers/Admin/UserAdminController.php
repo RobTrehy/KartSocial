@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UpdateUserProfileRequest;
 use App\Models\Track;
 use App\Models\TrackVisit;
+use App\Models\TrackVisitSession;
 use App\Models\User;
+use App\Models\UserRestrictionAppeal;
+use App\Models\UserSuggestion;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -84,9 +87,26 @@ class UserAdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        // TODO: Only super-admin can do this (user.id === 1?)
+        // TODO: Only super-dooper-admin can do this
+        if (Auth::user()->alias !== "RobGoesRacing" && Auth::user()->alias !== "Administrator") {
+            abort(403);
+        }
+
+        UserSuggestion::where('suggested_id', $user->id)->delete();
+        UserRestrictionAppeal::where('restriction_id', $user->restriction()->first()->id)->delete();
+        $user->restriction()->delete();
+
+        $user->trackVisits()->each(function (TracKVisit $visit) {
+            $visit->laps()->delete();
+            $visit->sessions()->delete();
+            $visit->delete();
+        });
+        $user->suggestions()->delete();
+        $user->delete();
+
+        return redirect(route('admin:users.index'));
     }
 
     /**
