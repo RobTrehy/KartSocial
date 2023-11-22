@@ -59,7 +59,7 @@ class TrackVisitSessionLapsController extends Controller
                     'session_id' => $session->id,
                     'lap_number' => $lap['lap_number'],
                     'lap_time' => $lap['lap_time'],
-                    'lap_diff' => ($lap['lap_number'] === '1') ? null : $lap['lap_diff'],
+                    'lap_diff' => ($lap['lap_number'] == '1') ? null : $lap['lap_diff'],
                 ]);
                 $added++;
             }

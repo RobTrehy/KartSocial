@@ -42,7 +42,7 @@
     "react-tailwindcss-select": "^1.8.5",
     "react-toggle-dark-mode": "^1.1.1",
     "tesseract.js": "^5.0.3",
-    "xlsx": "^0.18.5",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.0/xlsx-0.20.0.tgz",
     "ziggy-js": "^1.8.1"
   },
   "prettier": {
@@ -53,5 +53,8 @@
     "trailingComma": "all",
     "printWidth": 80,
     "arrowParens": "avoid"
+  },
+  "overrides": {
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.0/xlsx-0.20.0.tgz"
   }
 }
