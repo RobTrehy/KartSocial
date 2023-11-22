@@ -42,6 +42,12 @@ export default function AdminNavBar() {
               >
                 Telescope
               </AdminNavLink>
+              <AdminNavLink
+                tag="a"
+                href={route('log-viewer.index')}
+              >
+                Log Viewer
+              </AdminNavLink>
             </div>
 
             {/* <!-- Hamburger --> */}
@@ -104,6 +110,12 @@ export default function AdminNavBar() {
             href={route('telescope')}
           >
             Telescope
+          </ResponsiveAdminNavLink>
+          <ResponsiveAdminNavLink
+            as="a"
+            href={route('log-viewer.index')}
+          >
+            Log Viewer
           </ResponsiveAdminNavLink>
         </div>
       </div>
