@@ -1,6 +1,9 @@
 import axios from 'axios';
 import _ from 'lodash';
 
+import moment from 'moment';
+import 'moment/dist/locale/en-gb';
+
 window._ = _;
 
 /**
@@ -14,6 +17,11 @@ window._ = _;
 (window as any).axios.defaults.headers.common['X-Requested-With'] =
   'XMLHttpRequest';
 (window as any).axios.defaults.withCredentials = true;
+
+/**
+ * Configure Moment to use en-gb locale
+ */
+moment.locale('en-gb');
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

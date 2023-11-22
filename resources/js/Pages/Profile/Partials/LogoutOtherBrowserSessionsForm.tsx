@@ -7,7 +7,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import SecondaryButton from '@/Components/SecondaryButton';
 import useRoute from '@/Hooks/useRoute';
 import { Session } from '@/types';
-import { useForm } from '@inertiajs/react';
+import { Link, useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import React, { useRef, useState } from 'react';
 
@@ -125,6 +125,15 @@ export default function LogoutOtherBrowserSessions({ sessions }: Props) {
         <ActionMessage on={form.recentlySuccessful} className="ml-3">
           Done.
         </ActionMessage>
+      </div>
+
+      <div className="flex items-center mt-5">
+        <Link
+          href={route('user.authentication-log')}
+          className="text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600 dark:hover:text-brand-500"
+        >
+          View Full Authentication History
+        </Link>
       </div>
 
       {/* <!-- Log Out Other Devices Confirmation Modal --> */}

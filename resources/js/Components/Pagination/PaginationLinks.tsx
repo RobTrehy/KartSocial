@@ -1,11 +1,8 @@
+import { Link } from '@/types';
 import React from 'react';
 import PaginationLink from './PaginationLink';
 
-interface Link {
-  active: boolean;
-  url: string;
-  label: string;
-}
+
 interface Props {
   currentPage: number;
   links: Array<Link>;

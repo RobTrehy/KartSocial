@@ -98,6 +98,7 @@ Route::middleware([
         ->name('current-user-cover.destroy');
     Route::post('/user/data/request', [UserAccountController::class, 'requestPersonalData'])->name('user.personal-data-request');
     Route::personalDataExports('personal-data-exports');
+    Route::get('/user/authentication', [UserAccountController::class, 'authenticationLog'])->name('user.authentication-log');
 
     // User Restrictions and Appeals
     Route::post('/user/restriction/appeal', [UserRestrictionController::class, 'addAppealComment'])->name('user.restriction.appeal.add');

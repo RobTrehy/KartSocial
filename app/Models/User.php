@@ -17,6 +17,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Rappasoft\LaravelAuthenticationLog\Traits\AuthenticationLoggable;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -25,6 +26,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements \Spatie\PersonalDataExport\ExportsPersonalData, MustVerifyEmail
 {
+    use AuthenticationLoggable;
     use CausesActivity;
     use HasApiTokens;
     use HasCoverPhoto;

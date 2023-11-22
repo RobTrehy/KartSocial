@@ -197,3 +197,19 @@ export interface TrackVisitSessionLap {
   lap_time: number;
   lap_diff: number | null;
 }
+
+export interface PaginationData {
+  prev_page_url: string;
+  next_page_url: string;
+  from: number;
+  to: number;
+  total: number;
+  current_page: number;
+  links: Array<Link>;
+}
+
+export interface Link {
+  active: boolean;
+  url: string;
+  label: string;
+}

@@ -1,8 +1,13 @@
+import { PaginationData } from '@/types';
 import { Link } from '@inertiajs/react';
 import React from 'react';
 import PaginationLinks from './PaginationLinks';
 
-export default function Pagination({ data }: any) {
+interface Props {
+  data: PaginationData;
+}
+
+export default function Pagination({ data }: Props) {
   return (
     <div className="flex items-center justify-between">
       <div className="flex flex-1 justify-between md:hidden">
