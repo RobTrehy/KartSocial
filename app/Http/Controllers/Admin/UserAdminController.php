@@ -74,6 +74,7 @@ class UserAdminController extends Controller
 
         $user->name = $request->name;
         $user->alias = $request->alias;
+        $user->bio = $request->bio;
         $user->weight = $request->weight;
         $user->home_track_id = $request->home_track_id;
         $user->save();

@@ -4,8 +4,8 @@ import React, { forwardRef } from 'react';
 const TextareaInput = forwardRef<
   HTMLInputElement,
   React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
+    React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+    HTMLTextAreaElement
   >
 >((props, ref) => (
   <textarea

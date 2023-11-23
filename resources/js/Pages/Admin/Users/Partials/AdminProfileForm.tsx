@@ -4,6 +4,7 @@ import InputError from '@/Components/Forms/InputError';
 import InputLabel from '@/Components/Forms/InputLabel';
 import SearchSelect from '@/Components/Forms/SearchSelect';
 import TextInput from '@/Components/Forms/TextInput';
+import TextareaInput from '@/Components/Forms/TextareaInput';
 import PrimaryButton from '@/Components/PrimaryButton';
 import useRoute from '@/Hooks/useRoute';
 import { User } from '@/types';
@@ -26,6 +27,7 @@ export default function AdminProfileForm({
     _method: 'PUT',
     name: user.name,
     alias: user.alias,
+    bio: user.bio || '',
     weight: user.weight || '',
     home_track_id: user.home_track_id || null,
   });
@@ -89,6 +91,24 @@ export default function AdminProfileForm({
           }
         />
         <InputError message={form.errors.alias} className="mt-2" />
+      </div>
+
+      {/* <!-- Bio --> */}
+      <div className="col-span-6 md:col-span-4">
+        <InputLabel htmlFor="bio" value="Bio" />
+        <div className="relative">
+          <TextareaInput
+            id="bio"
+            className="mt-1 block w-full"
+            value={form.data.bio}
+            onChange={e => form.setData('bio', e.currentTarget.value)}
+            rows={3}
+          />
+          <span className="absolute bottom-1 right-1 text-xs text-gray-400">
+            {form.data.bio.length}/120
+          </span>
+        </div>
+        <InputError message={form.errors.bio} className="mt-2" />
       </div>
 
       {/* <!-- Weight --> */}

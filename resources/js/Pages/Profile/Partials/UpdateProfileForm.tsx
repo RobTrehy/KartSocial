@@ -80,11 +80,10 @@ export default function UpdateProfileForm({
         <div className="relative">
           <TextareaInput
             id="bio"
-            type="text"
             className="mt-1 block w-full"
             value={form.data.bio}
             onChange={e => form.setData('bio', e.currentTarget.value)}
-            rows="3"
+            rows={3}
           />
           <span className="absolute bottom-1 right-1 text-xs text-gray-400">
             {form.data.bio.length}/120

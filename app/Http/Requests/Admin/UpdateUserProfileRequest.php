@@ -29,6 +29,7 @@ class UpdateUserProfileRequest extends FormRequest
                 Rule::unique('users', 'alias')->ignore($this->route()->user->id),
                 'alpha_dash:ascii',
             ],
+            'bio' => 'nullable|string|max:120',
             'weight' => 'nullable|decimal:1',
             'home_track_id' => 'nullable|exists:tracks,id',
         ];
