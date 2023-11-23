@@ -31,7 +31,7 @@ trait HasExportableData
             $personalDataSelection->addFile($this->profile_photo_path, isset($_ENV['VAPOR_ARTIFACT_NAME']) ? 's3' : config('jetstream.profile_photo_disk', 'public'));
         }
         if ($this->cover_photo_path) {
-            $personalDataSelection->addFile($this->profile_photo_path, isset($_ENV['VAPOR_ARTIFACT_NAME']) ? 's3' : config('jetstream.profile_photo_disk', 'public'));
+            $personalDataSelection->addFile($this->cover_photo_path, isset($_ENV['VAPOR_ARTIFACT_NAME']) ? 's3' : config('jetstream.profile_photo_disk', 'public'));
         }
     }
 
