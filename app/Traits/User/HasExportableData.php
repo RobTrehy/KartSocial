@@ -28,10 +28,10 @@ trait HasExportableData
             ->add('tracks.json', $this->buildTrackData());
 
         if ($this->profile_photo_path) {
-            $personalDataSelection->addFile(Storage::path($this->profile_photo_path));
+            $personalDataSelection->addFile($this->profile_photo_path, isset($_ENV['VAPOR_ARTIFACT_NAME']) ? 's3' : config('jetstream.profile_photo_disk', 'public'));
         }
         if ($this->cover_photo_path) {
-            $personalDataSelection->addFile(Storage::path($this->cover_photo_path));
+            $personalDataSelection->addFile($this->profile_photo_path, isset($_ENV['VAPOR_ARTIFACT_NAME']) ? 's3' : config('jetstream.profile_photo_disk', 'public'));
         }
     }
 
@@ -63,7 +63,7 @@ trait HasExportableData
                 $data[$visit->trackLayout->track->name][$visit->trackLayout->name]['visits'][$i]['sessions'][$si] = [
                     'name' => $session->session_name,
                     'type' => $session->session_type,
-                    'length' => $session->session_length.' '.$session->session_length_type,
+                    'length' => $session->session_length . ' ' . $session->session_length_type,
                     'position' => $session->finish_position,
                     'drivers' => $session->total_drivers,
                     'created_at' => Carbon::parse($visit->created_at)->toJSON(),
