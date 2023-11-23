@@ -20,6 +20,7 @@ trait HasExportableData
             ->add('user.json', [
                 'name' => $this->name,
                 'alias' => $this->alias,
+                'bio' => $this->bio,
                 'date_of_birth' => $this->dob,
                 'email' => $this->email,
                 'weight' => $this->weight,
