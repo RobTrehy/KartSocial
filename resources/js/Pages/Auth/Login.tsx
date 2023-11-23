@@ -17,7 +17,7 @@ interface Props {
 export default function Login({ canResetPassword, status }: Props) {
   const route = useRoute();
   const form = useForm({
-    identity: '',
+    alias: '',
     password: '',
     remember: '',
   });
@@ -42,17 +42,17 @@ export default function Login({ canResetPassword, status }: Props) {
       <form onSubmit={onSubmit} className="w-full">
         <p className="mb-5 text-2xl">Welcome Back</p>
         <div>
-          <InputLabel htmlFor="identity">Alias or Email Address</InputLabel>
+          <InputLabel htmlFor="alias">Alias or Email Address</InputLabel>
           <TextInput
-            id="identity"
+            id="alias"
             type="text"
             className="mt-1 block w-full"
-            value={form.data.identity}
-            onChange={e => form.setData('identity', e.currentTarget.value)}
+            value={form.data.alias}
+            onChange={e => form.setData('alias', e.currentTarget.value)}
             required
             autoFocus
           />
-          <InputError className="mt-2" message={form.errors.identity} />
+          <InputError className="mt-2" message={form.errors.alias} />
         </div>
 
         <div className="mt-4">
