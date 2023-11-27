@@ -10,8 +10,9 @@ bodyClass: bg-slate-50
       <tr>
         <td class="w-[552px] max-w-full">
           <div class="my-12 sm:my-8 text-center">
-            <a href="https://maizzle.com">
-              <img src="images/maizzle.png" width="70" alt="Maizzle">
+            <a href="{{config('app.url'), 'http://localhost'}}">
+              <!-- <img src="images/maizzle.png" width="70" alt="Maizzle"> -->
+              <h1 class="text-5xl brand-font text-brand-600">Kart <span class="text-brand-500">Social</span></h1>
             </a>
           </div>
 
@@ -59,11 +60,14 @@ bodyClass: bg-slate-50
                 </p>
 
                 <p class="cursor-default">
-                  <a href="https://maizzle.com/docs/" class="text-indigo-700 [text-decoration:none] hover:![text-decoration:underline]">Docs</a>
+                  <a href="https://maizzle.com/docs/"
+                    class="text-indigo-700 [text-decoration:none] hover:![text-decoration:underline]">Docs</a>
                   &bull;
-                  <a href="https://github.com/maizzle" class="text-indigo-700 [text-decoration:none] hover:![text-decoration:underline]">Github</a>
+                  <a href="https://github.com/maizzle"
+                    class="text-indigo-700 [text-decoration:none] hover:![text-decoration:underline]">Github</a>
                   &bull;
-                  <a href="https://twitter.com/maizzlejs" class="text-indigo-700 [text-decoration:none] hover:![text-decoration:underline]">Twitter</a>
+                  <a href="https://twitter.com/maizzlejs"
+                    class="text-indigo-700 [text-decoration:none] hover:![text-decoration:underline]">Twitter</a>
                 </p>
               </td>
             </tr>
