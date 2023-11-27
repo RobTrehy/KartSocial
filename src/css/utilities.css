@@ -1,0 +1,21 @@
+/*
+ * Here is where you can define your custom utility classes.
+ *
+ * We wrap them in the `utilities` @layer directive, so
+ * that Tailwind moves them to the correct location.
+ *
+ * More info:
+ * https://tailwindcss.com/docs/functions-and-directives#layer
+*/
+
+@layer utilities {
+  .break-word {
+    word-break: break-word;
+  }
+}
+
+@import url(https://fonts.bunny.net/css?family=audiowide:400|figtree:400,500,600);
+
+.brand-font {
+  font-family: 'Audiowide', sans-serif;
+}
