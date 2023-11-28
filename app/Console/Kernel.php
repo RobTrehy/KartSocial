@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('app:suggest-people')->hourly();
         $schedule->command('app:cancel-expired-restrictions')->daily();
         $schedule->command('app:clear-expired-roles')->daily();
+        $schedule->command('app:clear-expired-invites')->daily();
         $schedule->command('activitylog:clean')->daily();
         $schedule->command('personal-data-export:clean')->daily();
         $schedule->command('authentication-log:purge')->monthly();
