@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Invitational;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Invitational\StoreInvitationRequest;
+use App\Mail\InviteEmail;
 use App\Models\Invitation;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 
@@ -40,9 +42,12 @@ class InvitationController extends Controller
 
         activity('Invitation')
             ->event('invited')
-            ->log('Invited '.$request->email);
+            ->log('Invited ' . $request->email);
 
-        // TODO: Trigger invitation email
+        Mail::to($request->email)->send(new InviteEmail(
+            config('app.url') . '/register?invitation_code=' . $invitation->invitation_token,
+            Auth::user()->alias,
+        ));
 
         session()->flash('flash.banner', 'The invitation has been sent!');
         session()->flash('flash.bannerStyle', 'success');
