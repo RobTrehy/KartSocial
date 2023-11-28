@@ -1,0 +1,70 @@
+---
+title: "You're invited to join Kart Social!"
+preheader: "You've been invited to join Kart Social!"
+bodyClass: bg-gray-50 dark:bg-gray-900
+---
+
+<x-main>
+  <div class="bg-gray-100 dark:bg-gray-900 sm:px-4 font-sans">
+    <table align="center">
+      <tr>
+        <td class="w-[552px] max-w-full">
+          <div class="my-12 sm:my-8 text-center">
+            <a href="{{config('app.url'), 'http://localhost'}}">
+              <h1 class="text-5xl brand-font text-brand-600">Kart <span class="text-brand-500">Social</span></h1>
+            </a>
+          </div>
+
+          <table class="w-full">
+            <tr>
+              <td class="p-12 sm:px-6 text-base text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 rounded shadow-sm">
+                <h1 class="m-0 mb-6 text-3xl sm:leading-8 text-black dark:text-white font-semibold">
+                  You're Invited!
+                </h1>
+
+                <p class="m-0 leading-6">
+                  Kart Social is a social platform for go-kart racers to record, share and compare their lap times!
+                </p>
+                <p class="mt-2 leading-6">
+                  Whilst we're still building our platform, we're operating on an invite only registration. The good news for you is that you've been invited!<br />
+                </p>
+                <p class="mt-2 leading-6">
+                  Click the link below to start your registration, and be sure to search for and follow {{ invitor.name }} as they invited you!
+                </p>
+
+                <x-spacer height="24px" />
+
+                <x-button href="https://maizzle.com">
+                  Complete registration &rarr;
+                </x-button>
+
+                <x-divider space-y="32px" class="bg-gray-200 dark:bg-gray-900" />
+
+                <p class="m-0">
+                  If you don't want to join us, you can just ignore this email. Your invite and email address will be removed from our system in 30 days.
+                  <br />
+                  <br />
+                  If you'd like to sign up, but want to use a different email address, please forward this email to invites@kartsocial and let us know the correct email address!
+                  <br />
+                  <br />
+                  Thanks,<br />
+                  The Kart Social Team
+                </p>
+              </td>
+            </tr>
+            <tr role="separator">
+              <td class="leading-12">&zwj;</td>
+            </tr>
+            <tr>
+              <td class="text-center text-gray-600 dark:text-gray-400 text-xs px-6">
+                <p class="m-0 mb-4">
+                  Questions? <a href="{{ config('app.url') }}/help" class="text-brand-600 hover:text-brand-500">Help & Support</a>
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+</x-main>
