@@ -11,7 +11,9 @@ export default function AuthenticationCard({
   return (
     <div className="h-full min-h-screen w-screen flex flex-col-reverse md:flex-row">
       <div className="md:w-1/2 flex flex-col gap-4 md:justify-center items-center pt-6 md:pt-0 bg-brand-600 text-white">
-        <TextLogo classes="text-6xl hidden md:flex" secondaryClasses='text-white/70' />
+        <div className="w-2/5">
+          <TextLogo classes="text-white hidden md:flex" secondaryClasses='text-white/70' />
+        </div>
         <div className="rounded-md bg-brand-500 md:w-3/4 mx-4 p-5 mb-8">
           Login or Register to the social platform for go-kart racers to record,
           share and compare their lap times!
