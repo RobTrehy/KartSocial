@@ -112,10 +112,10 @@ export default function AppNavBar() {
               </NavLink>
               {page.props.auth.user && (
                 <NavLink
-                  href={route('visits.index')}
-                  active={route().current('visits.index')}
+                  href={route('events.index')}
+                  active={route().current('events.index')}
                 >
-                  Track Log
+                  My Events
                 </NavLink>
               )}
             </div>
