@@ -4,13 +4,16 @@ import InputError from '@/Components/Forms/InputError';
 import InputHelp from '@/Components/Forms/InputHelp';
 import InputLabel from '@/Components/Forms/InputLabel';
 import SearchSelect from '@/Components/Forms/SearchSelect';
+// import Select from '@/Components/Forms/Select';
 import TextInput from '@/Components/Forms/TextInput';
 import TextareaInput from '@/Components/Forms/TextareaInput';
 import PrimaryButton from '@/Components/PrimaryButton';
 import useRoute from '@/Hooks/useRoute';
 import { TrackLayout } from '@/types';
 import { Link, useForm } from '@inertiajs/react';
+// import axios from 'axios';
 import classNames from 'classnames';
+// import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 
 interface track {
@@ -32,11 +35,13 @@ export default function CreateTrackVisitForm(props: Props) {
     track_layout_id: '',
     title: '',
     notes: '',
+    // linked_visit_id: '0',
   });
 
   const [track, set_track] = useState<track | null>(null);
   const [layout, set_layout] = useState<object | null>(null);
   const [layouts, setLayouts] = useState<Array<object>>([]);
+  // const [suggestions, setSuggestions] = useState<Array<TrackVisit>>([]);
 
   useEffect(() => {
     if (
@@ -79,7 +84,17 @@ export default function CreateTrackVisitForm(props: Props) {
       set_layout(null);
       setLayouts(_layouts);
     }
+    // matchVisit();
   }, [track]);
+
+  // const matchVisit = async () => {
+  //   if (form.data.visit_date !== '' && track) {
+  //     await axios.post(`/api/match/${track.value}`, { visit_date: moment(form.data.visit_date).format('Y-M-D HH:mm') })
+  //       .then(json => {
+  //         setSuggestions(json.data.suggestions)
+  //       });
+  //   }
+  // }
 
   function createTrackVisit() {
     form.post(route('visits.store'), {
@@ -156,6 +171,32 @@ export default function CreateTrackVisitForm(props: Props) {
 
         <InputError message={form.errors.track_layout_id} className="mt-2" />
       </div>
+
+      {/* {
+        suggestions.length > 0 && (
+          <div className="col-span-6 md:col-span-4">
+            <InputLabel htmlFor="linked_visit_id" value="We found some possible matches!" />
+            <Select
+              id="linked_visit_id"
+              className="mt-1 block w-full"
+              value={form.data.linked_visit_id}
+              onChange={e => form.setData('linked_visit_id', e.currentTarget.value)}
+            >
+              <option value="0">Don't link this visit</option>
+              {
+                suggestions.map((suggestion: any, i: number) => (
+                  <option key={i} value={suggestion.id}>
+                    {suggestion.title} by {suggestion.driver.alias}
+                  </option>
+                ))
+              }
+            </Select>
+            <InputHelp className="mt-2">
+              If you went to the same event as these suggestions, you can link your visit to easily compare!
+            </InputHelp>
+          </div>
+        )
+      } */}
 
       {/* <!-- Title --> */}
       <div className="col-span-6 md:col-span-4">

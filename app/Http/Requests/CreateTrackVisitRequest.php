@@ -27,6 +27,7 @@ class CreateTrackVisitRequest extends FormRequest
             'track_layout_id' => 'required|exists:App\Models\TrackLayout,id',
             'title' => 'required|string',
             'notes' => 'nullable|string',
+            // 'linked_visit_id' => 'nullable|exists:App\Models\TrackVisit,id',
         ];
     }
 }

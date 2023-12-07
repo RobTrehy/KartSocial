@@ -1,3 +1,4 @@
+import ProfilePhoto from '@/Components/UserPhotos/ProfilePhoto';
 import useRoute from '@/Hooks/useRoute';
 import useTypedPage from '@/Hooks/useTypedPage';
 import { User } from '@/types';
@@ -24,13 +25,7 @@ export default function Header({ user, following }: Props) {
 
       <div className="relative flex flex-col md:flex-row justify-between md:items-end h-full max-w-7xl mt-6 md:mt-0 mx-auto px-4 md:px-6 lg:px-8 pb-6">
         <div className="flex flex-col md:flex-row gap-y-2 gap-x-6 text-gray-800 dark:text-gray-200 md:items-end">
-          <div className="h-24 md:h-52 w-24 md:w-52 p-1 rounded-md backdrop-blur-sm bg-white/30">
-            <img
-              className="h-full w-full rounded-md object-cover"
-              src={user.profile_photo_url}
-              alt={user.alias}
-            />
-          </div>
+          <ProfilePhoto user={user} />
           <div className="text-gray-100 flex flex-col gap-y-2">
             <p className="text-3xl font-bold">{user.alias}</p>
             <div className="flex flex-row gap-x-2 text-md">

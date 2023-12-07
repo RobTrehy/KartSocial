@@ -5,11 +5,11 @@ import { Link, router } from '@inertiajs/react';
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { DarkModeSwitch } from 'react-toggle-dark-mode';
-import AppSearch from '../AppSearch/AppSearch';
 import Dropdown from '../Dropdown';
 import DropdownLink from '../DropdownLink';
 import IntialsLogo from '../Logos/InitialsLogo';
 import NavLink from '../NavLink';
+import AppSearch from '../Search/AppSearch';
 import ResponsiveNavLink from './Links/ResponsiveNavLink';
 
 export default function AppNavBar() {

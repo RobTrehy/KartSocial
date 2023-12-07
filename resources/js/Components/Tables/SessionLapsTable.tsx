@@ -1,10 +1,10 @@
 import { FormatLapDiff } from '@/Helpers/FormatLapDiff';
 import { FormatLapTime } from '@/Helpers/FormatLapTime';
-import { TrackVisitSession, TrackVisitSessionLap } from '@/types';
+import { TrackSession, TrackVisitSession, TrackVisitSessionLap } from '@/types';
 import React from 'react';
 
 interface Props {
-  session: TrackVisitSession;
+  session: TrackVisitSession|TrackSession;
 }
 
 export default function SessionLapsTable({ session }: Props) {

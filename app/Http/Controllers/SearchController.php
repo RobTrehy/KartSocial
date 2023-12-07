@@ -10,13 +10,13 @@ class SearchController extends Controller
 {
     public function search(Request $request)
     {
-        $tracks = Track::where('name', 'like', '%'.$request->input('term').'%')
-            ->orWhere('town', 'like', '%'.$request->input('term').'%')
-            ->orWhere('county', 'like', '%'.$request->input('term').'%')
+        $tracks = Track::where('name', 'like', '%' . $request->input('term') . '%')
+            ->orWhere('town', 'like', '%' . $request->input('term') . '%')
+            ->orWhere('county', 'like', '%' . $request->input('term') . '%')
             ->take(5)->get();
 
-        $people = User::where('alias', 'like', '%'.$request->input('term').'%')
-            ->orWhere('email', 'like', '%'.$request->input('term').'%')
+        $people = User::where('alias', 'like', '%' . $request->input('term') . '%')
+            ->orWhere('email', 'like', '%' . $request->input('term') . '%')
             ->take(5)->get();
 
         $all = array_merge($people->toArray(), $tracks->toArray());
@@ -26,6 +26,15 @@ class SearchController extends Controller
             'all' => array_slice($all, 0, 5),
             'tracks' => $tracks,
             'people' => $people,
+        ];
+    }
+
+    public function users(Request $request)
+    {
+        return [
+            'people' => User::where('alias', 'like', '%' . $request->input('term') . '%')
+                ->orWhere('email', 'like', '%' . $request->input('term') . '%')
+                ->take(10)->get(),
         ];
     }
 }

@@ -1,9 +1,9 @@
-import AccordionBody from '@/Components/Accordion/AccordionBody';
-import AccordionGroup from '@/Components/Accordion/AccordionGroup';
-import AccordionItem from '@/Components/Accordion/AccordionItem';
-import AccordionOpenIcon from '@/Components/Accordion/AccordionOpenIcon';
-import AccordionSessionTitle from '@/Components/Accordion/AccordionSessionTitle';
 import SessionLapsTable from '@/Components/Tables/SessionLapsTable';
+import AccordionBody from '@/Elements/Accordion/AccordionBody';
+import AccordionGroup from '@/Elements/Accordion/AccordionGroup';
+import AccordionItem from '@/Elements/Accordion/AccordionItem';
+import AccordionOpenIcon from '@/Elements/Accordion/AccordionOpenIcon';
+import AccordionSessionTitle from '@/Elements/Accordion/AccordionSessionTitle';
 import { FormatLapTime } from '@/Helpers/FormatLapTime';
 import { toOrdinal } from '@/Helpers/ToOrdinal';
 import useRoute from '@/Hooks/useRoute';

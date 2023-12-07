@@ -1,9 +1,14 @@
-import React, { createContext, useState } from 'react';
+import React, { PropsWithChildren, createContext, useState } from 'react';
 
 export const AccordionContext = createContext({});
 
-export default function (props: any) {
-  const [open, setOpen] = useState(props.defaultOpen || null);
+interface Props {
+  defaultOpen?: string | number;
+  toggle?: any;
+}
+
+export default function (props: PropsWithChildren<Props>) {
+  const [open, setOpen] = useState<string | number | null>(props.defaultOpen || null);
 
   const toggle: any = (id: string) => {
     setOpen(open !== id ? id : null);

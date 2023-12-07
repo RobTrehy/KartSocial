@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\API\RolesController;
+use App\Http\Controllers\Track\Visit\TrackVisitAPIController;
 use App\Http\Middleware\UserIsRestricted;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,19 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/**
+ * User must be authenticated, verified and NOT restricted
+ */
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+    UserIsRestricted::class,
+])->group(function () {
+    Route::post('/match/{track}', [TrackVisitAPIController::class, 'match']);
+});
+
 
 
 

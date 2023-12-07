@@ -2,6 +2,11 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\Track\Driver\TrackDriverController;
+use App\Http\Controllers\Track\Event\TrackEventsController;
+use App\Http\Controllers\Track\Lap\TrackLapsController;
+use App\Http\Controllers\Track\Session\SessionDriversController;
+use App\Http\Controllers\Track\Session\TrackSessionsController;
 use App\Http\Controllers\TrackLayoutsController;
 use App\Http\Controllers\TracksController;
 use App\Http\Controllers\TrackVisitsController;
@@ -62,7 +67,15 @@ Route::middleware([
     Route::post('/tracks/{track}/layout/{layout}/reinstate', [TrackLayoutsController::class, 'reinstate'])->withTrashed()->name('tracks.layout.reinstate');
     Route::post('/tracks/{track}/layout/{layout}/set_default', [TrackLayoutsController::class, 'makeDefault'])->withTrashed()->name('tracks.layout.set_default');
 
-    // Track Visit & Session Routes
+    // Track Events, Visit & Session Routes
+    Route::resource('events', TrackEventsController::class);
+    Route::resource('events.sessions', TrackSessionsController::class);
+    Route::get('/events/{event}/sessions/{session}/drivers', [TrackDriverController::class, 'index'])->name('events.sessions.drivers');
+    Route::put('/events/{event}/sessions/{session}/drivers', [TrackDriverController::class, 'update'])->name('events.sessions.drivers.update');
+    Route::get('/events/{event}/laps', [TrackLapsController::class, 'edit'])->name('events.laps');
+    Route::put('/events/{event}/laps', [TrackLapsController::class, 'update'])->name('events.laps.update');
+    Route::delete('/events/{event}/session/{session}/lap/{lap}', [TrackVisitSessionLapsController::class, 'destroy'])->name('events.laps.destroy');
+
     Route::resource('visits', TrackVisitsController::class);
     Route::resource('visits.sessions', TrackVisitSessionsController::class)->except(['index', 'show']);
     Route::get('/session/{session}/laps', [TrackVisitSessionLapsController::class, 'edit'])->name('session.laps');
@@ -83,8 +96,9 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    // App Search
+    // Search
     Route::post('/search', [SearchController::class, 'search'])->name('search');
+    Route::post('/users/search', [SearchController::class, 'users'])->name('users.search');
 
     // User Profile Routes
     Route::get('/user/profile', [UserProfileController::class, 'edit'])->name('user-profile.edit');

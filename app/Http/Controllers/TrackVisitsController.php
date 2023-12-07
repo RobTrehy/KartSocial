@@ -75,6 +75,9 @@ class TrackVisitsController extends Controller
                 $request->safe()->toArray()
             )
         );
+        if ($request->linked_visit_id) {
+            $visit->linkedVisits()->attach(TrackVisit::find($request->linked_visit_id));
+        }
 
         return redirect(route('visits.show', ['visit' => $visit->id]));
     }
@@ -91,7 +94,13 @@ class TrackVisitsController extends Controller
         }
 
         return Inertia::render('Visits/Show', [
-            'visit' => $visit->load(['trackLayout', 'sessions', 'sessions.laps']),
+            'visit' => $visit->load([
+                'trackLayout',
+                'sessions',
+                'sessions.laps',
+                // 'linkedVisits',
+                // 'linkedVisits.driver',
+            ]),
         ]);
     }
 

@@ -3,10 +3,14 @@
 namespace App\Traits\User;
 
 use App\Models\Track;
+use App\Models\TrackEvent;
 use App\Models\TrackLayout;
+use App\Models\TrackSession;
+use App\Models\TrackSessionLap;
 use App\Models\TrackVisit;
 use App\Models\TrackVisitSession;
 use App\Models\TrackVisitSessionLap;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Staudenmeir\EloquentHasManyDeep\HasManyDeep;
@@ -14,6 +18,21 @@ use Staudenmeir\EloquentHasManyDeep\HasManyDeep;
 trait HasLaps
 {
     use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
+
+    public function newLaps()
+    {
+        return $this->hasManyDeep(
+            TrackSessionLap::class,
+            [
+                'track_session_drivers',
+                TrackSession::class,
+            ],
+            [
+                'user_id',
+                'id',
+            ],
+        );
+    }
 
     /**
      * All TrackVisitSessionLap records belonging to this model.

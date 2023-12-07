@@ -140,8 +140,8 @@ export interface Track {
   layouts: Nullable<Array<TrackLayout>>;
   all_layouts: Nullable<Array<TrackLayout>>;
   retired_layouts: Nullable<Array<TrackLayout>>;
-  fastestLap: Nullable<TrackVisitSessionLap>;
-  myFastest: Nullable<TrackVisitSessionLap>;
+  fastestLap: Nullable<TrackSessionLap>;
+  myFastest: Nullable<TrackSessionLap>;
   feed: Array<any>; // TODO: Track Feed
   created_at: DateTime;
   updated_at: DateTime;
@@ -150,16 +150,16 @@ export interface Track {
 export interface TrackLayout {
   id: number;
   track_id: number;
-  track: Nullable<Track>;
+  track: Track;
   is_default: boolean;
   name: Nullable<string>;
   length: Nullable<number>;
   laps_count: number;
   my_laps_count: number;
-  fastestLap: TrackVisitSessionLap & {
+  fastestLap: TrackSessionLap & {
     session: any;
   };
-  myFastest: TrackVisitSessionLap & {
+  myFastest: TrackSessionLap & {
     session: any;
   };
   chartData: any;
@@ -168,15 +168,63 @@ export interface TrackLayout {
   updated_at: DateTime;
 }
 
+export interface TrackEvent {
+  id: number;
+  user_id: number;
+  name: string;
+  description: string;
+  date: DateTime;
+  sessions: Array<TrackSession>;
+  fastestLap: TrackSessionLap;
+  track_layout_id: number;
+  track_layout: TrackLayout;
+  // linked_visits: Array<TrackVisit>;
+}
+export interface TrackSession {
+  id: number;
+  track_event_id: number;
+  order: number;
+  name: string;
+  type: string;
+  length: number;
+  length_type: string;
+  laps: Array<TrackSessionLap>;
+  fastestLap: TrackSessionLap;
+  total_drivers: number;
+  drivers: Array<Driver>;
+}
+
+export interface TrackSessionLap {
+  id: number;
+  lap_number: number;
+  lap_time: number;
+  lap_diff: number | null;
+  driver: User;
+  session: TrackSession;
+}
+
+export type Driver = User & {
+  pivot: {
+    id: number,
+    user_id: number,
+    position: number,
+  };
+  laps: Array<TrackSessionLap>;
+  fastest_lap: TrackSessionLap;
+};
+
 export interface TrackVisit {
   id: number;
   user_id: number;
+  driver: User;
   title: string;
   notes: string;
   visit_date: DateTime;
   sessions: Array<TrackVisitSession>;
+  fastestLap: TrackVisitSessionLap;
   track_layout_id: number;
   track_layout: TrackLayout;
+  linked_visits: Array<TrackVisit>;
 }
 
 export interface TrackVisitSession {
@@ -196,6 +244,7 @@ export interface TrackVisitSessionLap {
   lap_number: number;
   lap_time: number;
   lap_diff: number | null;
+  session: TrackVisitSession;
 }
 
 export interface PaginationData {

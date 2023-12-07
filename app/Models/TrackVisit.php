@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Spatie\Activitylog\LogOptions;
@@ -72,8 +73,17 @@ class TrackVisit extends Model
      */
     public function getFastestLapAttribute(): ?TrackVisitSessionLap
     {
-        return $this->fastestLaps()->first();
+        $lap = $this->fastestLaps()->first();
+        return ($lap) ? $lap->load(['session']) : null;
     }
+
+    /**
+     * Get other TrackVisit's that this TrackVisit is linked to
+     */
+    // public function linkedVisits(): BelongsToMany
+    // {
+    //     return $this->belongsToMany(TrackVisit::class, 'track_visit_links', 'track_visit_id', 'linked_visit_id');
+    // }
 
     /**
      * Configure the activity logging rules

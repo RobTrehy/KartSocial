@@ -11,7 +11,7 @@ import React from 'react';
 
 interface Props {
   visit: TrackVisit;
-  profile: Boolean;
+  profile?: Boolean;
 }
 
 export default function TrackVisitCard({ visit, profile = false }: Props) {

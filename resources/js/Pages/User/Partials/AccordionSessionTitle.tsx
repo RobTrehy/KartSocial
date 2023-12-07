@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import { AccordionContext } from '@/Components/Accordion/AccordionGroup';
+import { AccordionContext } from '@/Elements/Accordion/AccordionGroup';
 import classNames from 'classnames';
 
 export default function AccordionSessionTitle(props: any) {
