@@ -3,54 +3,17 @@
 namespace App\Traits\User;
 
 use App\Models\Track;
-use App\Models\TrackEvent;
 use App\Models\TrackLayout;
-use App\Models\TrackSession;
 use App\Models\TrackSessionLap;
-use App\Models\TrackVisit;
-use App\Models\TrackVisitSession;
-use App\Models\TrackVisitSessionLap;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Staudenmeir\EloquentHasManyDeep\HasManyDeep;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 trait HasLaps
 {
     use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
-    public function newLaps()
+    public function laps(): Builder
     {
-        return $this->hasManyDeep(
-            TrackSessionLap::class,
-            [
-                'track_session_drivers',
-                TrackSession::class,
-            ],
-            [
-                'user_id',
-                'id',
-            ],
-        );
-    }
-
-    /**
-     * All TrackVisitSessionLap records belonging to this model.
-     */
-    public function laps(): HasManyThrough
-    {
-        return $this->hasManyDeep(
-            TrackVisitSessionLap::class,
-            [
-                TrackVisit::class,
-                TrackVisitSession::class,
-            ],
-            [
-                null,
-                'track_visit_id',
-                'session_id',
-            ]
-        );
+        return TrackSessionLap::where('user_id', $this->id);
     }
 
     /**
@@ -58,34 +21,33 @@ trait HasLaps
      *
      * Order By: lap_time, ASC
      */
-    public function fastestLaps(): MorphToMany
+    public function fastestLaps(): Builder
     {
         return $this->laps()->orderBy('lap_time', 'ASC');
     }
 
     /**
-     * All TrackVisitSessionLap records for this model, filtered by TrackLayout
+     * All TrackSessionLap records for this model, filtered by TrackLayout
      */
-    public function fastestLapsForTrackLayout(TrackLayout $layout): HasManyDeep
+    public function fastestLapsForTrackLayout(TrackLayout $layout): Builder
     {
-        return $this->laps()
-            ->where('track_visits.track_layout_id', $layout->id)
+        return TrackSessionLap::where('track_session_laps.user_id', $this->id)
+            ->where('track_events.track_layout_id', $layout->id)
+            ->join('track_sessions', 'track_sessions.id', '=', 'track_session_laps.track_session_id')
+            ->join('track_events', 'track_events.id', '=', 'track_sessions.track_event_id')
             ->orderBy('lap_time', 'ASC');
     }
 
     /**
-     * All TrackVisitSessionLap records for this model, filtered by Track
+     * All TrackSessionLap records for this model, filtered by Track
      */
-    public function fastestLapsForTrack(Track $track): HasManyDeep
+    public function fastestLapsForTrack(Track $track): Builder
     {
-        $ids = [];
-        $layouts = $track->allLayouts()->get();
-        foreach ($layouts as $layout) {
-            $ids[] = $layout->id;
-        }
-
-        return $this->laps()
-            ->whereIn('track_visits.track_layout_id', $ids)
+        $layouts = TrackLayout::where('track_id', $track->id)->pluck('id');
+        return TrackSessionLap::where('track_session_laps.user_id', $this->id)
+            ->whereIn('track_events.track_layout_id', $layouts)
+            ->join('track_sessions', 'track_sessions.id', '=', 'track_session_laps.track_session_id')
+            ->join('track_events', 'track_events.id', '=', 'track_sessions.track_event_id')
             ->orderBy('lap_time', 'ASC');
     }
 }

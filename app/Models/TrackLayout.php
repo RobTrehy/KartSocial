@@ -46,46 +46,47 @@ class TrackLayout extends Model
     }
 
     /**
-     * All TrackVisitSessionLap records for this model, via each TrackVisit and each TrackVisitSession.
+     * All TrackSessionLap records for this model, via each TrackEvent and each TrackSession.
      */
     public function laps(): HasManyThrough
     {
         return $this->hasManyDeep(
-            TrackVisitSessionLap::class,
+            TrackSessionLap::class,
             [
-                TrackVisit::class,
-                TrackVisitSession::class,
+                TrackEvent::class,
+                TrackSession::class,
             ],
             [
                 null,
-                'track_visit_id',
-                'session_id',
+                'track_event_id',
+                'track_session_id',
             ]
-        )->with(['session', 'session.trackVisit', 'session.trackVisit.driver']);
+        )->with(['session', 'session.trackEvent', 'driver']);
     }
 
     /**
-     * All TrackVisitSessionLap records for this model, via each TrackVisit and each TrackVisitSession
-     * WHERE the TrackVisitSessionLap belongs to the authenticated user.
+     * All TrackSessionLap records for this model, via each TrackEvent and each TrackSession
+     * WHERE the TrackSessionLap belongs to the authenticated user.
      */
     public function myLaps(): HasManyThrough
     {
         return $this->hasManyDeep(
-            TrackVisitSessionLap::class,
+            TrackSessionLap::class,
             [
-                TrackVisit::class,
-                TrackVisitSession::class,
+                TrackEvent::class,
+                TrackSession::class,
             ],
             [
                 null,
-                'track_visit_id',
-                'session_id',
+                'track_event_id',
+                'track_session_id',
             ]
-        )->where('track_visits.user_id', Auth::id());
+        )->with(['session', 'session.trackEvent', 'driver'])
+        ->where('track_session_laps.user_id', Auth::id());
     }
 
     /**
-     * All TrackVisitSessionLap records for this model, via each TrackVisit and each TrackVisitSession.
+     * All TrackSessionLap records for this model, via each TrackEvent and each TrackSession.
      *
      * Order By: lap_time, ASC
      */
@@ -95,11 +96,11 @@ class TrackLayout extends Model
     }
 
     /**
-     * Get the single most fastest TrackVisitSessionLap for this model.
+     * Get the single most fastest TrackSessionLap for this model.
      */
-    public function getFastestLapAttribute(): ?TrackVisitSessionLap
+    public function getFastestLapAttribute(): ?TrackSessionLap
     {
-        return $this->fastestLaps()->first();
+        return $this->fastestLaps()->with('driver')->first();
     }
 
     /**

@@ -73,15 +73,15 @@ export default function TrackLayoutCard({ layout, track }: Props) {
                   by&nbsp;
                   <Link
                     href={route('profile.show', {
-                      alias: layout.fastestLap.session.track_visit.driver.alias,
+                      alias: layout.fastestLap.driver.alias,
                     })}
                     className="hover:text-brand-600"
                   >
-                    {layout.fastestLap.session.track_visit.driver.alias}
+                    {layout.fastestLap.driver.alias}
                   </Link>
                   &nbsp;on{' '}
                   {moment(
-                    layout.fastestLap.session.track_visit.visit_date,
+                    layout.fastestLap.session.track_event.date,
                   ).format('Do MMM YYYY')}
                 </p>
               </div>
@@ -94,7 +94,7 @@ export default function TrackLayoutCard({ layout, track }: Props) {
                   <p className="text-xs">
                     on{' '}
                     {moment(
-                      layout.fastestLap.session.track_visit.visit_date,
+                      layout.fastestLap.session.track_event.date,
                     ).format('Do MMM YYYY')}
                   </p>
                 </div>
@@ -113,9 +113,7 @@ export default function TrackLayoutCard({ layout, track }: Props) {
                   <div className="flex flex-col">
                     <span className="block leading-5 text-sm md:ml-4 text-red-500">
                       {FormatLapDiff({
-                        id: 0,
-                        lap_time: 0,
-                        lap_number: 2,
+                        lap_number: 0,
                         lap_diff:
                           layout.myFastest.lap_time -
                           layout.fastestLap.lap_time,
@@ -233,14 +231,14 @@ export default function TrackLayoutCard({ layout, track }: Props) {
           </svg>
           {slide === 0 && (
             <TrackLayoutChart
-              chartData={layout.chartData?.latest}
-              title="Latest Laps"
+              chartData={layout.chartData?.fastest}
+              title="Fastest Laps"
             />
           )}
           {slide === 1 && (
             <TrackLayoutChart
-              chartData={layout.chartData?.myLatest}
-              title="My Latest Laps"
+              chartData={layout.chartData?.myFastest}
+              title="My Fastest Laps"
             />
           )}
           <svg

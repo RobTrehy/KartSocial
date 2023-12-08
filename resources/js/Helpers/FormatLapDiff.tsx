@@ -1,8 +1,13 @@
-import { TrackSessionLap, TrackVisitSessionLap } from '@/types';
+import { TrackSessionLap } from '@/types';
 import moment from 'moment';
 import React from 'react';
 
-export function FormatLapDiff(lap: TrackVisitSessionLap|TrackSessionLap, text: boolean = true) {
+interface Diff {
+  lap_number: number;
+  lap_diff: number;
+}
+
+export function FormatLapDiff(lap: Diff|TrackSessionLap, text: boolean = true) {
   if (lap.lap_number != 1 && lap.lap_diff) {
     if (lap.lap_diff <= -60 || lap.lap_diff >= 60) {
       if (lap.lap_diff < 0) {

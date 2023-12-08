@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateTrackRequest;
 use App\Models\Track;
 use App\Models\TrackEvent;
 use App\Models\TrackLayout;
+use App\Models\TrackSessionLap;
 use App\Models\TrackVisit;
 use App\Models\TrackVisitSessionLap;
 use App\Models\User;
@@ -74,10 +75,10 @@ class TracksController extends Controller
         $layouts = TrackLayout::where('track_id', $track->id)
             ->with([
                 'laps' => function ($query) {
-                    $query->latest()->limit(20);
+                    $query->orderBy('lap_time', 'ASC')->limit(15);
                 },
                 'myLaps' => function ($query) {
-                    $query->latest()->limit(20);
+                    $query->orderBy('lap_time', 'ASC')->limit(15);
                 },
             ])
             ->withCount(['laps', 'myLaps'])
@@ -89,25 +90,24 @@ class TracksController extends Controller
 
         foreach ($layouts as $idx => $layout) {
             if ($layout['fastestLap']) {
-                $layouts[$idx]['fastestLap'] = TrackVisitSessionLap::where('id', $layout['fastestLap']['id'])
-                    ->with(['session', 'session.trackVisit'])
-                    ->first()->toArray();
+                $layouts[$idx]['fastestLap'] = TrackSessionLap::where('id', $layout['fastestLap']['id'])
+                    ->with(['session', 'session.trackEvent', 'driver'])
+                    ->first()?->toArray();
             }
             $layouts[$idx]['myFastest'] = Auth::check() ?
-                User::find(Auth::id())->fastestLapsForTrackLayout(TrackLayout::find($layout['id']))->with(['session', 'session.trackVisit'])->first()
-                : null;
+                User::find(Auth::id())->fastestLapsForTrackLayout(TrackLayout::find($layout['id']))->first() : null;
 
             $layouts[$idx]['chartData'] = [
-                'latest' => $this->sortChartData(array_key_exists('laps', $layout) ? $layout['laps'] : []),
-                'myLatest' => $this->sortChartData(array_key_exists('my_laps', $layout) ? $layout['my_laps'] : []),
+                'fastest' => $this->sortChartData(array_key_exists('laps', $layout) ? $layout['laps'] : []),
+                'myFastest' => $this->sortChartData(array_key_exists('my_laps', $layout) ? $layout['my_laps'] : []),
             ];
         }
 
         return Inertia::render('Tracks/Show', [
             'track' => $track,
-            'track.myFastest' => Auth::check() ? User::find(Auth::id())->fastestLapsForTrack($track)->with(['session', 'session.trackVisit'])->first() : null,
-            'track.fastestLap' => TrackVisitSessionLap::where('id', $track->fastestLap?->id)
-                ->with(['session', 'session.trackVisit'])
+            'track.myFastest' => Auth::check() ? User::find(Auth::id())->fastestLapsForTrack($track)->first() : null,
+            'track.fastestLap' => TrackSessionLap::where('id', $track->fastestLap?->id)
+                ->with(['session', 'session.trackEvent'])
                 ->first(),
             'layouts' => $layouts,
         ]);

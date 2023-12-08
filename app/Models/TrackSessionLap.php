@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class TrackSessionLap extends Model
 {
+    use \Staudenmeir\EloquentEagerLimit\HasEagerLimit;
+    
     protected $fillable = [
         'user_id',
         'track_session_id',
@@ -22,6 +24,6 @@ class TrackSessionLap extends Model
 
     public function session(): BelongsTo
     {
-        return $this->belongsTo(TrackSession::class);
+        return $this->belongsTo(TrackSession::class, 'track_session_id');
     }
 }
