@@ -16,7 +16,7 @@ Route::resource('/users', UserAdminController::class)->only([
     'destroy',
 ]);
 Route::get('/users/{user}/activity', [UserAdminController::class, 'activity'])->name('users.activity');
-Route::get('/users/{user}/track-visits', [UserAdminController::class, 'trackVisits'])->name('users.track-visits');
+Route::get('/users/{user}/events', [UserAdminController::class, 'trackEvents'])->name('users.track-events');
 Route::get('/users/{user}/restriction', [UserRestrictionController::class, 'adminManageRestriction'])->name('users.restriction.manage');
 Route::post('/users/{user}/restrict', [UserRestrictionController::class, 'adminRestrictUser'])->name('user.restrict');
 Route::post('/user/restriction/{ban}', [UserRestrictionController::class, 'adminCancelAppeals'])->name('user.restriction.appeal.close');

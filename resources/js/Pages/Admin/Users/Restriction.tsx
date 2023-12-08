@@ -41,11 +41,11 @@ export default function Restriction({ user }: Props) {
             <SecondaryButton
               onClick={() =>
                 router.visit(
-                  route('admin:users.track-visits', { user: user.id }),
+                  route('admin:users.track-events', { user: user.id }),
                 )
               }
             >
-              Track Visits
+              Track Events
             </SecondaryButton>
           </div>
         </div>

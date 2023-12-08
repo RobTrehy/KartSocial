@@ -5,13 +5,9 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Track\Driver\TrackDriverController;
 use App\Http\Controllers\Track\Event\TrackEventsController;
 use App\Http\Controllers\Track\Lap\TrackLapsController;
-use App\Http\Controllers\Track\Session\SessionDriversController;
 use App\Http\Controllers\Track\Session\TrackSessionsController;
 use App\Http\Controllers\TrackLayoutsController;
 use App\Http\Controllers\TracksController;
-use App\Http\Controllers\TrackVisitsController;
-use App\Http\Controllers\TrackVisitSessionLapsController;
-use App\Http\Controllers\TrackVisitSessionsController;
 use App\Http\Controllers\User\UserAccountController;
 use App\Http\Controllers\User\UserPhotosController;
 use App\Http\Controllers\User\UserProfileController;
@@ -74,13 +70,7 @@ Route::middleware([
     Route::put('/events/{event}/sessions/{session}/drivers', [TrackDriverController::class, 'update'])->name('events.sessions.drivers.update');
     Route::get('/events/{event}/laps', [TrackLapsController::class, 'edit'])->name('events.laps');
     Route::put('/events/{event}/laps', [TrackLapsController::class, 'update'])->name('events.laps.update');
-    Route::delete('/events/{event}/session/{session}/lap/{lap}', [TrackVisitSessionLapsController::class, 'destroy'])->name('events.laps.destroy');
-
-    Route::resource('visits', TrackVisitsController::class);
-    Route::resource('visits.sessions', TrackVisitSessionsController::class)->except(['index', 'show']);
-    Route::get('/session/{session}/laps', [TrackVisitSessionLapsController::class, 'edit'])->name('session.laps');
-    Route::put('/session/{session}/laps', [TrackVisitSessionLapsController::class, 'update'])->name('session.laps.update');
-    Route::delete('/session/{session}/lap/{lap}', [TrackVisitSessionLapsController::class, 'destroy'])->name('session.lap.destroy');
+    Route::delete('/events/{event}/session/{session}/lap/{lap}', [TrackLapsController::class, 'destroy'])->name('events.laps.destroy');
 
     // Admin Routes
     Route::prefix('/admin')->middleware(['can:admin.access'])->name('admin:')->group(function () {

@@ -20,7 +20,7 @@ class UserProfileController extends Controller
     public function show(string $alias)
     {
         $user = User::where('alias', $alias)
-            ->with(['homeTrack', 'trackVisits'])
+            ->with(['homeTrack', 'trackEvents'])
             ->with(['followedBy' => function ($query) {
                 $query->inRandomOrder()->take('6');
             }])
@@ -42,7 +42,7 @@ class UserProfileController extends Controller
     public function showFollows(string $alias)
     {
         $user = User::where('alias', $alias)
-            ->with(['homeTrack', 'trackVisits', 'follows'])
+            ->with(['homeTrack', 'trackEvents', 'follows'])
             ->with(['followedBy' => function ($query) {
                 $query->inRandomOrder()->take('6');
             }])
@@ -63,7 +63,7 @@ class UserProfileController extends Controller
     public function showFollowers(string $alias)
     {
         $user = User::where('alias', $alias)
-            ->with(['homeTrack', 'trackVisits', 'followedBy'])
+            ->with(['homeTrack', 'trackEvents', 'followedBy'])
             ->withCount(['followedBy', 'follows'])
             ->firstOrFail();
 
@@ -81,7 +81,7 @@ class UserProfileController extends Controller
     public function showItem(string $alias, DashboardFeed $item)
     {
         $user = User::where('alias', $alias)
-            ->with(['homeTrack', 'trackVisits'])
+            ->with(['homeTrack', 'trackEvents'])
             ->with(['followedBy' => function ($query) {
                 $query->inRandomOrder()->take('6');
             }])

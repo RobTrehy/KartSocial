@@ -5,6 +5,10 @@ import React from 'react';
 export default function Against({ subjectType, subject }: any) {
   const route = useRoute();
 
+  if (!subject) {
+    return null;
+  }
+
   if (subjectType === 'App\\Models\\User') {
     return (
       <Link
@@ -44,31 +48,20 @@ export default function Against({ subjectType, subject }: any) {
     );
   }
 
-  if (subjectType === 'App\\Models\\TrackVisit') {
-    return (
-      <Link
-        href={route('visits.show', { visit: subject.id })}
-        className="text-sm leading-6 whitespace-nowrap truncate text-gray-900 dark:text-white hover:text-brand-500"
-      >
-        {subject.title}
-      </Link>
-    );
-  }
-
-  if (subjectType === 'App\\Models\\TrackSession' && subject) {
-    return (
-      <Link
-        href={route('visits.show', { visit: subject.track_visit_id })}
-        className="text-sm leading-6 whitespace-nowrap truncate text-gray-900 dark:text-white hover:text-brand-500"
-      >
-        {subject.session_name}
-      </Link>
-    );
-  } else if (subjectType === 'App\\Models\\TrackSession' && !subject) {
-    return (
-      <div className="text-sm leading-6 whitespace-nowrap truncate text-gray-900 dark:text-white italic">
-        Session has been deleted.
-      </div>
-    );
-  }
+  // if (subjectType === 'App\\Models\\TrackSession' && subject) {
+  //   return (
+  //     <Link
+  //       href={route('events.sessions.show', { visit: subject.track_visit_id })}
+  //       className="text-sm leading-6 whitespace-nowrap truncate text-gray-900 dark:text-white hover:text-brand-500"
+  //     >
+  //       {subject.session_name}
+  //     </Link>
+  //   );
+  // } else if (subjectType === 'App\\Models\\TrackSession' && !subject) {
+  //   return (
+  //     <div className="text-sm leading-6 whitespace-nowrap truncate text-gray-900 dark:text-white italic">
+  //       Session has been deleted.
+  //     </div>
+  //   );
+  // }
 }

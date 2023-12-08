@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UpdateUserProfileRequest;
 use App\Models\Track;
+use App\Models\TrackEvent;
 use App\Models\TrackVisit;
 use App\Models\TrackVisitSession;
 use App\Models\User;
@@ -111,18 +112,18 @@ class UserAdminController extends Controller
     }
 
     /**
-     * Get a list of track visits for a User
+     * Get a list of TrackEvents for a User
      *
      * Requires: visits.view.any
      */
-    public function trackVisits(User $user)
+    public function trackEvents(User $user)
     {
         if (Auth::user()->cannot('visits.view.any')) {
             abort(403);
         }
 
-        return Inertia::render('Admin/Users/TrackVisits/Index', [
-            'trackVisits' => TrackVisit::where('user_id', $user->id)->with(['trackLayout', 'sessions', 'sessions.laps'])->paginate(10),
+        return Inertia::render('Admin/Users/TrackEvents/Index', [
+            'events' => TrackEvent::where('user_id', $user->id)->with(['trackLayout', 'sessions', 'sessions.drivers'])->paginate(10),
         ]);
     }
 

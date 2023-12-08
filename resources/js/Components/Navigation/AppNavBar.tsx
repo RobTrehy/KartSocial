@@ -412,10 +412,10 @@ export default function AppNavBar() {
                 Tracks
               </ResponsiveNavLink>
               <ResponsiveNavLink
-                href={route('visits.index')}
-                active={route().current('visits.index')}
+                href={route('events.index')}
+                active={route().current('events.index')}
               >
-                Track Log
+                My Events
               </ResponsiveNavLink>
             </>
           )}
