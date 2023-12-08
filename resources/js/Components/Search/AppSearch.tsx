@@ -64,11 +64,28 @@ export default function AppSearch({ breakpoint }: Props) {
     'transition-all duration-500',
   );
 
+  const iconbreak = () => {
+    if (breakpoint === 'sm') {
+      return 'sm:hidden';
+    } else if (breakpoint === 'md') {
+      return 'md:hidden';
+    } else if (breakpoint === 'lg') {
+      return 'lg:hidden';
+    } else if (breakpoint === 'xl') {
+      return 'xl:hidden';
+    } else if (breakpoint === '2xl') {
+      return '2xl:hidden';
+    } else if (breakpoint === '3xl') {
+      return '3xl:hidden';
+    }
+    return 'hidden';
+  }
+
   return (
     <div className={`flex ml-4 ${breakpoint}:mx-auto items-center`}>
       {
         !isFocus && (
-          <div className={`inline-flex ${breakpoint}:hidden text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300`} onClick={() => { setIsFocus(true); inputRef.current?.focus() }}>
+          <div className={`inline-flex ${iconbreak()} text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300`} onClick={() => { setIsFocus(true); inputRef.current?.focus() }}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
             </svg>
