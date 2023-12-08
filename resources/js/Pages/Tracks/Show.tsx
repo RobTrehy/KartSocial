@@ -1,4 +1,3 @@
-import TrackVisitFeed from '@/Components/Feed/TrackVisitFeed';
 import usePermissions from '@/Hooks/usePermissions';
 import useRoute from '@/Hooks/useRoute';
 import AppLayout from '@/Layouts/AppLayout';
@@ -6,6 +5,7 @@ import { Track, TrackLayout } from '@/types';
 import { router } from '@inertiajs/react';
 import { Map, Marker } from 'pigeon-maps';
 import React, { useState } from 'react';
+import Calendar from './Partials/Calendar';
 import TrackLayoutCard from './Partials/TrackLayoutCard';
 
 interface Props {
@@ -42,20 +42,20 @@ export default function Index({ track, layouts }: Props) {
                 track.town ||
                 track.county ||
                 track.postal_code) && (
-                <p className="text-gray-300 max-w-md">
-                  {track.address_1}
-                  {track.address_2 ? ', ' : ''}
-                  {track.address_2}
-                  {track.address_3 ? ', ' : ''}
-                  {track.address_3}
-                  {track.town ? ', ' : ''}
-                  {track.town}
-                  {track.county ? ', ' : ''}
-                  {track.county}
-                  {track.postal_code ? ', ' : ''}
-                  {track.postal_code}
-                </p>
-              )}
+                  <p className="text-gray-300 max-w-md">
+                    {track.address_1}
+                    {track.address_2 ? ', ' : ''}
+                    {track.address_2}
+                    {track.address_3 ? ', ' : ''}
+                    {track.address_3}
+                    {track.town ? ', ' : ''}
+                    {track.town}
+                    {track.county ? ', ' : ''}
+                    {track.county}
+                    {track.postal_code ? ', ' : ''}
+                    {track.postal_code}
+                  </p>
+                )}
               <div className="flex flex-col md:flex-row gap-x-2 text-md">
                 {track.url && (
                   <a
@@ -86,31 +86,31 @@ export default function Index({ track, layouts }: Props) {
           <div className="mt-4 w-full md:w-1/3 text-center md:text-right text-gray-800 dark:text-gray-200">
             {(permissions.includes('tracks.layouts.create') ||
               permissions.includes('tracks.layouts.update')) && (
-              <div className="inline-flex items-center divide-x divide-gray-300 dark:divide-gray-500 overflow-hidden backdrop-blur-sd bg-white/50 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-500 rounded-md font-semibold text-xs text-gray-100 dark:text-gray-300 uppercase tracking-widest shadow-sm disabled:opacity-25">
-                {permissions.includes('tracks.layouts.create') && (
-                  <span
-                    className="px-4 py-2 cursor-pointer hover:bg-gray-50/20 dark:hover:bg-gray-700/50 transition ease-in-out duration-150"
-                    onClick={() =>
-                      router.visit(
-                        route('tracks.layout.create', { track: track.id }),
-                      )
-                    }
-                  >
-                    Add Layout
-                  </span>
-                )}
-                {permissions.includes('tracks.layouts.update') && (
-                  <span
-                    className="px-4 py-2 cursor-pointer hover:bg-gray-50/20 dark:hover:bg-gray-700/50 transition ease-in-out duration-150"
-                    onClick={() =>
-                      router.visit(route('tracks.edit', { track: track.id }))
-                    }
-                  >
-                    Update Details
-                  </span>
-                )}
-              </div>
-            )}
+                <div className="inline-flex items-center divide-x divide-gray-300 dark:divide-gray-500 overflow-hidden backdrop-blur-sd bg-white/50 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-500 rounded-md font-semibold text-xs text-gray-100 dark:text-gray-300 uppercase tracking-widest shadow-sm disabled:opacity-25">
+                  {permissions.includes('tracks.layouts.create') && (
+                    <span
+                      className="px-4 py-2 cursor-pointer hover:bg-gray-50/20 dark:hover:bg-gray-700/50 transition ease-in-out duration-150"
+                      onClick={() =>
+                        router.visit(
+                          route('tracks.layout.create', { track: track.id }),
+                        )
+                      }
+                    >
+                      Add Layout
+                    </span>
+                  )}
+                  {permissions.includes('tracks.layouts.update') && (
+                    <span
+                      className="px-4 py-2 cursor-pointer hover:bg-gray-50/20 dark:hover:bg-gray-700/50 transition ease-in-out duration-150"
+                      onClick={() =>
+                        router.visit(route('tracks.edit', { track: track.id }))
+                      }
+                    >
+                      Update Details
+                    </span>
+                  )}
+                </div>
+              )}
           </div>
         </div>
       </div>
@@ -216,14 +216,11 @@ export default function Index({ track, layouts }: Props) {
           )}
 
           <TrackLayoutCard layout={layouts[layout]} track={track} />
-          {track.feed.length > 0 && (
-            <>
-              <h2 className="mt-10 mb-4 px-4 font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                Latest Activity
-              </h2>
-              <TrackVisitFeed feed={track.feed} profile />
-            </>
-          )}
+
+          <h2 className="mt-10 mb-4 px-4 font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            Events
+          </h2>
+          <Calendar track={track} />
         </div>
       </div>
     </AppLayout>

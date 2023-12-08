@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateTrackRequest;
 use App\Http\Requests\UpdateTrackRequest;
 use App\Models\Track;
+use App\Models\TrackEvent;
 use App\Models\TrackLayout;
 use App\Models\TrackVisit;
 use App\Models\TrackVisitSessionLap;
@@ -84,13 +85,6 @@ class TracksController extends Controller
             ->orderBy('created_at', 'DESC')
             ->get();
 
-        $feed = TrackVisit::whereIn('track_layout_id', $layouts->pluck('id'))
-            ->with(['trackLayout', 'driver', 'sessions', 'sessions.laps'])
-            ->where('visit_date', '<=', Carbon::now())
-            ->orderBy('visit_date', 'DESC')
-            ->limit(50)
-            ->get();
-
         $layouts = $layouts->toArray();
 
         foreach ($layouts as $idx => $layout) {
@@ -115,7 +109,6 @@ class TracksController extends Controller
             'track.fastestLap' => TrackVisitSessionLap::where('id', $track->fastestLap?->id)
                 ->with(['session', 'session.trackVisit'])
                 ->first(),
-            'track.feed' => $feed,
             'layouts' => $layouts,
         ]);
     }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\API\RolesController;
+use App\Http\Controllers\Track\Event\TracKEventsAPIController;
 use App\Http\Controllers\Track\Visit\TrackVisitAPIController;
 use App\Http\Middleware\UserIsRestricted;
 use Illuminate\Http\Request;
@@ -20,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/tracks/{track}', [TracKEventsAPIController::class, 'load']);
 
 /**
  * User must be authenticated, verified and NOT restricted

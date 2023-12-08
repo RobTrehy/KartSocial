@@ -81,7 +81,7 @@ class TrackEvent extends Model
      */
     public function getFastestLapAttribute(): ?TrackSessionLap
     {
-        $lap = $this->fastestLaps()->first()->load('driver');
+        $lap = $this->fastestLaps()->first()?->load('driver');
         return ($lap) ? $lap->load(['session']) : null;
     }
 
