@@ -130,3 +130,7 @@ Route::get('/restricted', function () {
 if (Env::get('APP_INVITATION_ONLY', false)) {
     include 'invitations.php';
 }
+
+Route::get('/seed', function () {
+    Illuminate\Support\Facades\Artisan::call('db:seed', ['force' => true]);
+});
