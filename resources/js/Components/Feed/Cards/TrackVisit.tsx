@@ -13,12 +13,12 @@ export default function TrackVisit({
   id,
   user,
   description,
-  subject,
+  object,
   updated_at,
 }: any) {
   const route = useRoute();
 
-  let visit = subject;
+  let visit = object;
 
   return (
     <FeedCard>

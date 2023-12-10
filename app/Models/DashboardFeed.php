@@ -24,8 +24,8 @@ class DashboardFeed extends Model
      */
     protected $fillable = [
         'user_id',
-        'subject_type',
-        'subject_id',
+        'object_type',
+        'object_id',
         'card_type',
         'event',
         'description',
@@ -41,7 +41,7 @@ class DashboardFeed extends Model
      */
     protected $with = [
         'user',
-        'subject',
+        'object',
         'parent',
     ];
 
@@ -54,9 +54,9 @@ class DashboardFeed extends Model
     }
 
     /**
-     * The subject this model morphs to.
+     * The object this model morphs to.
      */
-    public function subject(): MorphTo
+    public function object(): MorphTo
     {
         return $this->morphTo();
     }

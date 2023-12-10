@@ -135,7 +135,7 @@ class UserAdminController extends Controller
     {
         return Inertia::render('Admin/Users/Activity', [
             'user' => $user,
-            'user.actions' => $user->actions()->with(['subject'])->orderBy('created_at', 'DESC')->paginate(15),
+            'user.actions' => $user->actions()->with(['object'])->orderBy('created_at', 'DESC')->paginate(15),
         ]);
     }
 }
