@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RolesAndPermissionsSeeder::class,
-            // TracksSeeder::class,
-            // TrackLayoutsSeeder::class,
+            TracksSeeder::class,
+            TrackLayoutsSeeder::class,
         ]);
 
         if (app()->environment('local')) {
