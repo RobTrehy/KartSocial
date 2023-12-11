@@ -9,7 +9,7 @@ import FeedHeader from './Partials/FeedHeader';
 
 export default function SessionLaps({
   id,
-  subject,
+  object,
   user,
   description,
   updated_at,
@@ -21,32 +21,32 @@ export default function SessionLaps({
       <FeedHeader user={user} description={description} time={updated_at} />
       <div className="border dark:border-gray-700 rounded-md py-2">
         <div className="px-2 mb-2">
-          <CardTitle>{subject.session_name}</CardTitle>
+          <CardTitle>{object.session_name}</CardTitle>
         </div>
 
         <div className={reveal ? 'relative' : 'h-28 overflow-hidden relative'}>
           <div className="flex flex-col md:flex-row items-center divide-y md:divide-y-0 md:divide-x border-t text-xs font-medium text-gray-500 dark:text-gray-500 dark:border-gray-700 dark:divide-gray-700">
             <div className="px-5 py-0.5 w-full md:w-auto text-center">
-              Session Length: {subject.session_length}{' '}
-              {subject.session_length_type}
+              Session Length: {object.session_length}{' '}
+              {object.session_length_type}
             </div>
             <div className="px-5 py-0.5 w-full md:w-auto text-center">
-              {subject.laps ? subject.laps.length : 0} Laps Completed
+              {object.laps ? object.laps.length : 0} Laps Completed
             </div>
-            {subject.fastestLap && (
+            {object.fastestLap && (
               <div className="px-5 py-0.5 w-full md:w-auto text-center">
-                Fastest Lap: {FormatLapTime(subject.fastestLap)} on lap{' '}
-                {subject.fastestLap.lap_number}
+                Fastest Lap: {FormatLapTime(object.fastestLap)} on lap{' '}
+                {object.fastestLap.lap_number}
               </div>
             )}
-            {subject.finish_position && subject.total_drivers && (
+            {object.finish_position && object.total_drivers && (
               <div className="px-5 py-0.5 w-full md:w-auto text-center">
-                Finished {toOrdinal(subject.finish_position)} of{' '}
-                {subject.total_drivers} drivers
+                Finished {toOrdinal(object.finish_position)} of{' '}
+                {object.total_drivers} drivers
               </div>
             )}
           </div>
-          <SessionLapsTable session={subject} />
+          <SessionLapsTable session={object} />
           <div
             className={
               reveal

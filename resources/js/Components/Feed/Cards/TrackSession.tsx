@@ -11,7 +11,7 @@ import SessionAccordion from './Partials/SessionAccordion';
 
 export default function TrackSession({
   id,
-  subject,
+  object,
   parent,
   user,
   description,

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('dashboard_feeds', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->morphs('subject', 'subject');
+            $table->morphs('object', 'object');
             $table->string('card_type');
             $table->string('event')->nullable();
             $table->text('description')->nullable();

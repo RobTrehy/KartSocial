@@ -13,8 +13,8 @@ class TrackVisitActions
     {
         DashboardFeed::create([
             'user_id' => (Auth::check()) ? Auth::id() : $event->visit->user_id, // Hack to get around seeding?
-            'subject_type' => get_class($event->visit),
-            'subject_id' => $event->visit->id,
+            'object_type' => get_class($event->visit),
+            'object_id' => $event->visit->id,
             'card_type' => 'TrackVisit',
             'event' => 'created',
             'description' => 'recorded a new Track Visit',
@@ -25,8 +25,8 @@ class TrackVisitActions
     {
         $user_id = (Auth::check()) ? Auth::id() : $event->visit->user_id; // Hack to get around seeding?
         $record = DashboardFeed::where('user_id', $user_id)
-            ->where('subject_type', get_class($event->visit))
-            ->where('subject_id', $event->visit->id)
+            ->where('object_type', get_class($event->visit))
+            ->where('object_id', $event->visit->id)
             ->where('event', 'updated')
             ->where('updated_at', '>=', Carbon::now()->subHours(5))
             ->first();
@@ -36,8 +36,8 @@ class TrackVisitActions
         } else {
             DashboardFeed::create([
                 'user_id' => $user_id,
-                'subject_type' => get_class($event->visit),
-                'subject_id' => $event->visit->id,
+                'object_type' => get_class($event->visit),
+                'object_id' => $event->visit->id,
                 'card_type' => 'TrackVisit',
                 'event' => 'updated',
                 'description' => 'updated a Track Visit',

@@ -151,8 +151,8 @@ export default function Show({ user }: any) {
                         )}
                     </div>
                     <Against
-                      subjectType={action.subject_type}
-                      subject={action.subject}
+                      objectType={action.object_type}
+                      object={action.object}
                     />
                   </div>
                 </li>

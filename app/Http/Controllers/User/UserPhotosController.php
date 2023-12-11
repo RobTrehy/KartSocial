@@ -45,8 +45,8 @@ class UserPhotosController extends Controller
         }
 
         $record = DashboardFeed::where('user_id', Auth::id())
-            ->where('subject_type', 'App\\Models\\User')
-            ->where('subject_id', Auth::id())
+            ->where('object_type', 'App\\Models\\User')
+            ->where('object_id', Auth::id())
             ->where('event', 'updated_photos')
             ->where('updated_at', '>=', Carbon::now()->subHours(5))
             ->first();
@@ -56,8 +56,8 @@ class UserPhotosController extends Controller
         } else {
             DashboardFeed::create([
                 'user_id' => Auth::id(),
-                'subject_type' => 'App\\Models\\User',
-                'subject_id' => Auth::id(),
+                'object_type' => 'App\\Models\\User',
+                'object_id' => Auth::id(),
                 'card_type' => 'ProfilePhotos',
                 'event' => 'updated_photos',
                 'description' => 'updated their Profile Photos',

@@ -15,7 +15,7 @@ import confetti from 'canvas-confetti';
 
 interface Props {
   id: number;
-  subject: {
+  object: {
     session_name: string;
     laps_count: number;
   };
@@ -39,7 +39,7 @@ interface Props {
 
 export default function TrackRecord({
   id,
-  subject,
+  object,
   user,
   event,
   description,
@@ -101,7 +101,7 @@ export default function TrackRecord({
               ? properties.layout?.name
                 ? `${properties.track?.name} - ${properties.layout.name}`
                 : properties.track?.name
-              : subject.session_name}
+              : object.session_name}
           </CardSubtitle>
         </div>
 
@@ -120,7 +120,7 @@ export default function TrackRecord({
 
         <p className="text-xl">{FormatLapTime(properties.lap)}</p>
         <p className="text-sm">
-          Set on lap {properties.lap.lap_number} of {subject.laps_count}
+          Set on lap {properties.lap.lap_number} of {object.laps_count}
         </p>
       </div>
       <FeedFooter id={id} />
