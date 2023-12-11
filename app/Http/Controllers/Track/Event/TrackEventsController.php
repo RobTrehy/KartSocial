@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Track\Event;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Track\Events\CreateTrackEventRequest;
 use App\Http\Requests\Track\Events\UpdateTrackEventRequest;
+use App\Models\Status;
 use App\Models\Track;
 use App\Models\TrackEvent;
+use App\Models\TrackEventAttendee;
 use App\Models\TrackLayout;
 use App\Models\TrackSession;
 use App\Models\TrackSessionLap;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -96,11 +99,11 @@ class TrackEventsController extends Controller
         }
 
         $_sessions = TrackSession::where('track_event_id', $event->id)->with(['drivers'])->get();
-        $attendee = false;
+        $isDriver = false;
 
         foreach ($_sessions as $session) {
-            if (!$attendee) {
-                $attendee = $session->drivers->contains(Auth::user());
+            if (!$isDriver) {
+                $isDriver = $session->drivers->contains(Auth::user());
             }
             foreach ($session->drivers as $driver) {
                 $driver->laps = TrackSessionLap::where('track_session_id', $session->id)->where('user_id', $driver->id)->orderBy('lap_number', 'ASC')->get();
@@ -109,9 +112,13 @@ class TrackEventsController extends Controller
         }
 
         return Inertia::render('Track/Events/Show', [
-            'event' => $event->load(['trackLayout']),
+            'event' => $event->load([
+                'trackLayout',
+                'attendees',
+                'attendees.pivot.status',
+            ]),
             'event.sessions' => $_sessions,
-            'attendee' => $attendee,
+            'driver' => $isDriver,
         ]);
     }
 
@@ -176,6 +183,28 @@ class TrackEventsController extends Controller
         );
 
         return redirect(route('events.show', ['event' => $event->id]));
+    }
+
+    /**
+     * 
+     */
+    public function updateAttendees(TrackEvent $event, Request $request)
+    {
+        if ($request->status !== "Undecided") {
+            TrackEventAttendee::updateOrCreate(
+                [
+                    'user_id' => Auth::id(),
+                    'track_event_id' => $event->id,
+                ],
+                [
+                    'status_id' => Status::where('value', $request->status)->first()->id,
+                ]
+            );
+        } else {
+            TrackEventAttendee::where('user_id', Auth::id())
+                ->where('track_event_id', $event->id)
+                ->delete();
+        }
     }
 
     /**

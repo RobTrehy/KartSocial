@@ -70,9 +70,9 @@ export default function Dashboard({ feed, suggestions, tracks }: any) {
                         People you may know
                       </p>
                     </div>
-                    <div className="text-sm font-normal text-brand-500 hover:text-brand-800">
+                    {/* <div className="text-sm font-normal text-brand-500 hover:text-brand-800">
                       See All
-                    </div>
+                    </div> */}
                   </div>
                   <div className="flex flex-col w-full">
                     {suggestions.length > 0

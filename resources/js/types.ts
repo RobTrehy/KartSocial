@@ -174,6 +174,15 @@ export interface TrackEvent {
   name: string;
   description: string;
   date: DateTime;
+  attendees: Array<User & {
+    pivot: {
+      status_id: number;
+      status: {
+        id: number;
+        value: string;
+      }
+    }
+  }>;
   sessions: Array<TrackSession>;
   fastestLap: TrackSessionLap;
   track_layout_id: number;

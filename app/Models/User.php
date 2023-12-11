@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use AjCastro\EagerLoadPivotRelations\EagerLoadPivotTrait;
 use App\Traits\User\HasCoverPhoto;
 use App\Traits\User\HasExportableData;
 use App\Traits\User\HasFollowing;
@@ -28,6 +29,7 @@ class User extends Authenticatable implements \Spatie\PersonalDataExport\Exports
 {
     use AuthenticationLoggable;
     use CausesActivity;
+    use EagerLoadPivotTrait;
     use HasApiTokens;
     use HasCoverPhoto;
     use HasExportableData;

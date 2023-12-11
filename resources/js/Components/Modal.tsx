@@ -32,7 +32,7 @@ export default function Modal({
       <Dialog
         as="div"
         static
-        className="fixed z-10 inset-0 overflow-y-auto"
+        className="fixed z-[500] inset-0 overflow-y-auto"
         open={isOpen}
         onClose={onClose}
       >

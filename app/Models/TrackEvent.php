@@ -35,6 +35,16 @@ class TrackEvent extends Model
     }
 
     /**
+     * Get the users who have marked attendance with this model.
+     */
+    public function attendees(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'track_event_attendees')
+            ->using(TrackEventAttendee::class)
+            ->withPivot(['status_id']);
+    }
+
+    /**
      * Get the drivers associated with this model.
      */
     public function drivers(): HasManyThrough

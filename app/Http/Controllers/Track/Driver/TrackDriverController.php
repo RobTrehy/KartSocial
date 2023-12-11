@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\TrackEvent;
 use App\Models\TrackSession;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class TrackDriverController extends Controller
@@ -27,5 +28,15 @@ class TrackDriverController extends Controller
         $session->drivers()->sync($drivers);
 
         return redirect(route('events.show', ['event' => $event]));
+    }
+
+    public function addDriverToSessions(Request $request)
+    {
+        foreach ($request->positions as $id => $result) {
+            if ($result) {
+                $session = TrackSession::where('id', $id)->first();
+                $session->drivers()->attach(Auth::user(), ['position' => $result]);
+            }
+        }
     }
 }

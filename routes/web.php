@@ -66,6 +66,8 @@ Route::middleware([
     // Track Events, Visit & Session Routes
     Route::resource('events', TrackEventsController::class);
     Route::resource('events.sessions', TrackSessionsController::class);
+    Route::put('/events/{event}/attendees', [TrackEventsController::class, 'updateAttendees'])->name('events.attendees.update');
+    Route::post('/events/{event}/drivers', [TrackDriverController::class, 'addDriverToSessions'])->name('events.drivers');
     Route::get('/events/{event}/sessions/{session}/drivers', [TrackDriverController::class, 'index'])->name('events.sessions.drivers');
     Route::put('/events/{event}/sessions/{session}/drivers', [TrackDriverController::class, 'update'])->name('events.sessions.drivers.update');
     Route::get('/events/{event}/laps', [TrackLapsController::class, 'edit'])->name('events.laps');

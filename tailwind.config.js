@@ -11,6 +11,7 @@ export default {
         './resources/views/**/*.blade.php',
         './resources/js/**/*.tsx',
         './node_modules/react-tailwindcss-select/dist/index.esm.js',
+        './node_modules/flowbite/**/*.js',
     ],
 
     darkMode: 'class',
@@ -40,6 +41,7 @@ export default {
 
     plugins: [
         forms,
-        typography
+        typography,
+        require('flowbite/plugin')
     ],
 };
