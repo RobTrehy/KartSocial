@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\TrackSessionLap;
 use App\Models\TrackVisitSessionLap;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -46,7 +47,7 @@ class HandleInertiaRequests extends Middleware
         if (! Auth::check() || Route::currentRouteName() === 'verification.notice') {
             $formatter = new \NumberFormatter('en_GB', \NumberFormatter::PADDING_POSITION);
             $stats['users'] = $formatter->format(floor(User::count() / 10) * 10); // To the nearest 10
-            $stats['laps'] = $formatter->format(floor(TrackVisitSessionLap::count() / 10) * 10); // To the nearest 10
+            $stats['laps'] = $formatter->format(floor(TrackSessionLap::count() / 10) * 10); // To the nearest 10
         }
 
         return array_merge(parent::share($request), [
