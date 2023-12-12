@@ -1,8 +1,11 @@
+import useRoute from '@/Hooks/useRoute';
 import { TrackEvent } from '@/types';
+import { Link } from '@inertiajs/react';
 import moment from 'moment';
 import React from 'react';
 
 export default function Upcoming({ user }: any) {
+  const route = useRoute();
   let upCount = 0;
 
   return (
@@ -18,7 +21,12 @@ export default function Upcoming({ user }: any) {
               key={i}
               className="items-center gap-x-2 py-3 px-4 bg-white border -mt-px md:first:rounded-t-md first:mt-0 md:last:rounded-b-md dark:bg-gray-800 dark:border-gray-700 "
             >
-              <span className="font-semibold">{event.name}</span>{' '}
+              <Link
+                href={route('events.show', { event: event.id })}
+                className="font-semibold hover:text-brand-600"
+              >
+                {event.name}
+              </Link>{' '}
               {moment(event.date).fromNow()} at{' '}
               {event.track_layout.track.name}
               <br />
