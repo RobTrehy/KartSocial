@@ -9,3 +9,34 @@
 .brand-font {
   font-family: 'Audiowide', sans-serif;
 }
+
+.fc {
+  @apply min-h-[30rem];
+
+  .fc-list,
+  .fc-multimonth {
+    @apply dark:border-gray-700;
+  }
+
+  .fc-list-empty {
+    @apply bg-gray-50 dark:bg-gray-800;
+  }
+
+  .fc-theme-standard td,
+  .fc-theme-standard th,
+  .fc-theme-standard .fc-scrollgrid {
+    @apply dark:border-gray-700;
+  }
+
+  .fc-scrollgrid-section-sticky>* {
+    @apply dark:bg-gray-800;
+  }
+
+  .fc-cell-shaded, 
+  .fc-day-disabled {
+    @apply dark:bg-gray-900;
+  }
+  .fc-multimonth-daygrid {
+    background: transparent;
+  }
+}

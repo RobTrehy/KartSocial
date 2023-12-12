@@ -4,6 +4,7 @@ import useRoute from '@/Hooks/useRoute';
 import { Track } from '@/types';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import listPlugin from '@fullcalendar/list';
+import multiMonthPlugin from '@fullcalendar/multimonth';
 import FullCalendar from '@fullcalendar/react';
 import { router } from '@inertiajs/react';
 import moment, { Moment } from 'moment';
@@ -19,7 +20,7 @@ export default function Calendar(props: Props) {
     const [calendarApi, setCalendarApi] = useState();
 
     const [date, setDate] = useState<Moment>(moment());
-    const [view, setView] = useState<string>('listMonth');
+    const [view, setView] = useState<string>('listYear');
 
     useEffect(() => {
         if (!calendarApi && calendar.current) {
@@ -65,7 +66,7 @@ export default function Calendar(props: Props) {
         <Card>
             <CardTitle>
                 <div className="flex flex-row items-center mb-2">
-                    <p className="w-40">{date.format('MMMM YYYY')}</p>
+                    <p className="w-40">{(view === 'dayGridMonth') ? date.format('MMMM YYYY') : date.format('YYYY')}</p>
                     <div className="flex flex-row">
                         <button
                             type="button"
@@ -106,16 +107,23 @@ export default function Calendar(props: Props) {
                         <button
                             type="button"
                             className="bg-brand-500 hover:bg-brand-600 text-white px-4 py-1 text-sm rounded-l-md border-r border-brand-600"
-                            onClick={() => setView('listMonth')}
+                            onClick={() => setView('listYear')}
                         >
                             List View
                         </button>
                         <button
                             type="button"
-                            className="bg-brand-500 hover:bg-brand-600 text-white px-4 py-1 text-sm rounded-r-md"
+                            className="bg-brand-500 hover:bg-brand-600 text-white px-4 py-1 text-sm border-r border-brand-600"
                             onClick={() => setView('dayGridMonth')}
                         >
                             Month View
+                        </button>
+                        <button
+                            type="button"
+                            className="bg-brand-500 hover:bg-brand-600 text-white px-4 py-1 text-sm rounded-r-md"
+                            onClick={() => setView('multiMonthYear')}
+                        >
+                            Year View
                         </button>
                     </div>
                 </div>
@@ -123,7 +131,7 @@ export default function Calendar(props: Props) {
             <FullCalendar
                 ref={calendar}
                 height="auto"
-                plugins={[dayGridPlugin, listPlugin]}
+                plugins={[dayGridPlugin, multiMonthPlugin, listPlugin]}
                 initialView={view}
                 events={{
                     url: `/api/tracks/${props.track.id}`
@@ -135,6 +143,7 @@ export default function Calendar(props: Props) {
                 }}
                 headerToolbar={false}
                 firstDay={1}
+                multiMonthMaxColumns={2}
             />
         </Card>
     )
