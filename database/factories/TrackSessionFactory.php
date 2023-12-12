@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\TrackVisitSession>
  */
-class TrackVisitSessionFactory extends Factory
+class TrackSessionFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,15 +16,12 @@ class TrackVisitSessionFactory extends Factory
      */
     public function definition(): array
     {
-        $total = rand(1, 20);
-
         return [
-            'session_name' => fake()->word(),
+            'name' => fake()->word(),
             'session_type' => fake()->randomElement(['Practice', 'Qualifying', 'Heat', 'Semi Final', 'Grand Final', 'Final', 'Race']),
-            'session_length_type' => fake()->randomElement(['Minutes', 'Laps']),
-            'session_length' => rand(5, 30),
-            'total_drivers' => $total,
-            'finish_position' => rand(1, $total),
+            'length_type' => fake()->randomElement(['Minutes', 'Laps']),
+            'length' => rand(5, 30),
+            'total_drivers' => rand(1, 20),
         ];
     }
 }

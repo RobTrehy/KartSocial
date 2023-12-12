@@ -91,10 +91,14 @@ export default function Index({ events }: Props) {
                       </span>
                     ))}
                   </p>
-                  <p>{event.fastestLap && FormatLapTime(event.fastestLap)}<br />
-                    <span className="truncate text-sm leading-5 text-gray-500 dark:text-gray-400">
-                      by {event.fastestLap.driver.alias}</span>
-                  </p>
+                  {
+                    event.fastestLap && (
+                      <p>{FormatLapTime(event.fastestLap)}<br />
+                        <span className="truncate text-sm leading-5 text-gray-500 dark:text-gray-400">
+                          by {event.fastestLap.driver.alias}</span>
+                      </p>
+                    )
+                  }
                 </div>
               </Link>
             ))}

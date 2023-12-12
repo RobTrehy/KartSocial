@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Telescope\Telescope;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +14,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        Telescope::stopRecording();
+
         $this->call([
             RolesAndPermissionsSeeder::class,
             StatusSeeder::class,
@@ -36,8 +39,11 @@ class DatabaseSeeder extends Seeder
             }
 
             $this->call([
-                TrackVisitsSeeder::class,
+                TrackEventsSeeder::class,
+                TrackSessionLapsSeeder::class,
             ]);
         }
+
+        Telescope::startRecording();
     }
 }

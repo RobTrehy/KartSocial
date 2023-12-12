@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\TrackVisitSessionLap>
  */
-class TrackVisitSessionLapFactory extends Factory
+class TrackSessionLapFactory extends Factory
 {
     /**
      * Define the model's default state.
