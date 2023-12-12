@@ -96,14 +96,6 @@ class TrackEvent extends Model
     }
 
     /**
-     * DEPRECATED? Get other TrackVisit's that this TrackVisit is linked to
-     */
-    // public function linkedVisits(): BelongsToMany
-    // {
-    //     return $this->belongsToMany(TrackVisit::class, 'track_visit_links', 'track_visit_id', 'linked_visit_id');
-    // }
-
-    /**
      * Configure the activity logging rules
      */
     public function getActivitylogOptions(): LogOptions
