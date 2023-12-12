@@ -64,7 +64,7 @@ export default function Welcome() {
         </Link>
 
         <Link
-          href={route('visits.create')}
+          href={route('events.create')}
           className="px-6 lg:px-8 py-4 hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-500 rounded-md"
         >
           <div className="flex items-center">
@@ -81,18 +81,17 @@ export default function Welcome() {
               />
             </svg>
             <h2 className="ml-3 text-xl font-semibold text-gray-900 dark:text-white">
-              Log a Track Visit
+              Create a Track Event
             </h2>
           </div>
 
           <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-            In order to share your lap times, you start by recording a visit to
-            a track!
+            In order to share your lap times, you need to find or create the event at the track!
             <br />
-            You can record visits both in the past and in the future, so people
-            viewing your profile can see when you're planning to go too!
+            You can create events both in the past and in the future, so people
+            viewing the track can join the same event!
             <br />
-            Once you've got a visit recorded, you can add multiple sessions, and
+            Once you've created or found the event, you can add multiple sessions, and
             record lap times from each - we have a couple of ways of importing
             your lap times, to keep it quick and easy!
           </p>
