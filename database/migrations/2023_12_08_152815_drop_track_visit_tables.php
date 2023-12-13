@@ -10,9 +10,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::dropIfExists('track_visits');
-        Schema::dropIfExists('track_visit_sessions');
         Schema::dropIfExists('track_visit_session_laps');
+        Schema::dropIfExists('track_visit_sessions');
+        Schema::dropIfExists('track_visits');
     }
 
     /**
