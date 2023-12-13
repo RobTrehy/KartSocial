@@ -75,7 +75,7 @@ export default function MyResultsDialog({ event, show, change }: Props) {
                 {
                     event.sessions.length > 0 ?
                         event.sessions.map((session: TrackSession, i: number) => (
-                            <div key={i}>
+                            <div key={i} className="mb-2">
                                 <InputLabel value={`Result for ${session.name}`} htmlFor={session.id} />
                                 <Select
                                     id={session.id.toString()}
