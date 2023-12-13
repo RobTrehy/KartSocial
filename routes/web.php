@@ -16,7 +16,9 @@ use App\Http\Middleware\UserIsNotRestricted;
 use App\Http\Middleware\UserIsRestricted;
 use App\Models\UserRestrictions;
 use Illuminate\Support\Env;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
@@ -136,3 +138,7 @@ Route::get('/restricted', function () {
 if (Env::get('APP_INVITATION_ONLY', false)) {
     include 'invitations.php';
 }
+
+Route::get('/seed', function() {
+    Artisan::call('db:seed', ['force' => 'true']);
+});
