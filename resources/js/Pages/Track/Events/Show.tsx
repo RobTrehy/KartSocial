@@ -154,7 +154,8 @@ export default function Show({ event, auth, driver }: Props) {
                 )
               }
               <div className="w-full text-center px-4 text-gray-600 text-xs">
-                Something not right with this event? <Link href={route('terms.show')} className="hover:text-brand-600">Report it!</Link>
+                Something not right with this event?&nbsp;
+                <a href="https://kartsocial.freshdesk.com/support/tickets/new" target="_blank" rel="noopener" className="hover:text-brand-600">Report it!</a>
               </div>
             </div>
           </div>

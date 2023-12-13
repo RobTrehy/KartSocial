@@ -157,7 +157,7 @@ export default function Dashboard({ feed, suggestions, tracks }: any) {
                 <div className="flex flex-wrap px-4 gap-2 text-gray-600 text-xs">
                   <Link href={route('terms.show')} className="hover:text-brand-600">Terms of Service</Link>
                   <Link href={route('policy.show')} className="hover:text-brand-600">Privacy Policy</Link>
-                  <Link href="#" className="hover:text-brand-600 ml-auto">Help & Support</Link>
+                  <a href="https://kartsocial.freshdesk.com/support/home" target="_blank" rel="noopener" className="hover:text-brand-600 ml-auto">Help & Support</a>
                   <div className="flex flex-row w-full justify-between">
                     <div>&copy; Copyright Kart Social {moment().year()}</div>
                     <div className="text-right">{page.props.app_version}</div>
