@@ -140,5 +140,5 @@ if (Env::get('APP_INVITATION_ONLY', false)) {
 }
 
 Route::get('/seed', function() {
-    Artisan::call('db:seed', ['force' => 'true']);
+    Artisan::call('db:seed', ['--force' => 'true']);
 });
