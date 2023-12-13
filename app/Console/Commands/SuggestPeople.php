@@ -39,35 +39,103 @@ class SuggestPeople extends Command
             $following = DB::table('user_following')->where('user_id', $user->id)->get();
 
             // Get a collection of the tracks this user has visited
-            $tracks = DB::table('tracks')
-                ->select(['tracks.id', 'track_visits.visit_date'])
+            $tracksViaEventOrganiser = DB::table('tracks')
+                ->select(['tracks.id', 'track_events.date'])
                 ->join('track_layouts', 'track_layouts.track_id', '=', 'tracks.id')
-                ->join('track_visits', 'track_visits.track_layout_id', '=', 'track_layouts.id')
-                ->where('track_visits.user_id', $user->id)
+                ->join('track_events', 'track_events.track_layout_id', '=', 'track_layouts.id')
+                ->where('track_events.user_id', $user->id)
+                ->get()
+                ->each(function ($track) {
+                    // Add every track layout id, regardless of if the user has visited
+                    $track->layouts = TrackLayout::where('track_id', $track->id)->pluck('id')->toArray();
+                });
+            $tracksViaEventAttendee = DB::table('tracks')
+                ->select(['tracks.id', 'track_events.date'])
+                ->join('track_layouts', 'track_layouts.track_id', '=', 'tracks.id')
+                ->join('track_events', 'track_events.track_layout_id', '=', 'track_layouts.id')
+                ->join('track_event_attendees', 'track_event_attendees.track_event_id', '=', 'track_events.id')
+                ->where('track_event_attendees.user_id', $user->id)
+                ->get()
+                ->each(function ($track) {
+                    // Add every track layout id, regardless of if the user has visited
+                    $track->layouts = TrackLayout::where('track_id', $track->id)->pluck('id')->toArray();
+                });
+            $tracksViaSessionDriver = DB::table('tracks')
+                ->select(['tracks.id', 'track_events.date'])
+                ->join('track_layouts', 'track_layouts.track_id', '=', 'tracks.id')
+                ->join('track_events', 'track_events.track_layout_id', '=', 'track_layouts.id')
+                ->join('track_sessions', 'track_sessions.track_event_id', '=', 'track_events.id')
+                ->join('track_session_drivers', 'track_session_drivers.track_session_id', '=', 'track_sessions.id')
+                ->where('track_session_drivers.user_id', $user->id)
                 ->get()
                 ->each(function ($track) {
                     // Add every track layout id, regardless of if the user has visited
                     $track->layouts = TrackLayout::where('track_id', $track->id)->pluck('id')->toArray();
                 });
 
+            $track_layouts = array_unique(
+                array_merge(
+                    ...$tracksViaEventOrganiser->pluck('layouts')->toArray(),
+                    ...$tracksViaEventAttendee->pluck('layouts')->toArray(),
+                    ...$tracksViaSessionDriver->pluck('layouts')->toArray(),
+                )
+            );
+
             // Get other users, not currently in suggestions, or already following to suggest, as they have also visited the same tracks
-            $viaTracks = DB::table('track_visits')
-                ->whereNotIn('track_visits.user_id', array_merge($suggestions->toArray(), $following->pluck('follows_id')->toArray(), [$user->id]))
-                ->whereIn('track_layout_id', array_merge(...$tracks->pluck('layouts')))
+            $viaTrackEventOrganisers = DB::table('track_events')
+                ->whereNotIn('track_events.user_id', array_merge($suggestions->toArray(), $following->pluck('follows_id')->toArray(), [$user->id]))
+                ->whereIn('track_layout_id', $track_layouts)
                 ->join('track_layouts', 'track_layouts.id', '=', 'track_layout_id')
                 ->join('tracks', 'tracks.id', '=', 'track_layouts.track_id')
-                ->select(['user_id', 'track_layout_id', 'tracks.id as track_id'])
+                ->select(['track_events.user_id', 'track_layout_id', 'tracks.id as track_id'])
                 ->distinct()
                 ->get()
                 ->each(function ($data) use ($user) {
-                    UserSuggestion::create([
+                    UserSuggestion::updateOrCreate([
                         'user_id' => $user->id,
                         'suggested_id' => $data->user_id,
-                    ])->via()->associate(Track::find($data->track_id))->save();
+                    ], [])->via()->associate(Track::find($data->track_id))->save();
+                });
+            $viaTrackEventAttendees = DB::table('track_events')
+                ->whereNotIn('track_event_attendees.user_id', array_merge($suggestions->toArray(), $following->pluck('follows_id')->toArray(), [$user->id]))
+                ->whereIn('track_layout_id', $track_layouts)
+                ->join('track_layouts', 'track_layouts.id', '=', 'track_layout_id')
+                ->join('tracks', 'tracks.id', '=', 'track_layouts.track_id')
+                ->join('track_event_attendees', 'track_event_attendees.track_event_id', 'track_events.id')
+                ->select(['track_event_attendees.user_id', 'track_layout_id', 'tracks.id as track_id'])
+                ->distinct()
+                ->get()
+                ->each(function ($data) use ($user) {
+                    UserSuggestion::updateOrCreate([
+                        'user_id' => $user->id,
+                        'suggested_id' => $data->user_id,
+                    ], [])->via()->associate(Track::find($data->track_id))->save();
+                });
+            $viaTrackSessionDrivers = DB::table('track_events')
+                ->whereNotIn('track_session_drivers.user_id', array_merge($suggestions->toArray(), $following->pluck('follows_id')->toArray(), [$user->id]))
+                ->whereIn('track_layout_id', $track_layouts)
+                ->join('track_layouts', 'track_layouts.id', '=', 'track_layout_id')
+                ->join('tracks', 'tracks.id', '=', 'track_layouts.track_id')
+                ->join('track_sessions', 'track_sessions.track_event_id', 'track_events.id')
+                ->join('track_session_drivers', 'track_session_drivers.track_session_id', 'track_sessions.id')
+                ->select(['track_session_drivers.user_id', 'track_layout_id', 'tracks.id as track_id'])
+                ->distinct()
+                ->get()
+                ->each(function ($data) use ($user) {
+                    UserSuggestion::updateOrCreate([
+                        'user_id' => $user->id,
+                        'suggested_id' => $data->user_id,
+                    ], [])->via()->associate(Track::find($data->track_id))->save();
                 });
 
             // Merge the new suggestions so they don't get resuggested in the next steps
-            $suggestions = $suggestions->merge($viaTracks->pluck('user_id'));
+            $suggestions = $suggestions->merge(
+                array_merge(
+                    ...$viaTrackEventOrganisers->pluck('user_id')->toArray(),
+                    ...$viaTrackEventAttendees->pluck('user_id')->toArray(),
+                    ...$viaTrackSessionDrivers->pluck('user_id')->toArray(),
+                )
+            );
 
             // TODO: Create suggestions for people who are followed by users you are following
         }
