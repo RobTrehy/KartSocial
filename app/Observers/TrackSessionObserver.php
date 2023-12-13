@@ -23,6 +23,15 @@ class TrackSessionObserver implements ShouldHandleEventsAfterCommit
             'description' => 'updated an Event with new Sessions',
             'parent_type' => get_class($session->trackEvent),
             'parent_id' => $session->track_event_id,
+            'properties' => [
+                'track_layout' => [
+                    'name' => $session->trackEvent->trackLayout->name,
+                ],
+                'track' => [
+                    'id' => $session->trackEvent->trackLayout->track->id,
+                    'name' => $session->trackEvent->trackLayout->track->name,
+                ],
+            ],
         ]);
     }
 
@@ -31,18 +40,29 @@ class TrackSessionObserver implements ShouldHandleEventsAfterCommit
      */
     public function updated(TrackSession $session): void
     {
-        DashboardFeed::updateOrCreate([
-            'user_id' => Auth::check() ? Auth::id() : $session->user_id,
-            'object_type' => get_class($session),
-            'object_id' => $session->id,
-            'card_type' => 'TrackSession',
-        ],
-        [
-            'event' => 'updated',
-            'description' => 'updated Sessions of an Event',
-            'parent_type' => get_class($session->trackEvent),
-            'parent_id' => $session->track_event_id,
-        ]);
+        DashboardFeed::updateOrCreate(
+            [
+                'user_id' => Auth::check() ? Auth::id() : $session->user_id,
+                'object_type' => get_class($session),
+                'object_id' => $session->id,
+                'card_type' => 'TrackSession',
+            ],
+            [
+                'event' => 'updated',
+                'description' => 'updated Sessions of an Event',
+                'parent_type' => get_class($session->trackEvent),
+                'parent_id' => $session->track_event_id,
+                'properties' => [
+                    'track_layout' => [
+                        'name' => $session->trackEvent->trackLayout->name,
+                    ],
+                    'track' => [
+                        'id' => $session->trackEvent->trackLayout->track->id,
+                        'name' => $session->trackEvent->trackLayout->track->name,
+                    ],
+                ],
+            ]
+        );
     }
 
     /**
