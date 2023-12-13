@@ -105,10 +105,6 @@ class TrackEventsController extends Controller
             if (!$isDriver) {
                 $isDriver = $session->drivers->contains(Auth::user());
             }
-            foreach ($session->drivers as $driver) {
-                $driver->laps = TrackSessionLap::where('track_session_id', $session->id)->where('user_id', $driver->id)->orderBy('lap_number', 'ASC')->get();
-                $driver->fastest_lap = TrackSessionLap::where('track_session_id', $session->id)->where('user_id', $driver->id)->orderBy('lap_time', 'ASC')->first();
-            }
         }
 
         return Inertia::render('Track/Events/Show', [

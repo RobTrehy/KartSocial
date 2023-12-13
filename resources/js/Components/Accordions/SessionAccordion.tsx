@@ -18,9 +18,10 @@ import ProfilePhoto from '../UserPhotos/ProfilePhoto';
 interface Props {
     event: TrackEvent;
     profile?: Boolean;
+    startClosed?: Boolean;
 }
 
-export default function SessionAccordion({ event, profile }: Props) {
+export default function SessionAccordion({ event, profile, startClosed = false }: Props) {
     const route = useRoute();
     const page = useTypedPage();
     const { auth } = page.props;
@@ -71,7 +72,7 @@ export default function SessionAccordion({ event, profile }: Props) {
     }
 
     return (
-        <AccordionGroup defaultOpen={event.sessions.length === 1 ? event.sessions[0].id : undefined}>
+        <AccordionGroup defaultOpen={!(startClosed) && event.sessions.length === 1 ? event.sessions[0].id : undefined}>
             {event.sessions.map((session: TrackSession, i: number) => {
                 return (
                     <AccordionItem key={i}>
@@ -93,19 +94,26 @@ export default function SessionAccordion({ event, profile }: Props) {
                                             <div className="flex flex-row h-36 items-end">
                                                 <div className="w-1/3 pb-2 bg-brand-500 text-center text-white">
                                                     <div className="flex flex-col items-center">
-                                                        2nd
                                                         {
-                                                            session.drivers.filter((driver: Driver) => driver.pivot.position === 2)[0] ?
-                                                                <ProfilePhoto
-                                                                    size='sm'
-                                                                    user={session.drivers.filter((driver: Driver) => driver.pivot.position === 2)[0]}
-                                                                /> : <ProfilePhoto
-                                                                    size="sm"
-                                                                    user={{
-                                                                        alias: 'Unknown Driver',
-                                                                        profile_photo_url: 'https://ui-avatars.com/api/?name=2&color=7F9CF5&background=EBF4FF'
-                                                                    }}
-                                                                />
+                                                            session.total_drivers > 1 ? (
+                                                                <>
+                                                                    2nd
+                                                                    {
+                                                                        session.drivers.filter((driver: Driver) => driver.pivot.position === 2)[0] ?
+                                                                            <ProfilePhoto
+                                                                                size='sm'
+                                                                                user={session.drivers.filter((driver: Driver) => driver.pivot.position === 2)[0]}
+                                                                            /> :
+                                                                            <ProfilePhoto
+                                                                                size="sm"
+                                                                                user={{
+                                                                                    alias: 'Unknown Driver',
+                                                                                    profile_photo_url: 'https://ui-avatars.com/api/?name=2&color=7F9CF5&background=EBF4FF'
+                                                                                }}
+                                                                            />
+                                                                    }
+                                                                </>
+                                                            ) : null
                                                         }
                                                     </div>
                                                 </div>
@@ -130,31 +138,43 @@ export default function SessionAccordion({ event, profile }: Props) {
                                                 </div>
                                                 <div className="w-1/3 pb-2 bg-brand-300 text-center text-white">
                                                     <div className="flex flex-col items-center">
-                                                        3rd
                                                         {
-                                                            session.drivers.filter((driver: Driver) => driver.pivot.position === 3)[0] ?
-                                                                <ProfilePhoto
-                                                                    size='xs'
-                                                                    user={session.drivers.filter((driver: Driver) => driver.pivot.position === 3)[0]}
-                                                                /> :
-                                                                <ProfilePhoto
-                                                                    size="xs"
-                                                                    user={{
-                                                                        alias: 'Unknown Driver',
-                                                                        profile_photo_url: 'https://ui-avatars.com/api/?name=3&color=7F9CF5&background=EBF4FF'
-                                                                    }}
-                                                                />
+                                                            session.total_drivers > 2 ? (
+                                                                <>
+                                                                    3rd
+                                                                    {
+                                                                        session.drivers.filter((driver: Driver) => driver.pivot.position === 3)[0] ?
+                                                                            <ProfilePhoto
+                                                                                size='xs'
+                                                                                user={session.drivers.filter((driver: Driver) => driver.pivot.position === 3)[0]}
+                                                                            /> :
+                                                                            <ProfilePhoto
+                                                                                size="xs"
+                                                                                user={{
+                                                                                    alias: 'Unknown Driver',
+                                                                                    profile_photo_url: 'https://ui-avatars.com/api/?name=3&color=7F9CF5&background=EBF4FF'
+                                                                                }}
+                                                                            />
+                                                                    }
+                                                                </>
+                                                            ) : null
                                                         }
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="flex flex-row items-center">
                                                 <div className="w-1/3 flex flex-row items-center justify-center gap-x-2 font-semibold">
-                                                    <AccordionOpenIcon id="top-3" />
                                                     {
-                                                        session.drivers.filter((driver: Driver) => driver.pivot.position === 2)[0] ?
-                                                            session.drivers.filter((driver: Driver) => driver.pivot.position === 2)[0]?.alias :
-                                                            'Unknown Driver'
+                                                        session.total_drivers > 1 ? (
+                                                            <>
+                                                                <AccordionOpenIcon id="top-3" />
+                                                                {
+                                                                    session.drivers.filter((driver: Driver) => driver.pivot.position === 2)[0] ?
+                                                                        session.drivers.filter((driver: Driver) => driver.pivot.position === 2)[0]?.alias :
+                                                                        'Unknown Driver'
+                                                                }
+                                                            </>
+                                                        ) : null
                                                     }
                                                 </div>
                                                 <div className="w-1/3 flex flex-row items-center justify-center gap-x-2 font-semibold">
@@ -166,11 +186,17 @@ export default function SessionAccordion({ event, profile }: Props) {
                                                     }
                                                 </div>
                                                 <div className="w-1/3 flex flex-row items-center justify-center gap-x-2 font-semibold">
-                                                    <AccordionOpenIcon id="top-3" />
                                                     {
-                                                        session.drivers.filter((driver: Driver) => driver.pivot.position === 3)[0] ?
-                                                            session.drivers.filter((driver: Driver) => driver.pivot.position === 3)[0]?.alias :
-                                                            'Unknown Driver'
+                                                        session.total_drivers > 2 ? (
+                                                            <>
+                                                                <AccordionOpenIcon id="top-3" />
+                                                                {
+                                                                    session.drivers.filter((driver: Driver) => driver.pivot.position === 3)[0] ?
+                                                                        session.drivers.filter((driver: Driver) => driver.pivot.position === 3)[0]?.alias :
+                                                                        'Unknown Driver'
+                                                                }
+                                                            </>
+                                                        ) : null
                                                     }
                                                 </div>
                                             </div>

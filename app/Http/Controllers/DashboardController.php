@@ -27,7 +27,8 @@ class DashboardController extends Controller
                 User::find(Auth::id())
                     ->follows()
                     ->pluck('id')
-            )->orderBy('created_at', 'DESC')->get(),
+            )->orderBy('updated_at', 'DESC')
+            ->orderBy('id', 'DESC')->get(),
             'suggestions' => User::find(Auth::id())
                 ->load(['suggestions' => function ($query) {
                     $query->inRandomOrder()->take('5');

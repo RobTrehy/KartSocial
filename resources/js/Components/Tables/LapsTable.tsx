@@ -1,6 +1,6 @@
 import { FormatLapDiff } from '@/Helpers/FormatLapDiff';
 import { FormatLapTime } from '@/Helpers/FormatLapTime';
-import { Driver, TrackVisitSessionLap } from '@/types';
+import { Driver, TrackSessionLap } from '@/types';
 import React from 'react';
 
 interface Props {
@@ -33,7 +33,7 @@ export default function LapsTable({ driver }: Props) {
         </tr>
       </thead>
       <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-        {driver?.laps.length >= 1 ? driver.laps.map((lap: TrackVisitSessionLap, i: number) => {
+        {driver?.laps.length >= 1 ? driver.laps.map((lap: TrackSessionLap, i: number) => {
           return (
             <tr
               key={i}

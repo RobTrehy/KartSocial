@@ -2,7 +2,12 @@
 
 namespace App\Providers;
 
-use App\Listeners\RecordFeedSubscriber;
+use App\Events\TrackLapsProcessed;
+use App\Listeners\TrackLapsProcessedListener;
+use App\Models\TrackEvent;
+use App\Models\TrackSession;
+use App\Observers\TrackEventObserver;
+use App\Observers\TrackSessionObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,6 +23,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        TrackLapsProcessed::class => [
+            TrackLapsProcessedListener::class,
+        ],
     ];
 
     /**
@@ -26,7 +34,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $subscribe = [
-        RecordFeedSubscriber::class,
+        //
     ];
 
     /**
@@ -34,7 +42,8 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        TrackEvent::observe(TrackEventObserver::class);
+        TrackSession::observe(TrackSessionObserver::class);
     }
 
     /**

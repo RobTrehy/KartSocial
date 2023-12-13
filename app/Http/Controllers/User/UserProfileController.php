@@ -30,7 +30,7 @@ class UserProfileController extends Controller
         return Inertia::render('User/Show', [
             'user' => $user,
             'following' => Auth::check() && $user->isFollowedBy(Auth::user()),
-            'feed' => DashboardFeed::where('user_id', $user->id)->orderBy('created_at', 'DESC')->get(),
+            'feed' => DashboardFeed::where('user_id', $user->id)->orderBy('updated_at', 'DESC')->orderBy('id', 'DESC')->get(),
         ]);
     }
 

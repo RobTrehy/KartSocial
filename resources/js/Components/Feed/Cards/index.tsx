@@ -1,15 +1,13 @@
 import ProfilePhotos from './ProfilePhotos';
-import SessionLaps from './SessionLaps';
 import TrackRecord from './TrackRecord';
 import TrackSession from './TrackSession';
-import TrackSessionCreated from './TrackSessionCreated';
-import TrackVisit from './TrackVisit';
+
+import TrackEvent from './TrackEvent';
 
 export {
   ProfilePhotos,
-  SessionLaps,
+  TrackEvent,
   TrackRecord,
-  TrackSession,
-  TrackSessionCreated,
-  TrackVisit,
+  TrackSession
 };
+

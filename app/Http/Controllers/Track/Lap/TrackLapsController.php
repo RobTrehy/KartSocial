@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Track\Lap;
 
+use App\Events\TrackLapsProcessed;
 use App\Http\Controllers\Controller;
 use App\Models\TrackEvent;
 use App\Models\TrackSession;
@@ -77,16 +78,17 @@ class TrackLapsController extends Controller
             }
         }
 
-        // if ($updated > 0 || $added > 0) {
-        //     TrackVisitSessionEvent::dispatch(
-        //         [
-        //             'session' => $session->toArray(),
-        //             'updated' => $updated,
-        //             'added' => $added,
-        //         ],
-        //         'addOrUpdateLaps'
-        //     );
-        // }
+        if ($updated > 0 || $added > 0) {
+            TrackLapsProcessed::dispatch($session);
+            // TrackVisitSessionEvent::dispatch(
+            //     [
+            //         'session' => $session->toArray(),
+            //         'updated' => $updated,
+            //         'added' => $added,
+            //     ],
+            //     'addOrUpdateLaps'
+            // );
+        }
 
         session()->flash('flash.banner', 'Session Laps Saved!');
         session()->flash('flash.bannerStyle', 'success');

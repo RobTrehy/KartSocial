@@ -17,6 +17,7 @@ class TrackEvent extends Model
     use LogsActivity;
 
     protected $appends = ['fastestLap'];
+    protected $with = ['sessions', 'sessions.drivers'];
 
     protected $fillable = [
         'user_id',
@@ -57,7 +58,7 @@ class TrackEvent extends Model
      */
     public function trackLayout(): BelongsTo
     {
-        return $this->belongsTo(TrackLayout::class)->with('track');
+        return $this->belongsTo(TrackLayout::class);
     }
 
     /**

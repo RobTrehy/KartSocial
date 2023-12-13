@@ -5,10 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Illuminate\Support\Facades\DB;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -17,7 +14,7 @@ class TrackSession extends Model
     use HasFactory;
     use LogsActivity;
 
-    protected $appends = ['fastestLap'];
+    protected $appends = ['fastestLap', 'driverlaps'];
 
     protected $fillable = [
         'user_id',
@@ -29,8 +26,6 @@ class TrackSession extends Model
         'order',
         'total_drivers',
     ];
-
-    protected $with = ['laps'];
 
     /**
      * The TrackEvent this model is associated with.
@@ -77,6 +72,14 @@ class TrackSession extends Model
     public function getFastestLapAttribute(): ?TrackSessionLap
     {
         return $this->fastestLaps()->first();
+    }
+
+    public function getDriverLapsAttribute()
+    {
+        foreach ($this->drivers as $driver) {
+            $driver->laps = TrackSessionLap::where('track_session_id', $this->id)->where('user_id', $driver->id)->orderBy('lap_number', 'ASC')->get();
+            $driver->fastest_lap = TrackSessionLap::where('track_session_id', $this->id)->where('user_id', $driver->id)->orderBy('lap_time', 'ASC')->first();
+        }
     }
 
     /**

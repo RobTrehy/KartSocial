@@ -23,7 +23,7 @@ class CreateTrackSessionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'track_event_id' => 'required|exists:App\Models\TrackVisit,id',
+            'track_event_id' => 'required|exists:App\Models\TrackEvent,id',
             'name' => 'required|string',
             'session_type' => 'required|in:Practice,Qualifying,Heat,Semi Final,Grand Final,Final,Race',
             'length_type' => 'required|in:Laps,Minutes',

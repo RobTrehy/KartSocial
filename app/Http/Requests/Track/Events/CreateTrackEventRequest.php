@@ -27,7 +27,6 @@ class CreateTrackEventRequest extends FormRequest
             'date' => 'required',
             'name' => 'required|string',
             'description' => 'nullable|string',
-            // 'linked_visit_id' => 'nullable|exists:App\Models\TrackVisit,id',
         ];
     }
 }

@@ -2,7 +2,7 @@ import CardSubtitle from '@/Components/Cards/CardSubtitle';
 import CardTitle from '@/Components/Cards/CardTitle';
 import { FormatLapTime } from '@/Helpers/FormatLapTime';
 import useOnScreen from '@/Hooks/useOnScreen';
-import { User } from '@/types';
+import { TrackEvent, TrackSession, User } from '@/types';
 import React, { useEffect, useRef, useState } from 'react';
 import FeedCard from './Partials/FeedCard';
 import FeedFooter from './Partials/FeedFooter';
@@ -15,15 +15,14 @@ import confetti from 'canvas-confetti';
 
 interface Props {
   id: number;
-  object: {
-    session_name: string;
-    laps_count: number;
-  };
+  object: TrackSession;
+  parent: TrackEvent;
   user: User;
   event: string;
   description: string;
   properties: {
     lap: {
+      lap_time: number;
       lap_number: number;
     };
     track?: {
@@ -40,6 +39,7 @@ interface Props {
 export default function TrackRecord({
   id,
   object,
+  parent,
   user,
   event,
   description,
@@ -120,7 +120,14 @@ export default function TrackRecord({
 
         <p className="text-xl">{FormatLapTime(properties.lap)}</p>
         <p className="text-sm">
-          Set on lap {properties.lap.lap_number} of {object.laps_count}
+          Set on lap {properties.lap.lap_number}<br />
+          During {object.name} of&nbsp;
+          <Link
+            href={route('events.show', { event: parent.id })}
+            className="hover:text-brand-600 dark:hover:text-brand-500 hover:font-semibold"
+          >
+            {parent.name}
+          </Link>
         </p>
       </div>
       <FeedFooter id={id} />
