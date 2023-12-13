@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('track_session_laps', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('track_session_id')->constrained('track_visit_sessions')->onDelete('cascade');
+            $table->foreignId('track_session_id')->constrained('track_sessions')->onDelete('cascade');
             $table->bigInteger('lap_number');
             $table->decimal('lap_time', 8, 3);
             $table->decimal('lap_diff', 8, 3)->nullable();
