@@ -41,7 +41,8 @@ class FortifyServiceProvider extends ServiceProvider
             $username = Fortify::username();
 
             $user = User::where('email', $request->{$username})
-                ->orWhere('alias', $request->{$username})->first();
+                ->orWhereRaw('LOWER(`alias`) = ? ', strtolower($$request->{$username}))
+                ->first();
 
             if ($user && Hash::check($request->password, $user->password)) {
                 event(new UserLogin(($user)));
