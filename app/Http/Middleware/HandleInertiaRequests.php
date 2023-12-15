@@ -43,8 +43,10 @@ class HandleInertiaRequests extends Middleware
 
         if (Auth::check()) {
             $perms = User::find(Auth::id())->getAllPermissions()->pluck('name');
+            $notifications = User::find(Auth::id())->notifications()->limit(5)->get();
+            $unread_notifications = User::find(Auth::id())->unreadNotifications()->count();
         }
-        if (! Auth::check() || Route::currentRouteName() === 'verification.notice') {
+        if (!Auth::check() || Route::currentRouteName() === 'verification.notice') {
             $formatter = new \NumberFormatter('en_GB', \NumberFormatter::PADDING_POSITION);
             $stats['users'] = $formatter->format(floor(User::count() / 10) * 10); // To the nearest 10
             $stats['laps'] = $formatter->format(floor(TrackSessionLap::count() / 10) * 10); // To the nearest 10
@@ -56,6 +58,8 @@ class HandleInertiaRequests extends Middleware
             'app_version' => Env::get('APP_VERSION', 'v0.0.0'),
             'max_invites' => Env::get('APP_MAX_INVITES', 1),
             'auth.permissions' => isset($perms) ? $perms : null,
+            'auth.user.notifications' => isset($notifications) ? $notifications : null,
+            'auth.user.unread_notifications' => isset($unread_notifications) ? $unread_notifications : 0,
         ], $stats);
     }
 }

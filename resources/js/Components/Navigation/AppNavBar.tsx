@@ -9,6 +9,7 @@ import Dropdown from '../Dropdown';
 import DropdownLink from '../DropdownLink';
 import IntialsLogo from '../Logos/InitialsLogo';
 import NavLink from '../NavLink';
+import Notifications from '../Notifications/Notifications';
 import AppSearch from '../Search/AppSearch';
 import ResponsiveNavLink from './Links/ResponsiveNavLink';
 
@@ -203,100 +204,103 @@ export default function AppNavBar() {
 
               {/* <!-- Account Dropdown --> */}
               {page.props.auth.user && (
-                <Dropdown
-                  align="right"
-                  width="48"
-                  renderTrigger={() => (
-                    <span className="inline-flex rounded-md">
-                      <button
-                        type="button"
-                        className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-700 active:bg-gray-50 dark:active:bg-gray-700 transition ease-in-out duration-150"
-                      >
-                        <img
-                          className="h-8 w-8 mr-2 rounded-full object-cover"
-                          src={page.props.auth.user?.profile_photo_url}
-                          alt={page.props.auth.user?.name}
-                        />
-                        {page.props.auth.user?.name}
-
-                        <svg
-                          className="ml-2 -mr-0.5 h-4 w-4"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
+                <>
+                  <Notifications />
+                  <Dropdown
+                    align="right"
+                    width="48"
+                    renderTrigger={() => (
+                      <span className="inline-flex rounded-md">
+                        <button
+                          type="button"
+                          className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-700 active:bg-gray-50 dark:active:bg-gray-700 transition ease-in-out duration-150"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                          <img
+                            className="h-8 w-8 mr-2 rounded-full object-cover"
+                            src={page.props.auth.user?.profile_photo_url}
+                            alt={page.props.auth.user?.name}
                           />
-                        </svg>
-                      </button>
-                    </span>
-                  )}
-                >
-                  {/* <!-- Account Management --> */}
-                  <div className="block px-4 py-2 text-xs text-gray-400">
-                    Manage Account
-                  </div>
+                          {page.props.auth.user?.name}
 
-                  <DropdownLink
-                    href={route('profile.show', {
-                      alias: page.props.auth.user?.alias,
-                    })}
+                          <svg
+                            className="ml-2 -mr-0.5 h-4 w-4"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                            />
+                          </svg>
+                        </button>
+                      </span>
+                    )}
                   >
-                    View My Profile
-                  </DropdownLink>
-
-                  <DropdownLink href={route('user-profile.edit')}>
-                    Edit My Profile
-                  </DropdownLink>
-
-                  <DropdownLink href={route('account.show')}>
-                    Account Settings
-                  </DropdownLink>
-
-                  {page.props.jetstream.hasApiFeatures ? (
-                    <DropdownLink href={route('api-tokens.index')}>
-                      API Tokens
-                    </DropdownLink>
-                  ) : null}
-
-                  <div className="border-t border-gray-200 dark:border-gray-600"></div>
-
-                  {/* <!-- Authentication --> */}
-                  <form onSubmit={logout}>
-                    <DropdownLink as="button">Log Out</DropdownLink>
-                  </form>
-
-                  <div className="border-t border-gray-200 dark:border-gray-600"></div>
-
-                  {/* <!-- Invitations (ALPHA) --> */}
-                  <div className="block px-4 pt-4 pb-2 text-xs text-gray-400 text-center">
-                    Invitations
-                  </div>
-
-                  <DropdownLink href={route('user-invitations.show')}>
-                    <div className="text-center -mb-0.5">
-                      <div className="bg-gray-200 text-gray-900 w-full rounded-full text-xs py-0 leading-none text-center relative h-[12px] mb-0.5">
-                        <div className="absolute z-20 w-full">
-                          {page.props.auth.user.invited_count}/
-                          {page.props.max_invites}
-                        </div>
-                        <div
-                          className="absolute z-10 bg-blue-500 rounded-full text-xs leading-none h-[12px] text-center"
-                          style={{
-                            width: `${(page.props.auth.user.invited_count /
-                              page.props.max_invites) *
-                              100
-                              }%`,
-                          }}
-                        />
-                      </div>
-                      Invite New User
+                    {/* <!-- Account Management --> */}
+                    <div className="block px-4 py-2 text-xs text-gray-400">
+                      Manage Account
                     </div>
-                  </DropdownLink>
-                </Dropdown>
+
+                    <DropdownLink
+                      href={route('profile.show', {
+                        alias: page.props.auth.user?.alias,
+                      })}
+                    >
+                      View My Profile
+                    </DropdownLink>
+
+                    <DropdownLink href={route('user-profile.edit')}>
+                      Edit My Profile
+                    </DropdownLink>
+
+                    <DropdownLink href={route('account.show')}>
+                      Account Settings
+                    </DropdownLink>
+
+                    {page.props.jetstream.hasApiFeatures ? (
+                      <DropdownLink href={route('api-tokens.index')}>
+                        API Tokens
+                      </DropdownLink>
+                    ) : null}
+
+                    <div className="border-t border-gray-200 dark:border-gray-600"></div>
+
+                    {/* <!-- Authentication --> */}
+                    <form onSubmit={logout}>
+                      <DropdownLink as="button">Log Out</DropdownLink>
+                    </form>
+
+                    <div className="border-t border-gray-200 dark:border-gray-600"></div>
+
+                    {/* <!-- Invitations (ALPHA) --> */}
+                    <div className="block px-4 pt-4 pb-2 text-xs text-gray-400 text-center">
+                      Invitations
+                    </div>
+
+                    <DropdownLink href={route('user-invitations.show')}>
+                      <div className="text-center -mb-0.5">
+                        <div className="bg-gray-200 text-gray-900 w-full rounded-full text-xs py-0 leading-none text-center relative h-[12px] mb-0.5">
+                          <div className="absolute z-20 w-full">
+                            {page.props.auth.user.invited_count}/
+                            {page.props.max_invites}
+                          </div>
+                          <div
+                            className="absolute z-10 bg-blue-500 rounded-full text-xs leading-none h-[12px] text-center"
+                            style={{
+                              width: `${(page.props.auth.user.invited_count /
+                                page.props.max_invites) *
+                                100
+                                }%`,
+                            }}
+                          />
+                        </div>
+                        Invite New User
+                      </div>
+                    </DropdownLink>
+                  </Dropdown>
+                </>
               )}
             </div>
           </div>

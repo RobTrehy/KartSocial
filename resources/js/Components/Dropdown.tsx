@@ -12,7 +12,7 @@ interface Props {
 export default function Dropdown({
   align = 'right',
   width = '48',
-  contentClasses = 'py-1 bg-white dark:bg-gray-700',
+  contentClasses = 'overflow-hidden bg-white dark:bg-gray-700',
   renderTrigger,
   children,
 }: PropsWithChildren<Props>) {
@@ -20,6 +20,13 @@ export default function Dropdown({
 
   const widthClass = {
     '48': 'w-48',
+    '52': 'w-52',
+    '56': 'w-56',
+    '60': 'w-60',
+    '64': 'w-64',
+    '72': 'w-72',
+    '80': 'w-80',
+    '96': 'w-96',
   }[width.toString()];
 
   const alignmentClasses = (() => {

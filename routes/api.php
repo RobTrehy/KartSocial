@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\API\RolesController;
+use App\Http\Controllers\Notifications\API\NotificationsAPIController;
 use App\Http\Controllers\Track\Event\TracKEventsAPIController;
 use App\Http\Controllers\Track\Visit\TrackVisitAPIController;
 use App\Http\Middleware\UserIsRestricted;
@@ -50,4 +51,5 @@ Route::middleware([
     'can:admin.access'
 ])->prefix('/admin')->group(function () {
     Route::get('/roles', [RolesController::class, 'index']);
+    Route::put('/notifications/{notification}/read', [NotificationsAPIController::class, 'markAsRead'])->name('notifications.read.mark');
 });
