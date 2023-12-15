@@ -62,6 +62,7 @@ export default function EditTrackEventForm(props: Props) {
         },
       ];
       set_layout(_layouts[0]);
+      form.setData('track_layout_id', _layouts[0].value);
       setLayouts(_layouts);
     } else {
       let _layout = 0;
