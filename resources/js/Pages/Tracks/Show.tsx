@@ -215,12 +215,28 @@ export default function Index({ track, layouts }: Props) {
             </div>
           )}
 
-          <TrackLayoutCard layout={layouts[layout]} track={track} />
+          {
+            layouts.length > 0 ? (
+              <>
+                <TrackLayoutCard layout={layouts[layout]} track={track} />
 
-          <h2 className="mt-10 mb-4 px-4 font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Events
-          </h2>
-          <Calendar track={track} />
+                <h2 className="mt-10 mb-4 px-4 font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                  Events
+                </h2>
+                <Calendar track={track} />
+              </>
+            ) : (
+              <div className="my-12">
+                <p className="text-xl font-bold">Somethings gone wrong!</p>
+                <p>Somehow this track has no layouts assigned and we can't show that here!</p>
+                <p>Please let us know by&nbsp;
+                  <a href="https://kartsocial.freshdesk.com/support/tickets/new" target="_blank" rel="noopener" className="hover:text-brand-600">
+                    submitting a support ticket
+                  </a>.
+                </p>
+              </div>
+            )
+          }
         </div>
       </div>
     </AppLayout>
