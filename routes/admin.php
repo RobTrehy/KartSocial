@@ -1,13 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserAdminController;
 use App\Http\Controllers\UserRestrictionController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Admin/Index');
-})->name('index');
+Route::get('/', [AdminController::class, 'dashboard'])->name('index');
+Route::get('/tracks/reseed', [AdminController::class, 'reseedTracksAndLayouts'])->name('tracks.reseed');
 
 Route::resource('/users', UserAdminController::class)->only([
     'index',

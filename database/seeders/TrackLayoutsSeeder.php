@@ -17,17 +17,21 @@ class TrackLayoutsSeeder extends Seeder
 
         $firstLine = true;
         while (($data = fgetcsv($csvFile, 2000, ',')) !== false) {
-            if (! $firstLine) {
+            if (!$firstLine) {
                 $track = Track::where('name', $data[0])->first();
 
                 if ($track) {
-                    TrackLayout::create([
-                        'track_id' => $track->id,
-                        'is_default' => $data[1],
-                        'name' => ($data[2]) ? $data[2] : null,
-                        'length' => ($data[3]) ? $data[3] : null,
-                        'retired_at' => ($data[4]) ? $data[4] : null,
-                    ]);
+                    TrackLayout::updateOrCreate(
+                        [
+                            'track_id' => $track->id,
+                            'name' => ($data[2]) ? $data[2] : null,
+                        ],
+                        [
+                            'is_default' => $data[1],
+                            'length' => ($data[3]) ? $data[3] : null,
+                            'retired_at' => ($data[4]) ? $data[4] : null,
+                        ]
+                    );
                 }
             }
             $firstLine = false;
