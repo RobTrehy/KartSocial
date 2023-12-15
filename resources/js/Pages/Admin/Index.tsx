@@ -27,7 +27,7 @@ export default function Index({
 
       <div className="py-4 md:py-12">
         <div className="max-w-7xl mx-auto md:px-6 lg:px-8">
-          <div className="grid grid-cols-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
             <Card>
               <CardHeader>
                 <CardTitle>Tracks</CardTitle>
@@ -36,7 +36,7 @@ export default function Index({
                 <p>Tracks: {track_count} (in CSV: {csv_track_count})</p>
                 <p>Layouts: {track_layouts_count} (in CSV: {csv_track_layouts_count})</p>
                 <PrimaryButton
-                  onClick={() => router.visit(route('admin:tracks.reseed'))} 
+                  onClick={() => router.visit(route('admin:tracks.reseed'))}
                   className="mt-2"
                 >
                   Try reseeding

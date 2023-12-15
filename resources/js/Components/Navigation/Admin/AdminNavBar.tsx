@@ -25,6 +25,12 @@ export default function AdminNavBar() {
             {/* <!-- Main Navigation Links --> */}
             <div className="hidden space-x-8 md:-my-px md:ml-10 md:flex">
               <AdminNavLink
+                href={route('admin:index')}
+                active={route().current('admin:index')}
+              >
+                Dashboard
+              </AdminNavLink>
+              <AdminNavLink
                 href={route('admin:users.index')}
                 active={route().current('admin:users.index')}
               >
@@ -99,6 +105,12 @@ export default function AdminNavBar() {
         })}
       >
         <div className="pt-2 pb-3 space-y-1">
+          <ResponsiveAdminNavLink
+            href={route('admin:index')}
+            active={route().current('admin:index')}
+          >
+            Dashboard
+          </ResponsiveAdminNavLink>
           <ResponsiveAdminNavLink
             href={route('admin:users.index')}
             active={route().current('admin:users.index')}
