@@ -1,6 +1,6 @@
 import useTypedPage from '@/Hooks/useTypedPage';
 import { Notification } from '@/types';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Dropdown from '../Dropdown';
 import NotificationItem from './NotificationItem';
 import NotificationsNavIcon from './NotificationsNavIcon';
@@ -20,8 +20,6 @@ export default function Notifications() {
             setNotifications([notification, ...notifications]);
             setUnReadCount(unreadCount + 1)
         });
-
-    useEffect(() => { console.log(notifications) }, [notifications]);
 
     return (
         <Dropdown
