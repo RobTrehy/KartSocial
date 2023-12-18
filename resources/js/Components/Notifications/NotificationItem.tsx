@@ -12,7 +12,7 @@ interface Props {
 
 export default function NotificationItem({ notification }: PropsWithChildren<Props>) {
     const classes = classNames(
-        notification.read_at === null ? 'bg-gray-50 dark:bg-gray-800' : '',
+        !notification.read_at ? 'bg-gray-50 dark:bg-gray-800' : '',
         'block',
         'w-full',
         'px-4',
@@ -28,15 +28,13 @@ export default function NotificationItem({ notification }: PropsWithChildren<Pro
     );
 
     const markAsRead = async (notification: Notification) => {
-        if (notification.read_at === null) {
+        if (!notification.read_at) {
             notification.read_at = moment().format('Y-M-D H:m:s');
             await axios.put(
                 route('notifications.read.mark', { 'notification': notification.id }),
                 { 'read_at': notification.read_at }
             )
-                .then(json => {
-                    console.log(json);
-
+                .then(() => {
                     if (notification.data.url) {
                         router.visit(notification.data.url);
                     }
