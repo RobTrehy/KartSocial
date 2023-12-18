@@ -40,7 +40,7 @@ export default function AppNavBar() {
       changeDarkMode(darkMode);
     }
 
-    if (page.props.auth.user) {
+    if (page.props.auth.user && import.meta.env.VITE_APP_ENV === "production") {
       let user = page.props.auth.user;
       (function (w, d, i, s) {
         function l() {
