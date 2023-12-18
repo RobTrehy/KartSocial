@@ -42,6 +42,8 @@ export default function NotificationItem({ notification }: PropsWithChildren<Pro
                 .catch(err => {
                     console.error(err);
                 });
+        } else if (notification.data.url) {
+            router.visit(notification.data.url);
         }
     }
 
