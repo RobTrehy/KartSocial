@@ -18,6 +18,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use NotificationChannels\WebPush\HasPushSubscriptions;
 use Rappasoft\LaravelAuthenticationLog\Traits\AuthenticationLoggable;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\CausesActivity;
@@ -37,6 +38,7 @@ class User extends Authenticatable implements \Spatie\PersonalDataExport\Exports
     use HasFollowing;
     use HasLaps;
     use HasProfilePhoto;
+    use HasPushSubscriptions;
     use HasRoles;
     use HasTrackData;
     use LogsActivity;

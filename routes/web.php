@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Notifications\NotificationsController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Track\Driver\TrackDriverController;
 use App\Http\Controllers\Track\Event\TrackEventsController;
@@ -118,6 +119,8 @@ Route::middleware([
     config('jetstream.auth_session'),
 ])->group(function () {
     Route::get('/logout', [AuthenticatedSessionController::class, 'destroy']);
+
+    Route::post('/push', [NotificationsController::class, 'store']);
 });
 
 Route::resource('tracks', TracksController::class)->only(['index', 'show']);
