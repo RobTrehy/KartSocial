@@ -3,9 +3,10 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Notification;
 
-class TestNotification extends Notification
+class UserAppNotification extends Notification
 {
     use Queueable;
 
@@ -30,20 +31,32 @@ class TestNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database'];
+        return ['broadcast', 'database'];
     }
 
     /**
-     * Get the database representation of the notification.
+     * Get the array representation of the notification.
      *
      * @return array<string, mixed>
      */
-    public function toDatabase(object $notifiable): array
+    public function toArray(object $notifiable): array
     {
         return [
             'title' => $this->title,
             'message' => $this->message,
             'url' => $this->url,
         ];
+    }
+
+    public function toBroadcast(object $notifiable): BroadcastMessage
+    {
+        return new BroadcastMessage([
+            'data' => $this->toArray($notifiable)
+        ]);
+    }
+
+    public function broadcastType()
+    {
+        return 'test-notification';
     }
 }
