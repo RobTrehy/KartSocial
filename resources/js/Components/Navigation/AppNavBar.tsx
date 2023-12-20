@@ -271,34 +271,40 @@ export default function AppNavBar() {
                     <form onSubmit={logout}>
                       <DropdownLink as="button">Log Out</DropdownLink>
                     </form>
+                    {
+                      (import.meta.env.VITE_APP_ENV === "production") && (
+                        <>
 
-                    <div className="border-t border-gray-200 dark:border-gray-600"></div>
+                          <div className="border-t border-gray-200 dark:border-gray-600"></div>
 
-                    {/* <!-- Invitations (ALPHA) --> */}
-                    <div className="block px-4 pt-4 pb-2 text-xs text-gray-400 text-center">
-                      Invitations
-                    </div>
-
-                    <DropdownLink href={route('user-invitations.show')}>
-                      <div className="text-center -mb-0.5">
-                        <div className="bg-gray-200 text-gray-900 w-full rounded-full text-xs py-0 leading-none text-center relative h-[12px] mb-0.5">
-                          <div className="absolute z-20 w-full">
-                            {page.props.auth.user.invited_count}/
-                            {page.props.max_invites}
+                          {/* <!-- Invitations (ALPHA) --> */}
+                          <div className="block px-4 pt-4 pb-2 text-xs text-gray-400 text-center">
+                            Invitations
                           </div>
-                          <div
-                            className="absolute z-10 bg-blue-500 rounded-full text-xs leading-none h-[12px] text-center"
-                            style={{
-                              width: `${(page.props.auth.user.invited_count /
-                                page.props.max_invites) *
-                                100
-                                }%`,
-                            }}
-                          />
-                        </div>
-                        Invite New User
-                      </div>
-                    </DropdownLink>
+
+                          <DropdownLink href={route('user-invitations.show')}>
+                            <div className="text-center -mb-0.5">
+                              <div className="bg-gray-200 text-gray-900 w-full rounded-full text-xs py-0 leading-none text-center relative h-[12px] mb-0.5">
+                                <div className="absolute z-20 w-full">
+                                  {page.props.auth.user.invited_count}/
+                                  {page.props.max_invites}
+                                </div>
+                                <div
+                                  className="absolute z-10 bg-blue-500 rounded-full text-xs leading-none h-[12px] text-center"
+                                  style={{
+                                    width: `${(page.props.auth.user.invited_count /
+                                      page.props.max_invites) *
+                                      100
+                                      }%`,
+                                  }}
+                                />
+                              </div>
+                              Invite New User
+                            </div>
+                          </DropdownLink>
+                        </>
+                      )
+                    }
                   </Dropdown>
                 </>
               )}
