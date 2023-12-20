@@ -63,7 +63,7 @@ class UserAppNotification extends Notification
         return 'user-notification';
     }
 
-    public function toWebPush($notifiable, $notification)
+    public function toWebPush($notifiable)
     {
         return (new WebPushMessage)
             ->title($this->title)
