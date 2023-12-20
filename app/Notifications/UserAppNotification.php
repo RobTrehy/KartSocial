@@ -3,13 +3,14 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Env;
 use NotificationChannels\WebPush\WebPushChannel;
 use NotificationChannels\WebPush\WebPushMessage;
 
-class UserAppNotification extends Notification
+class UserAppNotification extends Notification implements ShouldDispatchAfterCommit
 {
     use Queueable;
 

@@ -16,9 +16,14 @@ export default function Notifications() {
     const [unreadCount, setUnReadCount] = useState<number>(page.props.auth.user.unread_notifications);
 
     window.Echo.private(`App.Models.User.${page.props.auth.user.id}`)
-        .notification((notification: Notification) => {
-            setNotifications([notification, ...notifications]);
-            setUnReadCount(unreadCount + 1)
+        .notification((notification: Notification | any) => {
+            if (notification.type === 'user-notification') {
+                setNotifications([notification, ...notifications]);
+                setUnReadCount(unreadCount + 1)
+            } else if (notification.type === 'user-notifications-updated') {
+                setNotifications(notification.notifications);
+                setUnReadCount(notification.unread_notifications);
+            }
         });
 
     return (
