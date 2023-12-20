@@ -24,6 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/tracks/{track}', [TracKEventsAPIController::class, 'load']);
+Route::put('/notifications/{notification}/read', [NotificationsAPIController::class, 'markAsRead'])->name('notifications.read.mark');
 
 /**
  * User must be authenticated, verified and NOT restricted
@@ -51,5 +52,4 @@ Route::middleware([
     'can:admin.access'
 ])->prefix('/admin')->group(function () {
     Route::get('/roles', [RolesController::class, 'index']);
-    Route::put('/notifications/{notification}/read', [NotificationsAPIController::class, 'markAsRead'])->name('notifications.read.mark');
 });
