@@ -65,15 +65,12 @@ function subscribeUser() {
 }
 
 function storePushSubscription(pushSubscription) {
-    const token = document.querySelector('meta[name=csrf-token]').getAttribute('content');
-
     fetch('/push', {
         method: 'POST',
         body: JSON.stringify(pushSubscription),
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'X-CSRF-Token': token
         }
     })
         .then((res) => {
