@@ -38,45 +38,51 @@ class TrackDriverController extends Controller
                 ->where('user_id', $attached_id)
                 ->where('track_session_id', $session->id)
                 ->first()->position);
-            User::find($attached_id)
-                ->notify(
-                    new UserAppNotification(
-                        Auth::user()->alias . " added you to a session!",
-                        "Congratulations for finishing in " . $position . " place! Click here to add your laps!",
-                        route('events.show', ['event' => $event])
-                    )
-                );
-        }
-
-        foreach ($result['detached'] as $detached_id) {
-            User::find($detached_id)
-                ->notify(
-                    new UserAppNotification(
-                        Auth::user()->alias . " removed you from a session!",
-                        "Click here to visit the event.",
-                        route('events.show', ['event' => $event])
-                    )
-                );
-        }
-
-        foreach ($result['updated'] as $updated_id) {
-            $original_position = $original[array_search(1, array_column($original, 'id'))]['pivot']['position'];
-            $new_position = DB::table('track_session_drivers')
-                ->where('user_id', $updated_id)
-                ->where('track_session_id', $session->id)
-                ->first()->position;
-
-            if ($original_position !== $new_position) {
-                $nf = new NumberFormatter("en_GB", NumberFormatter::ORDINAL);
-                $position = $nf->format($new_position);
-                User::find($updated_id)
+            if (Auth::id() <> $attached_id) {
+                User::find($attached_id)
                     ->notify(
                         new UserAppNotification(
-                            Auth::user()->alias . " updated your result on a session!",
-                            "You're " . $nf->format($original_position) . " place is now " . $position . " place. Click here to view the event.",
+                            Auth::user()->alias . " added you to a session!",
+                            "Congratulations for finishing in " . $position . " place! Click here to add your laps!",
                             route('events.show', ['event' => $event])
                         )
                     );
+            }
+        }
+
+        foreach ($result['detached'] as $detached_id) {
+            if (Auth::id() <> $detached_id) {
+                User::find($detached_id)
+                    ->notify(
+                        new UserAppNotification(
+                            Auth::user()->alias . " removed you from a session!",
+                            "Click here to visit the event.",
+                            route('events.show', ['event' => $event])
+                        )
+                    );
+            }
+        }
+
+        foreach ($result['updated'] as $updated_id) {
+            if (Auth::id() <> $updated_id) {
+                $original_position = $original[array_search(1, array_column($original, 'id'))]['pivot']['position'];
+                $new_position = DB::table('track_session_drivers')
+                    ->where('user_id', $updated_id)
+                    ->where('track_session_id', $session->id)
+                    ->first()->position;
+
+                if ($original_position !== $new_position) {
+                    $nf = new NumberFormatter("en_GB", NumberFormatter::ORDINAL);
+                    $position = $nf->format($new_position);
+                    User::find($updated_id)
+                        ->notify(
+                            new UserAppNotification(
+                                Auth::user()->alias . " updated your result on a session!",
+                                "You're " . $nf->format($original_position) . " place is now " . $position . " place. Click here to view the event.",
+                                route('events.show', ['event' => $event])
+                            )
+                        );
+                }
             }
         }
 

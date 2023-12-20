@@ -5,6 +5,9 @@ namespace App\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Env;
+use NotificationChannels\WebPush\WebPushChannel;
+use NotificationChannels\WebPush\WebPushMessage;
 
 class UserAppNotification extends Notification
 {
@@ -31,7 +34,7 @@ class UserAppNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['broadcast', 'database'];
+        return ['broadcast', 'database', WebPushChannel::class];
     }
 
     /**
@@ -57,6 +60,24 @@ class UserAppNotification extends Notification
 
     public function broadcastType()
     {
-        return 'test-notification';
+        return 'user-notification';
+    }
+
+    public function toWebPush($notifiable, $notification)
+    {
+        return (new WebPushMessage)
+            ->title($this->title)
+            ->body($this->message)
+            ->action('View Event', str_replace(Env::get('APP_URL'), '', $this->url))
+            ->action('Dismiss', 'dismiss')
+            ->options([
+                'TTL' => 1000,
+                'topic' => $this->url
+            ])
+            ->icon('/icons/icon-512x512.png')
+            ->data([
+                'id' => $this->id,
+                'data' => $this->toArray($notifiable)
+            ]);
     }
 }
