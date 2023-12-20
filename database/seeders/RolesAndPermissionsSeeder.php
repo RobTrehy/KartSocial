@@ -16,50 +16,51 @@ class RolesAndPermissionsSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         // Create permissions
-        Permission::create(['name' => 'admin.access']);
-        Permission::create(['name' => 'dashboard.view']);
+        Permission::updateOrCreate(['name' => 'admin.access']);
+        Permission::updateOrCreate(['name' => 'dashboard.view']);
 
-        Permission::create(['name' => 'tracks.create']);
-        Permission::create(['name' => 'tracks.update']);
-        Permission::create(['name' => 'tracks.destroy']);
-        Permission::create(['name' => 'tracks.layouts.create']);
-        Permission::create(['name' => 'tracks.layouts.update']);
-        Permission::create(['name' => 'tracks.layouts.destroy']);
-        Permission::create(['name' => 'tracks.layouts.restore']);
-        Permission::create(['name' => 'tracks.layouts.set_default']);
+        Permission::updateOrCreate(['name' => 'tracks.create']);
+        Permission::updateOrCreate(['name' => 'tracks.update']);
+        Permission::updateOrCreate(['name' => 'tracks.destroy']);
+        Permission::updateOrCreate(['name' => 'tracks.layouts.create']);
+        Permission::updateOrCreate(['name' => 'tracks.layouts.update']);
+        Permission::updateOrCreate(['name' => 'tracks.layouts.destroy']);
+        Permission::updateOrCreate(['name' => 'tracks.layouts.restore']);
+        Permission::updateOrCreate(['name' => 'tracks.layouts.set_default']);
 
         // Perform visits actions against OWN visits
-        Permission::create(['name' => 'visits.view']);
-        Permission::create(['name' => 'visits.create']);
-        Permission::create(['name' => 'visits.update']);
-        Permission::create(['name' => 'visits.destroy']);
-        Permission::create(['name' => 'visits.sessions.create']);
-        Permission::create(['name' => 'visits.sessions.update']);
-        Permission::create(['name' => 'visits.sessions.destroy']);
-        Permission::create(['name' => 'visits.sessions.laps.view']);
-        Permission::create(['name' => 'visits.sessions.laps.update']);
+        Permission::updateOrCreate(['name' => 'visits.view']);
+        Permission::updateOrCreate(['name' => 'visits.create']);
+        Permission::updateOrCreate(['name' => 'visits.update']);
+        Permission::updateOrCreate(['name' => 'visits.destroy']);
+        Permission::updateOrCreate(['name' => 'visits.sessions.create']);
+        Permission::updateOrCreate(['name' => 'visits.sessions.update']);
+        Permission::updateOrCreate(['name' => 'visits.sessions.destroy']);
+        Permission::updateOrCreate(['name' => 'visits.sessions.laps.view']);
+        Permission::updateOrCreate(['name' => 'visits.sessions.laps.update']);
 
         // Perform visits actions against ANY user's vistis
-        Permission::create(['name' => 'visits.view.any']);
-        Permission::create(['name' => 'visits.update.any']);
-        Permission::create(['name' => 'visits.destroy.any']);
-        Permission::create(['name' => 'visits.sessions.view.any']);
-        Permission::create(['name' => 'visits.sessions.update.any']);
-        Permission::create(['name' => 'visits.sessions.destroy.any']);
-        Permission::create(['name' => 'visits.sessions.laps.view.any']);
-        Permission::create(['name' => 'visits.sessions.laps.update.any']);
+        Permission::updateOrCreate(['name' => 'visits.view.any']);
+        Permission::updateOrCreate(['name' => 'visits.update.any']);
+        Permission::updateOrCreate(['name' => 'visits.destroy.any']);
+        Permission::updateOrCreate(['name' => 'visits.sessions.view.any']);
+        Permission::updateOrCreate(['name' => 'visits.sessions.update.any']);
+        Permission::updateOrCreate(['name' => 'visits.sessions.destroy.any']);
+        Permission::updateOrCreate(['name' => 'visits.sessions.laps.view.any']);
+        Permission::updateOrCreate(['name' => 'visits.sessions.laps.update.any']);
 
         // OWN User Profile
-        Permission::create(['name' => 'user-profile.update']);
-        Permission::create(['name' => 'user-profile.photos.update']);
+        Permission::updateOrCreate(['name' => 'user-profile.update']);
+        Permission::updateOrCreate(['name' => 'user-profile.photos.update']);
 
         // ANY User Profile
-        Permission::create(['name' => 'user-profile.update.any']);
-        Permission::create(['name' => 'user-profile.photos.update.any']);
+        Permission::updateOrCreate(['name' => 'user-profile.update.any']);
+        Permission::updateOrCreate(['name' => 'user-profile.photos.update.any']);
 
         // Create Administrator and allow all
-        $role = Role::create([
+        $role = Role::updateOrCreate([
             'name' => 'Administrator',
+        ], [
             'colors' => [
                 'border' => 'border-red-300 dark:border-red-700',
                 'background' => 'bg-red-50 dark:bg-red-900',
@@ -68,8 +69,9 @@ class RolesAndPermissionsSeeder extends Seeder
         $role->givePermissionTo(Permission::all());
 
         // Create Basic Role and assign permissions
-        $role = Role::create([
+        $role = Role::updateOrCreate([
             'name' => 'Basic',
+        ], [
             'colors' => [
                 'border' => 'border-gray-300 dark:border-gray-700',
                 'background' => 'bg-gray-50 dark:bg-gray-900',

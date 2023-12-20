@@ -12,13 +12,13 @@ class StatusSeeder extends Seeder
      */
     public function run(): void
     {
-        Status::create([
+        Status::updateOrCreate([
             'value' => 'Attending'
         ]);
-        Status::create([
+        Status::updateOrCreate([
             'value' => 'Interested'
         ]);
-        Status::create([
+        Status::updateOrCreate([
             'value' => 'Not Going'
         ]);
     }
