@@ -78,7 +78,7 @@ class TrackDriverController extends Controller
                         ->notify(
                             new UserAppNotification(
                                 Auth::user()->alias . " updated your result on a session!",
-                                "You're " . $nf->format($original_position) . " place is now " . $position . " place. Click here to view the event.",
+                                "Your " . $nf->format($original_position) . " place is now " . $position . " place. Click here to view the event.",
                                 route('events.show', ['event' => $event])
                             )
                         );
