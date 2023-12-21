@@ -13,7 +13,8 @@ export function initSW() {
 
     //register the service worker
     navigator.serviceWorker.register('/service-worker.js')
-        .then(() => {
+        .then((registration) => {
+            registration.update();
             initPush();
         })
         .catch((err) => {

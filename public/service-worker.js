@@ -17,7 +17,9 @@ self.addEventListener('push', function (event) {
 
 self.addEventListener("notificationclick", (event) => {
     event.notification.close();
-    let action = (event.action && event.action !== "") ? event.action : event.notification.data.url;
+    let action = (event.action !== null && event.action !== undefined && event.action !== "") ? event.action : event.notification.data.url;
+    alert(event.action);
+    alert(evet.notification.data.url);
     markAsRead(event.notification);
 
     if (action !== 'dismiss') {
