@@ -52,14 +52,20 @@ class HandleInertiaRequests extends Middleware
             $stats['laps'] = $formatter->format(floor(TrackSessionLap::count() / 10) * 10); // To the nearest 10
         }
 
-        return array_merge(parent::share($request), [
-            'app_name' => Env::get('APP_NAME'),
-            'app_feedback_label' => Env::get('APP_FEEDBACK_LABEL', 'Feedback'),
-            'app_version' => Env::get('APP_VERSION', 'v0.0.0'),
-            'max_invites' => Env::get('APP_MAX_INVITES', 1),
-            'auth.permissions' => isset($perms) ? $perms : null,
-            'auth.user.notifications' => isset($notifications) ? $notifications : null,
-            'auth.user.unread_notifications' => isset($unread_notifications) ? $unread_notifications : 0,
-        ], $stats);
+        return array_merge(
+            parent::share($request),
+            [
+                'app_name' => Env::get('APP_NAME'),
+                'app_feedback_label' => Env::get('APP_FEEDBACK_LABEL', 'Feedback'),
+                'app_version' => Env::get('APP_VERSION', 'v0.0.0'),
+                'max_invites' => Env::get('APP_MAX_INVITES', 1),
+            ],
+            Auth::check() ? [
+                'auth.permissions' => isset($perms) ? $perms : null,
+                'auth.user.notifications' => isset($notifications) ? $notifications : null,
+                'auth.user.unread_notifications' => isset($unread_notifications) ? $unread_notifications : 0,
+            ] : [],
+            $stats
+        );
     }
 }
