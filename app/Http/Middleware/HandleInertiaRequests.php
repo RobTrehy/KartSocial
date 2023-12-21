@@ -58,6 +58,7 @@ class HandleInertiaRequests extends Middleware
                 'app_name' => Env::get('APP_NAME'),
                 'app_feedback_label' => Env::get('APP_FEEDBACK_LABEL', 'Feedback'),
                 'app_version' => Env::get('APP_VERSION', 'v0.0.0'),
+                'app_invitation_only' => Env::get('APP_INVITATION_ONLY', false),
                 'max_invites' => Env::get('APP_MAX_INVITES', 1),
             ],
             Auth::check() ? [

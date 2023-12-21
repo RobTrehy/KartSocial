@@ -102,6 +102,7 @@ export type InertiaSharedProps<T = {}> = T & {
   app_name: string;
   app_feedback_label: string;
   app_version: string;
+  app_invitation_only: boolean;
   jetstream: {
     canManageTwoFactorAuthentication: boolean;
     canUpdatePassword: boolean;

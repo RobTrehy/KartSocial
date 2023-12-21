@@ -272,7 +272,7 @@ export default function AppNavBar() {
                       <DropdownLink as="button">Log Out</DropdownLink>
                     </form>
                     {
-                      (import.meta.env.VITE_APP_ENV === "production") && (
+                      (page.props.app_invitation_only) && (
                         <>
 
                           <div className="border-t border-gray-200 dark:border-gray-600"></div>
