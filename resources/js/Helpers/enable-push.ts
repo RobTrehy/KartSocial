@@ -1,10 +1,6 @@
 'use strict';
 
-document.addEventListener('DOMContentLoaded', function () {
-    initSW();
-});
-
-function initSW() {
+export function initSW() {
     if (!"serviceWorker" in navigator) {
         //service worker isn't supported
         return;

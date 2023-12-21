@@ -17,9 +17,6 @@
   @viteReactRefresh
   @vite('resources/js/app.tsx')
   @inertiaHead
-  @auth
-    @vite('resources/js/enable-push.js')
-  @endauth
 </head>
 
 <body class="font-sans antialiased">

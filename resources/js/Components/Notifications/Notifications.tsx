@@ -1,6 +1,7 @@
+import { initSW } from '@/Helpers/enable-push';
 import useTypedPage from '@/Hooks/useTypedPage';
 import { Notification } from '@/types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Dropdown from '../Dropdown';
 import NotificationItem from './NotificationItem';
 import NotificationsNavIcon from './NotificationsNavIcon';
@@ -15,16 +16,20 @@ export default function Notifications() {
     const [notifications, setNotifications] = useState<Array<Notification>>(page.props.auth.user.notifications);
     const [unreadCount, setUnReadCount] = useState<number>(page.props.auth.user.unread_notifications);
 
-    window.Echo.private(`App.Models.User.${page.props.auth.user.id}`)
-        .notification((notification: Notification | any) => {
-            if (notification.type === 'user-notification') {
-                setNotifications([notification, ...notifications]);
-                setUnReadCount(unreadCount + 1)
-            } else if (notification.type === 'user-notifications-updated') {
-                setNotifications(notification.notifications);
-                setUnReadCount(notification.unread_notifications);
-            }
-        });
+    useEffect(() => {
+        initSW();
+
+        window.Echo.private(`App.Models.User.${page.props.auth.user.id}`)
+            .notification((notification: Notification | any) => {
+                if (notification.type === 'user-notification') {
+                    setNotifications([notification, ...notifications]);
+                    setUnReadCount(unreadCount + 1)
+                } else if (notification.type === 'user-notifications-updated') {
+                    setNotifications(notification.notifications);
+                    setUnReadCount(notification.unread_notifications);
+                }
+            });
+    }, []);
 
     return (
         <Dropdown
