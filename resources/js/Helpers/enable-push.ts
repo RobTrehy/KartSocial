@@ -1,12 +1,12 @@
 'use strict';
 
 export function initSW() {
-    if (!"serviceWorker" in navigator) {
+    if (!("serviceWorker" in navigator)) {
         //service worker isn't supported
         return;
     }
 
-    if (!"PushManager" in window) {
+    if (!("PushManager" in window)) {
         //push isn't supported
         return;
     }
