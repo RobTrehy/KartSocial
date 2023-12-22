@@ -120,6 +120,8 @@ Route::middleware([
 ])->group(function () {
     Route::get('/logout', [AuthenticatedSessionController::class, 'destroy']);
 
+    Route::get('/notifications', [NotificationsController::class, 'index'])->name('notifications.index');
+    Route::get('/notifications/all/read', [NotificationsController::class, 'markAllAsRead'])->name('notifications.all.read');
     Route::post('/push', [NotificationsController::class, 'store']);
 });
 

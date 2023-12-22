@@ -326,6 +326,12 @@ export default function AppNavBar() {
               alpha
             </button>
 
+            {
+              page.props.auth.user && (
+                <Notifications responsive />
+              )
+            }
+
             {/* <!-- Hamburger --> */}
             <button
               type="button"

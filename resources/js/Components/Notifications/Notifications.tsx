@@ -1,13 +1,20 @@
 import { initSW } from '@/Helpers/enable-push';
+import useRoute from '@/Hooks/useRoute';
 import useTypedPage from '@/Hooks/useTypedPage';
 import { Notification } from '@/types';
+import { Link } from '@inertiajs/react';
 import React, { useEffect, useState } from 'react';
 import Dropdown from '../Dropdown';
 import NotificationItem from './NotificationItem';
 import NotificationsNavIcon from './NotificationsNavIcon';
 
-export default function Notifications() {
+interface Props {
+    responsive?: boolean;
+}
+
+export default function Notifications({ responsive = false }: Props) {
     const page = useTypedPage();
+    const route = useRoute();
 
     if (!page.props.auth.user) {
         return null;
@@ -31,6 +38,12 @@ export default function Notifications() {
             });
     }, []);
 
+    if (responsive) {
+        return (
+            <NotificationsNavIcon unread={unreadCount} />
+        )
+    }
+
     return (
         <Dropdown
             align="right"
@@ -44,13 +57,16 @@ export default function Notifications() {
                     <NotificationItem key={notification.id} notification={notification} />
                 ))
             }
-            <div className="block px-4 py-2 text-xs text-center text-brand-600 hover:text-brand-500">
+            <Link
+                href={route('notifications.index')}
+                className="block px-4 py-2 text-xs text-center text-brand-600 hover:text-brand-500"
+            >
                 {
                     notifications.length > 5
                         ? (<>View All {notifications.length} Notifications</>)
                         : (<>View All Notifications</>)
                 }
-            </div>
+            </Link>
         </Dropdown>
     )
 }

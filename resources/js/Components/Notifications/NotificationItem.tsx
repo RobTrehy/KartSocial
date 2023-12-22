@@ -54,6 +54,9 @@ export default function NotificationItem({ notification }: PropsWithChildren<Pro
         >
             <p className="font-semibold">{notification.data.title}</p>
             <p>{notification.data.message}</p>
+            <p className="mt-0.5 font-xs text-right italic">
+                {moment(notification.updated_at).calendar()}
+            </p>
         </div>
     )
 }
