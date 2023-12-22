@@ -328,7 +328,9 @@ export default function AppNavBar() {
 
             {
               page.props.auth.user && (
-                <Notifications responsive />
+                <Link href={route('notifications.index')}>
+                  <Notifications responsive />
+                </Link>
               )
             }
 
