@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\API\RolesController;
+use App\Http\Controllers\Notifications\API\NotificationsAPIController;
 use App\Http\Controllers\Track\Event\TracKEventsAPIController;
 use App\Http\Controllers\Track\Visit\TrackVisitAPIController;
 use App\Http\Middleware\UserIsRestricted;
@@ -23,6 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/tracks/{track}', [TracKEventsAPIController::class, 'load']);
+Route::put('/notifications/{notification}/read', [NotificationsAPIController::class, 'markAsRead'])->name('notifications.read.mark');
 
 /**
  * User must be authenticated, verified and NOT restricted

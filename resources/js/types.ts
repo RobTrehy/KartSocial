@@ -24,8 +24,27 @@ export interface User {
   invited_count: number;
   roles: Nullable<Array<Role>>;
   restriction: Nullable<UserRestriction>;
+  notifications: Array<Notification>;
+  unread_notifications: Number;
   created_at: DateTime;
   updated_at: DateTime;
+}
+
+export interface Notification {
+  id: string;
+  notifiable_id: number;
+  notifiable_type: string;
+  type: string;
+  data: Array<NotificationData>;
+  read_at: DateTime;
+  created_at: DateTime;
+  updated_at: DateTime;
+}
+
+export interface NotificationData {
+  title: string;
+  message: string;
+  url: string;
 }
 
 export interface UserRestriction {
@@ -83,6 +102,7 @@ export type InertiaSharedProps<T = {}> = T & {
   app_name: string;
   app_feedback_label: string;
   app_version: string;
+  app_invitation_only: boolean;
   jetstream: {
     canManageTwoFactorAuthentication: boolean;
     canUpdatePassword: boolean;

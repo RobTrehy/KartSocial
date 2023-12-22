@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Notifications\NotificationsController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Track\Driver\TrackDriverController;
 use App\Http\Controllers\Track\Event\TrackEventsController;
@@ -16,9 +17,7 @@ use App\Http\Middleware\UserIsNotRestricted;
 use App\Http\Middleware\UserIsRestricted;
 use App\Models\UserRestrictions;
 use Illuminate\Support\Env;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
@@ -120,6 +119,10 @@ Route::middleware([
     config('jetstream.auth_session'),
 ])->group(function () {
     Route::get('/logout', [AuthenticatedSessionController::class, 'destroy']);
+
+    Route::get('/notifications', [NotificationsController::class, 'index'])->name('notifications.index');
+    Route::get('/notifications/all/read', [NotificationsController::class, 'markAllAsRead'])->name('notifications.all.read');
+    Route::post('/push', [NotificationsController::class, 'store']);
 });
 
 Route::resource('tracks', TracksController::class)->only(['index', 'show']);
@@ -138,7 +141,3 @@ Route::get('/restricted', function () {
 if (Env::get('APP_INVITATION_ONLY', false)) {
     include 'invitations.php';
 }
-
-Route::get('/seed', function() {
-    Artisan::call('db:seed', ['--force' => 'true']);
-});
