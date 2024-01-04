@@ -20,7 +20,7 @@ class UserProfileController extends Controller
     public function show(string $alias)
     {
         $user = User::where('alias', $alias)
-            ->with(['homeTrack', 'trackEvents'])
+            ->with(['homeTrack'])
             ->with(['followedBy' => function ($query) {
                 $query->inRandomOrder()->take('6');
             }])
@@ -29,6 +29,7 @@ class UserProfileController extends Controller
 
         return Inertia::render('User/Show', [
             'user' => $user,
+            'user.track_events' => $user->TrackEvents(),
             'following' => Auth::check() && $user->isFollowedBy(Auth::user()),
             'feed' => DashboardFeed::where('user_id', $user->id)->orderBy('updated_at', 'DESC')->orderBy('id', 'DESC')->get(),
         ]);
