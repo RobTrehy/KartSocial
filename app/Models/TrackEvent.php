@@ -144,7 +144,7 @@ class TrackEvent extends Model
             ->where('user_id', Auth::id())
             ->join('statuses', 'track_event_attendees.status_id', '=', 'statuses.id')
             ->select('value')
-            ->first()->value;
+            ->first()?->value;
     }
 
     /**

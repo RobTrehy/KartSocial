@@ -18,13 +18,17 @@ class TracKEventsAPIController extends Controller
                 'id',
                 'date',
                 'name as title',
+                'slug',
             ])
             ->where('date', '>=', $request->start)
             ->where('date', '<=', $request->end)
             ->orderBy('date', 'ASC')
             ->get();
-        $events->each(function ($event) {
-            $event->url = route('events.show', ['event' => $event->id]);
+        $events->each(function ($event) use ($track) {
+            $event->url = route('events.show', [
+                'track' => $track->slug,
+                'event' => $event->slug
+            ]);
         });
 
         return $events;
