@@ -36,7 +36,7 @@ class DashboardController extends Controller
             'tracks' => Track::whereNotIn(
                 'id',
                 User::find(Auth::id())
-                    ->load('trackEvents')
+                    ->TrackEvents()
                     ->pluck('track_events.track_layout.track.id')
             )->inRandomOrder()->take(5)->get(),
         ]);
