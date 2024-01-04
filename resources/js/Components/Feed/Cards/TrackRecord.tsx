@@ -26,8 +26,8 @@ interface Props {
       lap_number: number;
     };
     track?: {
-      id: number;
       name: string;
+      slug: string;
     };
     layout?: {
       name: string;
@@ -46,6 +46,8 @@ export default function TrackRecord({
   properties,
   updated_at,
 }: Props) {
+  // return null;
+
   const route = useRoute();
   const ref = useRef<HTMLDivElement>(null);
   const onScreen = useOnScreen(ref);
@@ -78,7 +80,7 @@ export default function TrackRecord({
           <CardTitle>
             {event === 'track_record' ? (
               <Link
-                href={route('tracks.show', { track: properties.track?.id })}
+                href={route('tracks.show', { track: properties.track?.slug })}
                 className="hover:text-brand-500"
               >
                 {properties.track?.name}
@@ -86,7 +88,7 @@ export default function TrackRecord({
             ) : null}
             {event === 'layout_record' ? (
               <Link
-                href={route('tracks.show', { track: properties.track?.id })}
+                href={route('tracks.show', { track: properties.track?.slug })}
                 className="hover:text-brand-500"
               >
                 {properties.layout?.name
@@ -101,7 +103,7 @@ export default function TrackRecord({
               ? properties.layout?.name
                 ? `${properties.track?.name} - ${properties.layout.name}`
                 : properties.track?.name
-              : object.session_name}
+              : object.name}
           </CardSubtitle>
         </div>
 
@@ -123,7 +125,7 @@ export default function TrackRecord({
           Set on lap {properties.lap.lap_number}<br />
           During {object.name} of&nbsp;
           <Link
-            href={route('events.show', { event: parent.id })}
+            href={route('events.show', { track: properties.track?.slug, event: parent.id })}
             className="hover:text-brand-600 dark:hover:text-brand-500 hover:font-semibold"
           >
             {parent.name}

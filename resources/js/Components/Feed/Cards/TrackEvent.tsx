@@ -2,13 +2,35 @@ import SessionAccordion from '@/Components/Accordions/SessionAccordion';
 import CardSubtitle from '@/Components/Cards/CardSubtitle';
 import CardTitle from '@/Components/Cards/CardTitle';
 import useRoute from '@/Hooks/useRoute';
-import { TrackEvent as TrackEventType } from '@/types';
+import { TrackEvent as TrackEventType, User } from '@/types';
 import { Link } from '@inertiajs/react';
 import moment from 'moment';
 import React from 'react';
 import FeedCard from './Partials/FeedCard';
 import FeedFooter from './Partials/FeedFooter';
 import FeedHeader from './Partials/FeedHeader';
+
+interface Props {
+  id: number;
+  object: TrackEventType;
+  user: User;
+  event: string;
+  description: string;
+  properties: {
+    lap: {
+      lap_time: number;
+      lap_number: number;
+    };
+    track: {
+      name: string;
+      slug: string;
+    };
+    track_layout: {
+      name: string;
+    };
+  };
+  updated_at: string;
+}
 
 export default function TrackEvent({
   id,
@@ -17,12 +39,10 @@ export default function TrackEvent({
   object,
   properties,
   updated_at,
-}: any) {
+}: Props) {
   const route = useRoute();
 
   let event: TrackEventType = object;
-
-  console.log(event, properties);
 
   return (
     <FeedCard>
@@ -30,14 +50,14 @@ export default function TrackEvent({
 
       <CardTitle>
         <Link
-          href={route('events.show', { event: event.id })}
+          href={route('events.show', { track: properties.track.slug, event: event.slug })}
           className="hover:text-brand-600 dark:hover:text-brand-500"
         >
           {event.name}
         </Link>
         &nbsp;at&nbsp;
         <Link
-          href={route('tracks.show', { track: properties.track.id })}
+          href={route('tracks.show', { track: properties.track.slug })}
           className="hover:text-brand-600 dark:hover:text-brand-500"
         >
           {properties.track.name}{' '}

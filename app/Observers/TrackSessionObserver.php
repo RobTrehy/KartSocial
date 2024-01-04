@@ -28,7 +28,7 @@ class TrackSessionObserver implements ShouldHandleEventsAfterCommit
                     'name' => $session->trackEvent->trackLayout->name,
                 ],
                 'track' => [
-                    'id' => $session->trackEvent->trackLayout->track->id,
+                    'slug' => $session->trackEvent->trackLayout->track->slug,
                     'name' => $session->trackEvent->trackLayout->track->name,
                 ],
             ],
@@ -57,7 +57,7 @@ class TrackSessionObserver implements ShouldHandleEventsAfterCommit
                         'name' => $session->trackEvent->trackLayout->name,
                     ],
                     'track' => [
-                        'id' => $session->trackEvent->trackLayout->track->id,
+                        'slug' => $session->trackEvent->trackLayout->track->slug,
                         'name' => $session->trackEvent->trackLayout->track->name,
                     ],
                 ],

@@ -22,7 +22,7 @@ export default function Upcoming({ user }: any) {
               className="items-center gap-x-2 py-3 px-4 bg-white border -mt-px md:first:rounded-t-md first:mt-0 md:last:rounded-b-md dark:bg-gray-800 dark:border-gray-700 "
             >
               <Link
-                href={route('events.show', { event: event.id })}
+                href={route('events.show', { track: event.track_layout.track.slug, event: event.slug })}
                 className="font-semibold hover:text-brand-600"
               >
                 {event.name}

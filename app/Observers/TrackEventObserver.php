@@ -20,7 +20,7 @@ class TrackEventObserver implements ShouldHandleEventsAfterCommit
             'object_id' => $event->id,
             'properties' => [
                 'track_layout' => $event->trackLayout->pluck('name')->toArray(),
-                'track' => $event->trackLayout->track->pluck('id', 'name')->toArray(),
+                'track' => $event->trackLayout->track->pluck('slug', 'name')->toArray(),
             ],
             'card_type' => 'TrackEvent',
             'event' => 'created',
@@ -46,7 +46,7 @@ class TrackEventObserver implements ShouldHandleEventsAfterCommit
                         'name' => $event->trackLayout->name,
                     ],
                     'track' => [
-                        'id' => $event->trackLayout->track->id,
+                        'slug' => $event->trackLayout->track->slug,
                         'name' => $event->trackLayout->track->name,
                     ],
                 ],
