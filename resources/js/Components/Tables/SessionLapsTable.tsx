@@ -37,7 +37,7 @@ export default function SessionLapsTable({ session }: Props) {
           return (
             <tr
               key={i}
-              className={`${lap.lap_number === session.fastestLap?.lap_number
+              className={`${lap.lap_number === session.fastest_lap?.lap_number
                   ? 'bg-yellow-50 hover:bg-yellow-100 dark:bg-yellow-800 dark:hover:bg-yellow-900 font-bold'
                   : 'hover:bg-gray-50 dark:hover:bg-gray-900'
                 }`}

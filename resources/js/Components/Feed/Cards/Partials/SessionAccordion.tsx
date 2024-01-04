@@ -82,10 +82,10 @@ export default function SessionAccordion({ visit, profile }: Props) {
               <div className="px-5 py-0.5 w-full md:w-auto text-center">
                 {session.laps ? session.laps.length : 0} Laps Completed
               </div>
-              {session.fastestLap && (
+              {session.fastest_lap && (
                 <div className="px-5 py-0.5 w-full md:w-auto text-center">
-                  Fastest Lap: {FormatLapTime(session.fastestLap)} on lap{' '}
-                  {session.fastestLap.lap_number}
+                  Fastest Lap: {FormatLapTime(session.fastest_lap)} on lap{' '}
+                  {session.fastest_lap.lap_number}
                 </div>
               )}
               {session.finish_position && session.total_drivers && (

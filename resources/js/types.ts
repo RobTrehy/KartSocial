@@ -166,7 +166,7 @@ export interface Track {
   retired_layouts_count: number;
   laps: Nullable<Array<TrackSessionLap>>;
   laps_count: number;
-  fastestLap: Nullable<TrackSessionLap>;
+  fastest_lap: Nullable<TrackSessionLap>;
   myFastest: Nullable<TrackSessionLap>;
   feed: Array<any>; // TODO: Track Feed
   created_at: DateTime;
@@ -182,7 +182,7 @@ export interface TrackLayout {
   length: Nullable<number>;
   laps_count: number;
   my_laps_count: number;
-  fastestLap: TrackSessionLap & {
+  fastest_lap: TrackSessionLap & {
     session: any;
   };
   myFastest: TrackSessionLap & {
@@ -210,11 +210,11 @@ export interface TrackEvent {
       }
     }
   }>;
+  attending_status: string;
   sessions: Array<TrackSession>;
-  fastestLap: TrackSessionLap;
+  fastest_lap: TrackSessionLap;
   track_layout_id: number;
   track_layout: TrackLayout;
-  // linked_visits: Array<TrackVisit>;
 }
 
 export interface TrackSession {
@@ -226,7 +226,7 @@ export interface TrackSession {
   length: number;
   length_type: string;
   laps: Array<TrackSessionLap>;
-  fastestLap: TrackSessionLap;
+  fastest_lap: TrackSessionLap;
   total_drivers: number;
   drivers: Array<Driver>;
 }
@@ -259,7 +259,7 @@ export interface TrackVisit {
   notes: string;
   visit_date: DateTime;
   sessions: Array<TrackVisitSession>;
-  fastestLap: TrackVisitSessionLap;
+  fastest_lap: TrackVisitSessionLap;
   track_layout_id: number;
   track_layout: TrackLayout;
   linked_visits: Array<TrackVisit>;
@@ -272,7 +272,7 @@ export interface TrackVisitSession {
   session_length: number;
   session_length_type: string;
   laps: Array<TrackVisitSessionLap>;
-  fastestLap: TrackVisitSessionLap;
+  fastest_lap: TrackVisitSessionLap;
   finish_position: number;
   total_drivers: number;
 }

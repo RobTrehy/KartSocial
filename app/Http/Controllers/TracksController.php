@@ -89,8 +89,8 @@ class TracksController extends Controller
         $layouts = $layouts->toArray();
 
         foreach ($layouts as $idx => $layout) {
-            if ($layout['fastestLap']) {
-                $layouts[$idx]['fastestLap'] = TrackSessionLap::where('id', $layout['fastestLap']['id'])
+            if ($layout['fastest_lap']) {
+                $layouts[$idx]['fastest_lap'] = TrackSessionLap::where('id', $layout['fastest_lap']['id'])
                     ->with(['session', 'session.trackEvent', 'driver'])
                     ->first()?->toArray();
             }
@@ -106,7 +106,7 @@ class TracksController extends Controller
         return Inertia::render('Tracks/Show', [
             'track' => $track,
             'track.myFastest' => Auth::check() ? User::find(Auth::id())->fastestLapsForTrack($track)->first() : null,
-            'track.fastestLap' => TrackSessionLap::where('id', $track->fastestLap?->id)
+            'track.fastest_lap' => TrackSessionLap::where('id', $track->fastest_lap?->id)
                 ->with(['session', 'session.trackEvent'])
                 ->first(),
             'layouts' => $layouts,

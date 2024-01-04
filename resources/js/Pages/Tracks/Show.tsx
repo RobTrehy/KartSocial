@@ -117,8 +117,8 @@ export default function Index({ track, layouts }: Props) {
 
       <div className="pb-8">
         <div className="max-w-7xl mx-auto md:px-6 lg:px-8">
-          {track.fastestLap &&
-            track.fastestLap?.lap_time === track.myFastest?.lap_time && (
+          {track.fastest_lap &&
+            track.fastest_lap?.lap_time === track.myFastest?.lap_time && (
               <div className="text-center mb-6 md:pb-8 lg:px-4">
                 <div
                   className="p-2 bg-brand-800 items-center text-brand-100 leading-none lg:rounded-full flex flex-col gap-y-2 md:flex-row lg:inline-flex"

@@ -16,7 +16,7 @@ class TrackVisit extends Model
     use HasFactory;
     use LogsActivity;
 
-    protected $appends = ['fastestLap'];
+    protected $appends = ['fastest_lap'];
 
     protected $fillable = [
         'user_id',

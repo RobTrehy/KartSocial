@@ -11,11 +11,8 @@ use App\Models\TrackEvent;
 use App\Models\TrackEventAttendee;
 use App\Models\TrackLayout;
 use App\Models\TrackSession;
-use App\Models\TrackSessionLap;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class TrackEventsController extends Controller
@@ -32,7 +29,9 @@ class TrackEventsController extends Controller
         }
 
         return Inertia::render('Track/Events/Index', [
-            'events' => TrackEvent::where('user_id', Auth::id())
+            'events' => TrackEvent::whereHas('attendees', function ($q) {
+                $q->where('user_id', Auth::id())->where('status_id', '!=', 3);
+            })->orWhere('user_id', Auth::id())
                 ->with(['trackLayout', 'sessions', 'sessions.laps'])
                 ->orderBy('date', 'DESC')
                 ->paginate(15),

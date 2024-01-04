@@ -42,7 +42,7 @@ class Track extends Model
         return 'slug';
     }
 
-    protected $appends = ['fastestLap'];
+    protected $appends = ['fastest_lap'];
 
     protected $fillable = [
         'name',

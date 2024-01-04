@@ -227,10 +227,10 @@ export default function SessionAccordion({ event, profile, startClosed = false }
                             <div className="px-5 py-0.5 w-full md:w-auto text-center">
                                 Session Length: {session.length}{' '}{session.length_type}
                             </div>
-                            {session.fastestLap && (
+                            {session.fastest_lap && (
                                 <div className="px-5 py-0.5 w-full md:w-auto text-center">
-                                    Fastest Lap: {FormatLapTime(session.fastestLap)} on lap{' '}
-                                    {session.fastestLap.lap_number} by {session.fastestLap.driver.alias}
+                                    Fastest Lap: {FormatLapTime(session.fastest_lap)} on lap{' '}
+                                    {session.fastest_lap.lap_number} by {session.fastest_lap.driver.alias}
                                 </div>
                             )}
                             {event.user_id === auth.user?.id && !profile && (

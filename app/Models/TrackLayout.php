@@ -17,7 +17,7 @@ class TrackLayout extends Model
     use \Staudenmeir\EloquentEagerLimit\HasEagerLimit;
     use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
-    protected $appends = ['fastestLap'];
+    protected $appends = ['fastest_lap'];
 
     protected $with = ['track'];
 

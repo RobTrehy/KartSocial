@@ -62,26 +62,26 @@ export default function TrackLayoutCard({ layout, track }: Props) {
     <div className="w-full md:flex mb-6">
       <div className="flex w-full md:w-1/2 p-10 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 items-center">
         <div className="flex flex-col w-full h-full">
-          {layout.fastestLap && (
+          {layout.fastest_lap && (
             <div className="flex flex-col md:flex-row gap-2 w-full items-center md:items-end mb-2 md:mb-6">
               <div className="flex flex-col text-center md:text-left">
                 <p className="font-semibold">Layout Record</p>
                 <span className="block leading-none text-3xl text-gray-800 dark:text-gray-100">
-                  {FormatLapTime(layout.fastestLap)}
+                  {FormatLapTime(layout.fastest_lap)}
                 </span>
                 <p className="text-xs">
                   by&nbsp;
                   <Link
                     href={route('profile.show', {
-                      alias: layout.fastestLap.driver.alias,
+                      alias: layout.fastest_lap.driver.alias,
                     })}
                     className="hover:text-brand-600"
                   >
-                    {layout.fastestLap.driver.alias}
+                    {layout.fastest_lap.driver.alias}
                   </Link>
                   &nbsp;on{' '}
                   {moment(
-                    layout.fastestLap.session.track_event.date,
+                    layout.fastest_lap.session.track_event.date,
                   ).format('Do MMM YYYY')}
                 </p>
               </div>
@@ -94,13 +94,13 @@ export default function TrackLayoutCard({ layout, track }: Props) {
                   <p className="text-xs">
                     on{' '}
                     {moment(
-                      layout.fastestLap.session.track_event.date,
+                      layout.fastest_lap.session.track_event.date,
                     ).format('Do MMM YYYY')}
                   </p>
                 </div>
               )}
               {layout.myFastest &&
-                layout.myFastest.lap_time === layout.fastestLap.lap_time && (
+                layout.myFastest.lap_time === layout.fastest_lap.lap_time && (
                   <div className="flex flex-col">
                     <span className="block leading-5 text-sm md:ml-4 text-green-500">
                       0.000
@@ -109,14 +109,14 @@ export default function TrackLayoutCard({ layout, track }: Props) {
                   </div>
                 )}
               {layout.myFastest &&
-                layout.myFastest.lap_time > layout.fastestLap.lap_time && (
+                layout.myFastest.lap_time > layout.fastest_lap.lap_time && (
                   <div className="flex flex-col">
                     <span className="block leading-5 text-sm md:ml-4 text-red-500">
                       {FormatLapDiff({
                         lap_number: 0,
                         lap_diff:
                           layout.myFastest.lap_time -
-                          layout.fastestLap.lap_time,
+                          layout.fastest_lap.lap_time,
                       })}
                     </span>
                     <p className="text-xs">&nbsp;</p>

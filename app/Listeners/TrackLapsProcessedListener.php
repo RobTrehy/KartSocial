@@ -155,13 +155,13 @@ class TrackLapsProcessedListener
         ];
 
         // Check and Set the track record
-        if ($track->fastestLap) {
-            if ($lap->id === $track->fastestLap->id) {
+        if ($track->fastest_lap) {
+            if ($lap->id === $track->fastest_lap->id) {
                 $records['track'] = true;
                 activity('Track')
                     ->performedOn($track)
                     ->withProperties([
-                        'old' => ['lap_time' => $track->fastestLap->lap_time],
+                        'old' => ['lap_time' => $track->fastest_lap->lap_time],
                         'attributes' => ['lap_time' => $lap->lap_time],
                     ])
                     ->event('- New Record!')
@@ -179,13 +179,13 @@ class TrackLapsProcessedListener
         }
 
         // Check and Set the track layout record
-        if ($layout->fastestLap) {
-            if ($lap->id === $layout->fastestLap->id) {
+        if ($layout->fastest_lap) {
+            if ($lap->id === $layout->fastest_lap->id) {
                 $records['layout'] = true;
                 activity('Track Layout')
                     ->performedOn($layout)
                     ->withProperties([
-                        'old' => ['lap_time' => $layout->fastestLap->lap_time],
+                        'old' => ['lap_time' => $layout->fastest_lap->lap_time],
                         'attributes' => ['lap_time' => $lap->lap_time],
                     ])
                     ->event('- New Record!')
@@ -203,21 +203,21 @@ class TrackLapsProcessedListener
         }
 
         // Check and Set the track event record
-        if ($event->fastestLap) {
-            if ($lap->id === $event->fastestLap->id) {
-                // $event->fastestLaps()->syncWithPivotValues($lap, ['track_layout_id' => $layout->id]);
+        if ($event->fastest_lap) {
+            if ($lap->id === $event->fastest_lap->id) {
+                // $event->fastest_laps()->syncWithPivotValues($lap, ['track_layout_id' => $layout->id]);
             }
         } else {
-            // $event->fastestLaps()->syncWithPivotValues($lap, ['track_layout_id' => $layout->id]);
+            // $event->fastest_laps()->syncWithPivotValues($lap, ['track_layout_id' => $layout->id]);
         }
 
         // Check and Set the track session record
-        if ($session->fastestLap) {
-            if ($lap->id === $session->fastestLap->id) {
-                // $session->fastestLaps()->syncWithPivotValues($lap, ['track_layout_id' => $layout->id]);
+        if ($session->fastest_lap) {
+            if ($lap->id === $session->fastest_lap->id) {
+                // $session->fastest_laps()->syncWithPivotValues($lap, ['track_layout_id' => $layout->id]);
             }
         } else {
-            // $session->fastestLaps()->syncWithPivotValues($lap, ['track_layout_id' => $layout->id]);
+            // $session->fastest_laps()->syncWithPivotValues($lap, ['track_layout_id' => $layout->id]);
         }
 
         // Check and Set the User's Track & Track Layout Record
@@ -228,7 +228,7 @@ class TrackLapsProcessedListener
                 activity('Track Layout')
                     ->performedOn($layout)
                     ->withProperties([
-                        'old' => ['lap_time' => ($layout->fastestLap) ? $layout->fastestLap->lap_time : null],
+                        'old' => ['lap_time' => ($layout->fastest_lap) ? $layout->fastest_lap->lap_time : null],
                         'attributes' => ['lap_time' => $lap->lap_time],
                     ])
                     ->event('- New Personal Record!')

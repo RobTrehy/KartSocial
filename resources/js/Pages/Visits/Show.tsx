@@ -66,8 +66,8 @@ export default function Show({ visit, auth }: Props) {
                       className="items-center gap-x-2 py-3 px-4 bg-white border -mt-px md:first:rounded-t-md first:mt-0 md:last:rounded-b-md dark:bg-gray-800 dark:border-gray-700 "
                     >
                       {visit.title} by {visit.driver.alias}
-                      <p>Fastest Lap: {FormatLapTime(visit.fastestLap)}</p>
-                      <p>Set during {visit.fastestLap.session.session_name} on lap {visit.fastestLap.lap_number}</p>
+                      <p>Fastest Lap: {FormatLapTime(visit.fastest_lap)}</p>
+                      <p>Set during {visit.fastest_lap.session.session_name} on lap {visit.fastest_lap.lap_number}</p>
                       <p>Compare</p>
                     </li>
                   ))

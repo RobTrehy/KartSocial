@@ -14,7 +14,7 @@ class TrackSession extends Model
     use HasFactory;
     use LogsActivity;
 
-    protected $appends = ['fastestLap', 'driverlaps'];
+    protected $appends = ['fastest_lap', 'driverlaps'];
 
     protected $fillable = [
         'user_id',

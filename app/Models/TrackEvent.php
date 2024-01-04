@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -48,7 +50,7 @@ class TrackEvent extends Model
         return 'slug';
     }
 
-    protected $appends = ['fastestLap'];
+    protected $appends = ['fastest_lap', 'attending_status'];
     protected $with = ['sessions', 'sessions.drivers'];
 
     protected $fillable = [
@@ -126,6 +128,23 @@ class TrackEvent extends Model
     {
         $lap = $this->fastestLaps()->first()?->load('driver');
         return ($lap) ? $lap->load(['session']) : null;
+    }
+
+    /**
+     * Set the attending status of the event
+     */
+    public function getAttendingStatusAttribute()
+    {
+        if ($this->user_id === Auth::id()) {
+            return "Organiser";
+        }
+
+        return DB::table('track_event_attendees')
+            ->where('track_event_id', $this->id)
+            ->where('user_id', Auth::id())
+            ->join('statuses', 'track_event_attendees.status_id', '=', 'statuses.id')
+            ->select('value')
+            ->first()->value;
     }
 
     /**

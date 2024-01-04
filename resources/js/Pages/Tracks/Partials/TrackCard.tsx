@@ -48,10 +48,10 @@ export default function TrackCard({ track }: Props) {
             <p className="text-sm text-gray-500">
               Total Laps Recorded: {track.laps_count}
             </p>
-            {track.fastestLap && (
+            {track.fastest_lap && (
               <p className="text-sm text-gray-500">
                 Track Record:{' '}
-                {moment.unix(track.fastestLap.lap_time).format('mm:ss.SSS')}
+                {moment.unix(track.fastest_lap.lap_time).format('mm:ss.SSS')}
               </p>
             )}
           </div>

@@ -88,7 +88,7 @@ export default function Index(props: any) {
                       </span>
                     ))}
                   </p>
-                  <p>{visit.fastestLap && FormatLapTime(visit.fastestLap)}</p>
+                  <p>{visit.fastest_lap && FormatLapTime(visit.fastest_lap)}</p>
                 </div>
               </Link>
             ))}

@@ -3,7 +3,7 @@ import SecondaryButton from '@/Components/SecondaryButton';
 import { FormatLapTime } from '@/Helpers/FormatLapTime';
 import useRoute from '@/Hooks/useRoute';
 import AppLayout from '@/Layouts/AppLayout';
-import { PaginationData, TrackEvent } from '@/types';
+import { PaginationData, TrackEvent, TrackSession } from '@/types';
 import { Link, router } from '@inertiajs/react';
 import moment from 'moment';
 import React from 'react';
@@ -52,7 +52,7 @@ export default function Index({ events }: Props) {
               </div>
             </div>
 
-            {events.data.map((event: any) => (
+            {events.data.map((event: TrackEvent) => (
               <Link
                 key={event.id}
                 href={route('events.show', { track: event.track_layout.track.slug, event: event.slug })}
@@ -60,9 +60,20 @@ export default function Index({ events }: Props) {
               >
                 <div className="flex min-w-0 gap-x-4">
                   <div className="min-w-0 flex-auto">
-                    <p className="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+                    <div className="text-base font-semibold leading-6 text-gray-900 dark:text-white flex flex-row items-center">
                       {event.name}
-                    </p>
+                      {
+                        event.attending_status == "Organiser" ? (
+                          <span className="ml-auto bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">
+                            Organiser
+                          </span>
+                        ) : (
+                          <span className="ml-auto bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">
+                            {event.attending_status}
+                          </span>
+                        )
+                      }
+                    </div>
                     <p className="truncate text-sm leading-5 text-gray-500 dark:text-gray-400">
                       {moment(event.date).format(
                         'Do MMMM YYYY [at] HH:mm',
@@ -85,7 +96,7 @@ export default function Index({ events }: Props) {
                 <div className="hidden md:grid grid-cols-3 items-center text-sm leading-6 whitespace-nowrap text-gray-900 dark:text-white">
                   <p>{event.sessions.length}</p>
                   <p>
-                    {event.sessions.map((session: any, i: number) => (
+                    {event.sessions.map((session: TrackSession, i: number) => (
                       <span
                         key={i}
                         className="after:content-['/'] last:after:content-['']"
@@ -95,10 +106,11 @@ export default function Index({ events }: Props) {
                     ))}
                   </p>
                   {
-                    event.fastestLap && (
-                      <p>{FormatLapTime(event.fastestLap)}<br />
+                    event.fastest_lap && (
+                      <p>{FormatLapTime(event.fastest_lap)}<br />
                         <span className="truncate text-sm leading-5 text-gray-500 dark:text-gray-400">
-                          by {event.fastestLap.driver.alias}</span>
+                          by {event.fastest_lap.driver.alias}
+                        </span>
                       </p>
                     )
                   }
