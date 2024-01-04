@@ -237,7 +237,8 @@ export default function SessionAccordion({ event, profile, startClosed = false }
                                 <div className="flex flex-col md:flex-row w-full md:w-auto md:ml-auto">
                                     <Link
                                         href={route('events.sessions.edit', {
-                                            event: session.track_event_id,
+                                            track: event.track_layout.track.slug,
+                                            event: event.slug,
                                             session: session.id,
                                         })}
                                         className="w-full md:w-auto text-center px-5 py-0.5 bg-gray-200 dark:bg-gray-900 text-black dark:text-white"
@@ -245,7 +246,11 @@ export default function SessionAccordion({ event, profile, startClosed = false }
                                         Edit Session
                                     </Link>
                                     <Link
-                                        href={route('events.sessions.drivers', { event: event.id, session: session.id })}
+                                        href={route('events.sessions.drivers', {
+                                            track: event.track_layout.track.slug,
+                                            event: event.slug,
+                                            session: session.id,
+                                        })}
                                         className="w-full md:w-auto text-center px-5 py-0.5 bg-brand-600 dark:bg-brand-500 text-white"
                                     >
                                         Manage Drivers

@@ -1,10 +1,15 @@
 import SectionBorder from '@/Components/SectionBorder';
 import AppLayout from '@/Layouts/AppLayout';
+import { TrackEvent } from '@/types';
 import React from 'react';
 import DeleteEventForm from './Partials/DeleteEventForm';
 import EditTrackEventForm from './Partials/EditTrackEventForm';
 
-export default function Edit(props: any) {
+interface Props {
+  event: TrackEvent;
+}
+
+export default function Edit(props: Props) {
   return (
     <AppLayout
       title="Edit Track Event"

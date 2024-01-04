@@ -1,6 +1,7 @@
 import useRoute from '@/Hooks/useRoute';
 import { router } from '@inertiajs/react';
 import { Map } from 'pigeon-maps';
+import { osm } from 'pigeon-maps/providers';
 import React, { Key } from 'react';
 import { Marker } from './Marker';
 
@@ -13,7 +14,7 @@ export default function TrackMap({ tracks }: Props) {
 
   return (
     <div style={{ height: 'calc(100vh - 147px)' }}>
-      <Map defaultCenter={[54.093409, -2.89479]} defaultZoom={6}>
+      <Map defaultCenter={[54.093409, -2.89479]} defaultZoom={6} provider={osm}>
         {tracks.map((track: any, i: Key) => {
           if (track.lat && track.lng) {
             return (
@@ -23,7 +24,7 @@ export default function TrackMap({ tracks }: Props) {
                 text={track.name}
                 color={track.my_laps_count > 0 ? '#16A34A' : '#4E76C2'}
                 onClick={() =>
-                  router.visit(route('tracks.show', { track: track.id }))
+                  router.visit(route('tracks.show', { track: track.slug }))
                 }
                 key={i}
               />

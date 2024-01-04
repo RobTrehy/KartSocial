@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,6 +17,36 @@ class TrackEvent extends Model
 {
     use HasFactory;
     use LogsActivity;
+    use Sluggable;
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => ['dateSlug', 'name'],
+                'unique' => false,
+            ],
+        ];
+    }
+
+    public function getDateSlugAttribute(): string
+    {
+        $carbon_date = Carbon::parse($this->date);
+        return $carbon_date->year . $carbon_date->month . $carbon_date->day;
+    }
+
+    /**
+     * Get the route key for the model.
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
     protected $appends = ['fastestLap'];
     protected $with = ['sessions', 'sessions.drivers'];

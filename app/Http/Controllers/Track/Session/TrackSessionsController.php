@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Track\Session;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Track\Sessions\CreateTrackSessionRequest;
 use App\Http\Requests\Track\Sessions\UpdateTrackSessionRequest;
+use App\Models\Track;
 use App\Models\TrackEvent;
 use App\Models\TrackSession;
 use Illuminate\Http\Request;
@@ -18,11 +19,12 @@ class TrackSessionsController extends Controller
      *
      * Requires: visits.sessions.create
      */
-    public function create(TrackEvent $event)
+    public function create(Track $track, string $event_slug)
     {
         if (Auth::user()->cannot('visits.sessions.create')) {
             abort(403);
         }
+        $event = TrackEvent::where('slug', $event_slug)->whereIn('track_layout_id', $track->allLayouts()->pluck('id'))->first();
 
         return Inertia::render('Track/Sessions/New', [
             'event' => $event->load(['trackLayout', 'sessions']),
@@ -47,7 +49,7 @@ class TrackSessionsController extends Controller
             )
         );
 
-        return redirect(route('events.show', ['event' => $session->track_event_id]));
+        return redirect(route('events.show', ['track' => $session->trackEvent->trackLayout->track->slug, 'event' => $session->trackEvent->slug]));
     }
 
     /**
@@ -55,11 +57,12 @@ class TrackSessionsController extends Controller
      *
      * Requires: visits.sessions.update
      */
-    public function edit(TrackEvent $event, TrackSession $session)
+    public function edit(Track $track, string $event_slug, TrackSession $session)
     {
         if (Auth::user()->cannot('visits.sessions.update')) {
             abort(403);
         }
+        $event = TrackEvent::where('slug', $event_slug)->whereIn('track_layout_id', $track->allLayouts()->pluck('id'))->first();
 
         return Inertia::render('Track/Sessions/Edit', [
             'event' => $event->load(['trackLayout', 'sessions']),
@@ -72,15 +75,16 @@ class TrackSessionsController extends Controller
      *
      * Requires: visits.sessions.update
      */
-    public function update(TrackEvent $event, TrackSession $session, UpdateTrackSessionRequest $request)
+    public function update(Track $track, string $event_slug, TrackSession $session, UpdateTrackSessionRequest $request)
     {
         if (Auth::user()->cannot('visits.sessions.update')) {
             abort(403);
         }
+        $event = TrackEvent::where('slug', $event_slug)->whereIn('track_layout_id', $track->allLayouts()->pluck('id'))->first();
 
         $session->update($request->safe()->toArray());
 
-        return redirect(route('events.show', ['event' => $event->id]));
+        return redirect(route('events.show', ['track' => $track->slug, 'event' => $event_slug]));
     }
 
     /**
@@ -96,6 +100,6 @@ class TrackSessionsController extends Controller
 
         $session->delete();
 
-        return redirect(route('events.show', ['event' => $event->id]));
+        return redirect(route('events.show', ['track' => $event->trackLayout->track->slug, 'event' => $event->slug]));
     }
 }

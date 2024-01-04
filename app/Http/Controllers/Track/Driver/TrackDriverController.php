@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Track\Driver;
 
 use App\Http\Controllers\Controller;
+use App\Models\Track;
 use App\Models\TrackEvent;
 use App\Models\TrackSession;
 use App\Models\User;
@@ -15,16 +16,20 @@ use NumberFormatter;
 
 class TrackDriverController extends Controller
 {
-    public function index(TrackEvent $event, TrackSession $session)
+    public function index(Track $track, string $event_slug, TrackSession $session)
     {
+        $event = TrackEvent::where('slug', $event_slug)->whereIn('track_layout_id', $track->allLayouts()->pluck('id'))->first();
+
         return Inertia::render('Track/Sessions/Drivers', [
             'event' => $event->load(['trackLayout']),
             'session' => $session->load(['drivers']),
         ]);
     }
 
-    public function update(TrackEvent $event, TrackSession $session, Request $request)
+    public function update(Track $track, string $event_slug, TrackSession $session, Request $request)
     {
+        $event = TrackEvent::where('slug', $event_slug)->whereIn('track_layout_id', $track->allLayouts()->pluck('id'))->first();
+
         $original = $session->drivers->toBase()->toArray();
         $drivers = [];
         foreach ($request->drivers as $driver) {
@@ -44,7 +49,7 @@ class TrackDriverController extends Controller
                         new UserAppNotification(
                             Auth::user()->alias . " added you to a session!",
                             "Congratulations for finishing in " . $position . " place! Click here to add your laps!",
-                            route('events.show', ['event' => $event])
+                            route('events.show', ['track' => $event->trackLayout->track->slug, 'event' => $event->slug])
                         )
                     );
             }
@@ -57,7 +62,7 @@ class TrackDriverController extends Controller
                         new UserAppNotification(
                             Auth::user()->alias . " removed you from a session!",
                             "Click here to visit the event.",
-                            route('events.show', ['event' => $event])
+                            route('events.show', ['track' => $event->trackLayout->track->slug, 'event' => $event->slug])
                         )
                     );
             }
@@ -79,14 +84,14 @@ class TrackDriverController extends Controller
                             new UserAppNotification(
                                 Auth::user()->alias . " updated your result on a session!",
                                 "Your " . $nf->format($original_position) . " place is now " . $position . " place. Click here to view the event.",
-                                route('events.show', ['event' => $event])
+                                route('events.show', ['track' => $event->trackLayout->track->slug, 'event' => $event->slug])
                             )
                         );
                 }
             }
         }
 
-        return redirect(route('events.show', ['event' => $event]));
+        return redirect(route('events.show', ['track' => $event->trackLayout->track->slug, 'event' => $event->slug]));
     }
 
     public function addDriverToSessions(Request $request)

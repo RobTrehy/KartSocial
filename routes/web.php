@@ -64,16 +64,32 @@ Route::middleware([
     Route::post('/tracks/{track}/layout/{layout}/reinstate', [TrackLayoutsController::class, 'reinstate'])->withTrashed()->name('tracks.layout.reinstate');
     Route::post('/tracks/{track}/layout/{layout}/set_default', [TrackLayoutsController::class, 'makeDefault'])->withTrashed()->name('tracks.layout.set_default');
 
-    // Track Events, Visit & Session Routes
-    Route::resource('events', TrackEventsController::class);
-    Route::resource('events.sessions', TrackSessionsController::class);
-    Route::put('/events/{event}/attendees', [TrackEventsController::class, 'updateAttendees'])->name('events.attendees.update');
-    Route::post('/events/{event}/drivers', [TrackDriverController::class, 'addDriverToSessions'])->name('events.drivers');
-    Route::get('/events/{event}/sessions/{session}/drivers', [TrackDriverController::class, 'index'])->name('events.sessions.drivers');
-    Route::put('/events/{event}/sessions/{session}/drivers', [TrackDriverController::class, 'update'])->name('events.sessions.drivers.update');
-    Route::get('/events/{event}/laps', [TrackLapsController::class, 'edit'])->name('events.laps');
-    Route::put('/events/{event}/laps', [TrackLapsController::class, 'update'])->name('events.laps.update');
-    Route::delete('/events/{event}/session/{session}/lap/{lap}', [TrackLapsController::class, 'destroy'])->name('events.laps.destroy');
+    // Track Events
+    Route::get('/events/', [TrackEventsController::class, 'index'])->name('events.index');
+    Route::get('/events/new', [TrackEventsController::class, 'create'])->name('events.create');
+    Route::post('/events', [TrackEventsController::class, 'store'])->name('events.store');
+    Route::get('/tracks/{track}/{event}', [TrackEventsController::class, 'show'])->name('events.show');
+    Route::get('/tracks/{track}/{event}/edit', [TrackEventsController::class, 'edit'])->name('events.edit');
+    Route::put('/tracks/{track}/{event}', [TrackEventsController::class,'update'])->name('events.update');
+    Route::put('/tracks/{track}/{event}/attendees', [TrackEventsController::class, 'updateAttendees'])->name('events.attendees.update');
+    Route::delete('/events/{event:id}', [TrackEventsController::class, 'destroy'])->name('events.destroy');
+
+    // Track Sessions
+    Route::get('/tracks/{track}/{event}/session/new', [TrackSessionsController::class, 'create'])->name('events.sessions.create');
+    Route::post('/tracks/{track}/{event}/session', [TrackSessionsController::class, 'store'])->name('events.sessions.store');
+    Route::get('/tracks/{track}/{event}/session-{session}/edit', [TrackSessionsController::class, 'edit'])->name('events.sessions.edit');
+    Route::put('/tracks/{track}/{event}/session-{session}', [TrackSessionsController::class, 'update'])->name('events.sessions.update');
+    Route::delete('/events/{event:id}/sessions/{session:id}', [TrackSessionsController::class, 'destroy'])->name('events.sessions.destroy');
+
+    // Track Drivers
+    Route::post('/tracks/{track}/{event}/drivers', [TrackDriverController::class, 'addDriverToSessions'])->name('events.drivers');
+    Route::get('/tracks/{track}/{event}/session-{session}/drivers', [TrackDriverController::class, 'index'])->name('events.sessions.drivers');
+    Route::put('/tracks/{track}/{event}/session-{session}/drivers', [TrackDriverController::class, 'update'])->name('events.sessions.drivers.update');
+
+    // Track Laps
+    Route::get('/tracks/{track}/{event}/laps', [TrackLapsController::class, 'edit'])->name('events.laps');
+    Route::put('/tracks/{track}/{event}/laps', [TrackLapsController::class, 'update'])->name('events.laps.update');
+    Route::delete('/events/{event:id}/{session:id}/{lap}', [TrackLapsController::class, 'destroy'])->name('events.laps.destroy');
 
     // Admin Routes
     Route::prefix('/admin')->middleware(['can:admin.access'])->name('admin:')->group(function () {

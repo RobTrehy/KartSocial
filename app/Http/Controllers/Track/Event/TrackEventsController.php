@@ -84,7 +84,7 @@ class TrackEventsController extends Controller
             )
         );
 
-        return redirect(route('events.show', ['event' => $event->id]));
+        return redirect(route('events.show', ['track' => $event->trackLayout->track->slug, 'event' => $event->slug]));
     }
 
     /**
@@ -92,12 +92,13 @@ class TrackEventsController extends Controller
      *
      * Requires: visits.view
      */
-    public function show(TrackEvent $event)
+    public function show(Track $track, string $event_slug)
     {
         if (Auth::user()->cannot('visits.view')) {
             abort(403);
         }
 
+        $event = TrackEvent::where('slug', $event_slug)->whereIn('track_layout_id', $track->allLayouts()->pluck('id'))->first();
         $_sessions = TrackSession::where('track_event_id', $event->id)->with(['drivers'])->get();
         $isDriver = false;
 
@@ -123,12 +124,13 @@ class TrackEventsController extends Controller
      *
      * Requires: visits.update
      */
-    public function edit(TrackEvent $event)
+    public function edit(Track $track, string $event_slug)
     {
         if (Auth::user()->cannot('visits.update')) {
             abort(403);
         }
 
+        $event = TrackEvent::where('slug', $event_slug)->whereIn('track_layout_id', $track->allLayouts()->pluck('id'))->first();
         $layout = TrackLayout::find($event->track_layout_id);
         $tracks = Track::with('allLayouts')->orderBy('name', 'ASC')->get();
         $trackSelect = [];
@@ -147,7 +149,7 @@ class TrackEventsController extends Controller
         }
 
         return Inertia::render('Track/Events/Edit', [
-            'event' => $event,
+            'event' => $event->load('trackLayout', 'trackLayout.track'),
             'tracks' => $tracks,
             'trackSelect' => $trackSelect,
             'selectedTrack' => $selectedTrack,
@@ -163,12 +165,13 @@ class TrackEventsController extends Controller
      *
      * Requires: visits.update
      */
-    public function update(UpdateTrackEventRequest $request, TrackEvent $event)
+    public function update(UpdateTrackEventRequest $request, Track $track, string $event_slug)
     {
         if (Auth::user()->cannot('visits.update')) {
             abort(403);
         }
 
+        $event = TrackEvent::where('slug', $event_slug)->whereIn('track_layout_id', $track->allLayouts()->pluck('id'))->first();
         $event->update(
             $request->only([
                 'track_layout_id',
@@ -178,14 +181,15 @@ class TrackEventsController extends Controller
             ])
         );
 
-        return redirect(route('events.show', ['event' => $event->id]));
+        return redirect(route('events.show', ['track' => $event->trackLayout->track->slug, 'event' => $event->slug]));
     }
 
     /**
      * 
      */
-    public function updateAttendees(TrackEvent $event, Request $request)
+    public function updateAttendees(Track $track, string $event_slug, Request $request)
     {
+        $event = TrackEvent::where('slug', $event_slug)->whereIn('track_layout_id', $track->allLayouts()->pluck('id'))->first();
         if ($request->status !== "Undecided") {
             TrackEventAttendee::updateOrCreate(
                 [

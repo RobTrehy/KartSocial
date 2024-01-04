@@ -27,7 +27,8 @@ export default function EditTrackSessionForm(props: any) {
   function updateTrackSession() {
     form.put(
       route('events.sessions.update', {
-        event: props.track_event_id,
+        track: props.event.track_layout.track.slug,
+        event: props.event.slug,
         session: session.id,
       }),
       {

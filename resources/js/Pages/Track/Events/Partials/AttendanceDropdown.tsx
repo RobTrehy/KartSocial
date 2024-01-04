@@ -30,7 +30,8 @@ export default function AttendanceDropdown({ event, auth }: Props) {
         if (prevStatusRef.current !== form.data.status) {
             form.put(
                 route('events.attendees.update', {
-                    event: event.id,
+                    track: event.track_layout.track.slug,
+                    event: event.slug,
                 }),
                 {
                     errorBag: 'TrackSession',

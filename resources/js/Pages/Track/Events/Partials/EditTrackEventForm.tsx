@@ -17,7 +17,7 @@ interface track {
   value: number;
   all_layouts: Array<TrackLayout>;
 };
-interface Props {
+interface EditTrackEventProps {
   tracks: Array<track>;
   trackSelect: Array<object>;
   selectedTrack: track;
@@ -25,7 +25,7 @@ interface Props {
   event: TrackEvent;
 };
 
-export default function EditTrackEventForm(props: Props) {
+export default function EditTrackEventForm(props: EditTrackEventProps) {
   const { event } = props;
   const route = useRoute();
 
@@ -89,7 +89,7 @@ export default function EditTrackEventForm(props: Props) {
   }, [track]);
 
   function createTrackEvent() {
-    form.put(route('events.update', { event: event.id }), {
+    form.put(route('events.update', { track: event.track_layout.track.slug, event: event.slug }), {
       errorBag: 'TrackEvent',
       preserveScroll: true,
     });

@@ -146,6 +146,7 @@ export interface ApiToken {
 export interface Track {
   id: number;
   name: string;
+  slug: string;
   address_1: string;
   address_2: string;
   address_3: string;
@@ -157,9 +158,14 @@ export interface Track {
   type: string;
   url: string;
   number: string;
-  layouts: Nullable<Array<TrackLayout>>;
-  all_layouts: Nullable<Array<TrackLayout>>;
+  layouts: Array<TrackLayout>;
+  layouts_count: number;
+  all_layouts: Array<TrackLayout>;
+  all_layouts_count: number;
   retired_layouts: Nullable<Array<TrackLayout>>;
+  retired_layouts_count: number;
+  laps: Nullable<Array<TrackSessionLap>>;
+  laps_count: number;
   fastestLap: Nullable<TrackSessionLap>;
   myFastest: Nullable<TrackSessionLap>;
   feed: Array<any>; // TODO: Track Feed
@@ -192,6 +198,7 @@ export interface TrackEvent {
   id: number;
   user_id: number;
   name: string;
+  slug: string;
   description: string;
   date: DateTime;
   attendees: Array<User & {
@@ -209,6 +216,7 @@ export interface TrackEvent {
   track_layout: TrackLayout;
   // linked_visits: Array<TrackVisit>;
 }
+
 export interface TrackSession {
   id: number;
   track_event_id: number;
@@ -237,6 +245,7 @@ export type Driver = User & {
     id: number,
     user_id: number,
     position: number,
+    track_session_id: number;
   };
   laps: Array<TrackSessionLap>;
   fastest_lap: TrackSessionLap;

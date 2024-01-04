@@ -6,13 +6,13 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import UserSearch from '@/Components/Search/UserSearch';
 import { toOrdinal } from '@/Helpers/ToOrdinal';
 import useRoute from '@/Hooks/useRoute';
-import { Driver, TrackSession } from '@/types';
+import { Driver, TrackEvent, TrackSession } from '@/types';
 import { useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import React from 'react';
 
 interface Props {
-  track_event_id: number;
+  event: TrackEvent;
   session: TrackSession
 };
 
@@ -29,7 +29,8 @@ export default function ManageSessionDriversForm(props: Props) {
   function updateSessionDrivers() {
     form.put(
       route('events.sessions.drivers.update', {
-        event: props.track_event_id,
+        track: props.event.track_layout.track.slug,
+        event: props.event.slug,
         session: session.id,
       }),
       {

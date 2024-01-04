@@ -30,7 +30,7 @@ export default function Edit({ event, session }: Props) {
       <div className="py-4 md:py-12">
         <div className="max-w-7xl mx-auto md:px-6 lg:px-8">
           <EditTrackSessionForm
-            track_event_id={event.id}
+            event={event}
             order={session.order}
             session={session}
           />

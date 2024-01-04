@@ -5,12 +5,13 @@ import InputLabel from '@/Components/Forms/InputLabel';
 import TextInput from '@/Components/Forms/TextInput';
 import PrimaryButton from '@/Components/PrimaryButton';
 import useRoute from '@/Hooks/useRoute';
+import { TrackEvent } from '@/types';
 import { useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import React from 'react';
 
 interface Props {
-  track_event_id: number;
+  event: TrackEvent;
   order: number;
 }
 
@@ -19,7 +20,7 @@ export default function CreateTrackSessionForm(props: Props) {
 
   const form = useForm({
     _method: 'POST',
-    track_event_id: props.track_event_id,
+    track_event_id: props.event.id,
     order: props.order,
     name: '',
     session_type: 'Practice',
@@ -29,7 +30,7 @@ export default function CreateTrackSessionForm(props: Props) {
   });
 
   function createTrackSession() {
-    form.post(route('events.sessions.store', { event: props.track_event_id }), {
+    form.post(route('events.sessions.store', { track: props.event.track_layout.track.slug, event: props.event.slug }), {
       errorBag: 'TrackSession',
       preserveScroll: true,
     });

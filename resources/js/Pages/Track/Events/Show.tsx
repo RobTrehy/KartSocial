@@ -39,7 +39,7 @@ export default function Show({ event, auth, driver }: Props) {
               (moment().diff(moment(event.date)) > 0 && driver) ?
                 <PrimaryButton
                   onClick={() =>
-                    router.visit(route('events.laps', { event: event.id }))
+                    router.visit(route('events.laps', { track: event.track_layout.track.slug, event: event.slug }))
                   }
                 >
                   Manage My Laps
@@ -54,7 +54,7 @@ export default function Show({ event, auth, driver }: Props) {
               <>
                 <SecondaryButton
                   onClick={() =>
-                    router.visit(route('events.edit', { event: event.id }))
+                    router.visit(route('events.edit', { track: event.track_layout.track.slug, event: event.slug }))
                   }
                 >
                   Edit Event
@@ -62,7 +62,7 @@ export default function Show({ event, auth, driver }: Props) {
                 <SecondaryButton
                   onClick={() =>
                     router.visit(
-                      route('events.sessions.create', { event: event.id }),
+                      route('events.sessions.create', { track: event.track_layout.track.slug, event: event.slug }),
                     )
                   }
                 >
@@ -89,7 +89,7 @@ export default function Show({ event, auth, driver }: Props) {
                   <CardTitle>
                     {event.name} at&nbsp;
                     <Link
-                      href={route('tracks.show', { track: event.track_layout.track?.id })}
+                      href={route('tracks.show', { track: event.track_layout.track.slug })}
                       className="hover:text-brand-600 dark:hover:text-brand-500"
                     >
                       {event.track_layout.track?.name}{' '}

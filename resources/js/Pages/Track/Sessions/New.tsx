@@ -28,7 +28,7 @@ export default function New({ event }: Props) {
         <div className="max-w-7xl mx-auto md:px-6 lg:px-8">
           <div>
             <CreateTrackSessionForm
-              track_event_id={event.id}
+              event={event}
               order={event.sessions.length}
             />
           </div>

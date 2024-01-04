@@ -27,8 +27,8 @@ export default function Edit(props: Props) {
   useEffect(() => {
     if (event.sessions.length > 0) {
       event.sessions.map((session: TrackSession, i: number) => {
-        if (session.drivers.filter((driver: Driver) => driver.id === page.props.auth.user.id)[0]) {
-          updateLaps(session.drivers.filter((driver: Driver) => driver.id === page.props.auth.user.id)[0].laps, session.id)
+        if (session.drivers.filter((driver: Driver) => driver.id === page.props.auth.user?.id)[0]) {
+          updateLaps(session.drivers.filter((driver: Driver) => driver.id === page.props.auth.user?.id)[0].laps, session.id)
         }
       });
     }

@@ -3,12 +3,15 @@ import DangerButton from '@/Components/DangerButton';
 import DialogModal from '@/Components/DialogModal';
 import SecondaryButton from '@/Components/SecondaryButton';
 import useRoute from '@/Hooks/useRoute';
-import { TrackEvent } from '@/types';
 import { useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import React, { useState } from 'react';
 
-export default function DeleteEventForm({ id }: TrackEvent) {
+interface Props {
+  id: number;
+}
+
+export default function DeleteEventForm({ id }: Props) {
   const route = useRoute();
   const [confirmingDeletion, setConfirmingDeletion] = useState(false);
 

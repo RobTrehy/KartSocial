@@ -55,7 +55,7 @@ export default function CreateLapForm(props: Props) {
         );
       });
     }
-    form.post(route('events.laps.update', { event: props.event.id }), {
+    form.post(route('events.laps.update', { track: props.event.track_layout.track.slug, event: props.event.slug }), {
       errorBag: `TrackLap.${props.event.id}`,
     });
   };

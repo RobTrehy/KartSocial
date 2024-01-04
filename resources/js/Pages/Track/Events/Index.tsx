@@ -3,12 +3,15 @@ import SecondaryButton from '@/Components/SecondaryButton';
 import { FormatLapTime } from '@/Helpers/FormatLapTime';
 import useRoute from '@/Hooks/useRoute';
 import AppLayout from '@/Layouts/AppLayout';
+import { PaginationData, TrackEvent } from '@/types';
 import { Link, router } from '@inertiajs/react';
 import moment from 'moment';
 import React from 'react';
 
 interface Props {
-  events: Array<TrackEvent>;
+  events: PaginationData & {
+    data: Array<TrackEvent>;
+  }
 }
 
 export default function Index({ events }: Props) {
@@ -52,7 +55,7 @@ export default function Index({ events }: Props) {
             {events.data.map((event: any) => (
               <Link
                 key={event.id}
-                href={route('events.show', { event: event.id })}
+                href={route('events.show', { track: event.track_layout.track.slug, event: event.slug })}
                 className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-x-6 p-2 hover:bg-gray-100 dark:hover:bg-gray-900"
               >
                 <div className="flex min-w-0 gap-x-4">

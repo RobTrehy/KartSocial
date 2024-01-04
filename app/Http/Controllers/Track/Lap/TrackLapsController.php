@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Track\Lap;
 
 use App\Events\TrackLapsProcessed;
 use App\Http\Controllers\Controller;
+use App\Models\Track;
 use App\Models\TrackEvent;
 use App\Models\TrackSession;
 use App\Models\TrackSessionLap;
@@ -18,12 +19,13 @@ class TrackLapsController extends Controller
      * 
      * Requires: visits.sessions.laps.update
      */
-    public function edit(TrackEvent $event)
+    public function edit(Track $track, string $event_slug)
     {
         if (Auth::user()->cannot('visits.sessions.laps.update')) {
             abort(403);
         }
 
+        $event = TrackEvent::where('slug', $event_slug)->whereIn('track_layout_id', $track->allLayouts()->pluck('id'))->first();
         $_sessions = TrackSession::where('track_event_id', $event->id)->with(['drivers'])->get();
 
         foreach ($_sessions as $session) {
@@ -80,14 +82,6 @@ class TrackLapsController extends Controller
 
         if ($updated > 0 || $added > 0) {
             TrackLapsProcessed::dispatch($session);
-            // TrackVisitSessionEvent::dispatch(
-            //     [
-            //         'session' => $session->toArray(),
-            //         'updated' => $updated,
-            //         'added' => $added,
-            //     ],
-            //     'addOrUpdateLaps'
-            // );
         }
 
         session()->flash('flash.banner', 'Session Laps Saved!');
@@ -101,18 +95,16 @@ class TrackLapsController extends Controller
      *
      * Requires: visits.sessions.laps.update
      */
-    public function destroy(TrackSession $session, TrackSessionLap $lap)
+    public function destroy(TrackEvent $event, TrackSession $session, TrackSessionLap $lap)
     {
         if (Auth::user()->cannot('visits.sessions.laps.update')) {
             abort(403);
         }
 
-        if ($lap->session_id === $session->id) {
-            $lap->delete();
-            activity('Session Laps')
-                ->performedOn($session)
-                ->event('deleted')
-                ->log('deleted');
-        }
+        $lap->delete();
+        activity('Session Laps')
+            ->performedOn($session)
+            ->event('deleted')
+            ->log('deleted');
     }
 }

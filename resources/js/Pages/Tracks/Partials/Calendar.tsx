@@ -134,7 +134,7 @@ export default function Calendar(props: Props) {
                 plugins={[dayGridPlugin, multiMonthPlugin, listPlugin]}
                 initialView={view}
                 events={{
-                    url: `/api/tracks/${props.track.id}`
+                    url: `/api/tracks/${props.track.slug}`
                 }}
                 eventTimeFormat={{
                     hour: '2-digit',

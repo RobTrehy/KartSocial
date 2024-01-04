@@ -1,18 +1,11 @@
 import useRoute from '@/Hooks/useRoute';
+import { Track } from '@/types';
 import { Link } from '@inertiajs/react';
 import moment from 'moment';
 import React from 'react';
 
 interface Props {
-  track: {
-    id: number;
-    name: string;
-    laps_count: number;
-    layouts_count: number;
-    fastestLap: {
-      lap_time: number;
-    };
-  };
+  track: Track;
 }
 
 export default function TrackCard({ track }: Props) {
@@ -20,7 +13,7 @@ export default function TrackCard({ track }: Props) {
 
   return (
     <Link
-      href={route('tracks.show', track.id)}
+      href={route('tracks.show', track.slug)}
       className="group flex flex-col h-full bg-white border border-gray-200 shadow-sm md:rounded-xl dark:bg-gray-900 dark:border-gray-700"
     >
       <div className="p-4 md:p-5">
