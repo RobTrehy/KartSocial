@@ -43,7 +43,7 @@ class UserProfileController extends Controller
     public function showFollows(string $alias)
     {
         $user = User::where('alias', $alias)
-            ->with(['homeTrack', 'trackEvents', 'follows'])
+            ->with(['homeTrack', 'follows'])
             ->with(['followedBy' => function ($query) {
                 $query->inRandomOrder()->take('6');
             }])
@@ -52,6 +52,7 @@ class UserProfileController extends Controller
 
         return Inertia::render('User/Follows', [
             'user' => $user,
+            'user.track_events' => $user->TrackEvents(),
             'following' => Auth::check() && $user->isFollowedBy(Auth::user()),
         ]);
     }
@@ -64,12 +65,13 @@ class UserProfileController extends Controller
     public function showFollowers(string $alias)
     {
         $user = User::where('alias', $alias)
-            ->with(['homeTrack', 'trackEvents', 'followedBy'])
+            ->with(['homeTrack', 'followedBy'])
             ->withCount(['followedBy', 'follows'])
             ->firstOrFail();
 
         return Inertia::render('User/Followers', [
             'user' => $user,
+            'user.track_events' => $user->TrackEvents(),
             'following' => Auth::check() && $user->isFollowedBy(Auth::user()),
         ]);
     }
@@ -82,7 +84,7 @@ class UserProfileController extends Controller
     public function showItem(string $alias, DashboardFeed $item)
     {
         $user = User::where('alias', $alias)
-            ->with(['homeTrack', 'trackEvents'])
+            ->with(['homeTrack'])
             ->with(['followedBy' => function ($query) {
                 $query->inRandomOrder()->take('6');
             }])
@@ -91,6 +93,7 @@ class UserProfileController extends Controller
 
         return Inertia::render('User/ShowItem', [
             'user' => $user,
+            'user.track_events' => $user->TrackEvents(),
             'following' => Auth::check() && $user->isFollowedBy(Auth::user()),
             'item' => $item,
         ]);
