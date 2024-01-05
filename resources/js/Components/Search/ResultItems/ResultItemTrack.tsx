@@ -1,13 +1,18 @@
 import useRoute from '@/Hooks/useRoute';
+import { Track } from '@/types';
 import { Link } from '@inertiajs/react';
 import React from 'react';
 
-export default function ResultItemTrack({ result }: any) {
+interface Props {
+  result: Track;
+}
+
+export default function ResultItemTrack({ result }: Props) {
   const route = useRoute();
 
   return (
     <Link
-      href={route('tracks.show', { track: result.id })}
+      href={route('tracks.show', { track: result.slug })}
       className="py-2 px-3 group hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer flex flex-row gap-x-4 items-center"
     >
       <div className="w-10 h-10 bg-brand-200 dark:bg-brand-800 rounded-md flex items-center">
