@@ -65,8 +65,8 @@ export default function Calendar(props: Props) {
     return (
         <Card>
             <CardTitle>
-                <div className="flex flex-row items-center mb-2">
-                    <p className="w-40">{(view === 'dayGridMonth') ? date.format('MMMM YYYY') : date.format('YYYY')}</p>
+                <div className="flex flex-col md:flex-row items-center mb-2 gap-y-2">
+                    <p className="md:w-40">{(view === 'dayGridMonth') ? date.format('MMMM YYYY') : date.format('YYYY')}</p>
                     <div className="flex flex-row">
                         <button
                             type="button"
@@ -103,7 +103,7 @@ export default function Calendar(props: Props) {
                             Create Event
                         </button>
                     </div>
-                    <div className="flex flex-row ml-auto">
+                    <div className="flex flex-row md:ml-auto">
                         <button
                             type="button"
                             className="bg-brand-500 hover:bg-brand-600 text-white px-4 py-1 text-sm rounded-l-md border-r border-brand-600"

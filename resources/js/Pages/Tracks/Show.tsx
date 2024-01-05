@@ -1,3 +1,5 @@
+import Dropdown from '@/Components/Dropdown';
+import DropdownLink from '@/Components/DropdownLink';
 import usePermissions from '@/Hooks/usePermissions';
 import useRoute from '@/Hooks/useRoute';
 import AppLayout from '@/Layouts/AppLayout';
@@ -20,7 +22,7 @@ export default function Index({ track, layouts }: Props) {
 
   return (
     <AppLayout title={track.name}>
-      <div className="w-full md:aspect-[42/9] overflow-hidden bg-brand-700 relative mb-6 shadow-md">
+      <div className="w-full md:aspect-[42/9] bg-brand-700 relative md:mb-6 shadow-md">
         {track.lat && track.lng && (
           <div className="absolute inset-0">
             <Map defaultCenter={[+track.lat, +track.lng]} defaultZoom={13}>
@@ -34,10 +36,10 @@ export default function Index({ track, layouts }: Props) {
         )}
         <div className="bg-black opacity-60 absolute inset-0"></div>
 
-        <div className="relative flex flex-col md:flex-row justify-between items-end h-full max-w-7xl mt-6 md:mt-0 mx-auto px-4 md:px-6 lg:px-8 pb-6">
+        <div className="relative flex flex-col md:flex-row justify-between md:items-end h-full max-w-7xl md:mt-0 mx-auto px-4 md:px-6 lg:px-8 pt-6 pb-2 md:pb-6">
           <div className="flex flex-row gap-x-6 text-gray-800 dark:text-gray-200 items-end">
             <div className="text-gray-100 flex flex-col gap-y-2">
-              <p className="text-3xl font-bold">{track.name}</p>
+              <p className="text-xl md:text-3xl font-bold">{track.name}</p>
               {(track.address_1 ||
                 track.town ||
                 track.county ||
@@ -67,7 +69,7 @@ export default function Index({ track, layouts }: Props) {
                     {track.url}
                   </a>
                 )}
-                {track.url && track.number && (
+                {track.url && (track.number || track.type) && (
                   <span className="hidden md:inline-block text-gray-400">&bull;</span>
                 )}
                 {track.number && (
@@ -80,36 +82,86 @@ export default function Index({ track, layouts }: Props) {
                     {track.number}
                   </a>
                 )}
+                {track.number && track.type && (
+                  <span className="hidden md:inline-block text-gray-400">&bull;</span>
+                )}
+                {track.type && (
+                  <span
+                    className="hover:text-brand-500"
+                  >
+                    {track.type} Track
+                  </span>
+                )}
               </div>
             </div>
           </div>
           <div className="mt-4 w-full md:w-1/3 text-center md:text-right text-gray-800 dark:text-gray-200">
             {(permissions.includes('tracks.layouts.create') ||
               permissions.includes('tracks.layouts.update')) && (
-                <div className="inline-flex items-center divide-x divide-gray-300 dark:divide-gray-500 overflow-hidden backdrop-blur-sd bg-white/50 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-500 rounded-md font-semibold text-xs text-gray-100 dark:text-gray-300 uppercase tracking-widest shadow-sm disabled:opacity-25">
-                  {permissions.includes('tracks.layouts.create') && (
-                    <span
-                      className="px-4 py-2 cursor-pointer hover:bg-gray-50/20 dark:hover:bg-gray-700/50 transition ease-in-out duration-150"
-                      onClick={() =>
-                        router.visit(
-                          route('tracks.layout.create', { track: track.id }),
-                        )
-                      }
-                    >
-                      Add Layout
-                    </span>
-                  )}
-                  {permissions.includes('tracks.layouts.update') && (
-                    <span
-                      className="px-4 py-2 cursor-pointer hover:bg-gray-50/20 dark:hover:bg-gray-700/50 transition ease-in-out duration-150"
-                      onClick={() =>
-                        router.visit(route('tracks.edit', { track: track.id }))
-                      }
-                    >
-                      Update Details
-                    </span>
-                  )}
-                </div>
+                <>
+                  <div className="hidden md:inline-flex items-center divide-x divide-gray-300 dark:divide-gray-500 overflow-hidden backdrop-blur-sd bg-white/50 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-500 rounded-md font-semibold text-xs text-gray-100 dark:text-gray-300 uppercase tracking-widest shadow-sm disabled:opacity-25">
+                    {permissions.includes('tracks.layouts.create') && (
+                      <span
+                        className="px-4 py-2 cursor-pointer hover:bg-gray-50/20 dark:hover:bg-gray-700/50 transition ease-in-out duration-150"
+                        onClick={() =>
+                          router.visit(
+                            route('tracks.layout.create', { track: track.slug }),
+                          )
+                        }
+                      >
+                        Add Layout
+                      </span>
+                    )}
+                    {permissions.includes('tracks.layouts.update') && (
+                      <span
+                        className="px-4 py-2 cursor-pointer hover:bg-gray-50/20 dark:hover:bg-gray-700/50 transition ease-in-out duration-150"
+                        onClick={() =>
+                          router.visit(route('tracks.edit', { track: track.slug }))
+                        }
+                      >
+                        Update Details
+                      </span>
+                    )}
+                  </div>
+                  <div className="md:hidden flex w-full">
+                    <div className="ml-auto -mt-8">
+                      <Dropdown
+                        align="right"
+                        width="48"
+                        renderTrigger={() => (
+                          <div className="h-6 backdrop-blur-sd bg-white/50 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-500 rounded-md font-semibold text-xs text-gray-100 dark:text-gray-300 uppercase tracking-widest shadow-sm disabled:opacity-25">
+                            <span
+                              className="h-6 w-6 cursor-pointer hover:bg-gray-50/20 dark:hover:bg-gray-700/50 transition ease-in-out duration-150"
+                            >
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                              </svg>
+                            </span>
+                          </div>
+                        )}
+                      >
+                        <DropdownLink
+                          as="button"
+                          onClick={() =>
+                            router.visit(
+                              route('tracks.layout.create', { track: track.slug }),
+                            )
+                          }
+                        >
+                          Add Layout
+                        </DropdownLink>
+                        <DropdownLink
+                          as="button"
+                          onClick={() =>
+                            router.visit(route('tracks.edit', { track: track.slug }))
+                          }
+                        >
+                          Update Details
+                        </DropdownLink>
+                      </Dropdown>
+                    </div>
+                  </div>
+                </>
               )}
           </div>
         </div>
@@ -119,7 +171,7 @@ export default function Index({ track, layouts }: Props) {
         <div className="max-w-7xl mx-auto md:px-6 lg:px-8">
           {track.fastest_lap &&
             track.fastest_lap?.lap_time === track.myFastest?.lap_time && (
-              <div className="text-center mb-6 md:pb-8 lg:px-4">
+              <div className="text-center md:mb-6 md:pb-8 lg:px-4">
                 <div
                   className="p-2 bg-brand-800 items-center text-brand-100 leading-none lg:rounded-full flex flex-col gap-y-2 md:flex-row lg:inline-flex"
                   role="alert"
@@ -149,7 +201,7 @@ export default function Index({ track, layouts }: Props) {
             )}
 
           {layouts.length > 1 && (
-            <div className="flex flex-row justify-between items-center mb-4">
+            <div className="flex flex-row justify-between items-center my-4">
               <button
                 type="button"
                 className="flex w-12"

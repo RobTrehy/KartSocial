@@ -311,7 +311,7 @@ export default function AppNavBar() {
             </div>
           </div>
 
-          <div className="-mr-2 flex items-center md:hidden">
+          <div className="-mr-2 flex items-center gap-x-1.5 md:hidden">
             {/* <!-- Feedback Mobile Dropdown --> */}
             <button
               type="button"
@@ -325,6 +325,13 @@ export default function AppNavBar() {
             >
               alpha
             </button>
+
+            {/* <!-- DarkMode Toggle --> */}
+              <DarkModeSwitch
+                checked={isDarkMode}
+                onChange={changeDarkMode}
+                size={25}
+              />
 
             {
               page.props.auth.user && (

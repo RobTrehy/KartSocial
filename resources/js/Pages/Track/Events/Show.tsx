@@ -31,7 +31,7 @@ export default function Show({ event, auth, driver }: Props) {
       title="Track Event"
       renderHeader={() => (
         <div className="flex flex-col md:flex-row items-center justify-between gap-y-2">
-          <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+          <h2 className="hidden md:flex font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             Track Event
           </h2>
           <div className="flex gap-x-2">
@@ -42,12 +42,12 @@ export default function Show({ event, auth, driver }: Props) {
                     router.visit(route('events.laps', { track: event.track_layout.track.slug, event: event.slug }))
                   }
                 >
-                  Manage My Laps
+                  My Laps
                 </PrimaryButton> :
                 <PrimaryButton
                   onClick={() => setShowingMyResults(true)}
                 >
-                  Add My Results
+                  My Results
                 </PrimaryButton>
             }
             {event?.user_id === auth.user?.id && (

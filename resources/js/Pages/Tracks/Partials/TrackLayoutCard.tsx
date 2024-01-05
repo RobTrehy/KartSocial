@@ -32,7 +32,7 @@ export default function TrackLayoutCard({ layout, track }: Props) {
   function deleteLayout() {
     form.delete(
       route('tracks.layout.destroy', {
-        track: track.id,
+        track: track.slug,
         layout: layout.id,
       }),
       {
@@ -45,7 +45,7 @@ export default function TrackLayoutCard({ layout, track }: Props) {
   function reinstateLayout() {
     form.post(
       route('tracks.layout.reinstate', {
-        track: track.id,
+        track: track.slug,
         layout: layout.id,
       }),
       {
@@ -162,7 +162,7 @@ export default function TrackLayoutCard({ layout, track }: Props) {
                 onClick={() =>
                   router.visit(
                     route('tracks.layout.edit', {
-                      track: track.id,
+                      track: track.slug,
                       layout: layout.id,
                     }),
                   )
@@ -179,7 +179,7 @@ export default function TrackLayoutCard({ layout, track }: Props) {
                     onClick={() =>
                       router.post(
                         route('tracks.layout.set_default', {
-                          track: track.id,
+                          track: track.slug,
                           layout: layout.id,
                         }),
                       )

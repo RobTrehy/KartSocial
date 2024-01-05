@@ -9,10 +9,10 @@ export default function AuthenticationCard({
   const { laps, users } = page.props;
 
   return (
-    <div className="h-full min-h-screen w-screen flex flex-col-reverse md:flex-row">
-      <div className="md:w-1/2 flex flex-col gap-4 md:justify-center items-center pt-6 md:pt-0 bg-brand-600 text-white">
-        <div className="w-2/5">
-          <TextLogo classes="text-white hidden md:flex" secondaryClasses='text-white/70' />
+    <div className="md:h-full min-h-screen w-screen flex flex-col-reverse md:flex-row justify-center">
+      <div className="min-h-[50vh] md:h-screen md:w-1/2 flex flex-col gap-4 justify-center items-center py-6 mt:p-0 bg-brand-600 text-white">
+        <div className="w-2/5 hidden md:flex">
+          <TextLogo classes="text-white" secondaryClasses='text-white/70' />
         </div>
         <div className="rounded-md bg-brand-500 md:w-3/4 mx-4 p-5 mb-8">
           Login or Register to the social platform for go-kart racers to record,
@@ -42,9 +42,9 @@ export default function AuthenticationCard({
         </div>
       </div>
 
-      <div className="md:w-1/2 flex flex-col md:justify-center items-center py-6 px-8 2xl:px-40 bg-white dark:bg-gray-900">
-        <div className="md:hidden mb-5 md:mb-0">
-          <TextLogo classes="text-brand-600 text-5xl" secondaryClasses="text-brand-500" />
+      <div className="min-h-[50vh] md:h-screen md:w-1/2 flex flex-col justify-center items-center py-6 px-8 2xl:px-40 bg-white dark:bg-gray-900">
+        <div className="flex md:hidden w-4/5 mb-5 md:mb-0">
+          <TextLogo classes="text-brand-600" secondaryClasses="text-brand-500" />
         </div>
 
         {children}
