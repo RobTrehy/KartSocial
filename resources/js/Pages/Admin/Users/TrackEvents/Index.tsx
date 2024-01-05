@@ -16,14 +16,7 @@ export default function Index({ events }: Props) {
   const route = useRoute();
 
   return (
-    <AppLayout
-      title="User Track Events - Admin"
-      renderHeader={() => (
-        <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-          User Track Events
-        </h2>
-      )}
-    >
+    <AppLayout title="User Track Events - Admin">
       <div className="py-4 md:py-12">
         <div className="max-w-7xl mx-auto md:px-6 lg:px-8">
           <ul
@@ -47,7 +40,7 @@ export default function Index({ events }: Props) {
             {events.data.map((event: TrackEvent) => (
               <Link
                 key={event.id}
-                href={route('events.show', { event: event.id })}
+                href={route('events.show', { track: event.track_layout.track.slug, event: event.slug })}
                 className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-x-6 p-2 hover:bg-gray-100 dark:hover:bg-gray-900"
               >
                 <div className="flex min-w-0 gap-x-4">
@@ -75,14 +68,14 @@ export default function Index({ events }: Props) {
                     : ''}
                 </p>
                 <div className="hidden md:grid grid-cols-2 text-sm leading-6 whitespace-nowrap text-gray-900 dark:text-white">
-                  <p>{event.sessions.length}</p>
+                  <p>{event.sessions?.length}</p>
                   <p>
                     {event.sessions.map((session: any, i: number) => (
                       <span
                         key={i}
                         className="after:content-['/'] last:after:content-['']"
                       >
-                        {session.laps.length}
+                        {session.laps?.length}
                       </span>
                     ))}
                   </p>

@@ -8,14 +8,7 @@ export default function Index({ users }: any) {
   const route = useRoute();
 
   return (
-    <AppLayout
-      title="Users - Admin"
-      renderHeader={() => (
-        <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-          Users
-        </h2>
-      )}
-    >
+    <AppLayout title="Users - Admin">
       <div className="py-4 md:py-12">
         <div className="max-w-7xl mx-auto md:px-6 lg:px-8">
           <div className="overflow-hidden md:rounded-md">

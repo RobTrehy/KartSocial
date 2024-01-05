@@ -25,7 +25,7 @@ export default function Show({ user, ...props }: Props) {
       title="User - Admin"
       renderHeader={() => (
         <div className="flex flex-col md:flex-row items-center justify-between gap-y-2">
-          <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+          <h2 className="hidden md:flex font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             Administrate User
           </h2>
           <div className="flex gap-x-2">
