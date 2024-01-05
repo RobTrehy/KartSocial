@@ -34,7 +34,7 @@ class TrackLayoutsController extends Controller
      */
     public function store(CreateTrackLayoutRequest $request, Track $track)
     {
-        if (Auth::user()->cannot('track.layouts.create')) {
+        if (Auth::user()->cannot('tracks.layouts.create')) {
             abort(403);
         }
 
@@ -57,7 +57,7 @@ class TrackLayoutsController extends Controller
      */
     public function edit(Track $track, TrackLayout $layout)
     {
-        if (Auth::user()->cannot('track.layouts.update')) {
+        if (Auth::user()->cannot('tracks.layouts.update')) {
             abort(403);
         }
 
@@ -74,7 +74,7 @@ class TrackLayoutsController extends Controller
      */
     public function update(UpdateTrackLayoutRequest $request, Track $track, TrackLayout $layout)
     {
-        if (Auth::user()->cannot('track.layouts.update')) {
+        if (Auth::user()->cannot('tracks.layouts.update')) {
             abort(403);
         }
 
@@ -90,7 +90,7 @@ class TrackLayoutsController extends Controller
      */
     public function destroy(Track $track, TrackLayout $layout)
     {
-        if (Auth::user()->cannot('track.layouts.destroy')) {
+        if (Auth::user()->cannot('tracks.layouts.destroy')) {
             abort(403);
         }
 
@@ -112,7 +112,7 @@ class TrackLayoutsController extends Controller
      */
     public function reinstate(Track $track, TrackLayout $layout)
     {
-        if (Auth::user()->cannot('track.layouts.restore')) {
+        if (Auth::user()->cannot('tracks.layouts.restore')) {
             abort(403);
         }
 
@@ -134,7 +134,7 @@ class TrackLayoutsController extends Controller
      */
     public function makeDefault(Track $track, TrackLayout $layout)
     {
-        if (Auth::user()->cannot('track.layouts.set_default')) {
+        if (Auth::user()->cannot('tracks.layouts.set_default')) {
             abort(403);
         }
 
