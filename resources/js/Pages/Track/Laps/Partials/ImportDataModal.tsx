@@ -8,6 +8,7 @@ import React, { Fragment, useContext, useState } from 'react';
 import { sessionLapContext } from '../Edit';
 import AlphaDataImporter from './AlphaDataImporter';
 import AppScreenImporter from './AppScreenImporter';
+import RaceChronoDataImporter from './RaceChronoDataImporter';
 
 export default function ImportDataModal({ open, setOpen, event }: any) {
   const {
@@ -152,6 +153,42 @@ export default function ImportDataModal({ open, setOpen, event }: any) {
                                   </svg>
                                 </label>
                               </li>
+                              <li>
+                                <input
+                                  type="radio"
+                                  id="csv-data"
+                                  name="data-type"
+                                  value="csv-data"
+                                  className="hidden peer"
+                                  required
+                                  onChange={() => setDataType('racechrono')}
+                                />
+                                <label
+                                  htmlFor="csv-data"
+                                  className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-md cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                                >
+                                  <div className="block">
+                                    <div className="w-full text-lg font-semibold">
+                                      Race Chrono ODS File
+                                    </div>
+                                  </div>
+                                  <svg
+                                    className="w-5 h-5 ml-3"
+                                    aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 14 10"
+                                  >
+                                    <path
+                                      stroke="currentColor"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth="2"
+                                      d="M1 5h12m0 0L9 1m4 4L9 9"
+                                    />
+                                  </svg>
+                                </label>
+                              </li>
                             </ul>
                           </>
                         )}
@@ -161,6 +198,9 @@ export default function ImportDataModal({ open, setOpen, event }: any) {
                         {dataType === 'app-screens' && (
                           <AppScreenImporter setProcessing={setProcessing} />
                         )}
+                        {dataType === 'racechrono'} && (
+                        <RaceChronoDataImporter setProcessing={setProcessing} />
+                        )
                       </div>
                       <div className="mt-2">
                         <InputLabel htmlFor="import_session" value="Session to import to" />
