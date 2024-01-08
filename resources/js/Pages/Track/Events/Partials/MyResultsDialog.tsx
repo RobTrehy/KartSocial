@@ -29,7 +29,7 @@ export default function MyResultsDialog({ event, show, change }: Props) {
     });
 
     const savePositions = () => {
-        form.post(route('events.drivers', { event: event.id }), {
+        form.post(route('events.drivers', { track: event.track_layout.track.slug, event: event.slug }), {
             errorBag: 'TrackEventDrivers',
             preserveScroll: true,
             onSuccess: () => change(false),
