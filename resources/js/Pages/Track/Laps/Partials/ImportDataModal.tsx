@@ -169,7 +169,7 @@ export default function ImportDataModal({ open, setOpen, event }: any) {
                                 >
                                   <div className="block">
                                     <div className="w-full text-md font-semibold">
-                                      Race Chrono ODS File
+                                      RaceChrono ODS File
                                     </div>
                                   </div>
                                   <svg
