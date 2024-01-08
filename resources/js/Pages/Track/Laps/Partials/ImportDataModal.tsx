@@ -198,9 +198,9 @@ export default function ImportDataModal({ open, setOpen, event }: any) {
                         {dataType === 'app-screens' && (
                           <AppScreenImporter setProcessing={setProcessing} />
                         )}
-                        {dataType === 'racechrono'} && (
-                        <RaceChronoDataImporter setProcessing={setProcessing} />
-                        )
+                        {dataType === 'racechrono' && (
+                          <RaceChronoDataImporter setProcessing={setProcessing} />
+                        )}
                       </div>
                       <div className="mt-2">
                         <InputLabel htmlFor="import_session" value="Session to import to" />
