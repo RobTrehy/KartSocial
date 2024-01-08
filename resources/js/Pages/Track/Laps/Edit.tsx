@@ -46,7 +46,7 @@ export default function Edit(props: Props) {
         let prevLap = importLaps[i - 1]
           ? importLaps[i - 1]
           : laps[laps.length - 1];
-        if (prevLap) {
+        if (prevLap.lap_time) {
           let diff = lap.lap_time - prevLap.lap_time;
           importLaps[i].lap_diff = diff.toFixed(3);
         }
@@ -71,7 +71,7 @@ export default function Edit(props: Props) {
             <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
               My Laps
             </h2>
-            <p className="text-sm text-gray-500 dark:text-gray-700">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
               {event.name} at {event.track_layout.track.name} {event.track_layout.name} on{' '}
               {moment(event.date).format('dddd Do MMMM YYYY [at] HH:mm')}
             </p>
